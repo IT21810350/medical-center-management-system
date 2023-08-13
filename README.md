@@ -1,1 +1,1 @@
-# medical-center-management-system
+# Medical Center Management System
