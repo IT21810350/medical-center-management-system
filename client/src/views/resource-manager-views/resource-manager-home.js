@@ -7,42 +7,42 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
-import { List, ListItem, ListItemAvatar, Avatar, ListItemText, Button  } from '@mui/material';
+// import { List, ListItem, ListItemAvatar, Avatar, ListItemText, Button  } from '@mui/material';
 import premiumRoom from '../../assets/img/resource-Manager/premiumRoom.jpg';
 import royalSuit from '../../assets/img/resource-Manager/royalSuit.jpg';
 import orchidSuit from '../../assets/img/resource-Manager/orchidSuit.jpg';
 
-const RecentPatientsCard = () => {
-    const recentPatients = [
-      { id: 1, name: 'Royal Suite', diagnostic: 'Royal Suite comes with the luxuries of royalty', avatarUrl: '/assets/img/avatar1.jpg' },
-      { id: 2, name: 'Orchid Suite', diagnostic: 'If you are staying at our Orchid Suite, you might just think you are on holiday', avatarUrl: '/assets/img/avatar2.jpg' },
-      { id: 3, name: 'Premium Room', diagnostic: 'Designed with ample space for you and your loved ones', avatarUrl: '/assets/img/avatar2.jpg' },
-      { id: 4, name: 'Super Deluxe Room', diagnostic: 'With all the luxuries you enjoy at home', avatarUrl: '/assets/img/avatar2.jpg' }
-    ];
+// const RecentPatientsCard = () => {
+//     const recentPatients = [
+//       { id: 1, name: 'Royal Suite', diagnostic: 'Royal Suite comes with the luxuries of royalty', avatarUrl: '/assets/img/avatar1.jpg' },
+//       { id: 2, name: 'Orchid Suite', diagnostic: 'If you are staying at our Orchid Suite, you might just think you are on holiday', avatarUrl: '/assets/img/avatar2.jpg' },
+//       { id: 3, name: 'Premium Room', diagnostic: 'Designed with ample space for you and your loved ones', avatarUrl: '/assets/img/avatar2.jpg' },
+//       { id: 4, name: 'Super Deluxe Room', diagnostic: 'With all the luxuries you enjoy at home', avatarUrl: '/assets/img/avatar2.jpg' }
+//     ];
   
-    return (
-      <Card sx={{ backgroundColor: '#F0FFFF' }}>
-        <CardContent>
-          <Typography variant="h6" gutterBottom>
-            Recent Patients
-          </Typography>
-          <List>
-            {recentPatients.map((patient) => (
-              <ListItem key={patient.id}>
-                <ListItemAvatar>
-                  <Avatar alt={patient.name} src={patient.avatarUrl} />
-                </ListItemAvatar>
-                <ListItemText primary={patient.name} secondary={patient.diagnostic} />
-                <Button variant="outlined" size="small">
-                    View
-              </Button>
-              </ListItem>
-            ))}
-          </List>
-        </CardContent>
-      </Card>
-    );
-};
+//     return (
+//       <Card sx={{ backgroundColor: '#F0FFFF' }}>
+//         <CardContent>
+//           <Typography variant="h6" gutterBottom>
+//             Recent Patients
+//           </Typography>
+//           <List>
+//             {recentPatients.map((patient) => (
+//               <ListItem key={patient.id}>
+//                 <ListItemAvatar>
+//                   <Avatar alt={patient.name} src={patient.avatarUrl} />
+//                 </ListItemAvatar>
+//                 <ListItemText primary={patient.name} secondary={patient.diagnostic} />
+//                 <Button variant="outlined" size="small">
+//                     View
+//               </Button>
+//               </ListItem>
+//             ))}
+//           </List>
+//         </CardContent>
+//       </Card>
+//     );
+// };
 
 const RM = () => {
     return (
