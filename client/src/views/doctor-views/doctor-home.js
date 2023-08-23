@@ -8,6 +8,7 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import { List, ListItem, ListItemAvatar, Avatar, ListItemText, Button  } from '@mui/material';
+import img1 from '../../assets/img/doctor/doctor-profile-img.jpg';
 
 const RecentPatientsCard = () => {
     const recentPatients = [
@@ -98,8 +99,8 @@ const Doctor = () => {
 
                             <Card sx={{ backgroundColor: '#F0FFFF' }}>
                                 <CardMedia 
-                                    sx={{ height: 200 }}
-                                    image="../../assets/img/doctor/doctor-profile-img.jpg"
+                                    sx={{ height: 500 }}
+                                    image= {img1}
                                     title="doctor"
                                 />
 
