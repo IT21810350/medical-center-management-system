@@ -32,12 +32,47 @@ const Login = () => {
         { withCredentials: true }
       );
 
-      const { success, message } = data;
+      const { success, message, user } = data;
 
       if (success) {
-        setTimeout(() => {
-          navigate("/hr");
-        }, 1000);
+        if (user.role === "patient") {
+          setTimeout(() => {
+            navigate("/patient");
+          }, 1000);
+        } else if (user.role === "doctor") {
+          setTimeout(() => {
+            navigate("/doctor");
+          }, 1000);
+        } else if (user.role === "hr") {
+          setTimeout(() => {
+            navigate("/hr");
+          }, 1000);
+        } else if (user.role === "financial-manager") {
+          setTimeout(() => {
+            navigate("/financial-manager");
+          }, 1000);
+        } else if (user.role === "lab-assistant") {
+          setTimeout(() => {
+            navigate("/lab-assistant");
+          }, 1000);
+        } else if (user.role === "resource-person") {
+          setTimeout(() => {
+            navigate("/resource-person");
+          }, 1000);
+        } else if (user.role === "pharmacist") {
+          setTimeout(() => {
+            navigate("/pharmacist");
+          }, 1000);
+        } else if (user.role === "supplier") {
+          setTimeout(() => {
+            navigate("/supplier");
+          }, 1000);
+        } else {
+          setTimeout(() => {
+            navigate("/signup");
+          }, 1000);
+          console.error("values not been sent");
+        }
       } else {
         console.error(message);
       }
