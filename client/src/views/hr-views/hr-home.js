@@ -11,14 +11,27 @@ import { DataGrid } from '@mui/x-data-grid';
 import Paper from '@mui/material/Paper';
 import { PieChart, pieArcClasses } from '@mui/x-charts/PieChart';
 import Grid from '@mui/material/Grid';
-// import Button from '@mui/material/Button';
+import IconButton from '@mui/material/IconButton';
+import DeleteIcon from '@mui/icons-material/Delete';
+import EditIcon from '@mui/icons-material/Edit';
 
+// import Button from '@mui/material/Button';
 // import CssBaseline from '@mui/material/CssBaseline';
 // import AppBar from '@mui/material/AppBar';
 // import Toolbar from '@mui/material/Toolbar';
 // import Link from '@mui/material/Link';
 
+const deleteIcon =
+(<IconButton onClick={console.log("delete")}>
+  <DeleteIcon color="secondary" />
+</IconButton>
+);
 
+const editIcon = (
+  <IconButton onClick={console.log("edited")}>
+    <EditIcon color="primary" />
+  </IconButton>
+);
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
@@ -35,7 +48,24 @@ const columns = [
   { field: 'Email', headerName: 'Email', width: 130 },
   {field: 'position',headerName: 'position', width:130,},
   {field: 'Netsalary',headerName: 'Netsalary', width:130,},
-  {field: 'Crud',headerName: 'Crud', width:150,},
+  {filed: 'action', headerName:'Action',width:150},
+
+  {
+    field: 'action',
+    headerName: 'Action',
+    width: 150,
+    renderCell: (params) => (
+      <div>
+        <IconButton onClick={() => console.log("edited")}>
+          <EditIcon color="primary" />
+        </IconButton>
+        <IconButton onClick={() => console.log("delete")}>
+          <DeleteIcon color="secondary" />
+        </IconButton>
+      </div>
+    ),
+  },
+
   {field: 'fullName',headerName: 'Full name',description: 'This column has a value getter and is not sortable.',sortable: false, width: 80,valueGetter: (params) =>`${params.row.firstName || ''} ${params.row.lastName || ''}`,},
 ];
 function createData(name, calories, fat, carbs, protein) {
@@ -44,7 +74,7 @@ function createData(name, calories, fat, carbs, protein) {
 
 
 const rows = [
-  { id: 1, firstName: 'Snow',lastName:'Umagliya', Email:'rgahbkajsd@gmail.com',position:'Doctor',Netsalary:'30000',  },
+  { id: 1, firstName: 'Snow',lastName:'Umagliya', Email:'rgahbkajsd@gmail.com',position:'Doctor',Netsalary:'30000',action:'edit',delete:'edit'},
   { id: 2, lastName: 'Lannister', firstName: 'Cersei', age: 42 },
   { id: 3, lastName: 'Lannister', firstName: 'Jaime', age: 45 },
   { id: 4, lastName: 'Stark', firstName: 'Arya', age: 16 },
@@ -148,6 +178,25 @@ const HR = () => {
           {/* <Box gridColumn="span 4">
           <Item>xs=4</Item>
         </Box> */}
+          <Box gridColumn="span 6">
+            <Item>
+                 <PieChart
+                    series={[
+                      {
+                        data,
+                        highlightScope: { faded: 'global', highlighted: 'item' },
+                        faded: { innerRadius: 30, additionalRadius: -30 },
+                      },
+                    ]}
+                    sx={{
+                      [`& .${pieArcClasses.faded}`]: {
+                        fill: 'gray',
+                      },
+                    }}
+                    height={200}
+                  /> 
+             </Item>
+          </Box>
           <Box gridColumn="span 6">
             <Item>
                  <PieChart
