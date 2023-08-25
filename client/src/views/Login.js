@@ -36,7 +36,7 @@ const Login = () => {
 
       if (success) {
         setTimeout(() => {
-          navigate("/");
+          navigate("/hr");
         }, 1000);
       } else {
         console.error(message);

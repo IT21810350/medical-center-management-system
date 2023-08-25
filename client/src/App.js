@@ -1,6 +1,13 @@
 import { Route, Routes } from "react-router-dom";
 import { Login, Signup } from "./views/Index";
 import Home from "./views/Home";
+import HR from './views/hr-views/hr-home'
+import Patient from './views/patient-views/patient-home'
+import Doctor from './views/doctor-views/doctor-home'
+import FM from './views/financial-manager-views/financial-manager-home'
+import LA from './views/lab-assistant-views/lab-assistant-home'
+import Pharmacist from './views/pharmacist-views/parmacist-home'
+import SM from "./views/supplier-manager-views/supplier-manager-home";
 
 function App() {
   return (
@@ -9,6 +16,13 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
+        <Route path="/hr" element={<HR />} />
+        <Route path="/patient" element={<Patient />} />
+        <Route path="/doctor" element={<Doctor />} />
+        <Route path="/financial-manager" element={<FM />} />
+        <Route path="/lab-assistant" element={<LA />} />
+        <Route path="/pharmacist" element={<Pharmacist />} />
+        <Route path="/supplier" element={<SM />} />
       </Routes>
     </div>
   );

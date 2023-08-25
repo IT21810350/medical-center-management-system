@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { Button, Container, TextField, Typography } from "@mui/material";
+import { Button, Container, TextField, Typography,MenuItem } from "@mui/material";
+import Select from '@mui/material/Select';
 import axios from "axios";
 
 const Signup = () => {
@@ -9,9 +10,10 @@ const Signup = () => {
     email: "",
     password: "",
     username: "",
+    role: "",
   });
 
-  const { email, password, username } = inputValue;
+  const { email, password, username, role } = inputValue;
 
   const handleOnChange = (e) => {
     const { name, value } = e.target;
@@ -33,12 +35,47 @@ const Signup = () => {
         { withCredentials: true }
       );
 
-      const { success, message } = data;
+      const { success, message, user } = data;
 
       if (success) {
-        setTimeout(() => {
-          navigate("/");
-        }, 1000);
+        if (user.role === "patient") {
+          setTimeout(() => {
+            navigate("/patient");
+          }, 1000);
+        } else if (user.role === "doctor") {
+          setTimeout(() => {
+            navigate("/doctor");
+          }, 1000);
+        } else if (user.role === "hr") {
+          setTimeout(() => {
+            navigate("/hr");
+          }, 1000);
+        } else if (user.role === "financial-manager") {
+          setTimeout(() => {
+            navigate("/financial-manager");
+          }, 1000);
+        } else if (user.role === "lab-assistant") {
+          setTimeout(() => {
+            navigate("/lab-assistant");
+          }, 1000);
+        } else if (user.role === "resource-person") {
+          setTimeout(() => {
+            navigate("/resource-person");
+          }, 1000);
+        } else if (user.role === "pharmacist") {
+          setTimeout(() => {
+            navigate("/pharmacist");
+          }, 1000);
+        } else if (user.role === "supplier") {
+          setTimeout(() => {
+            navigate("/supplier");
+          }, 1000);
+        } else {
+          setTimeout(() => {
+            navigate("/signup");
+          }, 1000);
+          console.error("values not been sent");
+        }
       } else {
         console.error(message);
       }
@@ -52,6 +89,7 @@ const Signup = () => {
       email: "",
       password: "",
       username: "",
+      role: "",
     });
   };
 
@@ -61,6 +99,7 @@ const Signup = () => {
         Signup Account
       </Typography>
       <form onSubmit={handleSubmit}>
+
         <TextField
           fullWidth
           label="Email"
@@ -71,6 +110,7 @@ const Signup = () => {
           margin="normal"
           variant="outlined"
         />
+
         <TextField
           fullWidth
           label="Username"
@@ -81,6 +121,7 @@ const Signup = () => {
           margin="normal"
           variant="outlined"
         />
+
         <TextField
           fullWidth
           label="Password"
@@ -92,6 +133,25 @@ const Signup = () => {
           margin="normal"
           variant="outlined"
         />
+
+        <Select
+          labelId="demo-simple-select-label"
+          id="demo-simple-select"
+          name="role"
+          value={role}
+          label="Role"
+          onChange={handleOnChange}
+        >
+          <MenuItem value={"patient"}>Patient</MenuItem>
+          <MenuItem value={"doctor"}>Doctor</MenuItem>
+          <MenuItem value={"financial-manager"}>Financial Manager</MenuItem>
+          <MenuItem value={"lab-assistant"}>Lab Asistant</MenuItem>
+          <MenuItem value={"resource-person"}>Resource Person</MenuItem>
+          <MenuItem value={"pharmacist"}>Pharmacist</MenuItem>
+          <MenuItem value={"supplier"}>Supplier</MenuItem>
+          <MenuItem value={"hr"}>Human Resource manager</MenuItem>
+        </Select>
+
         <Button type="submit" variant="contained" color="primary">
           Submit
         </Button>
