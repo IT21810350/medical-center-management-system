@@ -1,13 +1,12 @@
 import React from 'react';
 import Box from '@mui/material/Box';
 
-import { styled } from '@mui/material/styles';
+import { styled }  from '@mui/material/styles';
 import ii from '../hr-views/image/sm.jpg'
 import Card from '@mui/material/Card';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import CardContent from '@mui/material/CardContent';
-
 import CardActions from '@mui/material/CardActions';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -16,7 +15,6 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-
 
 
 const Item = styled(Paper)(({ theme }) => ({
