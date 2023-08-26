@@ -91,7 +91,7 @@ const RM = () => {
 
                         </Grid>
                         
-                        {/* roomtype 2 */}
+                        {/* room type 2 */}
                         <Grid item lg={4} sx={{ backgroundColor: '#f5f5f5', padding: '10px' }}>
 
                         <Card sx={{ backgroundColor: '#F0FFFF' }}>
