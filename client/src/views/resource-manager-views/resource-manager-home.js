@@ -71,7 +71,7 @@ const RM = () => {
                             <CardMedia 
                                 sx={{ height: 300 }}
                                 image= {premiumRoom}
-                                title="doctor"
+                                title="Premium room"
                             />
 
                             <CardContent sx={{ textAlign: 'center' }}>
@@ -98,7 +98,7 @@ const RM = () => {
                             <CardMedia 
                                 sx={{ height: 300 }}
                                 image= {royalSuit}
-                                title="doctor"
+                                title="Royal suite"
                             />
 
                             <CardContent sx={{ textAlign: 'center' }}>
@@ -124,7 +124,7 @@ const RM = () => {
                             <CardMedia 
                                 sx={{ height: 300 }}
                                 image= {orchidSuit}
-                                title="doctor"
+                                title="Orchid suite"
                             />
 
                             <CardContent sx={{ textAlign: 'center' }}>
