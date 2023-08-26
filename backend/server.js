@@ -8,22 +8,27 @@ const authRoute = require("./Routes/AuthRoute");
 const { MONGO_URL, PORT } = process.env;
 
 const app = express();
-app.use(cors());
-app.use(express.json());
 
-mongoose.connect(MONGO_URL, {useNewUrlParser: true, useUnifiedTopology: true});
+app.use(
+  cors({
+    origin: ["http://localhost:3000"],
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    credentials: true,
+  })
+);
+
+app.use(express.json());
+app.use(cookieParser());
+
+mongoose.connect(MONGO_URL, { useNewUrlParser: true, useUnifiedTopology: true });
 
 const connection = mongoose.connection;
 connection.once('open', () => {
     console.log("MongoDB database connection established successfully")
 });
 
+app.use("/", authRoute);
+
 app.listen(PORT, () => {
     console.log(`Server is running on port: ${PORT}`);
 });
-
-app.use(cookieParser());
-
-app.use(express.json());
-
-app.use("/", authRoute);
