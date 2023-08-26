@@ -135,7 +135,7 @@ const RM = () => {
                                 If you are staying at our Orchid Suite, you might just think you are on holiday. This Suite has all 
                                 the amenities of a hotel, with space and facilities for the patient and their visitors. Fully served 
                                 with air conditioning, television and phone, attached toilet and refrigerator, the Orchid Suite also 
-                                has an adjoining visitor’s room with a sofa. Royal Suite
+                                has an adjoining visitor’s room with a sofa. Royal Suite.
                                 </Typography>
                             </CardContent>
 
