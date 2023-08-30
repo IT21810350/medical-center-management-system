@@ -5,7 +5,7 @@ const Channeling = () =>{
     return(
 
         <div>
-            <h1>Channelings</h1>
+            <h1>Welcome toChannelings</h1>
         </div>
     )
 }
