@@ -9,14 +9,17 @@ import LA from './views/lab-assistant-views/lab-assistant-home'
 import Pharmacist from './views/pharmacist-views/parmacist-home'
 import SM from "./views/supplier-manager-views/supplier-manager-home";
 import RP from "./views/resource-manager-views/resource-manager-home";
+import Contact from './views/ContactUs'
+import Channeling from './views/doctor-views/channeling'
 
 function App() {
   return (
     <div className="App">
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/home" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
+
         <Route path="/hr" element={<HR />} />
         <Route path="/patient" element={<Patient />} />
         <Route path="/doctor" element={<Doctor />} />
@@ -25,6 +28,11 @@ function App() {
         <Route path="/pharmacist" element={<Pharmacist />} />
         <Route path="/resource-person" element={<RP />} />
         <Route path="/supplier" element={<SM />} />
+        
+        <Route path="/contact-us" element={<Contact />} />
+
+        {/* Doctor Routes */}
+        <Route path="/channeling" element={<Channeling />} />
       </Routes>
     </div>
   );

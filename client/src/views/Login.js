@@ -4,7 +4,7 @@ import axios from "axios";
 import { Button, Container, TextField, Typography } from "@mui/material";
 
 const Login = () => {
-  
+
   const navigate = useNavigate();
   const [inputValue, setInputValue] = useState({
     email: "",
@@ -69,7 +69,7 @@ const Login = () => {
           }, 1000);
         } else {
           setTimeout(() => {
-            navigate("/signup");
+            navigate("/login");
           }, 1000);
           console.error("values not been sent");
         }
