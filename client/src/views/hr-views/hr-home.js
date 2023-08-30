@@ -67,7 +67,7 @@ function createData(name, calories, fat, carbs, protein) {
 
 
 const rows = [
-  { id: 1, firstName: 'Snow', lastName: 'Umagliya', Email: 'rgahbkajsd@gmail.com', position: 'Doctor', Netsalary: '30000', action: 'edit', delete: 'edit' },
+  { id: 1, firstName: 'Snow', lastName: 'malshan', Email: 'rgahbkajsd@gmail.com', position: 'Doctor', Netsalary: '30000', action: 'edit', delete: 'edit' },
   { id: 2, firstName: 'Snow', lastName: 'Umagliya', Email: 'rgahbkajsd@gmail.com', position: 'Doctor', Netsalary: '30000', action: 'edit', delete: 'edit' },
   { id: 3, firstName: 'Snow', lastName: 'Umagliya', Email: 'rgahbkajsd@gmail.com', position: 'Doctor', Netsalary: '30000', action: 'edit', delete: 'edit' },
   { id: 4, firstName: 'Snow', lastName: 'Umagliya', Email: 'rgahbkajsd@gmail.com', position: 'Doctor', Netsalary: '30000', action: 'edit', delete: 'edit' },
