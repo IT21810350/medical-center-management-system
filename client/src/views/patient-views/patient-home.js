@@ -10,8 +10,9 @@ const Patient = () => {
     return (
         <div>
             <Typography container>
-                Enter Patient Details
+                Enter Patient Details..
             </Typography>
+            
             <Card>
                 <CardContent>
                     <form>

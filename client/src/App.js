@@ -8,6 +8,7 @@ import FM from './views/financial-manager-views/financial-manager-home'
 import LA from './views/lab-assistant-views/lab-assistant-home'
 import Pharmacist from './views/pharmacist-views/parmacist-home'
 import SM from "./views/supplier-manager-views/supplier-manager-home";
+import RP from "./views/resource-manager-views/resource-manager-home";
 import Contact from './views/ContactUs'
 import Channeling from './views/doctor-views/channeling'
 
@@ -25,6 +26,7 @@ function App() {
         <Route path="/financial-manager" element={<FM />} />
         <Route path="/lab-assistant" element={<LA />} />
         <Route path="/pharmacist" element={<Pharmacist />} />
+        <Route path="/resource-person" element={<RP />} />
         <Route path="/supplier" element={<SM />} />
         
         <Route path="/contact-us" element={<Contact />} />
