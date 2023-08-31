@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 require('dotenv').config();
 const cookieParser = require("cookie-parser");
 const authRoute = require("./Routes/AuthRoute");
+const ProfileRoute = require("./Routes/ProfileRoute");
 
 const { MONGO_URL, PORT } = process.env;
 
@@ -27,7 +28,7 @@ connection.once('open', () => {
     console.log("MongoDB database connection established successfully")
 });
 
-app.use("/", authRoute);
+app.use("/", authRoute, ProfileRoute);
 
 app.listen(PORT, () => {
     console.log(`Server is running on port: ${PORT}`);
