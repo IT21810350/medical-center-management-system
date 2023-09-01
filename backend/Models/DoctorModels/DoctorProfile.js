@@ -17,10 +17,8 @@ const doctorProfile = new mongoose.Schema({
     },
     employeeDetails: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'EmployeeModel'
+        ref: 'EmployeeDetails'
     }
-
-
 },
     {
         timestamps: true
