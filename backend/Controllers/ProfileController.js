@@ -1,4 +1,11 @@
 const DoctorProfile = require ("../Models/DoctorModels/DoctorProfile");
+const PatientProfile = require("../Models/PatientModel/PatientProfile");
+const PharmacistProfile = require("../Models/PharmacistModel/PharmacistProfile");
+const HumanResourceManagerProfile = require("../Models/hrmodel/HumanResourceManagerProfile");
+const FinancialManagerProfile = require("../Models/FinancialManagerModel/FinancialManagerProfile");
+const ResourcePersonProfile = require("../Models/ResourcePersonModel/ResourcePersonProfile");
+const LabAssistantProfile = require("../Models/LabAssistantModel/LabAssistantProfile");
+const SupplierManagerProfile = require("../Models/SupplierManagerModel/SupplierManagerProfile");
 const UserModel = require("../Models/UserModel")
 const {UserRole} = require("../Models/enum");
 
@@ -13,6 +20,24 @@ module.exports.CreateProfile = async (req, res, next) => {
                 break;
             case UserRole.DOCTOR:
                 userProfile = await DoctorProfile.create({ ...profileData });
+                break;
+            case UserRole.PHARMACIST:
+                userProfile = await PharmacistProfile.create({...profileData});
+                break;
+            case UserRole.HR:
+                userProfile = await HumanResourceManagerProfile.create({...profileData});
+                break;
+            case UserRole.FINANCIAL_MANAGER:
+                userProfile = await FinancialManagerProfile.create({...profileData});
+                break;
+            case UserRole.RESOURCE_PERSON:
+                userProfile = await ResourcePersonProfile.create({...profileData});
+                break;
+            case UserRole.SUPPLIER_MANAGER:
+                userProfile = await SupplierManagerProfile.create({...profileData});
+                break;
+            case UserRole.LAB_ASSISTANT:
+                userRole = await LabAssistantProfile.create({...profileData});
                 break;
             default:
                 return res.json({ message: "Invalid  role" });
