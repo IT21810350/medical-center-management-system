@@ -1,7 +1,7 @@
 import React from 'react';
 import Box from '@mui/material/Box';
 import { styled } from '@mui/material/styles';
-import ii from '../hr-views/image/hospital.jpg'
+import ii from './New folder/cc.jpg';
 import Card from '@mui/material/Card';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
@@ -101,7 +101,7 @@ const HR = () => {
       <Box sx={{ flexGrow: 1 }}>
         <Grid container spacing={2}>
           <Grid item xs={12}>
-            <Item>
+            <Item elevation={0}>
               <Card sx={{ maxWidth: 1400 }}>
                 <CardActionArea>
                   <CardMedia
@@ -134,7 +134,7 @@ const HR = () => {
         <Box sx={{ flexGrow: 1 }}>
           <Grid container spacing={2}>
             <Grid item xs={4}>
-              <Item>
+              <Item elevation={0}>
                 <Card sx={{ maxWidth: 345 }}>
                   <CardActionArea>
                     <CardMedia
@@ -162,7 +162,7 @@ const HR = () => {
               </Item>
             </Grid>
             <Grid item xs={4}>
-              <Item>
+              <Item elevation={0}>
                 <Card sx={{ maxWidth: 345 }}>
                   <CardActionArea>
                     <CardMedia
@@ -192,7 +192,7 @@ const HR = () => {
               </Item>
             </Grid>
             <Grid item xs={4}>
-              <Item>
+              <Item elevation={0}>
 
                 <Card sx={{ maxWidth: 345 }}>
                   <CardActionArea>
@@ -229,7 +229,7 @@ const HR = () => {
         <Box sx={{ flexGrow: 1 }}>
           <Grid container spacing={2}>
             <Grid item xs={6}>
-              <Item>
+              <Item elevation={0}>
                 <PieChart
                   series={[
                     {
@@ -249,7 +249,7 @@ const HR = () => {
               </Item>
             </Grid>
             <Grid item xs={6}>
-              <Item>
+              <Item elevation={0}>
                 <LineChart
                   xAxis={[{ data: [1, 2, 3, 5, 8, 10] }]}
                   series={[
@@ -272,7 +272,7 @@ const HR = () => {
         <Box sx={{ flexGrow: 1 }}>
           <Grid container spacing={2}>
             <Grid item xs={12}>
-              <Item>
+              <Item elevation={0}>
                 <div style={{ height: 400, width: '100%' }}>
                   <DataGrid
                     rows={rows}
@@ -295,12 +295,7 @@ const HR = () => {
 
       </div>
       <div>
-         <from noValidate autoComplete="off">
-         <TextField
-                label="Username"
-                variant="outlined"
-                />
-         </from>
+       
     </div>
     </div>
   );
