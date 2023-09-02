@@ -17,7 +17,7 @@ import EditIcon from '@mui/icons-material/Edit';
 import { LineChart } from '@mui/x-charts/LineChart';
 import { CardActionArea } from '@mui/material';
 import { Button, TextField } from '@mui/material';
-
+import Navbar from '../../components/HR-component/hr-nav-bar'
 
 // import Button from '@mui/material/Button';
 // import CssBaseline from '@mui/material/CssBaseline';
@@ -98,11 +98,19 @@ const data = [
 const HR = () => {
   return (
     <div>
+       
+
+       <Box >
+         <Grid container>
+            <Navbar />
+       </Grid>
+      </Box>
+
       <Box sx={{ flexGrow: 1 }}>
         <Grid container spacing={2}>
           <Grid item xs={12}>
             <Item elevation={0}>
-              <Card sx={{ maxWidth: 1400 }}>
+              <Card sx={{ maxWidth: 1700 }}>
                 <CardActionArea>
                   <CardMedia
                     component="img"
