@@ -12,6 +12,7 @@ import RP from "./views/resource-manager-views/resource-manager-home";
 import Contact from './views/ContactUs'
 import Channeling from './views/doctor-views/channeling'
 
+
 function App() {
   return (
     <div className="App">
@@ -33,7 +34,9 @@ function App() {
 
         {/* Doctor Routes */}
         <Route path="/channeling" element={<Channeling />} />
-      </Routes>
+        </Routes>
+
+        
     </div>
   );
 }
