@@ -85,6 +85,7 @@ module.exports.getUsersById = async (req, res) => {
     user.profile.employeeDetails = await EmployeeDetails.findOne({ _id: user.profile.employeeDetails._id });
 
     res.status(201).json({message: user.username + " 's details" ,user});
+    
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: 'An error occurred while fetching users' });

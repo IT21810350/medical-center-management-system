@@ -144,11 +144,11 @@ const Signup = () => {
         >
           <MenuItem value={"patient"}>Patient</MenuItem>
           <MenuItem value={"doctor"}>Doctor</MenuItem>
-          <MenuItem value={"financial-manager"}>Financial Manager</MenuItem>
-          <MenuItem value={"lab-assistant"}>Lab Asistant</MenuItem>
-          <MenuItem value={"resource-person"}>Resource Person</MenuItem>
+          <MenuItem value={"financialManager"}>Financial Manager</MenuItem>
+          <MenuItem value={"labAssistant"}>Lab Asistant</MenuItem>
+          <MenuItem value={"resourcePerson"}>Resource Person</MenuItem>
           <MenuItem value={"pharmacist"}>Pharmacist</MenuItem>
-          <MenuItem value={"supplier"}>Supplier</MenuItem>
+          <MenuItem value={"supplierManager"}>Supplier</MenuItem>
           <MenuItem value={"hr"}>Human Resource manager</MenuItem>
         </Select>
 
