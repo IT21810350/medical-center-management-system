@@ -12,6 +12,7 @@ import RP from "./views/resource-manager-views/resource-manager-home";
 import Contact from './views/ContactUs'
 import Channeling from './views/doctor-views/channeling'
 
+import SupplierRegister from './views/supplier-manager-views/supplier-ragistration'
 
 function App() {
   return (
@@ -29,14 +30,17 @@ function App() {
         <Route path="/pharmacist" element={<Pharmacist />} />
         <Route path="/resource-person" element={<RP />} />
         <Route path="/supplier" element={<SM />} />
-        
+
         <Route path="/contact-us" element={<Contact />} />
 
         {/* Doctor Routes */}
         <Route path="/channeling" element={<Channeling />} />
-        </Routes>
 
-        
+        {/* Supplier Routes */}
+        <Route path="/supplier/supplier-register" elements={<SupplierRegister/>}/>
+      </Routes>
+
+
     </div>
   );
 }

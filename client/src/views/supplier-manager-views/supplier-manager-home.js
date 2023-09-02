@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { Link } from 'react-router-dom';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
@@ -38,36 +39,38 @@ const SuppilerRegister = () => {
   return (
     <Grid item xs={4}>
       <Card sx={{ maxWidth: 345 }}>
-        <CardActionArea>
-          <CardMedia
-            component="img"
-            height="100"
-            image={img1}
-            alt="Suppiler Registreaion"
-          />
-          <CardContent>
-            <Typography
-              gutterBottom
-              variant="h5"
-              component="div"
-              sx={{
-                backgroundColor: 'darkblue',
-                padding: '8px',
-              }}
-            >
+        <Link to="/supplier/supplier-register" style={{ textDecoration: 'none' }}> 
+          <CardActionArea>
+            <CardMedia
+              component="img"
+              height="100"
+              image={img1}
+              alt="Suppiler Registreaion"
+            />
+            <CardContent>
               <Typography
-                component="span"
-                variant="inherit"
-                sx={{ color: 'lightblue' }}
+                gutterBottom
+                variant="h5"
+                component="div"
+                sx={{
+                  backgroundColor: 'darkblue',
+                  padding: '8px',
+                }}
               >
-                Supplier Registraion
+                <Typography
+                  component="span"
+                  variant="inherit"
+                  sx={{ color: 'lightblue' }}
+                >
+                  Supplier Registraion
+                </Typography>
               </Typography>
-            </Typography>
-            <Typography variant="body2" color="text.secondary">
-              Descriptions
-            </Typography>
-          </CardContent>
-        </CardActionArea>
+              <Typography variant="body2" color="text.secondary">
+                Descriptions
+              </Typography>
+            </CardContent>
+          </CardActionArea>
+        </Link>
       </Card>
     </Grid>
   );
@@ -119,7 +122,7 @@ export default function App() {
           {/* Additional Cards (xs=4 each) */}
           <Grid item xs={8}>
             <Grid container spacing={2}>
-              <SuppilerRegister/>
+              <SuppilerRegister />
             </Grid>
           </Grid>
         </Grid>
