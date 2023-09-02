@@ -1,8 +1,12 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { Button, Container, TextField, Typography,MenuItem } from "@mui/material";
+import { Button, TextField, Typography, MenuItem, FormControl, InputLabel, Grid, Box } from "@mui/material";
+import Paper from '@mui/material/Paper';
 import Select from '@mui/material/Select';
 import axios from "axios";
+import signupimg from '../assets/img/doctor/doctor-profile-img.jpg'
+
+const Item = Paper;
 
 const Signup = () => {
   const navigate = useNavigate();
@@ -94,72 +98,103 @@ const Signup = () => {
   };
 
   return (
-    <Container maxWidth="sm">
-      <Typography variant="h2" gutterBottom>
-        Signup Account
-      </Typography>
-      <form onSubmit={handleSubmit}>
+    <Box sx={{ flexGrow: 1 }}>
+      <Grid container spacing={2}>
+        <Grid item xs={6} sx={{ height: '10%' }}>
+          <Item elevation={0}>
+            <img src={signupimg} alt="" style={{ maxWidth: '100%', height: '600px' }} />
+          </Item>
+        </Grid>
+        <Grid item xs={6} sx={{ height: '10%' }}>
+          <Item sx={{ marginY: 10, marginX: 15 }} elevation={0}>
+            <Grid container alignItems="center" justifyContent="center">
+              <Typography variant="h2" gutterBottom style={{ color: 'blue', fontSize: '50px' }}>
+                Signup Account
+              </Typography>
+            </Grid>
+            <Grid>
+              <form onSubmit={handleSubmit}>
+                <Grid>
+                  <TextField
+                    fullWidth
+                    label="Email"
+                    name="email"
+                    value={email}
+                    placeholder="Enter your email"
+                    onChange={handleOnChange}
+                    margin="normal"
+                    variant="outlined"
+                  />
+                </Grid>
 
-        <TextField
-          fullWidth
-          label="Email"
-          name="email"
-          value={email}
-          placeholder="Enter your email"
-          onChange={handleOnChange}
-          margin="normal"
-          variant="outlined"
-        />
+                <Grid>
+                  <TextField
+                    fullWidth
+                    label="Username"
+                    name="username"
+                    value={username}
+                    placeholder="Enter your username"
+                    onChange={handleOnChange}
+                    margin="normal"
+                    variant="outlined"
+                  />
+                </Grid>
 
-        <TextField
-          fullWidth
-          label="Username"
-          name="username"
-          value={username}
-          placeholder="Enter your username"
-          onChange={handleOnChange}
-          margin="normal"
-          variant="outlined"
-        />
+                <Grid>
+                  <TextField
+                    fullWidth
+                    label="Password"
+                    type="password"
+                    name="password"
+                    value={password}
+                    placeholder="Enter your password"
+                    onChange={handleOnChange}
+                    margin="normal"
+                    variant="outlined"
+                  />
+                </Grid>
 
-        <TextField
-          fullWidth
-          label="Password"
-          type="password"
-          name="password"
-          value={password}
-          placeholder="Enter your password"
-          onChange={handleOnChange}
-          margin="normal"
-          variant="outlined"
-        />
+                <Grid>
+                  <FormControl fullWidth sx={{ marginY: 2 }}>
+                    <InputLabel id="user-role">Role</InputLabel>
+                    <Select
+                      labelId="user-role"
+                      id="demo-simple-select"
+                      name="role"
+                      value={role}
+                      label="Role"
+                      onChange={handleOnChange}
+                    >
+                      <MenuItem value={"patient"}>Patient</MenuItem>
+                      <MenuItem value={"doctor"}>Doctor</MenuItem>
+                      <MenuItem value={"financialManager"}>Financial Manager</MenuItem>
+                      <MenuItem value={"labAssistant"}>Lab Asistant</MenuItem>
+                      <MenuItem value={"resourcePerson"}>Resource Person</MenuItem>
+                      <MenuItem value={"pharmacist"}>Pharmacist</MenuItem>
+                      <MenuItem value={"supplierManager"}>Supplier</MenuItem>
+                      <MenuItem value={"hr"}>Human Resource manager</MenuItem>
+                    </Select>
+                  </FormControl>
+                </Grid>
 
-        <Select
-          labelId="demo-simple-select-label"
-          id="demo-simple-select"
-          name="role"
-          value={role}
-          label="Role"
-          onChange={handleOnChange}
-        >
-          <MenuItem value={"patient"}>Patient</MenuItem>
-          <MenuItem value={"doctor"}>Doctor</MenuItem>
-          <MenuItem value={"financialManager"}>Financial Manager</MenuItem>
-          <MenuItem value={"labAssistant"}>Lab Asistant</MenuItem>
-          <MenuItem value={"resourcePerson"}>Resource Person</MenuItem>
-          <MenuItem value={"pharmacist"}>Pharmacist</MenuItem>
-          <MenuItem value={"supplierManager"}>Supplier</MenuItem>
-          <MenuItem value={"hr"}>Human Resource manager</MenuItem>
-        </Select>
-
-        <Button type="submit" variant="contained" color="primary">
-          Submit
-        </Button>
-        <Typography variant="body1" gutterBottom>
-          Already have an account? <Link to="/login">Login</Link>
-        </Typography>
-      </form>
-    </Container>
+                <Grid container justifyContent="space-between" alignItems="center" sx={{ marginY: 1 }}>
+                  <Grid item>
+                    <Button type="submit" variant="contained" color="primary">
+                      Submit
+                    </Button>
+                  </Grid>
+                  <Grid item>
+                    <Typography variant="body1" gutterBottom>
+                      Already have an account? <Link to="/login" style={{ textDecoration: 'none' }}>Login</Link>
+                    </Typography>
+                  </Grid>
+                </Grid>
+              </form>
+            </Grid>
+          </Item>
+        </Grid>
+      </Grid>
+    </Box>
   );
 };
 

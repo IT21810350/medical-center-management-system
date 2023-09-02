@@ -1,7 +1,11 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
-import { Button, Container, TextField, Typography } from "@mui/material";
+import { Button, TextField, Typography, Grid, Box } from "@mui/material";
+import Paper from '@mui/material/Paper';
+import signupimg from '../assets/img/doctor/doctor-profile-img.jpg'
+
+const Item = Paper;
 
 const Login = () => {
 
@@ -88,40 +92,67 @@ const Login = () => {
   };
 
   return (
-    <Container maxWidth="sm">
-      <Typography variant="h2" gutterBottom>
-        Login Account
-      </Typography>
-      <form onSubmit={handleSubmit}>
-        <TextField
-          fullWidth
-          label="Email"
-          name="email"
-          value={email}
-          placeholder="Enter your email"
-          onChange={handleOnChange}
-          margin="normal"
-          variant="outlined"
-        />
-        <TextField
-          fullWidth
-          label="Password"
-          type="password"
-          name="password"
-          value={password}
-          placeholder="Enter your password"
-          onChange={handleOnChange}
-          margin="normal"
-          variant="outlined"
-        />
-        <Button type="submit" variant="contained" color="primary">
-          Submit
-        </Button>
-        <Typography variant="body1" gutterBottom>
-          Don't have an account? <Link to="/signup">Signup</Link>
-        </Typography>
-      </form>
-    </Container>
+<Box sx={{ flexGrow: 1 }}>
+      <Grid container spacing={2}>
+        <Grid item xs={6} sx={{ height: '10%' }}>
+          <Item elevation={0}>
+            <img src={signupimg} alt="" style={{ maxWidth: '100%', height: '600px' }} />
+          </Item>
+        </Grid>
+        <Grid item xs={6} sx={{ height: '10%' }}>
+          <Item sx={{ marginY: 20, marginX: 15 }} elevation={0}>
+            <Grid container alignItems="center" justifyContent="center">
+              <Typography variant="h2" gutterBottom style={{ color: 'blue', fontSize: '50px' }}>
+                Login Account
+              </Typography>
+            </Grid>
+            <Grid>
+              <form onSubmit={handleSubmit}>
+                <Grid>
+                  <TextField
+                    fullWidth
+                    label="Email"
+                    name="email"
+                    value={email}
+                    placeholder="Enter your email"
+                    onChange={handleOnChange}
+                    margin="normal"
+                    variant="outlined"
+                  />
+                </Grid>
+
+                <Grid>
+                  <TextField
+                    fullWidth
+                    label="Password"
+                    type="password"
+                    name="password"
+                    value={password}
+                    placeholder="Enter your password"
+                    onChange={handleOnChange}
+                    margin="normal"
+                    variant="outlined"
+                  />
+                </Grid>
+
+                <Grid container justifyContent="space-between" alignItems="center" sx={{ marginY: 1 }}>
+                  <Grid item>
+                    <Button type="submit" variant="contained" color="primary">
+                      Submit
+                    </Button>
+                  </Grid>
+                  <Grid item>
+                    <Typography variant="body1" gutterBottom>
+                      Don't have an account? <Link to="/signup" style={{ textDecoration: 'none' }}>Sign Up</Link>
+                    </Typography>
+                  </Grid>
+                </Grid>
+              </form>
+            </Grid>
+          </Item>
+        </Grid>
+      </Grid>
+    </Box>
   );
 };
 
