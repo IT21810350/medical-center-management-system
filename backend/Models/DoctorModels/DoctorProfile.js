@@ -2,23 +2,27 @@ const mongoose = require("mongoose");
 
 const doctorProfile = new mongoose.Schema({
 
-    firstName:{
+    firstName: {
         type: String,
     },
-    lastname:{
+    lastname: {
         type: String,
     },
-    specialization:{
+    specialization: {
         type: String,
     },
     experienceYears: {
         type: Number,
-        default: 0
+        default: 0,
+    },
+    employeeDetails: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'EmployeeDetails'
     }
 },
-{ 
-    timestamps: true 
-});
+    {
+        timestamps: true
+    });
 
 module.exports = mongoose.model("DoctorProfile", doctorProfile);
 

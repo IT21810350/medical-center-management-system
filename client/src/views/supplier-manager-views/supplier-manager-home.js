@@ -1,98 +1,132 @@
-import React from 'react';
-import Box from '@mui/material/Box';
-import Container from '@mui/material/Container';
-import Grid from '@mui/material/Grid';
+import * as React from 'react';
+import { Link } from 'react-router-dom';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import { CardActionArea } from '@mui/material';
-import img1 from '../../assets/img/supplier/sage.jpg';
+import Box from '@mui/material/Box';
+import Grid from '@mui/material/Grid';
+import Paper from '@mui/material/Paper';
+import { styled } from '@mui/material/styles';
+import img from '../../assets/img/supplier/supplier.jpg';
+import img1 from '../../assets/img/supplier/Registration.jpg';
+// import img2 from '../../assets/img/supplier/profile.jpg';
+// import img3 from '../../assets/img/supplier/list.jpeg';
+// import img4 from '../../assets/img/supplier/inven_item.jpeg'
+// import img5 from '../../assets/img/supplier/inven_medicine.jpeg';
+// import img6 from '../../assets/img/supplier/request.jpeg'
+// import img7 from '../../assets/img/supplier/confirm.jpeg'
+// import img8 from '../../assets/img/supplier/pharmacy.jpeg'
+// import img9 from '../../assets/img/supplier/pay.jpeg'
 
+const Item = styled(Paper)(({ theme }) => ({
+  backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
+  ...theme.typography.body2,
+  padding: theme.spacing(1),
+  textAlign: 'center',
+  color: theme.palette.text.secondary,
+}));
 
-const Name = () => {
-
-    return(
-        <div>
-            <h2>Hello, Santhushieeee!!!!</h2>
-        </div>
-    );
-}
-
-const Address = () => {
-
-    return(
-        <div>
-            <h2>Mathara</h2>
-        </div>
-    );
-}
-
-const Uni = () => {
-
-    return(
-        <div>
-            <h2>SLIIT</h2>
-        </div>
-    );
-}
-
-
-const SM = () => {
-    return (
-        
-        <Container maxWidth="100%">
-
-            <Box sx={{ flexGrow: 1 }}>
-
-                <Grid container spacing={2}>
-
-                    <Grid item lg={2} sx={{backgroundColor: '#f5f5f5', padding: '10px' }}>
-                        <Name/>
-                    </Grid>
-
-                    <Grid item lg={2} sx={{ backgroundColor: '#f5f5f5', padding: '10px' }}>
-                        <Address/>
-                    </Grid>
-
-                    <Grid item lg={2} sx={{ backgroundColor: '#f5f5f5', padding: '10px' }}>
-
-                        <Uni/>
-                    </Grid>
-
-                    <Grid item lg={6} sx={{ backgroundColor: '#f5f5f5', padding: '10px' }}>
-                        <Card sx={{ maxWidth: 1000, backgroundColor: '#fff444' }}>
-                            <CardActionArea>
-                                <CardMedia
-                                component="img"
-                                height="300"
-                                image={img1}
-                                alt="green iguana"
-                                />
-
-                                <CardContent>
-
-                                    <Typography gutterBottom variant="h5" component="div" textAlign={"Center"}>
-                                        Lizard
-                                    </Typography>
-
-                                    <Typography variant="body2" color="text.secondary">
-                                        Lizards are a widespread group of squamate reptiles, with over 6,000
-                                        species, ranging across all continents except Antarctica
-                                    </Typography>
-
-                                </CardContent>
-                            </CardActionArea>
-                            </Card>
-                    </Grid>
-
-                </Grid>
-
-            </Box>
-
-        </Container>
-        
-    );
+const mainCardData = {
+  image: img,
+  title: 'Ms.Santhushie Nallaperuma',
+  description: 'Supplier Manager',
 };
 
-export default SM;
+const SuppilerRegister = () => {
+
+  return (
+    <Grid item xs={4}>
+      <Card sx={{ maxWidth: 345 }}>
+        <Link to="/supplier/supplier-register" style={{ textDecoration: 'none' }}> 
+          <CardActionArea>
+            <CardMedia
+              component="img"
+              height="100"
+              image={img1}
+              alt="Suppiler Registreaion"
+            />
+            <CardContent>
+              <Typography
+                gutterBottom
+                variant="h5"
+                component="div"
+                sx={{
+                  backgroundColor: 'darkblue',
+                  padding: '8px',
+                }}
+              >
+                <Typography
+                  component="span"
+                  variant="inherit"
+                  sx={{ color: 'lightblue' }}
+                >
+                  Supplier Registraion
+                </Typography>
+              </Typography>
+              <Typography variant="body2" color="text.secondary">
+                Descriptions
+              </Typography>
+            </CardContent>
+          </CardActionArea>
+        </Link>
+      </Card>
+    </Grid>
+  );
+}
+
+export default function App() {
+  return (
+    <div>
+      <Box sx={{ flexGrow: 1 }}>
+        <Grid container spacing={3}>
+          {/* Main Card (xs=4) */}
+          <Grid item xs={4}>
+            <Item>
+              <Card sx={{ maxWidth: 550 }}>
+                <CardActionArea>
+                  <CardMedia
+                    component="img"
+                    height="300"
+                    image={mainCardData.image}
+                    alt=""
+                  />
+                  <CardContent>
+                    <Typography
+                      gutterBottom
+                      variant="h5"
+                      component="div"
+                      sx={{
+                        backgroundColor: 'dark blue',
+                        padding: '8px',
+                      }}
+                    >
+                      <Typography
+                        component="span"
+                        variant="inherit"
+                        sx={{ color: 'lightblue' }}
+                      >
+                        {mainCardData.title}
+                      </Typography>
+                    </Typography>
+                    <Typography variant="body2" color="text.secondary">
+                      {mainCardData.description}
+                    </Typography>
+                  </CardContent>
+                </CardActionArea>
+              </Card>
+            </Item>
+          </Grid>
+
+          {/* Additional Cards (xs=4 each) */}
+          <Grid item xs={8}>
+            <Grid container spacing={2}>
+              <SuppilerRegister />
+            </Grid>
+          </Grid>
+        </Grid>
+      </Box>
+    </div>
+  );
+}

@@ -1,4 +1,6 @@
 const User = require("../Models/UserModel");
+const DoctorProfile = require("../Models/DoctorModels/DoctorProfile")
+const EmployeeDetails = require("../Models/EmployeeModel");
 const { createSecretToken } = require("../util/SecretToken");
 const bcrypt = require("bcryptjs");
 
@@ -78,7 +80,12 @@ module.exports.getUsers = async (req, res) => {
 module.exports.getUsersById = async (req, res) => {
   try {
     const user = await User.findById(req.params.id);
-    res.json({message: user.username + " 's details" ,user});
+
+    user.profile = await DoctorProfile.findOne({_id: user.profile._id});
+    user.profile.employeeDetails = await EmployeeDetails.findOne({ _id: user.profile.employeeDetails._id });
+
+    res.status(201).json({message: user.username + " 's details" ,user});
+    
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: 'An error occurred while fetching users' });

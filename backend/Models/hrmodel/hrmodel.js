@@ -2,7 +2,7 @@ const mongoose =require("mongoose");
 const bcrypt = require("bcrypt.js");
 
 
-const Employee = new mongoose.Schema({
+const EmployeeSchema = new mongoose.Schema({
     email:{
         type:String,
         require:[true,"Employee email addres is required"],
@@ -55,7 +55,7 @@ const Employee = new mongoose.Schema({
         require:[true,"Employee gender is required"]
     },
 
-    Dathofbirth:{
+    birthday:{
         type:String,
         require:[true,"Employee birthday is requieed"]
     },
@@ -73,9 +73,9 @@ const Employee = new mongoose.Schema({
         type:String,
         require:[true,"Workin hours are required"]
     }
-    
-
-
-
-
 })
+Employee.pre("save",  async function(){
+this.password = await bcrypt.hash(this.password,12);
+});
+
+module.exports = mongoose.model("employee",EmployeeSchema);

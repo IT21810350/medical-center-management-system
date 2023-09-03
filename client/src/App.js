@@ -11,6 +11,10 @@ import SM from "./views/supplier-manager-views/supplier-manager-home";
 import RP from "./views/resource-manager-views/resource-manager-home";
 import Contact from './views/ContactUs'
 import Channeling from './views/doctor-views/channeling'
+import Registration from './views/hr-views/hr-emp-registration';
+import Profile from './views/hr-views/emp-profile';
+
+import SupplierRegister from './views/supplier-manager-views/supplier-ragistration'
 
 function App() {
   return (
@@ -20,6 +24,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
 
+        {/* actor routes */}
         <Route path="/hr" element={<HR />} />
         <Route path="/patient" element={<Patient />} />
         <Route path="/doctor" element={<Doctor />} />
@@ -28,11 +33,19 @@ function App() {
         <Route path="/pharmacist" element={<Pharmacist />} />
         <Route path="/resource-person" element={<RP />} />
         <Route path="/supplier" element={<SM />} />
-        
+
         <Route path="/contact-us" element={<Contact />} />
 
         {/* Doctor Routes */}
         <Route path="/channeling" element={<Channeling />} />
+
+        {/* Hr Routes */}
+        <Route path="/registration" element={<Registration/>}/>
+
+        <Route path="/profile" element={<Profile/>}/>
+
+        {/* Supplier Routes */}
+        <Route path="/supplier/supplier-register" elements={<SupplierRegister/>}/>
       </Routes>
     </div>
   );
