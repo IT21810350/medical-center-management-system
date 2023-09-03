@@ -210,3 +210,12 @@ const Patient = () => {
 };
 
 export default Patient;
+{/* 
+To do
+
+Validations of NIC / Passport
+Profile Picture
+Align the buttons to left corner
+
+
+*/}
