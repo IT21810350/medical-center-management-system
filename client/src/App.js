@@ -22,6 +22,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
 
+        {/* actor routes */}
         <Route path="/hr" element={<HR />} />
         <Route path="/patient" element={<Patient />} />
         <Route path="/doctor" element={<Doctor />} />
@@ -39,8 +40,6 @@ function App() {
         {/* Supplier Routes */}
         <Route path="/supplier/supplier-register" elements={<SupplierRegister/>}/>
       </Routes>
-
-
     </div>
   );
 }

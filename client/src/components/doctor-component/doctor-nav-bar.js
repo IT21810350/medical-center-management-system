@@ -117,7 +117,7 @@ function ResponsiveAppBar() {
                     </Typography>
                     <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
                         {pages.map((page) => (
-                            <Link to={`/${formatPageName(page)}`}>
+                            <Link to={`/${formatPageName(page)}`} style={{ textDecoration: 'none' }}>
                                 <Button
                                     sx={{ my: 2, color: 'white', display: 'block' }}
                                 >
@@ -151,7 +151,7 @@ function ResponsiveAppBar() {
                         >
                             {settings.map((setting) => (
                                 <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                                    <Link>
+                                    <Link style={{ textDecoration: 'none' }}>
                                         <Typography textAlign="center">{setting}</Typography>
                                     </Link>
                                 </MenuItem>
