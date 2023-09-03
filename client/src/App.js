@@ -11,6 +11,8 @@ import SM from "./views/supplier-manager-views/supplier-manager-home";
 import RP from "./views/resource-manager-views/resource-manager-home";
 import Contact from './views/ContactUs'
 import Channeling from './views/doctor-views/channeling'
+import Registration from './views/hr-views/hr-emp-registration';
+import Profile from './views/hr-views/emp-profile';
 
 import SupplierRegister from './views/supplier-manager-views/supplier-ragistration'
 
@@ -36,6 +38,11 @@ function App() {
 
         {/* Doctor Routes */}
         <Route path="/channeling" element={<Channeling />} />
+
+        {/* Hr Routes */}
+        <Route path="/registration" element={<Registration/>}/>
+
+        <Route path="/profile" element={<Profile/>}/>
 
         {/* Supplier Routes */}
         <Route path="/supplier/supplier-register" elements={<SupplierRegister/>}/>
