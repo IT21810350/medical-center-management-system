@@ -59,7 +59,7 @@ const SummaryCard = () => {
   return (
     <Card variant="outlined" sx={{ height: '200px', backgroundColor: '#4169E1' }}>
       <CardContent sx={{ color: 'white' }}>
-        <Typography variant="h4" align="center" sx={{ marginBottom: 5 }}>SUMMARY</Typography>
+        <Typography variant="h4" align="center" sx={{ marginBottom: 5 }}>SUMMARY!!!!</Typography>
         <Grid container spacing={2}>
           <Grid item xs={6}>
             <Typography variant="body1" align="center">Active Patients</Typography>
