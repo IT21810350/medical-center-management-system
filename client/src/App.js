@@ -16,7 +16,7 @@ import Profile from './views/hr-views/emp-profile';
 import SearchDoctors from './views/patient-views/searchDoctors'
 import SupplierRegistration from './views/supplier-manager-views/supplier-registration';
 
-import SupplierRegister from './views/supplier-manager-views/supplier-ragistration'
+
 
 function App() {
   return (
@@ -47,12 +47,9 @@ function App() {
 
         <Route path="/profile" element={<Profile/>}/>
 
-        {/* Supplier Routes */}
-        <Route path="/supplier/supplier-register" elements={<SupplierRegister/>}/>
-
         {/* Patient Routes */}
         <Route path="/searchDoctors" element={<SearchDoctors />} />
-      </Routes>
+      
 
         {/* Supplier Routes */}
         <Route path="/supplier/supplier-registration" element={<SupplierRegistration />} />
