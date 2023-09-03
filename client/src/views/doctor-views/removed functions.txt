@@ -1,0 +1,180 @@
+const RecentPatientsCard = () => {
+  const recentPatients = [
+    { id: 1, name: 'Malshan Rathnayake', diagnostic: 'Fever', avatarUrl: '/assets/img/avatar1.jpg' },
+    { id: 2, name: 'Ravindu Kavishka', diagnostic: 'Back Pain', avatarUrl: '/assets/img/avatar2.jpg' },
+    { id: 3, name: 'Inupa Tharindu', diagnostic: 'Headache', avatarUrl: '/assets/img/avatar2.jpg' },
+    { id: 4, name: 'Pathum Nishajith', diagnostic: 'Running Nose', avatarUrl: '/assets/img/avatar2.jpg' }
+  ];
+
+  return (
+    <Card sx={{ backgroundColor: '#F0FFFF' }}>
+      <CardContent>
+        <Typography variant="h6" gutterBottom>
+          Recent Patients
+        </Typography>
+        <List>
+          {recentPatients.map((patient) => (
+            <ListItem key={patient.id}>
+              <ListItemAvatar>
+                <Avatar alt={patient.name} src={patient.avatarUrl} />
+              </ListItemAvatar>
+              <ListItemText primary={patient.name} secondary={patient.diagnostic} />
+              <Button variant="outlined" size="small">
+                View
+              </Button>
+            </ListItem>
+          ))}
+        </List>
+      </CardContent>
+    </Card>
+  );
+};
+
+const UpcomingAppointmentsCard = () => {
+
+  const upcomingAppointments = [
+    { id: 1, name: 'Amalsha rathnayake', date: '2023-10-11', time: '10:00 AM' },
+    { id: 2, name: 'Shehan Dilisha', date: '2023-09-10', time: '11:00 AM' },
+    { id: 3, name: 'Tharindu Shehan', date: '2023-11-11', time: '12:00 PM' },
+    { id: 4, name: 'Nadun Thennakoon', date: '2023-08-17', time: '01:00 PM' },
+  ];
+
+  return (
+    <Card sx={{ backgroundColor: '#F0FFFF' }}>
+      <CardContent>
+        <Typography variant="h6" gutterBottom>
+          Upcomming Appointments
+        </Typography>
+        <List>
+          {upcomingAppointments.map((upcomingAppointments) => (
+            <ListItem key={upcomingAppointments.id}>
+              <ListItemAvatar>
+                <Avatar alt={upcomingAppointments.name} />
+              </ListItemAvatar>
+              <ListItemText primary={upcomingAppointments.name} secondary={`${upcomingAppointments.date} at ${upcomingAppointments.time}`} />
+              <Button variant="outlined" size="small">
+                View
+              </Button>
+            </ListItem>
+          ))}
+        </List>
+      </CardContent>
+    </Card>
+  );
+};
+
+import React, { useEffect, useState } from 'react';
+import Box from '@mui/material/Box';
+import Table from '@mui/material/Table';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TableBody from '@mui/material/TableBody';
+import TableRow from '@mui/material/TableRow';
+import TableCell from '@mui/material/TableCell';
+import TablePagination from '@mui/material/TablePagination';
+
+const columns = [
+  { id: 'name', label: 'Patient Name', minWidth: 170 },
+  { id: 'date', label: 'Date', minWidth: 100 },
+  { id: 'time', label: 'Time', minWidth: 100 },
+  { id: 'severity', label: 'Severity Level', minWidth: 170 },
+  { id: 'view', label: 'View', minWidth: 100 },
+];
+
+function createData(id, name, date, time, severity) {
+  return { id, name, date, time, severity };
+}
+
+const UpcomingChanneling = () => {
+  const [page, setPage] = useState(0);
+  const [rowsPerPage, setRowsPerPage] = useState(10);
+  const [rows, setRows] = useState([]);
+
+  useEffect(() => {
+    // Fetch data from the backend when the component mounts
+    fetch('YOUR_API_ENDPOINT')
+      .then((response) => response.json())
+      .then((data) => {
+        // Map the fetched data to the rows array
+        const mappedRows = data.map((item) =>
+          createData(item.id, item.name, item.date, item.time, item.severity)
+        );
+        setRows(mappedRows);
+      })
+      .catch((error) => {
+        console.error('Error fetching data:', error);
+      });
+  }, []);
+
+  const handleChangePage = (event, newPage) => {
+    setPage(newPage);
+  };
+
+  const handleChangeRowsPerPage = (event) => {
+    setRowsPerPage(+event.target.value);
+    setPage(0);
+  };
+
+  const handleViewClick = (id) => {
+    // Handle redirection to a different page with the channeling ID
+    // For example: history.push(`/channeling/${id}`);
+    console.log(`View clicked for ID: ${id}`);
+  };
+
+  return (
+    <Box sx={{ width: '80%', overflow: 'hidden', marginLeft: '100px' }}>
+      <TableContainer sx={{ maxHeight: 440 }}>
+        <Table stickyHeader aria-label="sticky table">
+          <TableHead>
+            <TableRow>
+              {columns.map((column) => (
+                <TableCell
+                  key={column.id}
+                  align="center"
+                  style={{ minWidth: column.minWidth }}
+                >
+                  {column.label}
+                </TableCell>
+              ))}
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {rows
+              .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+              .map((row) => {
+                return (
+                  <TableRow hover role="checkbox" tabIndex={-1} key={row.id}>
+                    {columns.map((column) => {
+                      const value = row[column.id];
+                      return (
+                        <TableCell key={column.id} align="center">
+                          {column.id === 'view' ? (
+                            <button onClick={() => handleViewClick(row.id)}>
+                              View
+                            </button>
+                          ) : (
+                            value
+                          )}
+                        </TableCell>
+                      );
+                    })}
+                  </TableRow>
+                );
+              })}
+          </TableBody>
+        </Table>
+      </TableContainer>
+      <TablePagination
+        rowsPerPageOptions={[10, 25, 100]}
+        component="div"
+        count={rows.length}
+        rowsPerPage={rowsPerPage}
+        page={page}
+        onPageChange={handleChangePage}
+        onRowsPerPageChange={handleChangeRowsPerPage}
+      />
+    </Box>
+  );
+};
+
+export default UpcomingChanneling;

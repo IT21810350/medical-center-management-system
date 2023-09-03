@@ -1,134 +1,238 @@
 import React from 'react';
-import CssBaseline from '@mui/material/CssBaseline';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
-import { List, ListItem, ListItemAvatar, Avatar, ListItemText, Button, Container } from '@mui/material';
+import { Avatar, Paper } from '@mui/material';
+// for calandar
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { DateCalendar } from '@mui/x-date-pickers/DateCalendar';
+
 import Navbar from '../../components/doctor-component/doctor-nav-bar';
-import img1 from '../../assets/img/doctor/doctor-profile-img.jpg';
+import { useCurrentTime } from '../../utils/getCurrentTime'
 
-const RecentPatientsCard = () => {
-  const recentPatients = [
-    { id: 1, name: 'Malshan Rathnayake', diagnostic: 'Fever', avatarUrl: '/assets/img/avatar1.jpg' },
-    { id: 2, name: 'Ravindu Kavishka', diagnostic: 'Back Pain', avatarUrl: '/assets/img/avatar2.jpg' },
-    { id: 3, name: 'Inupa Tharindu', diagnostic: 'Headache', avatarUrl: '/assets/img/avatar2.jpg' },
-    { id: 4, name: 'Pathum Nishajith', diagnostic: 'Running Nose', avatarUrl: '/assets/img/avatar2.jpg' }
-  ];
+import docImg from '../../assets/img/doctor/doctor-profile-img.jpg';
 
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TablePagination from '@mui/material/TablePagination';
+import TableRow from '@mui/material/TableRow';
+
+
+const Item = Paper;
+
+const ProfileCard = () => {
+
+  const time = useCurrentTime();
   return (
-    <Card sx={{ backgroundColor: '#F0FFFF' }}>
-      <CardContent>
-        <Typography variant="h6" gutterBottom>
-          Recent Patients
-        </Typography>
-        <List>
-          {recentPatients.map((patient) => (
-            <ListItem key={patient.id}>
-              <ListItemAvatar>
-                <Avatar alt={patient.name} src={patient.avatarUrl} />
-              </ListItemAvatar>
-              <ListItemText primary={patient.name} secondary={patient.diagnostic} />
-              <Button variant="outlined" size="small">
-                View
-              </Button>
-            </ListItem>
-          ))}
-        </List>
+    <Box sx={{ p: 2, height: '171px', backgroundColor: '#1E90FF' }}>
+      <Grid container alignItems="center" spacing={2}>
+        <Grid item>
+          <Avatar
+            src={docImg}
+            sx={{ width: 80, height: 80 }}
+          />
+        </Grid>
+        <Grid item>
+          <Typography variant="h6" sx={{ color: 'white' }}>Dr. Malshan</Typography>
+          <Typography variant="body2" sx={{ color: 'white' }}>Time: {time}</Typography>
+          <Typography variant="body2" sx={{ color: 'white' }}>Address: 123 Main St</Typography>
+        </Grid>
+      </Grid>
+
+      <Grid container mt={2}>
+        <Grid item xs={12}>
+          <Typography variant="h6" sx={{ color: 'white' }}>Center Name: XYZ Hospital</Typography>
+          <Typography variant="body2" sx={{ color: 'white' }}>Branch: Malabe Branch</Typography>
+        </Grid>
+      </Grid>
+    </Box>
+  );
+};
+
+const SummaryCard = () => {
+  return (
+    <Card variant="outlined" sx={{ height: '200px', backgroundColor: '#4169E1' }}>
+      <CardContent sx={{ color: 'white' }}>
+        <Typography variant="h4" align="center" sx={{ marginBottom: 5 }}>SUMMARY!!!!</Typography>
+        <Grid container spacing={2}>
+          <Grid item xs={6}>
+            <Typography variant="body1" align="center">Active Patients</Typography>
+            <Typography variant="h4" align="center">12</Typography>
+          </Grid>
+          <Grid item xs={6}>
+            <Typography variant="body1" align="center">Ongoing Channelings</Typography>
+            <Typography variant="h4" align="center">3</Typography>
+          </Grid>
+        </Grid>
       </CardContent>
     </Card>
   );
 };
 
-const UpcomingAppointmentsCard = () => {
-
-  const upcomingAppointments = [
-    { id: 1, name: 'Amalsha rathnayake', date: '2023-10-11', time: '10:00 AM' },
-    { id: 2, name: 'Shehan Dilisha', date: '2023-09-10', time: '11:00 AM' },
-    { id: 3, name: 'Tharindu Shehan', date: '2023-11-11', time: '12:00 PM' },
-    { id: 4, name: 'Nadun Thennakoon', date: '2023-08-17', time: '01:00 PM' },
-  ];
-
+const NextAppointmentCard = () => {
   return (
-    <Card sx={{ backgroundColor: '#F0FFFF' }}>
+    <Card variant="outlined" sx={{ height: '200px', backgroundColor: '#F33A6A', color: 'white' }}>
       <CardContent>
-        <Typography variant="h6" gutterBottom>
-          Upcomming Appointments
-        </Typography>
-        <List>
-          {upcomingAppointments.map((upcomingAppointments) => (
-            <ListItem key={upcomingAppointments.id}>
-              <ListItemAvatar>
-                <Avatar alt={upcomingAppointments.name} />
-              </ListItemAvatar>
-              <ListItemText primary={upcomingAppointments.name} secondary={`${upcomingAppointments.date} at ${upcomingAppointments.time}`} />
-              <Button variant="outlined" size="small">
-                View
-              </Button>
-            </ListItem>
-          ))}
-        </List>
+        <Typography variant="h4" align="center" sx={{ marginBottom: 5 }}>NEXT APPOINTMENT</Typography>
+        <Grid container spacing={1} justifyContent="center">
+          <Grid item xs={3}>
+            <Typography variant="body1">Patient</Typography>
+            <Typography variant="body1">Time</Typography>
+            <Typography variant="body1">Room</Typography>
+          </Grid>
+          <Grid item xs={1}>
+            <Typography variant="body1" >:</Typography>
+            <Typography variant="body1" >:</Typography>
+            <Typography variant="body1" >:</Typography>
+          </Grid>
+          <Grid item xs={5}>
+            <Typography variant="body1" >Malshan Rathnayake</Typography>
+            <Typography variant="body1" >9.00 AM</Typography>
+            <Typography variant="body1" >#45</Typography>
+          </Grid>
+        </Grid>
       </CardContent>
     </Card>
   );
 };
+
+const columns = [
+  { id: 'name', label: 'Patient Name', minWidth: 170 },
+  { id: 'date', label: 'Date', minWidth: 100 },
+  { id: 'time', label: 'Time', minWidth: 100 },
+  { id: 'severity', label: 'Severity Level', minWidth: 170 },
+  { id: 'view', label: 'View', minWidth: 100 },
+];
+
+function createData(name, date, time, severity, view) {
+  return { name, date, time, severity, view };
+}
+
+const rows = [
+  createData('John Doe', '2023-09-05', '09:30 AM', 'High', 'View'),
+  createData('Jane Smith', '2023-09-06', '02:15 PM', 'Medium', 'View'),
+  // Add more rows as needed
+];
+
+const UpcommingChanneling = () => {
+
+  const [page, setPage] = React.useState(0);
+  const [rowsPerPage, setRowsPerPage] = React.useState(10);
+
+  const handleChangePage = (event, newPage) => {
+    setPage(newPage);
+  };
+
+  const handleChangeRowsPerPage = (event) => {
+    setRowsPerPage(+event.target.value);
+    setPage(0);
+  };
+
+  return (
+    <Paper sx={{ width: '80%', overflow: 'hidden', marginLeft: '100px' }}>
+      <TableContainer sx={{ maxHeight: 440 }}>
+        <Table stickyHeader aria-label="sticky table">
+          <TableHead>
+            <TableRow>
+              {columns.map((column) => (
+                <TableCell
+                  key={column.id}
+                  align="center" // Center align the header cells
+                  style={{ minWidth: column.minWidth }}
+                >
+                  {column.label}
+                </TableCell>
+              ))}
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {rows
+              .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+              .map((row) => {
+                return (
+                  <TableRow hover role="checkbox" tabIndex={-1} key={row.name}>
+                    {columns.map((column) => {
+                      const value = row[column.id];
+                      return (
+                        <TableCell key={column.id} align="center">
+                          {column.id === 'view' ? (
+                            <button>{value}</button>
+                          ) : (
+                            value
+                          )}
+                        </TableCell>
+                      );
+                    })}
+                  </TableRow>
+                );
+              })}
+          </TableBody>
+        </Table>
+      </TableContainer>
+      <TablePagination
+        rowsPerPageOptions={[10, 25, 100]}
+        component="div"
+        count={rows.length}
+        rowsPerPage={rowsPerPage}
+        page={page}
+        onPageChange={handleChangePage}
+        onRowsPerPageChange={handleChangeRowsPerPage}
+      />
+    </Paper >
+  );
+}
 
 const Doctor = () => {
   return (
-    <React.Fragment>
+    <Box sx={{ flexGrow: 1, backgroundColor: '#f2f2f2' }}>
+      <Grid>
+        <Navbar />
+      </Grid>
 
-      <CssBaseline />
+      <Grid container mt={2}>
+        <Grid Item xs={3}>
+          <Item>
+            <ProfileCard />
+          </Item>
+        </Grid>
 
-      <Container maxWidth="100%">
+        <Grid Item xs={4} sx={{ marginLeft: 'auto' }}>
+          <Item sx={{ marginX: 2 }}>
+            <SummaryCard />
+          </Item>
+        </Grid>
 
-        <Box>
-          <Grid container>
-            <Navbar />
-          </Grid>
-        </Box>
+        <Grid Item xs={4} sx={{ marginLeft: 'auto' }}>
+          <Item>
+            <NextAppointmentCard />
+          </Item>
+        </Grid>
+      </Grid>
 
-        <Box sx={{ flexGrow: 1, marginTop: '20px' }}>
+      <Grid container mt={5}>
+        <Grid Item xs={3}>
+          <Item>
+            <LocalizationProvider dateAdapter={AdapterDayjs}>
+              <DateCalendar />
+            </LocalizationProvider>
+          </Item>
+        </Grid>
+        <Grid Item xs={9}>
+          <Typography variant="h4" align="center" style={{ marginBottom: '30px'}}>Upcomming Channeling</Typography>
 
-          <Grid container spacing={2}>
+          <UpcommingChanneling />
+        </Grid>
 
-            <Grid item lg={4} sx={{ backgroundColor: '#f5f5f5', padding: '10px' }}>
-              <RecentPatientsCard />
-            </Grid>
+      </Grid>
 
-            <Grid item lg={4} sx={{ backgroundColor: '#f5f5f5', padding: '10px' }}>
-              <UpcomingAppointmentsCard />
-            </Grid>
+    </Box>
 
-            <Grid item lg={4} sx={{ backgroundColor: '#f5f5f5', padding: '10px' }}>
-
-              <Card sx={{ backgroundColor: '#F0FFFF' }}>
-                <CardMedia
-                  sx={{ height: 500 }}
-                  image={img1}
-                  title="doctor"
-                />
-
-                <CardContent sx={{ textAlign: 'center' }}>
-                  <Typography gutterBottom variant="h5" component="div">
-                    Welcome Doctor
-                  </Typography>
-                  <Typography variant="body2" color="text.secondary">
-                    Dr. Emily Johnson is a dedicated and compassionate doctor with a strong commitment to patient well-being. With extensive experience in internal medicine, she focuses on delivering personalized care and promoting preventive health practices.
-                  </Typography>
-                </CardContent>
-
-              </Card>
-
-            </Grid>
-
-          </Grid>
-
-        </Box>
-      </Container>
-
-    </React.Fragment>
   );
 };
 
