@@ -13,6 +13,7 @@ import Contact from './views/ContactUs'
 import Channeling from './views/doctor-views/channeling'
 import Registration from './views/hr-views/hr-emp-registration';
 import Profile from './views/hr-views/emp-profile';
+import SearchDoctors from './views/patient-views/searchDoctors'
 
 import SupplierRegister from './views/supplier-manager-views/supplier-ragistration'
 
@@ -46,6 +47,9 @@ function App() {
 
         {/* Supplier Routes */}
         <Route path="/supplier/supplier-register" elements={<SupplierRegister/>}/>
+
+        {/* Patient Routes */}
+        <Route path="/searchDoctors" element={<SearchDoctors />} />
       </Routes>
     </div>
   );
