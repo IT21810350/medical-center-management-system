@@ -1,17 +1,16 @@
-import React from 'react'
-import Box from '@mui/material/Box'; // Import Box
-import Grid from '@mui/material/Grid'; // Import Grid
-import Navbar from '../../components/HR-component/hr-nav-bar'; 
+import React from 'react';
+import Box from '@mui/material/Box';
+import Grid from '@mui/material/Grid';
+import Navbar from '../../components/HR-component/hr-nav-bar';
 
-export default function 
-() {
+export default function EmployeeProfile() { 
   return (
     <div>
-        <Box >
-            <Grid container>
-            <Navbar />
-            </Grid>
-        </Box>
+      <Box>
+        <Grid container>
+          <Navbar />
+        </Grid>
+      </Box>
     </div>
-  )
+  );
 }
