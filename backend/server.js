@@ -1,27 +1,36 @@
 const express = require('express');
 const cors = require('cors');
-const mongoose = require('mongoose'); //helps connect to mongodb database
+const mongoose = require('mongoose'); 
+require('dotenv').config();
+const cookieParser = require("cookie-parser");
+const authRoute = require("./Routes/AuthRoute");
+const ProfileRoute = require("./Routes/ProfileRoute");
+const RegisterEmployee = require("./Routes/EmployeeRoutes")
 
-require('dotenv').config(); //to use environment variables in .env file
+const { MONGO_URL, PORT } = process.env;
 
-//create express server
 const app = express();
-const port = process.env.PORT || 5000;
 
-//middleware 
-app.use(cors());
+app.use(
+  cors({
+    origin: ["http://localhost:3000"],
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    credentials: true,
+  })
+);
+
 app.use(express.json());
+app.use(cookieParser());
 
-//connect to mongodb database
-const uri = process.env.ATLAS_URI;
-mongoose.connect(uri, {useNewUrlParser: true, useUnifiedTopology: true});
+mongoose.connect(MONGO_URL, { useNewUrlParser: true, useUnifiedTopology: true });
 
 const connection = mongoose.connection;
 connection.once('open', () => {
     console.log("MongoDB database connection established successfully")
 });
 
-//start server
-app.listen(port, () => {
-    console.log(`Server is running on port: ${port}`);
+app.use("/", authRoute, ProfileRoute, RegisterEmployee);
+
+app.listen(PORT, () => {
+    console.log(`Server is running on port: ${PORT}`);
 });
