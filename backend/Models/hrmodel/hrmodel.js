@@ -3,75 +3,75 @@ const bcrypt = require("bcrypt.js");
 
 
 const EmployeeSchema = new mongoose.Schema({
-    email:{
-        type:String,
-        require:[true,"Employee email addres is required"],
-        unique:true,
-    },
-
     firstName:{
         type:String,
-        require:[true,"Employee firstname addres is required"],
+        require:[true,"Employee firstname is required"],
+        unique:true,
     },
 
     lastName:{
         type:String,
-        require:[true,"Employee last name is required"],
+        require:[true,"Employee lastname addres is required"],
     },
 
-    password:{
+    email:{
         type:String,
-        require:[true,"Employee password is reuired"],
+        require:[true,"Employee email is required"],
     },
 
-    Nic:{
+    nic:{
         type:String,
-        require:[true,"Employee nic is required"],
-    },
-
-    role:{
-        type:String,
-        require:[true,"Employee 's  role is required"]
-    },
-
-
-    hireDate:{
-        type:String,
-         default: new Date(),
-    },
-
-    PhoneNumber:{
-     type:String,
-     require:[true,"Employee phone number is required"]
-    },
-
-    Salaray:{
-        type:String,
-        require:[true,"Employee salaray is required"]
-    },
-
-    Gender:{
-        type:String,
-        require:[true,"Employee gender is required"]
-    },
-
-    birthday:{
-        type:String,
-        require:[true,"Employee birthday is requieed"]
+        require:[true,"Employee Nic is reuired"],
     },
 
     address:{
         type:String,
-        require:[true,"Employee address is required"]
+        require:[true,"Employee address is required"],
+    },
+
+    employeeRole:{
+        type:String,
+        require:[true,"Employee  role is required"]
+    },
+
+
+    gender:{
+        type:String,
+        require:[true,"Employee  gender is required"]
+    },
+
+    birthday:{
+        type:String,
+        default: new Date(),
+    },
+
+    educationlevel:{
+        type:String,
+        require:[true,"Employee rducstion level is required"]
+    },
+
+    certifications:{
+        type:String,
+        require:[true,"Employee certification is required"]
+    },
+
+    medicallicense:{
+        type:String,
+        require:[true,"Employee medical licen is requieed"]
+    },
+
+    taxinformation:{
+        type:String,
+        require:[true,"Employee tax  is required"]
     },
     
-    Skills_and_Qualifications:{
+    bankinformation:{
         type:String,
-        require:[true,"Skills are required"]
+        require:[true,"Bank information  required"]
     },
-    Regular_Working_HoursZ:{
+    insurancedetails:{
         type:String,
-        require:[true,"Workin hours are required"]
+        require:[true,"insurance  are required"]
     }
 })
 Employee.pre("save",  async function(){

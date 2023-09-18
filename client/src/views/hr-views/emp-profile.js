@@ -8,7 +8,7 @@ export default function EmployeeProfile() {
     <div>
       <Box>
         <Grid container>
-          <Navbar />
+          <Navbar/>
         </Grid>
       </Box>
     </div>

@@ -4,11 +4,14 @@ import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import Navbar from '../../components/HR-component/hr-nav-bar'
+import axios from "axios";
 
 export default function RegistrationForm() {
 
   // State to store form values
   const [formData, setFormData] = useState({
+    userId:'',
+    role:'doctor',
     firstName: '',
     lastName: '',
     email: '',
@@ -34,11 +37,40 @@ export default function RegistrationForm() {
   };
 
   // Function to handle form submission
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) =>{
     e.preventDefault();
-    // Here, you can process the form data (e.g., send it to an API or perform validation)
-    console.log(formData);
-  };
+    try{
+      const {data } = await axios.Post(
+        "http://localhost:4000/register-employee",
+        {
+          ...formData,
+        },
+        {withCredentials: true }
+      );
+      }catch(error){
+        console.error(error);
+      }
+
+      setFormData({
+        ...formData,
+        userId:'64f4ba9b767974208f4fe06d',
+        role:'doctor',
+        firstName: '',
+        lastName: '',
+        email: '',
+        nic: '', 
+        address: '',
+        employeeRole: '',
+        gender: '',
+        birthday: '',
+        educationlevel: '',
+        certifications: '',
+        medicallicense: '',
+        taxinformation: '',
+        bankinformation: '',
+        insurancedetails: '', 
+      });
+  }
 
   // Function to handle input changes and update state
   const handleInputChange = (e) => {
@@ -106,7 +138,7 @@ export default function RegistrationForm() {
             fullWidth
             label="Gender"
             name="gender"
-            value={formData.address}
+            value={formData.gender}
             onChange={handleInputChange}
             sx={{ marginTop: '10px' }}
           />
@@ -115,7 +147,7 @@ export default function RegistrationForm() {
               fullWidth
               label="Birthday"
               name="birthday"
-              value={formData.employeeRole}
+              value={formData.birthday}
               onChange={handleInputChange}
               sx={{ marginRight: '20px', width: '50%', textAlign: 'left' }}
             />
@@ -124,7 +156,7 @@ export default function RegistrationForm() {
               fullWidth
               label="Employee Role"
               name="employeeRole"
-              value={formData.birthday}
+              value={formData.employeeRole}
               onChange={handleInputChange}
             />
           </div>
@@ -132,7 +164,7 @@ export default function RegistrationForm() {
             fullWidth
             label="PhoneNumber"
             name="phonenumbe"
-            value={formData.address}
+            value={formData.phonenumbe}
             onChange={handleInputChange}
             sx={{ marginTop: '10px' }}
           />
@@ -150,7 +182,7 @@ export default function RegistrationForm() {
               fullWidth
               label="EducationLevel"
               name="educationlevel"
-              value={formData.address}
+              value={formData.educationlevel}
               onChange={handleInputChange}
               sx={{ marginTop: '10px' }}
             />
@@ -158,7 +190,7 @@ export default function RegistrationForm() {
               fullWidth
               label="Certifications or Licenses"
               name="certifications"
-              value={formData.address}
+              value={formData.certifications}
               onChange={handleInputChange}
               sx={{ marginTop: '10px' }}
             />
@@ -166,7 +198,7 @@ export default function RegistrationForm() {
               fullWidth
               label="Medical license"
               name="medicallicense"
-              value={formData.address}
+              value={formData.medicallicense}
               onChange={handleInputChange}
               sx={{ marginTop: '10px' }}
             />
@@ -177,8 +209,8 @@ export default function RegistrationForm() {
             <TextField
               fullWidth
               label="Bank Account Information "
-              name="bankinformation "
-              value={formData.address}
+              name="bankinformation"
+              value={formData.bankinformation}
               onChange={handleInputChange}
               sx={{ marginTop: '10px' }}
             />
@@ -186,7 +218,7 @@ export default function RegistrationForm() {
               fullWidth
               label="Tax Information"
               name="taxinformation"
-              value={formData.address}
+              value={formData.taxinformation}
               onChange={handleInputChange}
               sx={{ marginTop: '10px' }}
             />
@@ -195,7 +227,7 @@ export default function RegistrationForm() {
               fullWidth
               label="Insurance Details"
               name="insurancedetails"
-              value={formData.address}
+              value={formData.insurancedetails}
               onChange={handleInputChange}
               sx={{ marginTop: '10px' }}
             />
@@ -209,7 +241,7 @@ export default function RegistrationForm() {
           />
 
 
-          <div style={{ marginTop: '10px' }}>
+          <div style={{ marginTop: '10px' }} className=''>
             <Button type="submit" variant="contained" color="primary">
               Submit
             </Button>
