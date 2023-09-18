@@ -14,9 +14,10 @@ import {Grid,
         FormControlLabel,
         Radio,
         Stack,
+       // Container,
+       // Avatar,
         Box } from '@mui/material';
-import img1 from '../../assets/img/patient/profile.jpg'
-
+import img1 from '../../assets/img/patient/profile.jpg';
         
 const Patient = () => {
     return (
