@@ -187,7 +187,7 @@ const Patient = () => {
                                     <TextField type='text' label="Address" placeholder='Enter address - Optional' variant='outlined' fullWidth />
                                 </Grid>
 
-                                <Grid item>
+                                <Grid item xs={12}>
                                     <Stack direction="row" spacing={2} >
                                         <Button  type='submit' variant="contained" color="error">Cancel</Button>
                                         <Button type='submit' variant="contained">Submit</Button>
@@ -210,12 +210,3 @@ const Patient = () => {
 };
 
 export default Patient;
-{/* 
-To do
-
-Validations of NIC / Passport
-Profile Picture
-Align the buttons to left corner
-
-
-*/}
