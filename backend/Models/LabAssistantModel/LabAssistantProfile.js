@@ -16,4 +16,4 @@ const LASchema = new mongoose.Schema({
         timestamps : true
     });
 
-modules.export = mongoose.model("LabAssistantProfile",LASchema);
+module.export = mongoose.model("LabAssistantProfile",LASchema);
