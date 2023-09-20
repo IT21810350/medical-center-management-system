@@ -18,6 +18,8 @@ import Registration from './views/hr-views/hr-emp-registration';
 import Profile from './views/hr-views/emp-profile';
 import SearchDoctors from './views/patient-views/searchDoctors';
 import SupplierRegistration from './views/supplier-manager-views/supplier-registration';
+import SupplierProfile from './views/supplier-manager-views/supplier-profile';
+import SupplierList from './views/supplier-manager-views/supplier-list';
 
 
 
@@ -57,6 +59,10 @@ function App() {
 
         {/* Supplier Routes */}
         <Route path="/supplier/supplier-registration" element={<SupplierRegistration />} />
+
+        <Route path="/supplier/supplier-profile" element={<SupplierProfile/>} />
+        <Route path="/supplier/supplier-list" element={<SupplierList/>} />
+
       </Routes>
 
     </div>
