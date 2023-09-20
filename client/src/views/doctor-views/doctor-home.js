@@ -92,9 +92,9 @@ const NextAppointmentCard = () => {
             <Typography variant="body1" >:</Typography>
           </Grid>
           <Grid item xs={5}>
-            <Typography variant="body1" >Malshan Rathnayake</Typography>
-            <Typography variant="body1" >9.00 AM</Typography>
-            <Typography variant="body1" >#45</Typography>
+            <Typography variant="body1">Malshan Rathnayake</Typography>
+            <Typography variant="body1">9.00 AM</Typography>
+            <Typography variant="body1">#45</Typography>
           </Grid>
         </Grid>
       </CardContent>

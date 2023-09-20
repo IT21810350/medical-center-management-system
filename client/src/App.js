@@ -24,7 +24,7 @@ function App() {
   return (
     <div className="App">
       <Routes>
-        <Route path="/home" element={<Home />} />
+        <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
 
@@ -50,7 +50,7 @@ function App() {
         <Route path="/profile" element={<Profile/>}/>
 
         {/* Patient Routes */}
-        <Route path="/searchDoctors" element={<SearchDoctors />} />
+        <Route path="/search-doctors" element={<SearchDoctors />} />
       
 
         {/* Supplier Routes */}
