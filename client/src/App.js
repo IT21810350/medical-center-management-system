@@ -1,25 +1,43 @@
+// global imports
 import { Route, Routes } from "react-router-dom";
 import { Login, Signup } from "./views/Index";
+
+// pages <- common for every actor type
 import Home from "./views/Home";
-import HR from './views/hr-views/hr-home';
-import Patient from './views/patient-views/patient-home';
+import Contact from './views/ContactUs';
+
 // doctor imports
 import Doctor from './views/doctor-views/doctor-home';
 import Channeling from './views/doctor-views/channeling';
 import Symptoms from "./views/doctor-views/symptoms";
 
-import FM from './views/financial-manager-views/financial-manager-home';
-import LA from './views/lab-assistant-views/lab-assistant-home';
+// patient imports
+import Patient from './views/patient-views/patient-home';
+import SearchDoctors from './views/patient-views/searchDoctors';
+
+// pharmacist imports
 import Pharmacist from './views/pharmacist-views/parmacist-home';
-import SM from "./views/supplier-manager-views/supplier-manager-home";
-import RP from "./views/resource-manager-views/resource-manager-home";
-import Contact from './views/ContactUs';
+
+// hr imports
+import HR from './views/hr-views/hr-home';
 import Registration from './views/hr-views/hr-emp-registration';
 import Profile from './views/hr-views/emp-profile';
-import SearchDoctors from './views/patient-views/searchDoctors';
+
+// lab assistant imports
+import LA from './views/lab-assistant-views/lab-assistant-home';
+import LabTest from './views/lab-assistant-views/labTest';
+
+// supplier manager imports
+import SM from "./views/supplier-manager-views/supplier-manager-home";
 import SupplierRegistration from './views/supplier-manager-views/supplier-registration';
 import SupplierProfile from './views/supplier-manager-views/supplier-profile';
 import SupplierList from './views/supplier-manager-views/supplier-list';
+
+// resource person imports
+import RP from "./views/resource-manager-views/resource-manager-home";
+
+// financial manager imports
+import FM from './views/financial-manager-views/financial-manager-home';
 
 
 
@@ -30,6 +48,7 @@ function App() {
         <Route path="/home" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
+        <Route path="/contact-us" element={<Contact />} />
 
         {/* actor routes */}
         <Route path="/hr" element={<HR />} />
@@ -40,9 +59,6 @@ function App() {
         <Route path="/pharmacist" element={<Pharmacist />} />
         <Route path="/resource-person" element={<RP />} />
         <Route path="/supplier" element={<SM />} />
-
-
-        <Route path="/contact-us" element={<Contact />} />
 
         {/* Doctor Routes */}
         <Route path="/channeling" element={<Channeling />} />
@@ -59,10 +75,12 @@ function App() {
 
         {/* Supplier Routes */}
         <Route path="/supplier/supplier-registration" element={<SupplierRegistration />} />
-
         <Route path="/supplier/supplier-profile" element={<SupplierProfile/>} />
         <Route path="/supplier/supplier-list" element={<SupplierList/>} />
 
+
+        {/*Lab Assistant Routes */}
+        <Route path="/lab-test" element={<LabTest/>}/>
       </Routes>
 
     </div>

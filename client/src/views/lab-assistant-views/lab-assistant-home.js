@@ -2,6 +2,7 @@
 import * as React from "react";
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
+import {Link} from "react-router-dom";
 
 // imports for navbar
 import Navbar from '../../components/LA-component/la-nav-bar'
@@ -15,6 +16,7 @@ function LabPage() {
         <Navbar />
       </Grid>
     </Box>
+    <Link to={"./labTest"}>lab Test</Link>
   </div>
   );
 }
