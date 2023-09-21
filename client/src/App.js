@@ -25,7 +25,11 @@ import Profile from './views/hr-views/emp-profile';
 
 // lab assistant imports
 import LA from './views/lab-assistant-views/lab-assistant-home';
-import LabTest from './views/lab-assistant-views/labTest';
+import LabTest from './views/lab-assistant-views/lab-test';
+import LabInventory from './views/lab-assistant-views/lab-inventory';
+import LabReport from './views/lab-assistant-views/lab-report';
+import LabSample from './views/lab-assistant-views/lab-sample';
+
 
 // supplier manager imports
 import SM from "./views/supplier-manager-views/supplier-manager-home";
@@ -81,6 +85,9 @@ function App() {
 
         {/*Lab Assistant Routes */}
         <Route path="/lab-test" element={<LabTest/>}/>
+        <Route path="/lab-inventory" element={<LabInventory/>}/>
+        <Route path="/lab-report" element={<LabReport/>}/>
+        <Route path="/lab-sample" element={<LabSample/>}/>
       </Routes>
 
     </div>
