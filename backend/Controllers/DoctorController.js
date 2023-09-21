@@ -5,15 +5,30 @@ module.exports.SymptomController = async (req, res, next) => {
 
     try {
 
-        const { ...data } = req.body;
+        const symptomsData = req.body; 
 
-        const symptomData = await Symptoms.create({ ...data });
+        const createdSymptoms = [];
 
-        res
-            .status(201)
-            .json({ message: "Symptom data added successfully", success: true, symptomData });
+        for (const symptom of symptomsData) {
+            const symptomData = await Symptoms.create(symptom);
+            createdSymptoms.push(symptomData);
+        }
 
-        next();
+        res.status(201).json({
+            message: "Symptom data added successfully",
+            success: true,
+            symptomsData: createdSymptoms,
+        })
+
+        // const { ...data } = req.body;
+
+        // const symptomData = await Symptoms.create({ ...data });
+
+        // res
+        //     .status(201)
+        //     .json({ message: "Symptom data added successfully", success: true, symptomData });
+
+        // next();
 
     } catch (error) {
         console.error(error);

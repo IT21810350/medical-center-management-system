@@ -1,28 +1,34 @@
 import React, { useState } from 'react';
 import Navbar from '../../components/doctor-component/doctor-nav-bar';
-import { Box, Grid, TextField, Paper, Button } from '@mui/material';
+import { Box, Grid, TextField, Button } from '@mui/material';
 import axios from "axios";
 
-const Item = Paper;
-
 const Symptoms = () => {
+    const [symptoms, setSymptoms] = useState([{}]);
 
-    const [inputValue, setInputValue] = useState({
-        symptom: "",
-        since: "",
-        bodyPart: "",
-        serverityLevel: "",
-    });
-
-    const { symptom, since, bodyPart, serverityLevel } = inputValue;
-
-    const handleOnChange = (e) => {
+    const handleOnChange = (e, index) => {
         const { name, value } = e.target;
-        setInputValue({
-            ...inputValue,
-            [name]: value,
-        });
 
+        setSymptoms((prevSymptoms) => {
+            const updatedSymptoms = [...prevSymptoms];
+            updatedSymptoms[index] = {
+                ...updatedSymptoms[index],
+                [name]: value,
+            };
+            return updatedSymptoms;
+        });
+    };
+
+    const handleAddSymptom = () => {
+        setSymptoms([...symptoms, {}]);
+    };
+
+    const handleRemoveSymptom = (index) => {
+        setSymptoms((prevSymptoms) => {
+            const updatedSymptoms = [...prevSymptoms];
+            updatedSymptoms.splice(index, 1);
+            return updatedSymptoms;
+        });
     };
 
     const handleSubmit = async (e) => {
@@ -31,104 +37,101 @@ const Symptoms = () => {
         try {
             await axios.post(
                 "http://localhost:4000/symptoms",
-                {
-                    ...inputValue,
-                },
+                symptoms,
                 { withCredentials: true }
             );
 
-
+            setSymptoms([{}]);
         } catch (error) {
             console.error(error);
         }
-
-        setInputValue({
-            ...inputValue,
-            symptom: "",
-            since: "",
-            bodyPart: "",
-            serverityLevel: "",
-        });
     };
 
     return (
 
-        <Box sx={{ flexGrow: 1, backgroundColor: '#f2f2f2' }}>
-
+        <Box sx={{ flexGrow: 1 }}>
             <Grid>
                 <Navbar />
             </Grid>
-
             <Grid container mt={2}>
-
                 <form onSubmit={handleSubmit}>
-                    <Grid container spacing={2}>
-                        <Grid item xs={3}>
-                            <Item>
+                    {symptoms.map((symptom, index) => (
+                        <Grid container spacing={2} key={index}>
+                            <Grid item xs={12}>
                                 <TextField
                                     fullWidth
-                                    label="symptom"
+                                    label="Symptom"
                                     name="symptom"
-                                    value={symptom}
+                                    value={symptom.symptom || ''}
                                     placeholder="Enter patient symptom"
-                                    onChange={handleOnChange}
+                                    onChange={(e) => handleOnChange(e, index)}
                                     margin="normal"
                                     variant="outlined"
                                 />
-                            </Item>
-                        </Grid>
+                            </Grid>
 
-                        <Grid item xs={3}>
-                            <Item>
+                            <Grid item xs={3}>
                                 <TextField
                                     fullWidth
-                                    label="since"
+                                    label="Since"
                                     name="since"
-                                    value={since}
+                                    value={symptom.since || ''}
                                     placeholder="Since when?"
-                                    onChange={handleOnChange}
+                                    onChange={(e) => handleOnChange(e, index)}
                                     margin="normal"
                                     variant="outlined"
                                 />
-                            </Item>
-                        </Grid>
+                            </Grid>
 
-                        <Grid item xs={3}>
-                            <Item>
+                            <Grid item xs={3}>
                                 <TextField
                                     fullWidth
-                                    label="body part"
+                                    label="Body Part"
                                     name="bodyPart"
-                                    value={bodyPart}
+                                    value={symptom.bodyPart || ''}
                                     placeholder="Body Part"
-                                    onChange={handleOnChange}
+                                    onChange={(e) => handleOnChange(e, index)}
                                     margin="normal"
                                     variant="outlined"
                                 />
-                            </Item>
-                        </Grid>
+                            </Grid>
 
-                        <Grid item xs={3}>
-                            <Item>
+                            <Grid item xs={3}>
                                 <TextField
                                     fullWidth
-                                    label="serverity level"
-                                    name="serverityLevel"
-                                    value={serverityLevel}
-                                    placeholder="serverity level"
-                                    onChange={handleOnChange}
+                                    label="Severity Level"
+                                    name="severityLevel"
+                                    value={symptom.severityLevel || ''}
+                                    placeholder="Severity Level"
+                                    onChange={(e) => handleOnChange(e, index)}
                                     margin="normal"
                                     variant="outlined"
                                 />
-                            </Item>
-                        </Grid>
+                            </Grid>
 
-                        <Grid item xs={12}>
-                            <Button type="submit" variant="contained" color="primary">
-                                Submit
-                            </Button>
+                            <Grid item xs={3}>
+                                <Button
+                                    type="button"
+                                    variant="outlined"
+                                    color="secondary"
+                                    onClick={() => handleRemoveSymptom(index)}
+                                >
+                                    Remove
+                                </Button>
+                            </Grid>
                         </Grid>
-                    </Grid>
+                    ))}
+                    <Button
+                        type="button"
+                        variant="contained"
+                        color="primary"
+                        onClick={handleAddSymptom}
+                    >
+                        Add Symptom
+                    </Button>
+                    <Button type="submit" variant="contained" color="primary">
+                        Submit
+                    </Button>
                 </form>
             </Grid>
         </Box>
