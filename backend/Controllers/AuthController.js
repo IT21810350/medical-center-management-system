@@ -72,8 +72,14 @@ module.exports.getUsers = async (req, res) => {
     const users = await User.find();
 
     for(const user of users){
-      user.profile = await DoctorProfile.findOne({_id: user.profile._id});
-      user.profile.employeeDetails = await EmployeeDetails.findOne({_id: user.profile.employeeDetails._id});
+
+      if(user.profile != null){
+
+        user.profile = await DoctorProfile.findOne({_id: user.profile._id});
+        user.profile.employeeDetails = await EmployeeDetails.findOne({_id: user.profile.employeeDetails._id});
+
+      }
+      
     }
 
     res.json({message: "All Users" , users});

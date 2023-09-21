@@ -27,6 +27,7 @@ export default function RegistrationForm() {
       ...formData,
       [name]: value,
     });
+    console.log(formData);
   };
 
   const handleSubmit = async (e) => {
@@ -37,6 +38,7 @@ export default function RegistrationForm() {
         {
           ...formData,
         },
+        { withCredentials: true }
       );
     } catch (error) {
       console.error(error);
