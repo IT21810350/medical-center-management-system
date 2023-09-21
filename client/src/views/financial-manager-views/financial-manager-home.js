@@ -3,7 +3,7 @@ import React from 'react';
 const FM = () => {
     return (
         <div>
-            <section style={{backgroundImage: `url(${bg})`}}>
+            {/* <section style={{backgroundImage: `url(${bg})`}}>
         <header>
         <img
             src={menu}
@@ -20,7 +20,7 @@ const FM = () => {
             <a href="/" className="cta">Go to my stats</a>
         </div>
         </div>
-    </section>
+    </section> */}
         </div>
     );
 };
