@@ -1,8 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
-import Sidebar from '../../components/financial-component/Sidebar'
-import RighSidebar from '../../components/financial-component/RightSidebar'
-import Dashboard from '../../components/financial-component/Dashbord'
+import Sidebar from './components/Sidebar'
+import RighSidebar from './components/RightSidebar'
+import Dashboard from './components/Dashboard'
 function FApp() {
   return (
     <Div>
