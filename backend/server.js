@@ -9,7 +9,7 @@ const RegisterEmployee = require("./Routes/EmployeeRoutes");
 const HR =require("./Routes/HRroutes");;
 const SupplierRegistration = require("./Routes/SupplierRoutes");
 const SymptomAdd = require("./Routes/DoctorRoutes");
-const SupplierRoutes = require("./Routes/SupplierRoutes");
+
 
 
 const { MONGO_URL, PORT } = process.env;
