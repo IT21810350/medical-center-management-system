@@ -29,7 +29,7 @@ function Sidebar() {
                             className={currentLink === 1 ? "active" : "none"} //home page
                             onClick={() => setCurrentLink(1)}
                             >
-                                <a href="#">
+                                <a href="www.google.com">
                                     <BiHomeAlt />
                                     
                                 </a>
@@ -38,7 +38,7 @@ function Sidebar() {
                             className={currentLink === 2 ? "active" : "none"} 
                             onClick={() => setCurrentLink(2)}
                             >
-                                <a href="#">
+                                <a href="www.google.com">
                                     <AiOutlineFundProjectionScreen />
                                     
                                 </a>
@@ -47,7 +47,7 @@ function Sidebar() {
                             className={currentLink === 3 ? "active" : "none"}
                             onClick={() => setCurrentLink(3)}
                             >
-                                <a href="#">
+                                <a href="www.google.com">
                                     <AiOutlineFileText />
                                     
                                 </a>
@@ -56,7 +56,7 @@ function Sidebar() {
                             className={currentLink === 4 ? "active" : "none"}
                             onClick={() => setCurrentLink(4)}
                             >
-                                <a href="#" className="noti">
+                                <a href="www.google.com" className="noti">
                                     <BsCreditCard2Front />
                                     <span>2</span>
                                 </a>
@@ -65,7 +65,7 @@ function Sidebar() {
                             className={currentLink === 5 ? "active" : "none"} // should change
                             onClick={() => setCurrentLink(5)}
                             >
-                                <a href="#">
+                                <a href="www.google.com">
                                     <AiOutlineTrophy />
                                     
                                 </a>
@@ -74,7 +74,7 @@ function Sidebar() {
                             className={currentLink === 6 ? "active" : "none"}
                             onClick={() => setCurrentLink(6)}
                             >
-                                <a href="#">
+                                <a href="www.google.com">
                                     <AiOutlineDotChart />
                                     
                                 </a>
