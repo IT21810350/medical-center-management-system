@@ -1,28 +1,34 @@
 import React, { useState } from 'react';
 import Navbar from '../../components/doctor-component/doctor-nav-bar';
-import { Box, Grid, TextField, Paper, Button } from '@mui/material';
+import { Box, Grid, TextField, Button } from '@mui/material';
 import axios from "axios";
 
-const Item = Paper;
-
 const Symptoms = () => {
+    const [symptoms, setSymptoms] = useState([{}]);
 
-    const [inputValue, setInputValue] = useState({
-        symptom: "",
-        since: "",
-        bodyPart: "",
-        serverityLevel: "",
-    });
-
-    const { symptom, since, bodyPart, serverityLevel } = inputValue;
-
-    const handleOnChange = (e) => {
+    const handleOnChange = (e, index) => {
         const { name, value } = e.target;
-        setInputValue({
-            ...inputValue,
-            [name]: value,
-        });
 
+        setSymptoms((prevSymptoms) => {
+            const updatedSymptoms = [...prevSymptoms];
+            updatedSymptoms[index] = {
+                ...updatedSymptoms[index],
+                [name]: value,
+            };
+            return updatedSymptoms;
+        });
+    };
+
+    const handleAddSymptom = () => {
+        setSymptoms([...symptoms, {}]);
+    };
+
+    const handleRemoveSymptom = (index) => {
+        setSymptoms((prevSymptoms) => {
+            const updatedSymptoms = [...prevSymptoms];
+            updatedSymptoms.splice(index, 1);
+            return updatedSymptoms;
+        });
     };
 
     const handleSubmit = async (e) => {
@@ -31,106 +37,101 @@ const Symptoms = () => {
         try {
             await axios.post(
                 "http://localhost:4000/symptoms",
-                {
-                    ...inputValue,
-                },
+                symptoms,
                 { withCredentials: true }
             );
 
-
+            setSymptoms([{}]);
         } catch (error) {
             console.error(error);
         }
-
-        setInputValue({
-            ...inputValue,
-            symptom: "",
-            since: "",
-            bodyPart: "",
-            serverityLevel: "",
-        });
     };
 
     return (
 
-        <Box sx={{ flexGrow: 1, backgroundColor: '#f2f2f2' }}>
-
+        <Box sx={{ flexGrow: 1, width: '100%' }}>
             <Grid>
                 <Navbar />
             </Grid>
-
-            <Grid container mt={2}>
-
-                <form onSubmit={handleSubmit}>
-                    <Grid container spacing={2}>
-                        <Grid item xs={3}>
-                            <Item>
-                                <TextField
-                                    fullWidth
-                                    label="symptom"
-                                    name="symptom"
-                                    value={symptom}
-                                    placeholder="Enter patient symptom"
-                                    onChange={handleOnChange}
-                                    margin="normal"
-                                    variant="outlined"
-                                />
-                            </Item>
+            <form onSubmit={handleSubmit}>
+                {symptoms.map((symptom, index) => (
+                    <Grid container spacing={2} mt={2} key={index}>
+                        <Grid item xs={2}>
+                            <TextField
+                                fullWidth
+                                label="Symptom"
+                                name="symptom"
+                                value={symptom.symptom || ''}
+                                placeholder="Enter patient symptom"
+                                onChange={(e) => handleOnChange(e, index)}
+                                margin="normal"
+                                variant="outlined"
+                            />
                         </Grid>
 
-                        <Grid item xs={3}>
-                            <Item>
-                                <TextField
-                                    fullWidth
-                                    label="since"
-                                    name="since"
-                                    value={since}
-                                    placeholder="Since when?"
-                                    onChange={handleOnChange}
-                                    margin="normal"
-                                    variant="outlined"
-                                />
-                            </Item>
+                        <Grid item xs={2}>
+                            <TextField
+                                fullWidth
+                                label="Since"
+                                name="since"
+                                value={symptom.since || ''}
+                                placeholder="Since when?"
+                                onChange={(e) => handleOnChange(e, index)}
+                                margin="normal"
+                                variant="outlined"
+                            />
                         </Grid>
 
-                        <Grid item xs={3}>
-                            <Item>
-                                <TextField
-                                    fullWidth
-                                    label="body part"
-                                    name="bodyPart"
-                                    value={bodyPart}
-                                    placeholder="Body Part"
-                                    onChange={handleOnChange}
-                                    margin="normal"
-                                    variant="outlined"
-                                />
-                            </Item>
+                        <Grid item xs={2}>
+                            <TextField
+                                fullWidth
+                                label="Body Part"
+                                name="bodyPart"
+                                value={symptom.bodyPart || ''}
+                                placeholder="Body Part"
+                                onChange={(e) => handleOnChange(e, index)}
+                                margin="normal"
+                                variant="outlined"
+                            />
                         </Grid>
 
-                        <Grid item xs={3}>
-                            <Item>
-                                <TextField
-                                    fullWidth
-                                    label="serverity level"
-                                    name="serverityLevel"
-                                    value={serverityLevel}
-                                    placeholder="serverity level"
-                                    onChange={handleOnChange}
-                                    margin="normal"
-                                    variant="outlined"
-                                />
-                            </Item>
+                        <Grid item xs={2}>
+                            <TextField
+                                fullWidth
+                                label="Severity Level"
+                                name="severityLevel"
+                                value={symptom.severityLevel || ''}
+                                placeholder="Severity Level"
+                                onChange={(e) => handleOnChange(e, index)}
+                                margin="normal"
+                                variant="outlined"
+                            />
                         </Grid>
 
-                        <Grid item xs={12}>
-                            <Button type="submit" variant="contained" color="primary">
-                                Submit
+                        <Grid item xs={2}>
+                            <Button
+                                type="button"
+                                variant="outlined"
+                                color="secondary"
+                                onClick={() => handleRemoveSymptom(index)}
+                            >
+                                Remove Symptom Record
                             </Button>
                         </Grid>
                     </Grid>
-                </form>
-            </Grid>
+                ))}
+                <Button
+                    type="button"
+                    variant="contained"
+                    color="primary"
+                    onClick={handleAddSymptom}
+                >
+                    Add More Symptom
+                </Button>
+                <Button type="submit" variant="contained" color="primary">
+                    Submit
+                </Button>
+            </form>
         </Box>
     );
 };

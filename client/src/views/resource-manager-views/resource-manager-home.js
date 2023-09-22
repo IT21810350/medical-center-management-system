@@ -29,14 +29,6 @@ const RM = () => {
 
                     <Grid container spacing={2} sx={{ marginTop: '10px' }}>
 
-                        {/* <Grid item lg={4} sx={{backgroundColor: '#f5f5f5', padding: '10px' }}>
-                            <RecentPatientsCard />
-                        </Grid> */}
-
-                        {/* <Grid item lg={4} sx={{ backgroundColor: '#f5f5f5', padding: '10px' }}>
-                            <UpcomingAppointmentsCard />
-                        </Grid> */}
-
                         {/* room type 1 */}
                         <Grid item lg={4} sx={{ backgroundColor: '#f5f5f5', padding: '10px' }}>
 

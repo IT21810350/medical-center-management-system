@@ -29,6 +29,11 @@ const EmployeeSchema = new mongoose.Schema({
         require:[true,"Employee address is required"],
     },
 
+    phonenumbe:{
+        type:String,
+        require:[true,"Employee PhoneNUmber is required"],
+    },
+
     employeeRole:{
         type:String,
         require:[true,"Employee  role is required"]

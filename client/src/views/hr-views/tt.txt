@@ -1,0 +1,97 @@
+./// hr profile get data 
+
+
+
+  const [employeeData, setEmployeeData] = useState([]);
+
+  useEffect(() => {
+    // Make an HTTP GET request to your server's endpoint
+    fetch('http://localhost:4000/employees') // Replace with the actual endpoint URL
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return response.json();
+      })
+      .then((data) => {
+        // Update the state with the fetched employee data
+        setEmployeeData(data.Employee); // Assuming the data structure matches your controller response
+      })
+      .catch((error) => {
+        console.error('Error fetching employee data:', error);
+        // Handle the error, e.g., show an error message to the user
+      });
+  }, []);
+  console.log('Employees in state:', employeeData);
+
+  
+
+  /// employe profile get fuction 
+
+    useEffect(() => {
+    // Make an HTTP GET request to fetch employee data from the server
+    axios.get(`http://localhost:4000/employees/${employeeId}`) // Replace with your endpoint
+      .then((response) => {
+        setEmployeeData(response.data); // Assuming response.data contains employee data
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }, [employeeId]);
+
+
+
+
+  ////
+  const [employees, setEmployees] = useState([]);
+
+  useEffect(() => {
+    // Fetch data from your backend API using Axios
+    axios.get('http://localhost:4000/employees') // Replace with the actual API route
+      .then((response) => {
+        setEmployees(response.data.Employee);
+      })
+      .catch((error) => {
+        console.error('Error fetching data:', error);
+      });
+  }, []);
+      
+
+//// table
+
+
+<TableContainer component={Paper} style={styles.tableContainer}>
+          <Table>
+            <TableHead>
+              <TableRow>
+                <TableCell>Report ID</TableCell>
+                <TableCell>Report Name</TableCell>
+                <TableCell>Created Date</TableCell>
+                <TableCell>Lab Assistant ID</TableCell>
+                <TableCell>Action</TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {labReports.map((report) => (
+                <TableRow key={report.id}>
+                  <TableCell>{report.reportId}</TableCell>
+                  <TableCell>{report.reportName}</TableCell>
+                  <TableCell>{report.createdDate}</TableCell>
+                  <TableCell>{report.labAssistantId}</TableCell>
+                  <TableCell>
+                    <Button variant="outlined" color="primary">
+                      View Report
+                    </Button>
+                    <Button
+                      variant="outlined"
+                      color="secondary"
+                      onClick={() => handleDeleteReport(report.reportId)}
+                    >
+                      Delete
+                    </Button>
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
