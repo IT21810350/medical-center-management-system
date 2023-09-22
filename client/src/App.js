@@ -42,6 +42,7 @@ import RP from "./views/resource-manager-views/resource-manager-home";
 
 // financial manager imports
 import FM from './views/financial-manager-views/financial-manager-home';
+import Invoice from './views/financial-manager-views/invoice';
 
 
 
@@ -58,7 +59,6 @@ function App() {
         <Route path="/hr" element={<HR />} />
         <Route path="/patient" element={<Patient />} />
         <Route path="/doctor" element={<Doctor />} />
-        <Route path="/financial-manager" element={<FM />} />
         <Route path="/lab-assistant" element={<LA />} />
         <Route path="/pharmacist" element={<Pharmacist />} />
         <Route path="/resource-person" element={<RP />} />
@@ -88,6 +88,13 @@ function App() {
         <Route path="/lab-inventory" element={<LabInventory/>}/>
         <Route path="/lab-report" element={<LabReport/>}/>
         <Route path="/lab-sample" element={<LabSample/>}/>
+
+
+        {/*Financial Manager Routes */}
+
+        <Route path="/financial-manager" element={<FM />} />
+        {/* <Route path="/invoice" element={<Invoice />} /> */} 
+
       </Routes>
 
     </div>

@@ -8,7 +8,7 @@ function Navbar() {
         <Nav>
                 <div className="title">
                     <h1>Dashboard</h1>
-                    <h5>Payment updates</h5>
+                    <h5>Financial Manager</h5>
                 </div>
                 <div className="search">
                     <BiSearch />
