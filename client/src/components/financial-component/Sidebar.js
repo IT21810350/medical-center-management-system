@@ -113,13 +113,13 @@ gap: 2rem;
         align-items: center;
         gap: 1.3rem 0;
         .color1{
-            color: red;
+            color: #004AAD;
         }
         .color2{
-            color: yellow;
+            color: #0CC0DF;
         }
         .color3{
-            color: green;
+            color: #FFA829;
         }
         svg {
             margin: 0 2px;

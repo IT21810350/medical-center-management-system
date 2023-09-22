@@ -126,37 +126,37 @@ const SupplierList = () => {
     <Grid item xs={4}>
       <Item>
         <Card sx={{ maxWidth: 345 }}>
-        <Link to="/supplier/supplier-list" style={{ textDecoration: 'none' }}>
-          <CardActionArea>
-            <CardMedia
-              component="img"
-              height="100"
-              image={img3}
-              alt="Supplier List"
-            />
-            <CardContent>
-              <Typography
-                gutterBottom
-                variant="h5"
-                component="div"
-                sx={{
-                  backgroundColor: 'darkblue',
-                  padding: '8px',
-                }}
-              >
+          <Link to="/supplier/supplier-list" style={{ textDecoration: 'none' }}>
+            <CardActionArea>
+              <CardMedia
+                component="img"
+                height="100"
+                image={img3}
+                alt="Supplier List"
+              />
+              <CardContent>
                 <Typography
-                  component="span"
-                  variant="inherit"
-                  sx={{ color: 'lightblue' }}
+                  gutterBottom
+                  variant="h5"
+                  component="div"
+                  sx={{
+                    backgroundColor: 'darkblue',
+                    padding: '8px',
+                  }}
                 >
-                  Supplier List
+                  <Typography
+                    component="span"
+                    variant="inherit"
+                    sx={{ color: 'lightblue' }}
+                  >
+                    Supplier List
+                  </Typography>
                 </Typography>
-              </Typography>
-              <Typography variant="body2" color="text.secondary">
-                Description for Supplier List
-              </Typography>
-            </CardContent>
-          </CardActionArea>
+                <Typography variant="body2" color="text.secondary">
+                  Description for Supplier List
+                </Typography>
+              </CardContent>
+            </CardActionArea>
           </Link>
         </Card>
       </Item>
@@ -169,6 +169,7 @@ const InventoryItems = () => {
     <Grid item xs={4}>
       <Item>
         <Card sx={{ maxWidth: 345 }}>
+        <Link to="/supplier/supplier-inventory-equipment" style={{ textDecoration: 'none' }}>
           <CardActionArea>
             <CardMedia
               component="img"
@@ -199,6 +200,7 @@ const InventoryItems = () => {
               </Typography>
             </CardContent>
           </CardActionArea>
+          </Link>
         </Card>
       </Item>
     </Grid>
@@ -210,6 +212,7 @@ const InventoryMedicine = () => {
     <Grid item xs={4}>
       <Item>
         <Card sx={{ maxWidth: 345 }}>
+        <Link to="/supplier/supplier-inventory-medicine" style={{ textDecoration: 'none' }}>
           <CardActionArea>
             <CardMedia
               component="img"
@@ -240,6 +243,7 @@ const InventoryMedicine = () => {
               </Typography>
             </CardContent>
           </CardActionArea>
+          </Link>
         </Card>
       </Item>
     </Grid>
@@ -251,36 +255,38 @@ const OrderRequest = () => {
     <Grid item xs={4}>
       <Item>
         <Card sx={{ maxWidth: 345 }}>
-          <CardActionArea>
-            <CardMedia
-              component="img"
-              height="100"
-              image={img6}
-              alt="Order Request"
-            />
-            <CardContent>
-              <Typography
-                gutterBottom
-                variant="h5"
-                component="div"
-                sx={{
-                  backgroundColor: 'darkblue',
-                  padding: '8px',
-                }}
-              >
+          <Link to="/supplier/supplier-order-request" style={{ textDecoration: 'none' }}>
+            <CardActionArea>
+              <CardMedia
+                component="img"
+                height="100"
+                image={img6}
+                alt="Order Request"
+              />
+              <CardContent>
                 <Typography
-                  component="span"
-                  variant="inherit"
-                  sx={{ color: 'lightblue' }}
+                  gutterBottom
+                  variant="h5"
+                  component="div"
+                  sx={{
+                    backgroundColor: 'darkblue',
+                    padding: '8px',
+                  }}
                 >
-                  Order Request
+                  <Typography
+                    component="span"
+                    variant="inherit"
+                    sx={{ color: 'lightblue' }}
+                  >
+                    Order Request
+                  </Typography>
                 </Typography>
-              </Typography>
-              <Typography variant="body2" color="text.secondary">
-                Description for Order Request
-              </Typography>
-            </CardContent>
-          </CardActionArea>
+                <Typography variant="body2" color="text.secondary">
+                  Description for Order Request
+                </Typography>
+              </CardContent>
+            </CardActionArea>
+          </Link>
         </Card>
       </Item>
     </Grid>
@@ -333,6 +339,7 @@ const OrderForPharmacy = () => {
     <Grid item xs={4}>
       <Item>
         <Card sx={{ maxWidth: 345 }}>
+
           <CardActionArea>
             <CardMedia
               component="img"
@@ -363,6 +370,7 @@ const OrderForPharmacy = () => {
               </Typography>
             </CardContent>
           </CardActionArea>
+
         </Card>
       </Item>
     </Grid>
@@ -374,36 +382,38 @@ const SupplierPayment = () => {
     <Grid item xs={4}>
       <Item>
         <Card sx={{ maxWidth: 345 }}>
-          <CardActionArea>
-            <CardMedia
-              component="img"
-              height="100"
-              image={img9}
-              alt="Supplier Payment"
-            />
-            <CardContent>
-              <Typography
-                gutterBottom
-                variant="h5"
-                component="div"
-                sx={{
-                  backgroundColor: 'darkblue',
-                  padding: '8px',
-                }}
-              >
+          <Link to="/supplier/supplier-payment" style={{ textDecoration: 'none' }}>
+            <CardActionArea>
+              <CardMedia
+                component="img"
+                height="100"
+                image={img9}
+                alt="Supplier Payment"
+              />
+              <CardContent>
                 <Typography
-                  component="span"
-                  variant="inherit"
-                  sx={{ color: 'lightblue' }}
+                  gutterBottom
+                  variant="h5"
+                  component="div"
+                  sx={{
+                    backgroundColor: 'darkblue',
+                    padding: '8px',
+                  }}
                 >
-                  Supplier Payment
+                  <Typography
+                    component="span"
+                    variant="inherit"
+                    sx={{ color: 'lightblue' }}
+                  >
+                    Supplier Payment
+                  </Typography>
                 </Typography>
-              </Typography>
-              <Typography variant="body2" color="text.secondary">
-                Description for Supplier Payment
-              </Typography>
-            </CardContent>
-          </CardActionArea>
+                <Typography variant="body2" color="text.secondary">
+                  Description for Supplier Payment
+                </Typography>
+              </CardContent>
+            </CardActionArea>
+          </Link>
         </Card>
       </Item>
     </Grid>
