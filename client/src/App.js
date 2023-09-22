@@ -13,6 +13,7 @@ import Contact from './views/ContactUs'
 import Channeling from './views/doctor-views/channeling'
 import Registration from './views/hr-views/hr-emp-registration';
 import Profile from './views/hr-views/emp-profile';
+import EditEmployee from './views/hr-views/Edit_employee'; 
 import SearchDoctors from './views/patient-views/searchDoctors'
 import SupplierRegistration from './views/supplier-manager-views/supplier-registration';
 
@@ -27,7 +28,7 @@ function App() {
         <Route path="/signup" element={<Signup />} />
 
         {/* actor routes */}
-        <Route path="/hr" element={<HR />} />
+        
         <Route path="/patient" element={<Patient />} />
         <Route path="/doctor" element={<Doctor />} />
         <Route path="/financial-manager" element={<FM />} />
@@ -43,9 +44,10 @@ function App() {
         <Route path="/channeling" element={<Channeling />} />
 
         {/* Hr Routes */}
+        <Route path="/hr" element={<HR />} />
         <Route path="/registration" element={<Registration/>}/>
-
-        <Route path="/profile" element={<Profile/>}/>
+        <Route path="/edit-employee" element={<EditEmployee/>} />
+        <Route path="/profile/:id" element={<Profile/>}/>
 
         {/* Patient Routes */}
         <Route path="/search-doctors" element={<SearchDoctors />} />

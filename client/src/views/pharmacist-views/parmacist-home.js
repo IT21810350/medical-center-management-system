@@ -7,7 +7,7 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import { CardActionArea } from '@mui/material';
-import img1 from '../../assets/img/supplier/sage.jpg';
+// import img1 from '../../assets/img/supplier/sage.jpg';
 import Paper from '@mui/material/Paper';
 import Link from '@mui/material/Link';
 
