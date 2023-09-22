@@ -17,9 +17,14 @@ import Contact from './views/ContactUs';
 import Registration from './views/hr-views/hr-emp-registration';
 import Profile from './views/hr-views/emp-profile';
 import SearchDoctors from './views/patient-views/searchDoctors';
+//supplier imports
 import SupplierRegistration from './views/supplier-manager-views/supplier-registration';
 import SupplierProfile from './views/supplier-manager-views/supplier-profile';
 import SupplierList from './views/supplier-manager-views/supplier-list';
+import SupplierOrderRequest from './views/supplier-manager-views/supplier-order-request';
+import SupplierPayment from './views/supplier-manager-views/supplier-payment';
+import SupplierMedicine from './views/supplier-manager-views/supplier-inventory-medicine';
+import SupplierEquipment from './views/supplier-manager-views/supplier-inventory-equipment';
 
 
 
@@ -49,19 +54,23 @@ function App() {
         <Route path="/symptoms" element={<Symptoms />} />
 
         {/* Hr Routes */}
-        <Route path="/registration" element={<Registration/>}/>
+        <Route path="/registration" element={<Registration />} />
 
-        <Route path="/profile" element={<Profile/>}/>
+        <Route path="/profile" element={<Profile />} />
 
         {/* Patient Routes */}
         <Route path="/search-doctors" element={<SearchDoctors />} />
-      
+
 
         {/* Supplier Routes */}
         <Route path="/supplier/supplier-registration" element={<SupplierRegistration />} />
+        <Route path="/supplier/supplier-profile" element={<SupplierProfile />} />
+        <Route path="/supplier/supplier-list" element={<SupplierList />} />
+        <Route path="/supplier/supplier-order-request" element={<SupplierOrderRequest />} />
+        <Route path="/supplier/supplier-payment" element={<SupplierPayment />} />
+        <Route path="/supplier/supplier-inventory-medicine" element={<SupplierMedicine />} />
+        <Route path="/supplier/supplier-inventory-equipment" element={<SupplierEquipment />} />
 
-        <Route path="/supplier/supplier-profile" element={<SupplierProfile/>} />
-        <Route path="/supplier/supplier-list" element={<SupplierList/>} />
 
       </Routes>
 

@@ -5,7 +5,7 @@ import TextField from '@mui/material/TextField';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Container from '@mui/material/Container';
-import axios from 'axios'; // Added axios import
+import axios from 'axios';
 
 export default function RegistrationForm() {
   const [formData, setFormData] = useState({
@@ -27,7 +27,6 @@ export default function RegistrationForm() {
       ...formData,
       [name]: value,
     });
-    console.log(formData);
   };
 
   const handleSubmit = async (e) => {
@@ -35,40 +34,44 @@ export default function RegistrationForm() {
     try {
       await axios.post(
         "http://localhost:4000/supplierRegistration",
-        {
-          ...formData,
-        },
+        { ...formData },
         { withCredentials: true }
       );
+      setFormData({
+        FirstName: '',
+        LastName: '',
+        Email: '',
+        PhoneNumber: '',
+        Address: '',
+        CompanyName: '',
+        NIC: '',
+        Bio: '',
+      });
     } catch (error) {
       console.error(error);
     }
-    setFormData({
-      ...formData,
-      FirstName: '',
-      LastName: '',
-      Email: '',
-      PhoneNumber: '',
-      Address: '',
-      CompanyName: '',
-      NIC: '',
-      Bio: '',
-    });
   };
 
   return (
     <Container
-      maxWidth="xl"
+      maxWidth="sm"
       style={{
         height: '100vh',
         width: '100vw',
-        backgroundSize: 'cover',
-        backgroundRepeat: 'no-repeat',
-        backgroundPosition: 'center',
-        backgroundColor: 'rgba(155, 155, 155, 0.5)',
+        backgroundColor: '#E1F5FE', // Updated background color to light blue
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
       }}
     >
-      <div style={{ padding: '20px' }}>
+      <Box
+        sx={{
+          p: 3,
+          border: '2px solid #90A4AE', // Added border styling
+          borderRadius: '8px', // Added border radius
+          backgroundColor: '#FFFFFF', // Set background color to white
+        }}
+      >
         <h1 style={{ textAlign: 'center' }}>Supplier Registration</h1>
         <Grid container spacing={2}>
           <Grid item xs={6}>
@@ -163,11 +166,11 @@ export default function RegistrationForm() {
             />
           </Grid>
         </Grid>
-      </div>
-      <Box sx={{ display: 'flex', justifyContent: 'center', mt: 2 }}>
-        <Button variant="contained" color="primary" onClick={handleSubmit}>
-          Submit
-        </Button>
+        <Box sx={{ display: 'flex', justifyContent: 'center', mt: 2 }}>
+          <Button variant="contained" color="primary" onClick={handleSubmit}>
+            Submit
+          </Button>
+        </Box>
       </Box>
     </Container>
   );
