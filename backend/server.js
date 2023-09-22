@@ -6,7 +6,9 @@ const cookieParser = require("cookie-parser");
 const authRoute = require("./Routes/AuthRoute");
 const ProfileRoute = require("./Routes/ProfileRoute");
 const RegisterEmployee = require("./Routes/EmployeeRoutes");
-const HR =require("./Routes/HRroutes");
+const HR =require("./Routes/HRroutes");;
+const SupplierRegistration = require("./Routes/SupplierRoutes");
+const SymptomAdd = require("./Routes/DoctorRoutes");
 
 const { MONGO_URL, PORT } = process.env;
 
@@ -39,7 +41,7 @@ connection.once('open', () => {
     console.log("MongoDB database connection established successfully")
 });
 
-app.use("/", authRoute, ProfileRoute, RegisterEmployee,HR);
+app.use("/", authRoute, ProfileRoute, RegisterEmployee,HR, SymptomAdd,SupplierRegistration);
 
 app.listen(PORT, () => {
     console.log(`Server is running on port: ${PORT}`);
