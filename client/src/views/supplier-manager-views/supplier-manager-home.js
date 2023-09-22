@@ -4,7 +4,7 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
-import { CardActionArea} from '@mui/material';
+import { CardActionArea } from '@mui/material';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
@@ -39,7 +39,7 @@ const SupplierRegistration = () => {
     <Grid item xs={4}>
       <Item>
         <Card sx={{ maxWidth: 345 }}>
-          <Link to="/supplier/supplier-registration" style={{textDecoration:'none'}}>
+          <Link to="/supplier/supplier-registration" style={{ textDecoration: 'none' }}>
             <CardActionArea>
               <CardMedia
                 component="img"
@@ -83,36 +83,38 @@ const SupplierProfile = () => {
     <Grid item xs={4}>
       <Item>
         <Card sx={{ maxWidth: 345 }}>
-          <CardActionArea>
-            <CardMedia
-              component="img"
-              height="100"
-              image={img2}
-              alt="Supplier Profile"
-            />
-            <CardContent>
-              <Typography
-                gutterBottom
-                variant="h5"
-                component="div"
-                sx={{
-                  backgroundColor: 'darkblue',
-                  padding: '8px',
-                }}
-              >
+          <Link to="/supplier/supplier-profile" style={{ textDecoration: 'none' }}>
+            <CardActionArea>
+              <CardMedia
+                component="img"
+                height="100"
+                image={img2}
+                alt="Supplier Profile"
+              />
+              <CardContent>
                 <Typography
-                  component="span"
-                  variant="inherit"
-                  sx={{ color: 'lightblue' }}
+                  gutterBottom
+                  variant="h5"
+                  component="div"
+                  sx={{
+                    backgroundColor: 'darkblue',
+                    padding: '8px',
+                  }}
                 >
-                  Supplier Profile
+                  <Typography
+                    component="span"
+                    variant="inherit"
+                    sx={{ color: 'lightblue' }}
+                  >
+                    Supplier Profile
+                  </Typography>
                 </Typography>
-              </Typography>
-              <Typography variant="body2" color="text.secondary">
-                Description for Supplier Profile
-              </Typography>
-            </CardContent>
-          </CardActionArea>
+                <Typography variant="body2" color="text.secondary">
+                  Description for Supplier Profile
+                </Typography>
+              </CardContent>
+            </CardActionArea>
+          </Link>
         </Card>
       </Item>
     </Grid>
@@ -124,6 +126,7 @@ const SupplierList = () => {
     <Grid item xs={4}>
       <Item>
         <Card sx={{ maxWidth: 345 }}>
+        <Link to="/supplier/supplier-list" style={{ textDecoration: 'none' }}>
           <CardActionArea>
             <CardMedia
               component="img"
@@ -154,6 +157,7 @@ const SupplierList = () => {
               </Typography>
             </CardContent>
           </CardActionArea>
+          </Link>
         </Card>
       </Item>
     </Grid>
