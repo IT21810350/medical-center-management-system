@@ -22,6 +22,7 @@ import Pharmacist from './views/pharmacist-views/parmacist-home';
 import HR from './views/hr-views/hr-home';
 import Registration from './views/hr-views/hr-emp-registration';
 import Profile from './views/hr-views/emp-profile';
+import EditEmployee from './views/hr-views/Edit_employee'; 
 
 // lab assistant imports
 import LA from './views/lab-assistant-views/lab-assistant-home';
@@ -50,13 +51,13 @@ function App() {
   return (
     <div className="App">
       <Routes>
-        <Route path="/home" element={<Home />} />
+        <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/contact-us" element={<Contact />} />
 
         {/* actor routes */}
-        <Route path="/hr" element={<HR />} />
+        
         <Route path="/patient" element={<Patient />} />
         <Route path="/doctor" element={<Doctor />} />
         <Route path="/lab-assistant" element={<LA />} />
@@ -69,9 +70,10 @@ function App() {
         <Route path="/symptoms" element={<Symptoms />} />
 
         {/* Hr Routes */}
+        <Route path="/hr" element={<HR />} />
         <Route path="/registration" element={<Registration/>}/>
-
-        <Route path="/profile" element={<Profile/>}/>
+        <Route path="/edit-employee" element={<EditEmployee/>} />
+        <Route path="/profile/:id" element={<Profile/>}/>
 
         {/* Patient Routes */}
         <Route path="/search-doctors" element={<SearchDoctors />} />
