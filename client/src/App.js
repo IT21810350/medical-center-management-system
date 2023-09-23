@@ -45,6 +45,9 @@ import RP from "./views/resource-manager-views/resource-manager-home";
 import FM from './views/financial-manager-views/financial-manager-home';
 import Invoice from './views/financial-manager-views/invoice';
 
+// Resource person Imports
+import RoomList from './views/resource-manager-views/roomList';
+
 
 
 function App() {
@@ -77,6 +80,9 @@ function App() {
 
         {/* Patient Routes */}
         <Route path="/search-doctors" element={<SearchDoctors />} />
+
+        {/* Resource person Routes */}
+        <Route path="/room-list" element={<RoomList />} />
 
 
         {/* Supplier Routes */}
