@@ -13,7 +13,7 @@ const lab_test = new mongoose.Schema({
     test_date : {
         type : Date,
     },
-    labAssistant_id : {
+    lab_assistant_id : {
         type : Number,
     },
     result_data : {
