@@ -14,6 +14,16 @@ import Symptoms from "./views/doctor-views/symptoms";
 // patient imports
 import Patient from './views/patient-views/patient-home';
 import SearchDoctors from './views/patient-views/searchDoctors';
+import CommonPatientDashboard from './views/patient-views/common-patient-dashboard';
+//import PatientNavigationBar from './views/patient-views/patient-navigation-bar';
+import SearchChanelling from './views/patient-views/search-chanelling';
+import PatientCreateAccount from './views/patient-views/patient-create-account';
+import PatientMakeChanelling from './views/patient-views/make-chanelling';
+import ChanellingConfirmation from './views/patient-views/chanelling-confirmation';
+import PatientProfile from './views/patient-views/patient-profile';
+import PatientInquiries from './views/patient-views/inquiries';
+import PatientAdditionalFiles from './views/patient-views/patient-additional-files';
+import InquiryList from './views/patient-views/inq-handle';
 
 // pharmacist imports
 import Pharmacist from './views/pharmacist-views/parmacist-home';
@@ -77,6 +87,15 @@ function App() {
 
         {/* Patient Routes */}
         <Route path="/search-doctors" element={<SearchDoctors />} />
+        <Route path="/dash" exact Component={CommonPatientDashboard} />
+        <Route path="/search-chanelling" exact Component={SearchChanelling} />
+        <Route path="/patient-create-account" exact Component={PatientCreateAccount} />
+        <Route path="/make-chanelling" exact Component={PatientMakeChanelling} />
+        <Route path="/confirm-chanelling" exact Component={ChanellingConfirmation} />
+        <Route path="/patient-profile" exact Component={PatientProfile} />
+        <Route path="/patient-inquiries" exact Component={PatientInquiries} />
+        <Route path="/inq-handle" exact Component={InquiryList} />
+        <Route path="/patient-additional" exact Component={PatientAdditionalFiles} />
 
 
         {/* Supplier Routes */}
@@ -96,6 +115,12 @@ function App() {
 
         <Route path="/financial-manager" element={<FM />} />
         {/* <Route path="/invoice" element={<Invoice />} /> */} 
+
+
+
+
+
+        
 
       </Routes>
 
