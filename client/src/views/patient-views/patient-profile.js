@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Box, Grid, FormControl, InputLabel , Select , MenuItem , RadioGroup , FormControlLabel , Radio , Checkbox , TextField } from '@mui/material';
-import { Card, CardMedia,CardContent, CardActions,Stack, Typography,Button  } from '@mui/material';
+import { Box, Grid, FormControl, InputLabel , Select , MenuItem , RadioGroup , FormControlLabel , Radio , Checkbox , TextField, TableContainer } from '@mui/material';
+import { Card, CardMedia,CardContent, CardActions,Stack, Typography,Button,Table, TableBody, TableCell, TableHead, TableRow, Paper  } from '@mui/material';
 import img1 from '../../assets/img/patient/profile.jpg';
 import Heading from '../../components/patient-components/heading.component';
 import axios from 'axios';
@@ -114,16 +114,18 @@ export default function PatientProfile() {
                                     </Grid>
                                     <Grid item xs={12} sm={9}>
                                         data
-                                        <ul>
+                                        {/* <ul> */}
                                             {/* Map through the patientData array and display each patient's information */}
-                                            {patientData.map(patient => (
+                                            {/* {patientData.map(patient => (
                                                 <li key={patient._id}>
                                                     <h2>{patient.name}</h2>
                                                     <p>Age: {patient.age}</p>
                                                     Display other patient details
                                                 </li>
                                             ))}
-                                        </ul>
+                                        </ul> */}
+
+            
                                     </Grid>
                                 </Grid>
                             </CustomTabPanel>
