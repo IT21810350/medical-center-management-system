@@ -1,8 +1,6 @@
 import React, {useEffect,useState} from 'react';
-import { Box, Grid, FormControl, InputLabel , Select , MenuItem , Stack, RadioGroup , Typography, FormControlLabel , Radio , Checkbox , Button, TextField, Paper } from '@mui/material';
-import imgProfile from '../../assets/img/patient/profile.jpg';
-import Heading from '../../components/patient-components/heading.component';
-import axios from 'axios';
+import { Box, Grid,  Typography, } from '@mui/material';
+
 //import ChanellinDetailsCard from '../../components/patient-components/chanelling-details-card';
 
 export default function UpcomingChanellings(){

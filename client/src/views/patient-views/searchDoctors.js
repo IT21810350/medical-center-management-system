@@ -128,11 +128,11 @@ const SearchDoctors = () => {
 }
 
 
-const tableData = [
-    { id: 1, col1: 'Row 1', col2: 'Data A', col3: 'Data B', col4: 'Data C' },
-    { id: 2, col1: 'Row 2', col2: 'Data D', col3: 'Data E', col4: 'Data F' },
-    // Add more rows as needed
-];
+// const tableData = [
+//     { id: 1, col1: 'Row 1', col2: 'Data A', col3: 'Data B', col4: 'Data C' },
+//     { id: 2, col1: 'Row 2', col2: 'Data D', col3: 'Data E', col4: 'Data F' },
+//     // Add more rows as needed
+// ];
 
 
 

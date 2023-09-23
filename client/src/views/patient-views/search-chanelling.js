@@ -1,11 +1,8 @@
 import React, { Component } from 'react';
-import { useParams } from 'react-router-dom';
-import { useState } from 'react';
-import { Box,Grid,Link,Typography,Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Button, TextField } from '@mui/material';
+// import { useParams } from 'react-router-dom';
+// import { useState } from 'react';
+import { Link,Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Button, TextField } from '@mui/material';
 import Heading from '../../components/patient-components/heading.component';
-import axios from 'axios';
-import { useHistory } from 'react-router-dom';
-import { blue } from '@mui/material/colors';
 import PatientNavigationBar from '../../views/patient-views/patient-navigation-bar';
 
 

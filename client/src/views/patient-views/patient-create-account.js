@@ -116,7 +116,7 @@ export default function PatientCreateAccount() {
                   value="NIC"
                   control={<Radio />}
                   label="NIC"
-                  disabled={patientDetails.country == '' || patientDetails.country !== 'Sri Lanka'}
+                  disabled={patientDetails.country === '' || patientDetails.country !== 'Sri Lanka'}
                 />
                 <FormControlLabel
                   value="Passport"

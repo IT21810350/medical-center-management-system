@@ -5,7 +5,6 @@ import { Card, CardMedia,CardContent, CardActions,Stack, Typography,Button,Table
 import img1 from '../../assets/img/patient/profile.jpg';
 import Heading from '../../components/patient-components/heading.component';
 import axios from 'axios';
-import ProfileCard from '../../components/patient-components/patient-profile-card';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import CustomTabPanel from '../../components/patient-components/tab-panel';
@@ -45,11 +44,11 @@ export default function PatientProfile() {
         setValue2(newValue2);
     };
 
-    const [valueInq, setValueInq] = React.useState(0);
+    // const [valueInq, setValueInq] = React.useState(0);
 
-    const handleChangeInq = (event, newValueInq) => {
-        setValueInq(newValueInq);
-    };
+    // const handleChangeInq = (event, newValueInq) => {
+    //     setValueInq(newValueInq);
+    // };
 
 
     
