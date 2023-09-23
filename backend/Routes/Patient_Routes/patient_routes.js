@@ -103,6 +103,24 @@ router.route("/").get((req,res)=>{
         console.log(err)
     })
 })
+
+// router.get('/patients', async (req, res) => {
+//   try {
+//     const patients = await Patient.find();
+
+//     if (!patients || patients.length === 0) {
+//       // No patients found
+//       return res.status(404).json({ message: 'No patients found' });
+//     }
+
+//     // Patients found, send the data
+//     return res.status(200).json(patients);
+//   } catch (error) {
+//     // Handle errors
+//     console.error('Error retrieving patients:', error);
+//     return res.status(500).json({ message: 'Error retrieving patients', error: error.message });
+//   }
+// });
 //=====================================================
 //UPDATE
 router.route("/update/:id").put(async(req,res)=>{
@@ -163,16 +181,32 @@ router.route("/deletepatient/:id").delete(async (req, res) => {
   });
 //=====================================================
 //Select only one patient
-router.route("/get/:id").get(async (req,res) =>{
-    let patientId = req.params.id;
-    const patient = await Patient.findById(patientId)
-    .then((patient)=>{
-        res.status(200).send({status: "Patient found",patient})
-    }).catch((err)=>{
-        console.log(err.message);
-        res.status(500).send({status: "Error with getting patient", error: err.message});
-    })
-})
+// router.route("/get/:id").get(async (req,res) =>{
+//     let patientId = req.params.id;
+//     const patient = await Patient.findById(patientId)
+//     .then((patient)=>{
+//         res.status(200).send({status: "Patient found",patient})
+//     }).catch((err)=>{
+//         console.log(err.message);
+//         res.status(500).send({status: "Error with getting patient", error: err.message});
+//     })
+// })
+
+router.route("/get/:id").get(async (req, res) => {
+  try {
+    const patientId = req.params.id;
+    const patient = await Patient.findById(patientId);
+    
+    if (!patient) {
+      return res.status(404).json({ status: "Patient not found" });
+    }
+
+    return res.status(200).json({ status: "Patient found", patient });
+  } catch (err) {
+    console.error(err.message);
+    return res.status(500).json({ status: "Error with getting patient", error: err.message });
+  }
+});
 
 
 module.exports = router;
