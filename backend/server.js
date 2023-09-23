@@ -10,6 +10,11 @@ const HR =require("./Routes/HRroutes");;
 const SupplierRegistration = require("./Routes/SupplierRoutes");
 const SymptomAdd = require("./Routes/DoctorRoutes");
 
+//========================================
+const patientRouter = require("./routes/Patient_Routes/patient_routes.js");
+const inqRouter = require("./routes/Patient_Routes/inq-routes.js");
+//========================================
+
 
 
 const { MONGO_URL, PORT } = process.env;
@@ -44,6 +49,13 @@ connection.once('open', () => {
 });
 
 app.use("/", authRoute, ProfileRoute, RegisterEmployee,HR, SymptomAdd,SupplierRegistration);
+
+
+//================================
+app.use("/patient",patientRouter);
+app.use("/inqData" ,inqRouter);
+//=================================
+
 
 app.listen(PORT, () => {
     console.log(`Server is running on port: ${PORT}`);
