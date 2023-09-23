@@ -24,6 +24,8 @@ import PatientProfile from './views/patient-views/patient-profile';
 import PatientInquiries from './views/patient-views/inquiries';
 import PatientAdditionalFiles from './views/patient-views/patient-additional-files';
 import InquiryList from './views/patient-views/inq-handle';
+import Reschedule from './views/patient-views/reschedule';
+import Delete from './views/patient-views/delete';
 
 // pharmacist imports
 import Pharmacist from './views/pharmacist-views/parmacist-home';
@@ -109,6 +111,9 @@ function App() {
         <Route path="/patient-inquiries" exact Component={PatientInquiries} />
         <Route path="/inq-handle" exact Component={InquiryList} />
         <Route path="/patient-additional" exact Component={PatientAdditionalFiles} />
+        <Route path="/rescedule-appointment" exact Component={Reschedule} />
+        <Route path="/delete-appointment" exact Component={Delete} />
+
 
 
         {/* Supplier Routes */}

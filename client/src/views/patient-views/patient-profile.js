@@ -115,6 +115,7 @@ export default function PatientProfile() {
                                             ))}
                                         </ul> */}
 
+                                        <PatientDetails/>
 
                                       
 
@@ -284,149 +285,202 @@ function a11yProps(index) {
 //   }
 
   
-    const PatientList = () => {
-        const [patients, setPatients] = useState([]);
-      
-        const fetchPatients = async () => {
-          try {
-            const response = await axios.get('http://localhost:4000/patientData/'); // Fetch all patients
-            setPatients(response.data);
-          } catch (error) {
-            console.error('Error fetching patients:', error);
-          }
-        };
-      
-        useEffect(() => {
-          fetchPatients(); // Fetch patients when the component mounts
-        }, []);
+function PatientDetails() {
+    const [patient, setPatient] = useState({});
+    const [loading, setLoading] = useState(true);
   
+    useEffect(() => {
+      const fetchPatientDetails = async () => {
+        try {
+          const response = await axios.get(`http://localhost:4000/patients/get/650f256bb408726a4815564a`);
+          setPatient(response.data.patient);
+          setLoading(false);
+        } catch (error) {
+          console.error('Error fetching patient details:', error);
+          setLoading(false);
+        }
+      };
+  
+      fetchPatientDetails();
+    }, []);
     return (
-      <div>
-        <h1>List of Patients</h1>
-        {/* <table>
-          <thead>
-            <tr>
-              <th></th>
-              <th></th>
-              <th></th>
-              <th></th>
-              <th></th>
-              <th></th>
-              <th></th>
-              <th></th>
-              <th></th>
-              <th></th>
-              <th></th>
-              <th></th>
-              <th></th>
-              <th></th>
-              <th></th>
-            </tr>
-          </thead>
-          <tbody>
-            {patients.map((patient) => (
-              <tr key={patient._id}>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-              </tr>
+        <div>
+          {loading ? (
+            <p>Loading...</p>
+          ) : (
+            <div>
+              <h2>Patient Details</h2>
+              <p>Country: {patient.country}</p>
+              <p>ID Type: {patient.idType}</p>
+              <p>ID Number: {patient.idNumber}</p>
+              <p>First Name: {patient.fName}</p>
+              <p>Last Name: {patient.lName}</p>
+              <p>Gender: {patient.gender}</p>
+              <p>Date of Birth: {patient.dob}</p>
+              <p>Contact Number: {patient.phone}</p>
+              <p>Email: {patient.email}</p>
+              <p>Address: {patient.address}</p>
+              <p>Guardian's Name: {patient.gName}</p>
+              <p>Relation: {patient.relation}</p>
+              <p>Guardian ID: {patient.gId}</p>
+              <p>Guardian Contact: {patient.gContact}</p>
+            </div>
+          )}
+        </div>
+      );
+    }
+//===================  
+    
+    // const PatientDetails = () => {
+    //     const [patient, setPatient] = useState(null);
+      
+    //     const fetchPatientDetails = async () => {
+    //       const patientId = '650efb90b6d7126c541b1fbe'; // Replace with the desired patient ID
+      
+    //       try {
+    //         const response = await axios.get(`http://localhost:4000/patients/get/${patientId}`); // Fetch a single patient by ID
+    //         setPatient(response.data);
+    //       } catch (error) {
+    //         console.error('Error fetching patient details:', error);
+    //       }
+    //     };
+      
+    //     useEffect(() => {
+    //       fetchPatientDetails(); // Fetch patient details when the component mounts
+    //     }, []);
+      
+//         if (!patient) {
+//           return <div>Loading...</div>;
+//         }
+      
+  
+//     return (
+//       <div>
+//         <h1>List of Patients</h1>
+//         {/* <table>
+//           <thead>
+//             <tr>
+//               <th></th>
+//               <th></th>
+//               <th></th>
+//               <th></th>
+//               <th></th>
+//               <th></th>
+//               <th></th>
+//               <th></th>
+//               <th></th>
+//               <th></th>
+//               <th></th>
+//               <th></th>
+//               <th></th>
+//               <th></th>
+//               <th></th>
+//             </tr>
+//           </thead>
+//           <tbody>
+//             {patients.map((patient) => (
+//               <tr key={patient._id}>
+//                 <td></td>
+//                 <td></td>
+//                 <td></td>
+//                 <td></td>
+//                 <td></td>
+//                 <td></td>
+//                 <td></td>
+//                 <td></td>
+//                 <td></td>
+//                 <td></td>
+//                 <td></td>
+//                 <td></td>
+//                 <td></td>
+//                 <td></td>
+//                 <td></td>
+//               </tr>
            
-          </tbody>
-        </table> */}
-        {patients.map((patient) => (
-        <TableContainer  key={patient._id}>
+//           </tbody>
+//         </table> */}
+//         {patients.map((patient) => (
+//         <TableContainer  key={patient._id}>
         
-            <Table>
-                <TableHead>ID</TableHead>
-                <TableCell>{patient._id}</TableCell>
-            </Table>
+//             <Table>
+//                 <TableHead>ID</TableHead>
+//                 <TableCell>{patient._id}</TableCell>
+//             </Table>
 
-            <Table>
-                <TableHead>Country</TableHead>
-                <TableCell>{patient.country}</TableCell>
-            </Table>
+//             <Table>
+//                 <TableHead>Country</TableHead>
+//                 <TableCell>{patient.country}</TableCell>
+//             </Table>
 
-            <Table>
-                <TableHead>ID Type</TableHead>
-                <TableCell>{patient.idType}</TableCell>
-            </Table>
+//             <Table>
+//                 <TableHead>ID Type</TableHead>
+//                 <TableCell>{patient.idType}</TableCell>
+//             </Table>
 
-            <Table>
-                <TableHead>ID Number</TableHead>
-                <TableCell>{patient.idNumber}</TableCell>
-            </Table>
+//             <Table>
+//                 <TableHead>ID Number</TableHead>
+//                 <TableCell>{patient.idNumber}</TableCell>
+//             </Table>
 
-            <Table>
-                <TableHead>First Name</TableHead>
-                <TableCell>{patient.fName}</TableCell>
-            </Table>
+//             <Table>
+//                 <TableHead>First Name</TableHead>
+//                 <TableCell>{patient.fName}</TableCell>
+//             </Table>
 
-            <Table>
-                <TableHead>Last Name</TableHead>
-                <TableCell>{patient.lName}</TableCell>
-            </Table>
+//             <Table>
+//                 <TableHead>Last Name</TableHead>
+//                 <TableCell>{patient.lName}</TableCell>
+//             </Table>
 
-            <Table>
-                <TableHead>Gender</TableHead>
-                <TableCell>{patient.gender}</TableCell>
-            </Table>
+//             <Table>
+//                 <TableHead>Gender</TableHead>
+//                 <TableCell>{patient.gender}</TableCell>
+//             </Table>
 
-            <Table>
-                <TableHead>Date of Birth</TableHead>
-                <TableCell>{patient.dob}</TableCell>
-            </Table>
+//             <Table>
+//                 <TableHead>Date of Birth</TableHead>
+//                 <TableCell>{patient.dob}</TableCell>
+//             </Table>
 
-            <Table>
-                <TableHead>Phone</TableHead>
-                <TableCell>{patient.phone}</TableCell>
-            </Table>
+//             <Table>
+//                 <TableHead>Phone</TableHead>
+//                 <TableCell>{patient.phone}</TableCell>
+//             </Table>
 
-            <Table>
-                <TableHead>Email</TableHead>
-                <TableCell>{patient.email}</TableCell>
-            </Table>
+//             <Table>
+//                 <TableHead>Email</TableHead>
+//                 <TableCell>{patient.email}</TableCell>
+//             </Table>
 
-            <Table>
-                <TableHead>Address</TableHead>
-                <TableCell>{patient.address}</TableCell>
-            </Table>
+//             <Table>
+//                 <TableHead>Address</TableHead>
+//                 <TableCell>{patient.address}</TableCell>
+//             </Table>
 
-            <Table>
-                <TableHead>Guardian Name</TableHead>
-                <TableCell>{patient.gName}</TableCell>
-            </Table>
+//             <Table>
+//                 <TableHead>Guardian Name</TableHead>
+//                 <TableCell>{patient.gName}</TableCell>
+//             </Table>
 
-            <Table>
-                <TableHead>Relation</TableHead>
-                <TableCell>{patient.relation}</TableCell>
-            </Table>
+//             <Table>
+//                 <TableHead>Relation</TableHead>
+//                 <TableCell>{patient.relation}</TableCell>
+//             </Table>
 
-            <Table>
-                <TableHead>Guardian ID</TableHead>
-                <TableCell>{patient.gId}</TableCell>
-            </Table>
+//             <Table>
+//                 <TableHead>Guardian ID</TableHead>
+//                 <TableCell>{patient.gId}</TableCell>
+//             </Table>
 
-            <Table>
-                <TableHead>Guardian Contact</TableHead>
-                <TableCell>{patient.gContact}</TableCell>
-            </Table>
-        </TableContainer>
-         ))}
-      </div>
-    );
-  }
+//             <Table>
+//                 <TableHead>Guardian Contact</TableHead>
+//                 <TableCell>{patient.gContact}</TableCell>
+//             </Table>
+//         </TableContainer>
+//          ))}
+//       </div>
+//     );
+//   }
 // // //=========================================================
 
 // import React, { useEffect, useState } from 'react';

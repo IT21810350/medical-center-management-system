@@ -52,9 +52,7 @@ const InquiryList = () => {
               <td>{inquiry.message}</td>
               <td>
                 <button onClick={() => handleDelete(inquiry._id)}>Delete</button>
-                <button>Edit
-                   
-                </button>
+                <button>Edit</button>
               </td>
             </tr>
           ))}
