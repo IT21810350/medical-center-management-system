@@ -1,84 +1,3 @@
-// import React, { useState, useEffect } from 'react';
-// import axios from 'axios';
-
-// const InquiryList = () => {
-//   const [inquiries, setInquiries] = useState([]);
-//   const [filteredInquiries, setFilteredInquiries] = useState([]);
-//   const [filter, setFilter] = useState('');
-
-
-//   const fetchInquiries = async () => {
-//     try {
-//       const response = await axios.get('http://localhost:5000/inqData/'); // Fetch all inquiries
-//       setInquiries(response.data);
-//       setFilteredInquiries(response.data); // Initialize filteredInquiries
-//     } catch (error) {
-//       console.error('Error fetching inquiries:', error);
-//     }
-//   };
-
-//   const handleFilterChange = (e) => {
-//     const newFilter = e.target.value;
-//     setFilter(newFilter);
-
-//     // Filter inquiries based on subject
-//     const filtered = inquiries.filter((inquiry) =>
-//       inquiry.subject.toLowerCase().includes(newFilter.toLowerCase())
-//     );
-//     setFilteredInquiries(filtered);
-//   };
-
-//   const handleDelete = async (id) => {
-//     try {
-//       // Delete the inquiry with the specified ID
-//       await axios.delete(`http://localhost:5000/inqData/deleteinq/:${id}`);
-//       // Refetch inquiries to update the list
-//       fetchInquiries();
-//     } catch (error) {
-//       console.error('Error deleting inquiry:', error);
-//     }
-//   };
-
-//   useEffect(() => {
-//     fetchInquiries(); // Fetch inquiries when the component mounts
-//   }, []);
-
-//   return (
-//     <div>
-//       <h2>All Inquiries</h2>
-//       <input
-//         type="text"
-//         placeholder="Filter by subject"
-//         value={filter}
-//         onChange={handleFilterChange}
-//       />
-//       <ul>
-//         {filteredInquiries.map((inquiry) => (
-//           <li key={inquiry._id}>
-//             <strong>Name:</strong> {inquiry.name}
-//             <br />
-//             <strong>Subject:</strong> {inquiry.subject}
-//             <br />
-//             <strong>Message:</strong> {inquiry.message}
-//             <br />
-//             <button onClick={() => handleDelete(inquiry._id)}>Delete</button>
-//             {/* Add an update button with a link to an update page */}
-//             <button>
-//               <a href={`http://localhost:5000/inqData/update/:${inquiry._id}`}>Update</a>
-//             </button>
-//           </li>
-//         ))}
-//       </ul>
-//     </div>
-//   );
-// };
-
-// export default InquiryList;
-
-//========================================================================================================
-// 
-//=============================================================================================
-
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
@@ -88,7 +7,7 @@ const InquiryList = () => {
 
   const fetchInquiries = async () => {
     try {
-      const response = await axios.get('http://localhost:5000/inqData/'); // Fetch all inquiries
+      const response = await axios.get('http://localhost:4000/inqData/'); // Fetch all inquiries
       setInquiries(response.data);
     } catch (error) {
       console.error('Error fetching inquiries:', error);
@@ -102,7 +21,7 @@ const InquiryList = () => {
   const handleDelete = async (id) => {
     try {
       // Delete the inquiry with the specified ID
-      await axios.delete(`http://localhost:5000/deleteinq/${id}`);
+      await axios.delete(`http://localhost:4000/deleteinq/${id}`);
       // Refetch inquiries to update the list
       fetchInquiries();
     } catch (error) {

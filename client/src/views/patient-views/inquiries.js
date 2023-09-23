@@ -5,15 +5,6 @@ import axios from 'axios';
 import PatientNavigationBar from '../../views/patient-views/patient-navigation-bar';
 
 
-// export default function PatientInquiries(){
-//     return(
-//         <>
-         
-//         <h1>PatientInquiries</h1>
-//         </>
-//     );
-// }
-
 
 
 const PatientInquiries = () => {

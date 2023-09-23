@@ -2,39 +2,37 @@
 const router = require("express").Router();
 const { request } = require("express");
 
-let Patient = require("../../Models/PatientModel/Patient");
+let Patient = require("../../Models/PatientModel/Patientmodel");
 
 //=====================================================
-//CREATE A PATIENT BEFORE MAKE A CHANNELLING
 
 router.post('/add', async (req, res) => {
   const {
+   
     country,
     idType,
-    identity,
-    firstName,
-    lastName,
+    idNumber,
+    fName,
+    lName,
     gender,
     dob,
     phone,
     email,
     address,
-    agreeToTerms,
   } = req.body;
 
   try {
     const newPatient = new Patient({
       country,
-      idType,
-      identity,
-      firstName,
-      lastName,
-      gender,
-      dob,
-      phone,
-      email,
-      address,
-      agreeToTerms,
+    idType,
+    idNumber,
+    fName,
+    lName,
+    gender,
+    dob,
+    phone,
+    email,
+    address,
     });
 
     await newPatient.save();
@@ -45,46 +43,6 @@ router.post('/add', async (req, res) => {
     res.status(500).json({ error: 'Internal server error' });
   }
 });
-
-// router.route("/add").post((req, res) => {
-//   const {
-//       country,
-//       idType,
-//       identity,
-//       firstName,
-//       lastName,
-//       gender,
-//       dob,
-//       phone,
-//       email,
-//       address,
-//       agreeToTerms
-//   } = req.body;
-
-//   const newPatient = new Patient({
-//       country,
-//       idType,
-//       identity,
-//       firstName,
-//       lastName,
-//       gender,
-//       dob,
-//       phone,
-//       email,
-//       address,
-//       agreeToTerms
-//   });
-
-//   newPatient.save()
-//       .then((patient) => {
-//           // Respond with the newly created patient data
-//           res.status(201).json({ status: "Patient added", patient });
-//       })
-//       .catch((err) => {
-//           console.error(err);
-//           res.status(500).json({ status: "Error adding patient", error: err.message });
-//       });
-// });
 
 
 //=====================================================

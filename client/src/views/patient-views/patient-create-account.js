@@ -1,123 +1,241 @@
 import React, { useState } from 'react';
-
+import Button from '@mui/material/Button';
+import TextField from '@mui/material/TextField';
+import FormControl from '@mui/material/FormControl';
+import RadioGroup from '@mui/material/RadioGroup';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import Radio from '@mui/material/Radio';
+import Grid from '@mui/material/Grid';
+import Stack from '@mui/material/Stack';
+import InputLabel from '@mui/material/InputLabel';
+import Select from '@mui/material/Select';
+import MenuItem from '@mui/material/MenuItem';
+import Checkbox from '@mui/material/Checkbox';
 import Heading from '../../components/patient-components/heading.component';
 import PatientNavigationBar from '../../views/patient-views/patient-navigation-bar';
+import axios from 'axios';
 
 export default function PatientCreateAccount() {
-  //  this.state1 = {     country:'', idNumber:'',idNumber:'',gender:'',fName:'',lName:'',dob:'',phone:'',email:'',address:'',};
+  //Create a state variable to store all the values with an initial value of an array containing an empty object {}.
+  //The setpatientDetails function is used to update the state.
+  const [patientDetails, setpatientDetails] = useState({
+    country: '', idType: '', idNumber: '', fName: '', lName: '', gender: '', dob: '', phone: '', email: '', address: '',
+  });
 
-    // const handleInputChange = (e) => {
-    //     const { name, value,type,checked } = e.target;
-    //     this.setState({
-          
-    //       [name]: type === 'checkbox' ? checked : value,
-    //     });
-    //   };
 
-  //     const  handleSubmit = (e) => {
-  //       e.preventDefault();
-    
-  //       const data = {
-  //         country: this.state.country,
-  //         idType: this.state.idType,
-  //         idNumber: this.state.idNumber,
-  //         gender: this.state.gender,
-  //         fName: this.state.fName,
-  //         lName: this.state.lName,
-  //         dob: this.state.dob,
-  //         phone:this.state.phone,
-  //         email : this.state.email,
-  //         address : this.state.address,
-  //       };
 
-  //       axios
-  //     .post('PatientInquiries', data)
-  //     .then((response) => {
-  //       console.log(response.data);
-  //     })
-  //     .catch((error) => {
-  //       console.error(error);
-  //     });
-  // };
+  const [agreeToTerms, setAgreeToTerms] = useState(false);
 
-  //const [formData, setFormData] = useState({ });
-//   const [idType, setIdType] = useState('Passport');
-//   const [idNumber, setIdNumber] = useState('');
-//   const [gender, setGender] = useState('Male');
-//   const [fName, setFName] = useState('');
-//   const [lName, setLName] = useState('');
-//   const [dob, setDob] = useState('');
-//   const [phone, setPhone] = useState('');
-//   const [email, setEmail] = useState('');
-//   const [address, setAddress] = useState('');
-  // const [agreeToTerms, setAgreeToTerms] = useState(false);
+  const handleOnChange = (e) => {
+    const { name, value } = e.target;
 
-//   const handleCountryChange = (e) => {
-//     setCountry(e.target.value);
-//     // Reset ID type and ID number when the country changes
-//     setIdType('Passport');
-//     setIdNumber('');
-//   };
+    setpatientDetails({
+      ...patientDetails,
+      [name]: value,
+    });
+  };
 
-// const handleFileInputChange = (e) => {
-//     const file = e.target.files[0]; // Get the first selected file
-//     setFormData({
-//       ...formData,
-//       submitDocuments: file, // Store the selected file in your form data
-//     });
-//   };
 
-  
 
-//   const handleSubmit = async (e) => {
-//     e.preventDefault();
-//     try {
-//       const { data } = await axios.post(
-//         'http://localhost:5000/patient/add',
-//         {
-//           ...formData,
-//         },
-//         { withCredentials: true }
-//       );
-    //   console.log('Response from server:', data);
-    //   // Clear form fields after successful submission
-    //   setCountry('');
-    //   setIdType('Passport');
-    //   setIdNumber('');
-    //   setGender('Male');
-    //   setFName('');
-    //   setLName('');
-    //   setDob('');
-    //   setPhone('');
-    //   setEmail('');
-    //   setAddress('');
-    //   setAgreeToTerms(false);
-//     } catch (error) {
-//       console.error('Error submitting data:', error);
-//     }
-//   };
+  const handleAgreeToTermsChange = (e) => {
+    setAgreeToTerms(e.target.checked); // Update the state when the checkbox is checked or unchecked
+  };
 
-//   setFormData({
-//     ...formData,
-//     country:'', idNumber:'',idNumber:'',gender:'',fName:'',lName:'',dob:'',phone:'',email:'',address:'',
-//   });
-  // setAgreeToTerms(false);
 
-//   const handleInputChange = (e) => {
-//     const { name, value,type,checked } = e.target;
-//     setFormData({
-//       ...formData,
-//       [name]: value,
-//     });
-//   };
-  
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      // Make a POST request to your server or API endpoint
+      const response = await axios.post('http://localhost:4000/patientData/add', patientDetails);
+
+      // Handle the response 
+      console.log('Form submitted successfully', response.data);
+
+      // Optionally, reset the form
+      setFormData({
+        country: '', idType: '', idNumber: '', fName: '', lName: '', gender: '', dob: '', phone: '', email: '', address: '',
+      });
+    } catch (error) {
+      // Handle errors 
+      console.error('Error submitting form', error.response.data);
+    }
+
+  };
+
+
+  // Determine if the country is selected
+  const isCountrySelected = patientDetails.countrycountry !== '';
+
+  // Disable submit if country not selected or terms not agreed
+  const isSubmitDisabled = !isCountrySelected || !agreeToTerms;
+
+
   return (
     <>
-     <PatientNavigationBar/>
-    
-      <Heading title="Create an account" />
 
-     
+<PatientNavigationBar/>
+      <Heading title="Create an account"
+      />
+
+      <form onSubmit={handleSubmit} style={{ padding: "100px", paddingTop: "0px", textDecoration: "bold" }}>
+
+        <Grid container spacing={1} lg={12}>
+          <Grid xs={12} item>
+            {/* Country Selection */}
+            <FormControl fullWidth variant="outlined">
+              <InputLabel>Select Country</InputLabel>
+              <Select
+                label="Select Country"
+                name='country'
+                onChange={(e) => handleOnChange(e)}
+                value={patientDetails.country}
+              >
+                <MenuItem value="null">
+                  <em>Select</em>
+                </MenuItem>
+                <MenuItem value="Sri Lanka">Sri Lanka</MenuItem>
+                <MenuItem value="India">India</MenuItem>
+                <MenuItem value="Australia">Australia</MenuItem>
+                <MenuItem value="Canada">Canada</MenuItem>
+                <MenuItem value="Other Country">Other Country</MenuItem>
+              </Select>
+            </FormControl>
+          </Grid>
+          <Grid xs={12} item>
+            {/* ID Type Selection */}
+            <FormControl component="fieldset">
+              <RadioGroup
+                row
+                name="idType"
+                value={patientDetails.idType}
+                onChange={(e) => handleOnChange(e)}
+              >
+                <FormControlLabel
+
+                  value="NIC"
+                  control={<Radio />}
+                  label="NIC"
+                  disabled={patientDetails.country == '' || patientDetails.country !== 'Sri Lanka'}
+                />
+                <FormControlLabel
+                  value="Passport"
+                  control={<Radio />}
+                  label="Passport"
+                  disabled={!isCountrySelected}
+                />
+              </RadioGroup>
+            </FormControl>
+          </Grid>
+
+          <Grid xs={12} item>
+            {/* ID Input Field */}
+            <TextField
+              fullWidth
+              variant="outlined"
+              label={patientDetails.idType === 'NIC' ? 'NIC Number' : 'Passport Number'}
+              value={patientDetails.idNumber}
+              name='idNumber'
+              onChange={(e) => handleOnChange(e)}
+              placeholder={
+                patientDetails.idType === 'NIC'
+                  ? 'Please enter your NIC'
+                  : 'Please enter your Passport number'
+              }
+              disabled={!isCountrySelected}
+              required
+            />
+          </Grid>
+
+          <Grid xs={12} sm={6} item>
+            <TextField label="First Name" value={patientDetails.fName} name='fName' onChange={(e) => handleOnChange(e)} placeholder='Enter first name' variant='outlined' fullWidth required />
+          </Grid>
+
+          <Grid xs={12} sm={6} item>
+            <TextField label="Last Name" value={patientDetails.lName} name='lName' onChange={(e) => handleOnChange(e)} placeholder='Enter last name' variant='outlined' fullWidth required />
+          </Grid>
+
+          <Grid xs={12} sm={6} item>
+            <FormControl component="fieldset" required>
+              <RadioGroup
+                row
+                name="gender"
+                value={patientDetails.gender}
+                onChange={(e) => handleOnChange(e)}
+              >
+                <FormControlLabel
+                  value="Male"
+                  control={<Radio />}
+                  label="Male"
+                  defaultChecked
+                />
+                <FormControlLabel
+                  value="Female"
+                  control={<Radio />}
+                  label="Female"
+                />
+
+                <FormControlLabel
+                  value="Other"
+                  control={<Radio />}
+                  label="Other"
+                />
+              </RadioGroup>
+            </FormControl>
+          </Grid>
+
+          <Grid xs={12} item>
+            <TextField type='number' value={patientDetails.phone} label="Phone" name='phone' onChange={(e) => handleOnChange(e)} placeholder='Enter phone number' variant='outlined' fullWidth required />
+          </Grid>
+
+          <Grid xs={12} item>
+            <TextField type='date' value={patientDetails.dob} label="Date of Birth" name='dob' onChange={(e) => handleOnChange(e)} placeholder='Enter date of birth' variant='outlined' fullWidth required />
+          </Grid>
+
+          <Grid xs={12} item>
+            <TextField type='email' value={patientDetails.email} label="Email" name='email' onChange={(e) => handleOnChange(e)} placeholder='Enter email' variant='outlined' fullWidth required />
+          </Grid>
+
+          <Grid xs={12} item>
+            <TextField type='text' value={patientDetails.address} label="Address" name='address' onChange={(e) => handleOnChange(e)} placeholder='Enter address - Optional' variant='outlined' fullWidth />
+          </Grid>
+
+          <Grid xs={12} item>
+            {/* Agree to Terms Checkbox */}
+            <FormControlLabel
+              control={
+                <Checkbox
+                  checked={agreeToTerms}
+                  onChange={handleAgreeToTermsChange}
+                  color="primary"
+                />
+              }
+              label="I agree to the terms and conditions"
+            />
+          </Grid>
+
+          <Grid item>
+
+            <Stack direction="row" spacing={2} >
+
+              <Button
+                type="submit"
+                variant="contained"
+                color="primary"
+                disabled={isSubmitDisabled}
+              >
+                Submit
+              </Button>
+
+            </Stack>
+          </Grid>
+
+
+        </Grid>
+      </form>
+
+
+
     </>
   );
 }

@@ -6,16 +6,20 @@ const patientSchema = new Schema({
         type: String,
         required: true
     },
-    identity: {
+    idType: {
+        type: String,
+        required: true
+    },
+    idNumber: {
         type: String,
         required: true
     },
 
-    firstName: {
+    fName: {
         type: String,
         required: true
     },
-    lastName: {
+    lName: {
         type: String,
         required: true
     },
