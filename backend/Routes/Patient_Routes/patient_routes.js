@@ -5,6 +5,7 @@ const { request } = require("express");
 let Patient = require("../../Models/PatientModel/Patientmodel");
 
 //=====================================================
+//CREATE A PATIENT BEFORE MAKE A CHANNELLING
 
 router.post('/add', async (req, res) => {
   const {
@@ -19,6 +20,10 @@ router.post('/add', async (req, res) => {
     phone,
     email,
     address,
+    gName,
+    relation,
+    gId,
+    gContact,
   } = req.body;
 
   try {
@@ -33,6 +38,10 @@ router.post('/add', async (req, res) => {
     phone,
     email,
     address,
+    gName,
+    relation,
+    gId,
+    gContact,
     });
 
     await newPatient.save();
@@ -43,6 +52,46 @@ router.post('/add', async (req, res) => {
     res.status(500).json({ error: 'Internal server error' });
   }
 });
+
+// router.route("/add").post((req, res) => {
+//   const {
+//       country,
+//       idType,
+//       identity,
+//       firstName,
+//       lastName,
+//       gender,
+//       dob,
+//       phone,
+//       email,
+//       address,
+//       agreeToTerms
+//   } = req.body;
+
+//   const newPatient = new Patient({
+//       country,
+//       idType,
+//       identity,
+//       firstName,
+//       lastName,
+//       gender,
+//       dob,
+//       phone,
+//       email,
+//       address,
+//       agreeToTerms
+//   });
+
+//   newPatient.save()
+//       .then((patient) => {
+//           // Respond with the newly created patient data
+//           res.status(201).json({ status: "Patient added", patient });
+//       })
+//       .catch((err) => {
+//           console.error(err);
+//           res.status(500).json({ status: "Error adding patient", error: err.message });
+//       });
+// });
 
 
 //=====================================================
@@ -59,19 +108,23 @@ router.route("/").get((req,res)=>{
 router.route("/update/:id").put(async(req,res)=>{
     let patientId = request.params.id;
 
-    const{country,identity,firstName,lastName,gender,dob,phone,email,address} = req.body;
+    const{country,identity,firstName,lastName,gender,dob,phone,email,address,gName,relation,gId,gContact,} = req.body;
 
     //crate an object
     const updatePatient = {
-        country,
-        identity,
-        firstName,
-        lastName,
-        gender,
-        dob,
-        phone,
-        email,
-        address
+      country,
+      identity,
+      firstName,
+      lastName,
+      gender,
+      dob,
+      phone,
+      email,
+      address,
+      gName,
+      relation,
+      gId,
+      gContact,
     };
     try {
         // Use findByIdAndUpdate to find and update the patient

@@ -44,6 +44,25 @@ const patientSchema = new Schema({
         type: String,
         required: true
     },
+    gName: {
+        type: String,
+        required: true
+    },
+
+    relation: {
+        type: String,
+        required: true
+    },
+
+    gId: {
+        type: String,
+        required: true
+    },
+
+    gContact: {
+        type: String,
+        required: true
+    },
 },
     {
         timestamps: true

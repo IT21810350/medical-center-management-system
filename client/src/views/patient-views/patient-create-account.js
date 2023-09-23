@@ -19,7 +19,7 @@ export default function PatientCreateAccount() {
   //Create a state variable to store all the values with an initial value of an array containing an empty object {}.
   //The setpatientDetails function is used to update the state.
   const [patientDetails, setpatientDetails] = useState({
-    country: '', idType: '', idNumber: '', fName: '', lName: '', gender: '', dob: '', phone: '', email: '', address: '',
+    country: '', idType: '', idNumber: '', fName: '', lName: '', gender: '', dob: '', phone: '', email: '', address: '',gName:'', relation:'', gId:'',gContact:'',
   });
 
 
@@ -54,7 +54,7 @@ export default function PatientCreateAccount() {
 
       // Optionally, reset the form
       setFormData({
-        country: '', idType: '', idNumber: '', fName: '', lName: '', gender: '', dob: '', phone: '', email: '', address: '',
+        country: '', idType: '', idNumber: '', fName: '', lName: '', gender: '', dob: '', phone: '', email: '', address: '',gName:'', relation:'', gId:'',gContact:'',
       });
     } catch (error) {
       // Handle errors 
@@ -73,8 +73,8 @@ export default function PatientCreateAccount() {
 
   return (
     <>
+      <PatientNavigationBar/>
 
-<PatientNavigationBar/>
       <Heading title="Create an account"
       />
 
@@ -198,6 +198,39 @@ export default function PatientCreateAccount() {
 
           <Grid xs={12} item>
             <TextField type='text' value={patientDetails.address} label="Address" name='address' onChange={(e) => handleOnChange(e)} placeholder='Enter address - Optional' variant='outlined' fullWidth />
+          </Grid>
+
+          <Grid xs={12} item>
+            <TextField type='text' value={patientDetails.gName} label="Guardian's Name" name='gName' onChange={(e) => handleOnChange(e)} placeholder='Enter name of the guardian - Optional' variant='outlined' fullWidth />
+          </Grid>
+
+          <Grid xs={12} item>
+            {/* Country Selection */}
+            <FormControl fullWidth variant="outlined">
+              <InputLabel>Select Relationship</InputLabel>
+              <Select
+                label="Select Relationship"
+                name='relation'
+                onChange={(e) => handleOnChange(e)}
+                value={patientDetails.relation}
+              >
+                <MenuItem value="null">
+                  <em>Select</em>
+                </MenuItem>
+                <MenuItem value="Mother">Mother</MenuItem>
+                <MenuItem value="Father">Father</MenuItem>
+                <MenuItem value="Other">Other</MenuItem>
+                <MenuItem value="-">-</MenuItem>
+              </Select>
+            </FormControl>
+          </Grid>
+
+          <Grid xs={12} item>
+            <TextField type='text' value={patientDetails.gId} label="Guardian's Identity No" name='gId' onChange={(e) => handleOnChange(e)} placeholder='Enter Identity no of the guardian - Optional' variant='outlined' fullWidth />
+          </Grid>
+
+          <Grid xs={12} item>
+            <TextField type='text' value={patientDetails.gContact} label="Guardian's contact no" name='gContact' onChange={(e) => handleOnChange(e)} placeholder='Enter contact no of the guardian - Optional' variant='outlined' fullWidth />
           </Grid>
 
           <Grid xs={12} item>
