@@ -1,30 +1,31 @@
 // global imports
-import * as React from "react";
+import React from "react";
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
+import image from '../../assets/img/lab-assistant/home_background.png';
+//import {Link} from "react-router-dom";
 
 // imports for navbar
 import Navbar from '../../components/LA-component/la-nav-bar'
 
 // Lab Assistant Interface Page
-function LabPage() {
-  return (
-  <div>
-    <Box>
-      <Grid container>
-        <Navbar />
-      </Grid>
-    </Box>
-  </div>
+function LabHome() {
+  return ( 
+    <div style={{ backgroundImage:`url(${image})`,backgroundRepeat:"no-repeat"}}>
+      <Box>
+        <Grid>
+          <Navbar/>
+        </Grid>
+      </Box>
+    </div>
   );
 }
 
-// Const LA(Lab Assistant) defined
-// This is used to load all functions into one place
-// Just like main function in C
+// Anon Function LA Calls the LabHome function
+// LabHome function loads lab-assistant home page content
 const LA = () => {
   return (
-    LabPage()
+    LabHome()
   );
 };
 

@@ -10,69 +10,28 @@ export default function RegistrationForm() {
 
   // State to store form values
   const [formData, setFormData] = useState({
-    userId:'',
-    role:'doctor',
+    userId: '650474d11164fa8928fa72a8',
+    role: 'doctor',
     firstName: '',
     lastName: '',
     email: '',
-    nic: '', // New field
-    address: '', // New field
+    nic: '',
+    address: '',
     employeeRole: '',
     gender: '',
     birthday: '',
+    phonenumber: '',
     educationlevel: '',
     certifications: '',
     medicallicense: '',
     taxinformation: '',
     bankinformation: '',
-    insurancedetails: '', // New field
+    insurancedetails: ''
   });
 
-  const handleFileInputChange = (e) => {
-    const file = e.target.files[0]; // Get the first selected file
-    setFormData({
-      ...formData,
-      submitDocuments: file, // Store the selected file in your form data
-    });
-  };
+  const { userId, role, firstName, lastName, email, nic, address, employeeRole, gender, birthday, educationlevel, phonenumber, certifications, medicallicense, taxinformation, bankinformation, insurancedetails } = formData
 
-  // Function to handle form submission
-  const handleSubmit = async (e) =>{
-    e.preventDefault();
-    try{
-      const {data } = await axios.Post(
-        "http://localhost:4000/register-employee",
-        {
-          ...formData,
-        },
-        {withCredentials: true }
-      );
-      }catch(error){
-        console.error(error);
-      }
 
-      setFormData({
-        ...formData,
-        userId:'64f4ba9b767974208f4fe06d',
-        role:'doctor',
-        firstName: '',
-        lastName: '',
-        email: '',
-        nic: '', 
-        address: '',
-        employeeRole: '',
-        gender: '',
-        birthday: '',
-        educationlevel: '',
-        certifications: '',
-        medicallicense: '',
-        taxinformation: '',
-        bankinformation: '',
-        insurancedetails: '', 
-      });
-  }
-
-  // Function to handle input changes and update state
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData({
@@ -81,15 +40,56 @@ export default function RegistrationForm() {
     });
   };
 
+  // Function to handle form submission
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+       await axios.post(
+        "http://localhost:4000/register-employee",
+        {
+          ...formData,
+        },
+       
+        // { withCredentials: true }
+      );
+    } catch (error) {
+      console.error(error);
+    }
+
+    setFormData({
+      ...formData,
+      userId: '64f4ba9b767974208f4fe06d',
+      role: 'doctor',
+      firstName: '',
+      lastName: '',
+      email: '',
+      nic: '',
+      address: '',
+      employeeRole: '',
+      gender: '',
+      phonenumber: '',
+      birthday: '',
+      educationlevel: '',
+      certifications: '',
+      medicallicense: '',
+      taxinformation: '',
+      bankinformation: '',
+      insurancedetails: ''
+    });
+  };
+
+  // Function to handle input changes and update state
+
+
   return (
-   <div>
-    <Box >
-    <Grid container>
-      <Navbar />
-    </Grid>
-  </Box>
-     
-  <Box sx={{
+    <div>
+      <Box >
+        <Grid container>
+          <Navbar />
+        </Grid>
+      </Box>
+
+      <Box sx={{
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
@@ -98,11 +98,32 @@ export default function RegistrationForm() {
       }}>
         <h1>Registration Form</h1>
         <form onSubmit={handleSubmit}>
+        {/* user ID */}
+        <TextField
+            fullWidth
+            label="userID"
+            name="userId"
+            value={userId}
+            onChange={handleInputChange}
+            sx={{ marginTop: '10px' }}
+            required
+          />
+          {/* user role */}
+          <TextField
+            fullWidth
+            label="First Name"
+            role="role"
+            value={role}
+            onChange={handleInputChange}
+            sx={{ marginTop: '10px' }}
+            required
+          />
+
           <TextField
             fullWidth
             label="First Name"
             name="firstName"
-            value={formData.firstName}
+            value={firstName}
             onChange={handleInputChange}
             sx={{ marginTop: '10px' }}
             required
@@ -111,7 +132,7 @@ export default function RegistrationForm() {
             fullWidth
             label="Last Name"
             name="lastName"
-            value={formData.lastName}
+            value={lastName}
             onChange={handleInputChange}
             sx={{ marginTop: '10px' }}
             required
@@ -121,7 +142,7 @@ export default function RegistrationForm() {
             label="Email"
             name="email"
             type="email"
-            value={formData.email}
+            value={email}
             onChange={handleInputChange}
             sx={{ marginTop: '10px' }}
             required
@@ -130,7 +151,7 @@ export default function RegistrationForm() {
             fullWidth
             label="NIC"
             name="nic"
-            value={formData.nic}
+            value={nic}
             onChange={handleInputChange}
             sx={{ marginTop: '10px' }}
           />
@@ -138,7 +159,7 @@ export default function RegistrationForm() {
             fullWidth
             label="Gender"
             name="gender"
-            value={formData.gender}
+            value={gender}
             onChange={handleInputChange}
             sx={{ marginTop: '10px' }}
           />
@@ -147,7 +168,7 @@ export default function RegistrationForm() {
               fullWidth
               label="Birthday"
               name="birthday"
-              value={formData.birthday}
+              value={birthday}
               onChange={handleInputChange}
               sx={{ marginRight: '20px', width: '50%', textAlign: 'left' }}
             />
@@ -156,15 +177,15 @@ export default function RegistrationForm() {
               fullWidth
               label="Employee Role"
               name="employeeRole"
-              value={formData.employeeRole}
+              value={employeeRole}
               onChange={handleInputChange}
             />
           </div>
           <TextField
             fullWidth
             label="PhoneNumber"
-            name="phonenumbe"
-            value={formData.phonenumbe}
+            name="phonenumber"
+            value={phonenumber}
             onChange={handleInputChange}
             sx={{ marginTop: '10px' }}
           />
@@ -172,7 +193,7 @@ export default function RegistrationForm() {
             fullWidth
             label="Address"
             name="address"
-            value={formData.address}
+            value={address}
             onChange={handleInputChange}
             sx={{ marginTop: '10px' }}
           />
@@ -182,7 +203,7 @@ export default function RegistrationForm() {
               fullWidth
               label="EducationLevel"
               name="educationlevel"
-              value={formData.educationlevel}
+              value={educationlevel}
               onChange={handleInputChange}
               sx={{ marginTop: '10px' }}
             />
@@ -190,7 +211,7 @@ export default function RegistrationForm() {
               fullWidth
               label="Certifications or Licenses"
               name="certifications"
-              value={formData.certifications}
+              value={certifications}
               onChange={handleInputChange}
               sx={{ marginTop: '10px' }}
             />
@@ -198,7 +219,7 @@ export default function RegistrationForm() {
               fullWidth
               label="Medical license"
               name="medicallicense"
-              value={formData.medicallicense}
+              value={medicallicense}
               onChange={handleInputChange}
               sx={{ marginTop: '10px' }}
             />
@@ -210,7 +231,7 @@ export default function RegistrationForm() {
               fullWidth
               label="Bank Account Information "
               name="bankinformation"
-              value={formData.bankinformation}
+              value={bankinformation}
               onChange={handleInputChange}
               sx={{ marginTop: '10px' }}
             />
@@ -218,7 +239,7 @@ export default function RegistrationForm() {
               fullWidth
               label="Tax Information"
               name="taxinformation"
-              value={formData.taxinformation}
+              value={taxinformation}
               onChange={handleInputChange}
               sx={{ marginTop: '10px' }}
             />
@@ -227,18 +248,18 @@ export default function RegistrationForm() {
               fullWidth
               label="Insurance Details"
               name="insurancedetails"
-              value={formData.insurancedetails}
+              value={insurancedetails}
               onChange={handleInputChange}
               sx={{ marginTop: '10px' }}
             />
           </div>
-          <input
+          {/* <input
             type="file"
             id="submitDocuments"
             name="submitDocuments"
             onChange={handleFileInputChange}
             sx={{ marginTop: '10px' }}
-          />
+          /> */}
 
 
           <div style={{ marginTop: '10px' }} className=''>
@@ -251,10 +272,10 @@ export default function RegistrationForm() {
 
 
 
-  </div>
- 
-   
- 
+    </div>
+
+
+
 
 
   );

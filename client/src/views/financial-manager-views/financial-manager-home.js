@@ -1,28 +1,19 @@
 import React from 'react';
+import styled from 'styled-components';
+import Sidebar from '../../components/financial-component/Sidebar'
+import RighSidebar from '../../components/financial-component/RightSidebar'
+import Dashboard from '../../components/financial-component/Dashbord'
+function FApp() {
+  return (
+    <Div>
+      <Sidebar />
+      <Dashboard />
+      <RighSidebar />
+    </Div>
+  );
+}
 
-const FM = () => {
-    return (
-        <div>
-            {/* <section style={{backgroundImage: `url(${bg})`}}>
-        <header>
-        <img
-            src={menu}
-            className="menu-btn"
-            onClick={handleMenuClick}
-            alt="menu"
-        />
-        <h3 className="logo">Logo</h3>
-        </header>
-        <div className="center-vertical">
-        <div className="content">
-            <h1>Data Analytics</h1>
-            <p className="hero-subtitle">Making sense of your traffic.</p>
-            <a href="/" className="cta">Go to my stats</a>
-        </div>
-        </div>
-    </section> */}
-        </div>
-    );
-};
-
-export default FM;
+export default FApp;
+const Div = styled.div `
+position: relative;
+`;

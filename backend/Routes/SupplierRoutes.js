@@ -1,7 +1,17 @@
 const express = require("express");
-const router = express.Router();
-const SupplierRegistration = require("../Controllers/SupplierController"); // Changed the import
+const router = require("express").Router();
+/*const router = express.Router();*/
+const { registerSupplier,addSupplierPayment,profileSupplier } = require("../Controllers/SupplierController");
 
-router.post("/supplierRegistration", SupplierRegistration);
+
+// Route for supplier registration
+router.post("/supplierRegistration", registerSupplier);
+
+// Route for supplier payment
+ router.post("/supplierPayment", addSupplierPayment);
+
+ // Route for supplier profile
+ router.post("/supplierManagerProfile", profileSupplier);
 
 module.exports = router;
+
