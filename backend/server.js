@@ -8,6 +8,7 @@ const ProfileRoute = require("./Routes/ProfileRoute");
 const RegisterEmployee = require("./Routes/EmployeeRoutes");
 const SupplierRegistration = require("./Routes/SupplierRoutes");
 const SymptomAdd = require("./Routes/DoctorRoutes");
+const validationRoute = require("./Routes/ValidateRoutes");
 
 const { MONGO_URL, PORT } = process.env;
 
@@ -31,7 +32,7 @@ connection.once('open', () => {
     console.log("MongoDB database connection established successfully")
 });
 
-app.use("/", authRoute, ProfileRoute, RegisterEmployee, SymptomAdd,SupplierRegistration);
+app.use("/", authRoute, ProfileRoute, RegisterEmployee, SymptomAdd, SupplierRegistration, validationRoute);
 
 app.listen(PORT, () => {
     console.log(`Server is running on port: ${PORT}`);
