@@ -1,5 +1,5 @@
 import React from 'react'
-import { BarChart, Bar, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 import styled from "styled-components";
 import './FFindex.css';
 function Balance() {
@@ -33,8 +33,8 @@ function Balance() {
                         <YAxis />
                         <Tooltip />
                         <Legend />
-                        <Bar dataKey="pv" stackId="a" fill="#14121F" />
-                        <Bar dataKey="uv" stackId="a" fill="#E5E5F1" />
+                        <Bar dataKey="pv" stackId="a" fill="#FFA829" />
+                        <Bar dataKey="uv" stackId="a" fill="#0CC0DF" />
                      </BarChart>
                     </ResponsiveContainer>
                 </div>

@@ -22,6 +22,7 @@ import Pharmacist from './views/pharmacist-views/parmacist-home';
 import HR from './views/hr-views/hr-home';
 import Registration from './views/hr-views/hr-emp-registration';
 import Profile from './views/hr-views/emp-profile';
+import EditEmployee from './views/hr-views/Edit_employee'; 
 
 // lab assistant imports
 import LA from './views/lab-assistant-views/lab-assistant-home';
@@ -42,6 +43,7 @@ import RP from "./views/resource-manager-views/resource-manager-home";
 
 // financial manager imports
 import FM from './views/financial-manager-views/financial-manager-home';
+import Invoice from './views/financial-manager-views/invoice';
 
 
 
@@ -49,16 +51,15 @@ function App() {
   return (
     <div className="App">
       <Routes>
-        <Route path="/home" element={<Home />} />
+        <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/contact-us" element={<Contact />} />
 
         {/* actor routes */}
-        <Route path="/hr" element={<HR />} />
+        
         <Route path="/patient" element={<Patient />} />
         <Route path="/doctor" element={<Doctor />} />
-        <Route path="/financial-manager" element={<FM />} />
         <Route path="/lab-assistant" element={<LA />} />
         <Route path="/pharmacist" element={<Pharmacist />} />
         <Route path="/resource-person" element={<RP />} />
@@ -69,13 +70,14 @@ function App() {
         <Route path="/symptoms" element={<Symptoms />} />
 
         {/* Hr Routes */}
+        <Route path="/hr" element={<HR />} />
         <Route path="/registration" element={<Registration/>}/>
-
-        <Route path="/profile" element={<Profile/>}/>
+        <Route path="/edit-employee" element={<EditEmployee/>} />
+        <Route path="/profile/:id" element={<Profile/>}/>
 
         {/* Patient Routes */}
         <Route path="/search-doctors" element={<SearchDoctors />} />
-      
+
 
         {/* Supplier Routes */}
         <Route path="/supplier/supplier-registration" element={<SupplierRegistration />} />
@@ -88,6 +90,13 @@ function App() {
         <Route path="/lab-inventory" element={<LabInventory/>}/>
         <Route path="/lab-report" element={<LabReport/>}/>
         <Route path="/lab-sample" element={<LabSample/>}/>
+
+
+        {/*Financial Manager Routes */}
+
+        <Route path="/financial-manager" element={<FM />} />
+        {/* <Route path="/invoice" element={<Invoice />} /> */} 
+
       </Routes>
 
     </div>

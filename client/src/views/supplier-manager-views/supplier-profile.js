@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useState } from 'react';
 import { styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
@@ -10,6 +10,7 @@ import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField'; 
 import Button from '@mui/material/Button'; 
 import EditIcon from '@mui/icons-material/Edit'; 
+import axios from 'axios'; 
 
 import img from '../../assets/img/supplier/supplier.jpg';
 
@@ -27,6 +28,50 @@ const StyledTextField = styled(TextField)({
 });
 
 export default function ColumnsGrid() {
+  const [formData, setFormData] = useState({
+    FirstName: '',
+    LastName: '',
+    Email: '',
+    PhoneNumber: '',
+    Address: '',
+    CompanyName: '',
+    NIC: '',
+    Bio: '',
+  });
+
+  const { FirstName, LastName, Email, PhoneNumber, Address, CompanyName, NIC, Bio } = formData;
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      await axios.post(
+        "http://localhost:4000/supplierManagerProfile",
+        { ...formData },
+        { withCredentials: true }
+      );
+      setFormData({
+        FirstName: '',
+        LastName: '',
+        Email: '',
+        PhoneNumber: '',
+        Address: '',
+        CompanyName: '',
+        NIC: '',
+        Bio: '',
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   return (
     <Box sx={{ flexGrow: 1, justifyContent: 'center' }}>
       <Grid container spacing={2}>
@@ -55,15 +100,63 @@ export default function ColumnsGrid() {
         </Grid>
         <Grid item xs={4.5}>
           <Item>
-            <StyledTextField label="First Name" variant="outlined" />
-            <StyledTextField label="Last Name" variant="outlined" />
-            <StyledTextField label="Email Address" variant="outlined" />
-            <StyledTextField label="Phone Number" variant="outlined" />
-            <StyledTextField label="Address" variant="outlined" />
-            <StyledTextField label="Company Name" variant="outlined" />
-            <StyledTextField label="NIC" variant="outlined" />
-            <StyledTextField label="Bio" variant="outlined" />
-            <Button variant="contained" startIcon={<EditIcon />}>
+            <StyledTextField 
+              label="First Name" 
+              variant="outlined" 
+              name="FirstName" 
+              value={FirstName}
+              onChange={handleInputChange}
+            />
+            <StyledTextField 
+              label="Last Name" 
+              variant="outlined" 
+              name="LastName"
+              value={LastName}
+              onChange={handleInputChange}
+            />
+            <StyledTextField 
+              label="Email Address" 
+              variant="outlined" 
+              name="Email"
+              value={Email}
+              onChange={handleInputChange}
+            />
+            <StyledTextField 
+              label="Phone Number" 
+              variant="outlined" 
+              name="PhoneNumber"
+              value={PhoneNumber}
+              onChange={handleInputChange}
+            />
+            <StyledTextField 
+              label="Address" 
+              variant="outlined" 
+              name="Address"
+              value={Address}
+              onChange={handleInputChange}
+            />
+            <StyledTextField 
+              label="Company Name" 
+              variant="outlined" 
+              name="CompanyName"
+              value={CompanyName}
+              onChange={handleInputChange}
+            />
+            <StyledTextField 
+              label="NIC" 
+              variant="outlined" 
+              name="NIC"
+              value={NIC}
+              onChange={handleInputChange}
+            />
+            <StyledTextField 
+              label="Bio" 
+              variant="outlined" 
+              name="Bio"
+              value={Bio}
+              onChange={handleInputChange}
+            />
+            <Button variant="contained" startIcon={<EditIcon />} onClick={handleSubmit}>
               Edit
             </Button>
           </Item>
