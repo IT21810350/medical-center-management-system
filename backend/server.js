@@ -16,6 +16,7 @@ const inqRouter = require("./Routes/Patient_Routes/inq-routes");
 //========================================
 
 
+const validationRoute = require("./Routes/ValidateRoutes");
 
 const { MONGO_URL, PORT } = process.env;
 
@@ -48,7 +49,7 @@ connection.once('open', () => {
     console.log("MongoDB database connection established successfully")
 });
 
-app.use("/", authRoute, ProfileRoute, RegisterEmployee,HR, SymptomAdd,SupplierRegistration);
+app.use("/", authRoute, ProfileRoute, RegisterEmployee,HR, SymptomAdd, SupplierRegistration, validationRoute);
 
 
 //================================
