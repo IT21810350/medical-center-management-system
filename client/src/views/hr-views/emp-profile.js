@@ -15,6 +15,7 @@ import DialogTitle from '@mui/material/DialogTitle'; // Import DialogTitle
 import IconButton from '@mui/material/IconButton'; // Import IconButton
 import CloseIcon from '@mui/icons-material/Close'; // Import CloseIcon
 import axios from 'axios';
+import InputLabel from '@mui/material/InputLabel';
 
 import { useParams } from 'react-router-dom';
 
@@ -80,7 +81,7 @@ export default function EmployeeProfile() {
                 <h1>picture</h1>
                 <img src={pro} alt="Employee Picture" onClick={handlePictureDialogOpen} style={{ cursor: 'pointer' }} />
 
-                <h1>lathaaaa</h1>
+                <h1>{employees.firstName}</h1>
                 <Stack spacing={2} direction="row" justifyContent="center">
 
                   <Button variant="contained">Follow</Button>
@@ -105,66 +106,91 @@ export default function EmployeeProfile() {
               <Box
                 component="form"
                 sx={{
-                    '& .MuiTextField-root': { m: 1 },
-                   }}
+                  '& .MuiTextField-root': { m: 1 },
+                }}
                 noValidate
                 autoComplete="off"
 
               >
-                
-                <TextField
-                   label={employees.firstName} 
-                   value={employees.firstName} 
-                   sx={{ width: '80%' }}
-                />
+                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>              
+                  <TextField
+                   
+                    label="First Name"
+                    value={employees.firstName}
+                    sx={{ width: '80%' }}
+                  />
+                </div>
 
+                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>    
                 <TextField
-                   label={employees.lastName}  
-                   value={employees.lastName}  
-                   sx={{ width: '80%' }}
+                  label="Last Name"
+                  value={employees.lastName}
+                  sx={{ width: '80%' }}
                 />
+                </div>
+               
 
-                <TextField  
-                   label={employees.email} 
-                   value={employees.email}  
-                   sx={{ width: '80%' }}
+                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>    
+                <TextField
+                  label="Email"
+                  value={employees.email}
+                  sx={{ width: '80%' }}
                 />
+                </div>
+               
+                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>    
+                <TextField
+                  label="Nic"
+                  value={employees.nic}
+                  sx={{ width: '80%' }}
+                />
+                </div>
+               
 
+                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>    
                 <TextField
-                   label={employees.nic} 
-                   value={employees.nic} 
-                   sx={{ width: '80%' }}
+                  label="DOB"
+                  value={employees.birthday}
+                  sx={{ width: '80%' }}
                 />
-                
+                </div>
+
+                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>    
                 <TextField
-                  label={employees.employeeRole}
+                  label="Role"
                   value={employees.employeeRole}
                   sx={{ width: '80%' }}
                 />
+                </div>
 
+                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>    
                 <TextField
-                  label={employees.educationlevel}
-                  value={employees.educationlevel}
+                  label="Education Level"
+                  value={employees. educationlevel}
                   sx={{ width: '80%' }}
                 />
-                   
+                </div>
 
+                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>    
                 <TextField
-                   label={employees.taxinformation}
-                   value={employees.taxinformation}
-                   sx={{ width: '80%' }}
+                  label="Tax Information"
+                  value={employees.taxinformation}
+                  sx={{ width: '80%' }}
                 />
-                    
+                </div>
 
+                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>    
                 <TextField
-                  label={employees.insurancedetails}
+                  label="Insurance Details"
                   value={employees.insurancedetails}
                   sx={{ width: '80%' }}
                 />
+                </div>
+
 
                 <h1></h1>
                 <Link to="/edit-employee">
-                  <Button variant="outlined" style={{ marginTop: '20px', alignSelf: 'flex-start' }}>Edit</Button>
+                  <Button variant="outlined" style={{ backgroundColor: 'red', color: 'white' }}>Edit</Button>
                 </Link>
                 {/* /// add to thise section */}
 

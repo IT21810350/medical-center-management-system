@@ -1,21 +1,15 @@
 import React from 'react';
-// import {
-//   Container,
-//   Typography,
-//   Paper,
-//   Table,
-//   TableContainer,
-//   TableHead,
-//   TableRow,
-//   TableCell,
-//   TableBody,
-//   Button,
-//   Dialog,
-//   DialogTitle,
-//   DialogContent,
-//   TextField,
-//   DialogActions,
-// } from '@mui/material';
+import {
+  Paper,
+  Table,
+  TableContainer,
+  TableHead,
+  TableRow,
+  TableCell,
+  TableBody,
+  Button,
+
+} from '@mui/material';
 
 
 const editemployee=()=>{
@@ -24,7 +18,7 @@ const editemployee=()=>{
 
        <div>
 
-{/* <TableContainer component={Paper} >
+<TableContainer component={Paper}  >
           <Table>
             <TableHead>
               <TableRow>
@@ -36,7 +30,7 @@ const editemployee=()=>{
               </TableRow>
             </TableHead>
             <TableBody>
-          
+             
                 <TableRow>
                   <TableCell>ttttt</TableCell>
                   <TableCell>ttttt</TableCell>
@@ -52,7 +46,7 @@ const editemployee=()=>{
          
             </TableBody>
           </Table>
-        </TableContainer> */}
+        </TableContainer>
        </div>
     );
    
