@@ -3,27 +3,44 @@ import { Table, TableContainer, TableHead, TableBody, TableRow, TableCell, Paper
 import Navbar from '../../components/HR-component/hr-nav-bar';
 import Grid from '@mui/material/Grid';
 import { styled } from '@mui/material/styles';
-import tt from '../../assets/img/HR/Healthcare.jpg'
-
+import payrollmanagement from '../../assets/img/HR/payrollmanagement.jpg';
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
+import CardActions from '@mui/material/CardActions';
+import { CardActionArea } from '@mui/material';
+import Typography from '@mui/material/Typography';
+import CardMedia from '@mui/material/CardMedia';
 
 const PayrollManagement = () => {
-    // Sample data for demonstration purposes
     const [payrollData, setPayrollData] = useState([
-        { id: 1, employeeName: 'John Doe', salary: 5000 },
-        { id: 2, employeeName: 'Jane Smith', salary: 6000 },
-        // Add more data here
+        { id: 1, employeeName: 'John Doe', salary: 5000, epf: 600, etf: 150 },
+        { id: 2, employeeName: 'Jane Smith', salary: 6000, epf: 720, etf: 180 },
     ]);
 
-    // State for adding new payroll records
     const [newRecord, setNewRecord] = useState({ employeeName: '', salary: '' });
+    const [isFormValid, setIsFormValid] = useState(false);
 
-    // Function to handle adding a new payroll record
     const handleAddRecord = () => {
-        // Perform validation here if needed
-        // Add the new record to the state
-        setPayrollData([...payrollData, { id: payrollData.length + 1, ...newRecord }]);
-        // Clear the input fields
+        const basicSalary = parseFloat(newRecord.salary);
+        const epfPercentage = 0.12; // Example EPF percentage
+        const etfPercentage = 0.03; // Example ETF percentage
+        const epf = basicSalary * epfPercentage;
+        const etf = basicSalary * etfPercentage;
+
+        setPayrollData([...payrollData, {
+            id: payrollData.length + 1,
+            employeeName: newRecord.employeeName,
+            salary: basicSalary,
+            epf: epf,
+            etf: etf
+        }]);
+
         setNewRecord({ employeeName: '', salary: '' });
+        if (newRecord.employeeName && newRecord.salary) {
+            setIsFormValid(true);
+        } else {
+            setIsFormValid(false);
+        }
     };
 
     const Item = styled(Paper)(({ theme }) => ({
@@ -34,45 +51,33 @@ const PayrollManagement = () => {
         color: theme.palette.text.secondary,
     }));
 
-
-
     return (
         <div>
-
             <Box>
                 <Grid container>
                     <Navbar />
                 </Grid>
             </Box>
-            <h1>Helooo</h1>
-            <Box
-                sx={{
-                    display: 'flex',
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                    height: '50vh', // You can adjust the height as needed
-                    marginBottom: '40px',
-                }}
-            >
-                <Grid container spacing={2}>
-                    <Grid item xs={8}>
-                        <Paper elevation={3}>
+            <h1>Payroll Management</h1>
+            <Card sx={{ maxWidth: 2000 }}>
+                <CardActionArea>
+                    <CardMedia
+                        component="img"
+                        height="450"
+                        image={payrollmanagement}
+                        alt="Payroll Management"
+                        style={{
+                            width: '100%',
+                            height: '650px',
+                        }}
+                    />
+                    <CardContent>
+                        {/* Add content for the card */}
+                    </CardContent>
+                </CardActionArea>
+            </Card>
 
-                            <img
-                                src={tt} // Use the imported image
-                                alt="Healthcare Image"
-                                style={{ width: '100%', height: 'auto'  }}
-                            />
-
-                        </Paper>
-                    </Grid>
-                </Grid>
-            </Box>
-
-
-            {/* Centered container for input fields and button */}
             <Box display="flex" justifyContent="center" alignItems="center" flexDirection="column">
-                {/* Input fields for adding a new payroll record */}
                 <Box display="flex" flexDirection="row" alignItems="center">
                     <TextField
                         label="Employee Name"
@@ -82,26 +87,30 @@ const PayrollManagement = () => {
                     />
                     <TextField
                         label="Salary"
+                        type="number"
                         value={newRecord.salary}
                         onChange={(e) => setNewRecord({ ...newRecord, salary: e.target.value })}
                         style={{ marginRight: '16px' }}
+                        required
                     />
-                    <Button variant="contained" color="primary" onClick={handleAddRecord}>
+                    <Button
+                        variant="contained"
+                        color="primary"
+                        onClick={handleAddRecord}
+                        
+                    >
                         Add Record
                     </Button>
                 </Box>
             </Box>
 
-            {/* Table to display payroll data */}
-            <TableContainer component={Paper}>
+            <TableContainer component={Paper} sx={{ width: '90%', margin: '0 auto' }}>
                 <Table>
                     <TableHead>
                         <TableRow>
                             <TableCell>ID</TableCell>
                             <TableCell>Employee Name</TableCell>
                             <TableCell>Salary</TableCell>
-                            <TableCell>Net Salary</TableCell>
-                            <TableCell>Working Hours</TableCell>
                             <TableCell>EPF</TableCell>
                             <TableCell>ETF</TableCell>
                         </TableRow>
@@ -112,8 +121,6 @@ const PayrollManagement = () => {
                                 <TableCell>{record.id}</TableCell>
                                 <TableCell>{record.employeeName}</TableCell>
                                 <TableCell>{record.salary}</TableCell>
-                                <TableCell>{record.netSalary}</TableCell>
-                                <TableCell>{record.workingHours}</TableCell>
                                 <TableCell>{record.epf}</TableCell>
                                 <TableCell>{record.etf}</TableCell>
                             </TableRow>
