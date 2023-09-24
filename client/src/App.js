@@ -114,7 +114,7 @@ function App() {
         <Route path="/patient-additional" exact Component={PatientAdditionalFiles} />
         <Route path="/rescedule-appointment" exact Component={Reschedule} />
         <Route path="/delete-appointment" exact Component={Delete} />
-        <Route path="/edit/:id" exact Component={EditInquiry} />
+        <Route path="/editinq" component={EditInquiry} />
 
 
 
