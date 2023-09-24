@@ -33,6 +33,7 @@ import HR from './views/hr-views/hr-home';
 import Registration from './views/hr-views/hr-emp-registration';
 import Profile from './views/hr-views/emp-profile';
 import EditEmployee from './views/hr-views/Edit_employee';
+import Payrollsystem  from './views/hr-views/Payroll-Management';
 
 // lab assistant imports
 import LA from './views/lab-assistant-views/lab-assistant-home';
@@ -97,6 +98,8 @@ function App() {
         <Route path="/registration" element={<Registration />} />
         <Route path="/edit-employee" element={<EditEmployee />} />
         <Route path="/profile/:id" element={<Profile />} />
+        <Route path="/payroll" element={<Payrollsystem />} />
+        
 
         {/* Patient Routes */}
         <Route path="/search-doctors" element={<SearchDoctors />} />

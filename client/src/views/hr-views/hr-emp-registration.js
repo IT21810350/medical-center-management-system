@@ -95,6 +95,7 @@ export default function RegistrationForm() {
         alignItems: 'center',
         justifyContent: 'center',
         minHeight: '100vh',
+        //padding: '0 20px',
       }}>
         <h1>Registration Form</h1>
         <form onSubmit={handleSubmit}>
