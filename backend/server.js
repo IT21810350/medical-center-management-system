@@ -17,6 +17,13 @@ const inqRouter = require("./Routes/Patient_Routes/inq-routes");
 const getDoctors = require("./Routes/Patient_Routes/getDoctors");
 //========================================
 
+// Lab Assistant Route start
+const equipmentRouter = require("./Routes/LabAssistant_Routes/EquipmentRoute");
+const labAssistantRouter = require("./Routes/LabAssistant_Routes/LabAssistantRoute");
+const reportRouter = require("./Routes/LabAssistant_Routes/ReportRoute");
+const sampleRouter = require("./Routes/LabAssistant_Routes/SampleRoute");
+const testRouter = require("./Routes/LabAssistant_Routes/TestRoute");
+
 
 const validationRoute = require("./Routes/ValidateRoutes");
 
@@ -65,6 +72,12 @@ app.use("/inqData" ,inqRouter);
 app.use("/getD",getDoctors);
 //=================================
 
+// lab assistant routes end
+app.use("/patientData",equipmentRouter);
+app.use("/labAssistantData",labAssistantRouter);
+app.use("/reportData",reportRouter);
+app.use("/sampleData",sampleRouter);
+app.use("/testData",testRouter);
 
 app.listen(PORT, () => {
     console.log(`Server is running on port: ${PORT}`);
