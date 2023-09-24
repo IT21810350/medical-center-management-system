@@ -95,3 +95,35 @@
             </TableBody>
           </Table>
         </TableContainer>
+
+
+        //////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+         <table border={2}   style={{ width: '100%', borderCollapse: 'collapse' }} >
+                    <thead>
+                      <tr>
+
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Role</th>
+                        <th>Email</th>
+                        <th>Address</th>
+                        <th>action</th>
+                        {/* Add more table headers as needed */}
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {data.map(employee => (
+                        <tr key={employee._id}>
+                          <td>{employee.firstName}</td>
+                          <td>{employee.lastName}</td>
+                          <td>{employee.employeeRole}</td>
+                          <td>{employee.email}</td>
+                          <td>{employee.address}</td>
+                          <td> <Link to={`/profile/${employee._id}`}>Profile</Link></td>
+                          {/* Add more table data cells as needed */}
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table> 

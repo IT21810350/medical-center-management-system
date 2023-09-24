@@ -24,6 +24,9 @@ import PatientProfile from './views/patient-views/patient-profile';
 import PatientInquiries from './views/patient-views/inquiries';
 import PatientAdditionalFiles from './views/patient-views/patient-additional-files';
 import InquiryList from './views/patient-views/inq-handle';
+import EditInquiry  from "./views/patient-views/EditInquery";
+import Reschedule from './views/patient-views/reschedule';
+import Delete from './views/patient-views/delete';
 
 // pharmacist imports
 import Pharmacist from './views/pharmacist-views/parmacist-home';
@@ -40,6 +43,12 @@ import LabTest from './views/lab-assistant-views/lab-test';
 import LabInventory from './views/lab-assistant-views/lab-inventory';
 import LabReport from './views/lab-assistant-views/lab-report';
 import LabSample from './views/lab-assistant-views/lab-sample';
+import LabFacilities from './views/lab-assistant-views/lab-facilities';
+import LabUpdateInventory from './views/lab-assistant-views/updateInventory';
+import LabUpdateReport from './views/lab-assistant-views/updateReport';
+import LabUpdateSample from './views/lab-assistant-views/updateSample';
+import LabUpdateTest from './views/lab-assistant-views/updateTest';
+import LabAssistantProfile from './views/lab-assistant-views/lab-assistant-profile';
 
 
 // supplier manager imports
@@ -103,6 +112,10 @@ function App() {
         <Route path="/patient-inquiries" exact Component={PatientInquiries} />
         <Route path="/inq-handle" exact Component={InquiryList} />
         <Route path="/patient-additional" exact Component={PatientAdditionalFiles} />
+        <Route path="/rescedule-appointment" exact Component={Reschedule} />
+        <Route path="/delete-appointment" exact Component={Delete} />
+        <Route path="/edit/:id" exact Component={EditInquiry} />
+
 
 
         {/* Supplier Routes */}
@@ -122,6 +135,13 @@ function App() {
         <Route path="/lab-inventory" element={<LabInventory />} />
         <Route path="/lab-report" element={<LabReport />} />
         <Route path="/lab-sample" element={<LabSample />} />
+        <Route path="/lab-test" element={<LabTest/>}/>
+        <Route path="/lab-facilities" element={<LabFacilities/>}/>
+        <Route path="/lab-inventory/update" element={<LabUpdateInventory/>}/>
+        <Route path="/lab-report/update" element={<LabUpdateReport/>}/>
+        <Route path="/lab-sample/update" element={<LabUpdateSample/>}/>
+        <Route path="/lab-test/update" element={<LabUpdateTest/>}/>
+        <Route path="/labAssistant-profile" element={<LabAssistantProfile/>}/>
 
 
         {/*Financial Manager Routes */}

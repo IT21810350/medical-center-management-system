@@ -15,6 +15,7 @@ const SymptomAdd = require("./Routes/DoctorRoutes");
 //========================================
 const patientRouter = require("./Routes/Patient_Routes/patient_routes");
 const inqRouter = require("./Routes/Patient_Routes/inq-routes");
+const getDoctors = require("./Routes/Patient_Routes/getDoctors");
 //========================================
 
 
@@ -57,6 +58,7 @@ app.use("/", authRoute, ProfileRoute, RegisterEmployee,HR, SymptomAdd, SupplierR
 //================================
 app.use("/patientData",patientRouter);
 app.use("/inqData" ,inqRouter);
+app.use("/getD",getDoctors);
 //=================================
 
 

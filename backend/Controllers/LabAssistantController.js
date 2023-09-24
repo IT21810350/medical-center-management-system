@@ -3,99 +3,75 @@ const Equipment = require("../Models/LabAssistantModel/lab-equipment");
 const Report = require("../Models/LabAssistantModel/lab-report");
 const Test = require("../Models/LabAssistantModel/lab-test");
 
-module.exports.SampleController = async (req, res, next) => {
-/*
-    try {
 
-        const symptomsData = req.body; 
+// SAMPLE
+// Sample Controllers for each CRUD Operation
+module.exports.CreateSampleController = async (req, res, next) => {
 
-        const createdSymptoms = [];
+};
 
-        for (const symptom of symptomsData) {
-            const symptomData = await Symptoms.create(symptom);
-            createdSymptoms.push(symptomData);
-        }
+module.exports.getAllSampleController = async (req, res, next) => {  
+};
 
-        res.status(201).json({
-            message: "Symptom data added successfully",
-            success: true,
-            symptomsData: createdSymptoms,
-        })
-    } catch (error) {
-        console.error(error);
-        json({ message: "Symptom data not added successfully"});
-    }
-    */
-}
+module.exports.getSampleByIdController = async (req, res, next) => {
+};
 
-module.exports.EquipmentController = async (req, res, next) => {
-/*
-    try {
+module.exports.updateSampleByIdController =  async (req, res, next) => {
+};
 
-        const symptomsData = req.body; 
+module.exports.deleteSampleByIdController = async (req, res, next) => {
+};
 
-        const createdSymptoms = [];
 
-        for (const symptom of symptomsData) {
-            const symptomData = await Symptoms.create(symptom);
-            createdSymptoms.push(symptomData);
-        }
+// EQUIPMENT
+// Equipment Controllers for each CRUD function
+module.exports.createEquipmentController = async (req, res, next) => {
+};
 
-        res.status(201).json({
-            message: "Symptom data added successfully",
-            success: true,
-            symptomsData: createdSymptoms,
-        })
-    } catch (error) {
-        console.error(error);
-        json({ message: "Symptom data not added successfully"});
-    }*/
-}
+module.exports.getAllEquipmentController = async (req, res, next) => {
+};
 
-module.exports.ReportController = async (req, res, next) => {
-/*
-    try {
+module.exports.getEquipmentByIdController = async (req, res, next) => {
+};
 
-        const symptomsData = req.body; 
+module.exports.updateEquipmentByIdController = async (req, res, next) => {
+};
 
-        const createdSymptoms = [];
+module.exports.deleteEquipmentByIdController =  async (req, res, next) => {
+};
 
-        for (const symptom of symptomsData) {
-            const symptomData = await Symptoms.create(symptom);
-            createdSymptoms.push(symptomData);
-        }
 
-        res.status(201).json({
-            message: "Symptom data added successfully",
-            success: true,
-            symptomsData: createdSymptoms,
-        })
-    } catch (error) {
-        console.error(error);
-        json({ message: "Symptom data not added successfully"});
-    }*/
-}
+// REPORT
+// Report Controllers for each CRUD function
+module.exports.createReportController = async (req, res, next) => {
+};
 
-module.exports.TestController = async (req, res, next) => {
-/*
-    try {
+module.exports.getAllReportController = async (req, res, next) => {
+};
 
-        const symptomsData = req.body; 
+module.exports.getReportByIdController = async (req, res, next) => {
+};
 
-        const createdSymptoms = [];
+module.exports.updateReportByIdController = async (req, res, next) => {
+};
 
-        for (const symptom of symptomsData) {
-            const symptomData = await Symptoms.create(symptom);
-            createdSymptoms.push(symptomData);
-        }
+module.exports.deleteReportByIdController =  async (req, res, next) => {
+};
 
-        res.status(201).json({
-            message: "Symptom data added successfully",
-            success: true,
-            symptomsData: createdSymptoms,
-        })
-    } catch (error) {
-        console.error(error);
-        json({ message: "Symptom data not added successfully"});
-    }*/
-}
+
+// TEST
+// Test Controllers for each CRUD function
+module.exports.createTestController = async (req, res, next) => {
+};
+
+module.exports.getAllTestController = async (req, res, next) => {
+};
+
+module.exports.getTestByIdController = async (req, res, next) => {
+};
+
+module.exports.updateTestByIdController = async (req, res, next) => {
+};
+
+module.exports.deleteTestByIdController =  async (req, res, next) => {
+};
