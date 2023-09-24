@@ -2,42 +2,35 @@ const mongoose = require('mongoose');
 
 const Schema = mongoose.Schema;
 
-const pharmacistSchema = new Schema({
+const medicineSchema = new Schema({
 
-    firstName : {
+    medicineName : {
         type :String,
         requied : true
     },
-    lastName : {
+    dosage : {
         type: String,
         required : true
     },
-    emailAddresss : {
+    medicineType : {
         type : String,
         required : true
     },
-    contactNumber : {
+    exoirtDate : {
         type :String,
         required : true
     },
-    gender : {
-        type : String,
-        required : true
-    },
-    nic : {
-        type : String,
-        required:true
-    },
-    bio : {
+    availability : {
         type : String,
         required : true
     }
+    
 
 
 
 })
 
 
-const Pharmacist = mongoose.model("Pharmacist", pharmacistSchema);
+const Pharmacist = mongoose.model("Pharmacist", medicineSchema);
 
 module.exports = Pharmacist;

@@ -193,7 +193,7 @@ const HR = () => {
                     />
                     <CardContent>
                       <Typography gutterBottom variant="h5" component="div">
-                        Lizard
+               
                       </Typography>
                       <Typography variant="body2" color="text.secondary">
                       We bridge innovation science with state-of-the-art clinical medicine
@@ -220,7 +220,7 @@ const HR = () => {
                     />
                     <CardContent>
                       <Typography gutterBottom variant="h5" component="div">
-                        Lizard
+                      
                       </Typography>
                       <Typography variant="body2" color="text.secondary">
                       Discover the ways we're training the next generation of doctors and researchers
@@ -250,7 +250,7 @@ const HR = () => {
                     />
                     <CardContent>
                       <Typography gutterBottom variant="h5" component="div">
-                        Lizard
+                       
                       </Typography>
                       <Typography variant="body2" color="text.secondary">
                       Learn about Mass General's service within greater Boston and around the world.

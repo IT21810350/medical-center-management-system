@@ -26,22 +26,51 @@ module.exports.getEmployeesById = async (req, res) => {
   };
 
 
-  module.exports.deleteEmployeeById = async (req, res) => {
-    try {
-      const employeeId = req.params.id;
-      const employee = await EmployeeModel.findById(employeeId);
-  
-      if (!employee) {
-        return res.status(404).json({ message: "Employee not found" });
-      }
-  
-      await employee.remove(); // Remove the employee from the database
-      res.status(200).json({ message: 'Employee with ID ' + employeeId + ' has been deleted' });
-    } catch (error) {
-      console.error(error);
-      res.status(500).json({ error: "An error occurred while deleting the employee" });
+ 
+
+module.exports.deleteEmployeeById = async (req, res) => {
+  try {
+    const employeeId = req.params.id;
+    const employee = await EmployeeModel.findById(employeeId);
+
+    if (!employee) {
+      return res.status(404).json({ message: "Employee not found" });
     }
-  };
+
+    await EmployeeModel.findByIdAndDelete(employeeId); 
+    res.status(200).json({ message: 'Employee with ID ' + employeeId + ' has been deleted' });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "An error occurred while deleting the employee" });
+  }
+};
+
+
+module.exports.editEmployeeById = async (req, res) => {
+  try {
+    const employeeId = req.params.id;
+    const updates = req.body; 
+
+    const updatedEmployee = await EmployeeModel.findByIdAndUpdate(
+      employeeId,
+      updates,
+      { new: true }
+    );
+
+    if (!updatedEmployee) {
+      return res.status(404).json({ message: "Employee not found" });
+    }
+
+    res.status(200).json({
+      message: "Employee with ID " + employeeId + " has been updated",
+      updatedEmployee,
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "An error occurred while updating the employee" });
+  }
+};
+
 
 
 

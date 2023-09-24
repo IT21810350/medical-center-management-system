@@ -10,6 +10,7 @@ import Contact from './views/ContactUs';
 import Doctor from './views/doctor-views/doctor-home';
 import Channeling from './views/doctor-views/channeling';
 import Symptoms from "./views/doctor-views/symptoms";
+import Prescription from "./views/doctor-views/prescription";
 
 // patient imports
 import Patient from './views/patient-views/patient-home';
@@ -36,6 +37,7 @@ import HR from './views/hr-views/hr-home';
 import Registration from './views/hr-views/hr-emp-registration';
 import Profile from './views/hr-views/emp-profile';
 import EditEmployee from './views/hr-views/Edit_employee';
+import Payrollsystem  from './views/hr-views/Payroll-Management';
 
 // lab assistant imports
 import LA from './views/lab-assistant-views/lab-assistant-home';
@@ -53,7 +55,13 @@ import LabAssistantProfile from './views/lab-assistant-views/lab-assistant-profi
 
 // supplier manager imports
 import SM from "./views/supplier-manager-views/supplier-manager-home";
+import SearchDoctors from './views/patient-views/searchDoctors';
+import PharmacistProfile from './views/pharmacist-views/pharmacistProfile';
 import SupplierRegistration from './views/supplier-manager-views/supplier-registration';
+//import addMedicine from './views/pharmacist-views/addMedicine';
+import MedicineStore from './views/pharmacist-views/medicineStore';
+import MedicineOrder from './views/pharmacist-views/medicineOrders';
+import MedicineSales from './views/pharmacist-views/medicineSales';
 import SupplierProfile from './views/supplier-manager-views/supplier-profile';
 import SupplierList from './views/supplier-manager-views/supplier-list';
 import SupplierPayment from './views/supplier-manager-views/supplier-payment';
@@ -69,7 +77,14 @@ import RP from "./views/resource-manager-views/resource-manager-home";
 
 // financial manager imports
 import FM from './views/financial-manager-views/financial-manager-home';
+// <<<<<<< HEAD
+// import Invoice from './views/financial-manager-views/invoice';
+
+// Resource person Imports
+import RoomType from './views/resource-manager-views/roomType';
+// =======
 //import Invoice from './views/financial-manager-views/invoice';
+// >>>>>>> 4003b993c00b58d3161f72f8e8c81dfa23d940d4
 
 
 
@@ -94,14 +109,28 @@ function App() {
         {/* Doctor Routes */}
         <Route path="/channeling" element={<Channeling />} />
         <Route path="/symptoms" element={<Symptoms />} />
+        <Route path="/prescription" element={<Prescription />} />
 
         {/* Hr Routes */}
         <Route path="/hr" element={<HR />} />
         <Route path="/registration" element={<Registration />} />
         <Route path="/edit-employee" element={<EditEmployee />} />
         <Route path="/profile/:id" element={<Profile />} />
+        <Route path="/payroll" element={<Payrollsystem />} />
+        
 
         {/* Patient Routes */}
+        <Route path="/searchDoctors" element={<SearchDoctors />} />
+
+        {/*Pharmacist Routes */}
+        <Route path="/pharmacistProfile" element={<PharmacistProfile/>} />
+        <Route path="/addMedicine" element={<addMedicine/>} />
+        <Route path="/medicineStore" element={<MedicineStore/>} />
+        <Route path="/medicineOrder" element={<MedicineOrder/>} />
+        <Route path="/medicineSales" element={<MedicineSales/>} />
+        <Route path="/pharmacist/*" element={<Pharmacist />} />
+
+      
         <Route path="/search-doctors" element={<SearchDoctors />} />
         <Route path="/dash" exact Component={CommonPatientDashboard} />
         <Route path="/search-chanelling" exact Component={SearchChanelling} />
@@ -116,6 +145,9 @@ function App() {
         <Route path="/delete-appointment" exact Component={Delete} />
         <Route path="/editinq" component={EditInquiry} />
 
+
+        {/* Resource person Routes */}
+        <Route path="/room-types" element={<RoomType />} />
 
 
         {/* Supplier Routes */}
@@ -161,6 +193,8 @@ function App() {
   );
 }
 
+export default App;
+
 // import React from 'react';
 // import { BrowserRouter as Router, Routes, Route} from 'react-router-dom';
 // import CssBaseline from '@mui/material/CssBaseline';
@@ -195,4 +229,4 @@ function App() {
 //   );
 // }
 
-export default App;
+
