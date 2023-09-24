@@ -55,7 +55,7 @@ import LabAssistantProfile from './views/lab-assistant-views/lab-assistant-profi
 
 // supplier manager imports
 import SM from "./views/supplier-manager-views/supplier-manager-home";
-import SearchDoctors from './views/patient-views/searchDoctors';
+//import SearchDoctors from './views/patient-views/searchDoctors';
 import PharmacistProfile from './views/pharmacist-views/pharmacistProfile';
 import SupplierRegistration from './views/supplier-manager-views/supplier-registration';
 //import addMedicine from './views/pharmacist-views/addMedicine';
