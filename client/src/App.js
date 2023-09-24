@@ -53,10 +53,10 @@ import RP from "./views/resource-manager-views/resource-manager-home";
 
 // financial manager imports
 import FM from './views/financial-manager-views/financial-manager-home';
-import Invoice from './views/financial-manager-views/invoice';
+// import Invoice from './views/financial-manager-views/invoice';
 
 // Resource person Imports
-import RoomList from './views/resource-manager-views/roomList';
+import RoomType from './views/resource-manager-views/roomType';
 
 
 
@@ -101,7 +101,7 @@ function App() {
         <Route path="/patient-additional" exact Component={PatientAdditionalFiles} />
 
         {/* Resource person Routes */}
-        <Route path="/room-list" element={<RoomList />} />
+        <Route path="/room-types" element={<RoomType />} />
 
 
         {/* Supplier Routes */}

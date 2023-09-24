@@ -16,7 +16,6 @@ const inqRouter = require("./routes/Patient_Routes/inq-routes.js");
 //========================================
 
 
-
 const { MONGO_URL, PORT } = process.env;
 
 const app = express();
@@ -47,6 +46,12 @@ const connection = mongoose.connection;
 connection.once('open', () => {
     console.log("MongoDB database connection established successfully")
 });
+
+// resource person routes start
+const roomType = require("./Routes/resource-person-routes/roomType-routes");
+
+app.use('/room-type', roomType);
+// resource person routes end
 
 app.use("/", authRoute, ProfileRoute, RegisterEmployee,HR, SymptomAdd,SupplierRegistration);
 

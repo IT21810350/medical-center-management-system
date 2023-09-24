@@ -1,18 +1,13 @@
 const mongoose = require("mongoose");
 
-const roomType = new mongoose.Schema({
+const roomTypeSchema = new mongoose.Schema({
 
-    roomType: {
-        type: String,
-    },
-    description: {
-        type: String,
-    },
-},
-{ 
+    roomType: { type: String, required: true },
+    description: { type: String }
+}, { 
     timestamps: true 
 });
 
-const room = mongoose.model("Complaint", roomType);
+const RoomType = mongoose.model("RoomType", roomTypeSchema);
 
-module.exports = room;
+module.exports = RoomType;
