@@ -280,4 +280,3 @@ export default function RegistrationForm() {
 
   );
 }
-

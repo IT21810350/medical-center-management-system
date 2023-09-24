@@ -11,8 +11,9 @@ const SupplierRegistration = require("./Routes/SupplierRoutes");
 const doctorRoutes = require("./Routes/DoctorRoutes");
 
 //========================================
-const patientRouter = require("./routes/Patient_Routes/patient_routes.js");
-const inqRouter = require("./routes/Patient_Routes/inq-routes.js");
+const patientRouter = require("./Routes/Patient_Routes/patient_routes");
+const inqRouter = require("./Routes/Patient_Routes/inq-routes");
+const getDoctors = require("./Routes/Patient_Routes/getDoctors");
 //========================================
 
 
@@ -54,8 +55,9 @@ app.use("/", authRoute, ProfileRoute, RegisterEmployee,HR, doctorRoutes, Supplie
 
 
 //================================
-app.use("/patient",patientRouter);
+app.use("/patientData",patientRouter);
 app.use("/inqData" ,inqRouter);
+app.use("/getD",getDoctors);
 //=================================
 
 

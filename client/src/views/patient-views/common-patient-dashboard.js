@@ -1,5 +1,5 @@
 import React from 'react';
-import { Grid, Typography,Button, Link } from '@mui/material';
+import { Grid, Typography} from '@mui/material';
 import img1 from '../../assets/img/patient/img3.jpg';
 import PatientNavigationBar from '../../views/patient-views/patient-navigation-bar';
 
@@ -12,7 +12,7 @@ export default function CommonPatientDashboard(){
         
 
         <Grid>
-          <img  width='100%' src={img1}/>
+          <img  width='100%' alt='img' src={img1}/>
         </Grid>
         <Grid>
           <Typography variant='h6' padding={10}>We are thrilled to introduce the latest addition to our medical 

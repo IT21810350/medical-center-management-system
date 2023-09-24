@@ -2,7 +2,7 @@
 const router = require("express").Router();
 const { request } = require("express");
 
-let Inq = require("../../Models/PatientModel/inq");
+let Inquiries = require("../../Models/PatientModel/inquiries");
 
 //=====================================================
 //CREATE A PATIENT BEFORE MAKE A CHANNELLING
@@ -16,7 +16,7 @@ router.post('/add', async (req, res) => {
   } = req.body;
 
   try {
-    const newInq = new Inq({
+    const newInq = new Inquiries({
       name,
       subject,
       message,
@@ -35,7 +35,7 @@ router.post('/add', async (req, res) => {
 //=====================================================
 // READ data from database
 router.route("/").get((req,res)=>{
-    Inq.find().then((inqs)=>{
+    Inquiries.find().then((inqs)=>{
         res.json(inqs)
     }).catch((err)=>{
         console.log(err)
@@ -54,7 +54,7 @@ router.route("/update/:id").put(async(req,res)=>{
     };
     try {
         // Use findByIdAndUpdate to find and update the inq
-        const updatedInq = await Inq.findByIdAndUpdate(inqId, updateInq);
+        const updatedInq = await Inquiries.findByIdAndUpdate(inqId, updateInq);
     
         if (!updatedInq) {
           return res.status(404).send({ status: "Inq not found" });
@@ -75,7 +75,7 @@ router.route("/deleteinq/:id").delete(async (req, res) => {
   
     try {
       // Use findByIdAndDelete to find and delete the inq
-      const deletedInq = await Inq.findByIdAndDelete(inqId);
+      const deletedInq = await Inquiries.findByIdAndDelete(inqId);
   
       if (!deletedInq) {
         return res.status(404).send({ status: "Inq not found" });
@@ -91,7 +91,7 @@ router.route("/deleteinq/:id").delete(async (req, res) => {
 //Select only one patient
 router.route("/get/:id").get(async (req,res) =>{
     let inqId = req.params.id;
-    const inq = await Inq.findById(inqId)
+    const inq = await Inquiries.findById(inqId)
     .then((inq)=>{
         res.status(200).send({status: "Inq found",inq})
     }).catch((err)=>{

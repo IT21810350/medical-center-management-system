@@ -1,8 +1,6 @@
-import React, {useEffect,useState} from 'react';
-import { Box, Grid, FormControl, InputLabel , Select , MenuItem , Stack, RadioGroup , Typography, FormControlLabel , Radio , Checkbox , Button, TextField, Paper } from '@mui/material';
-import imgProfile from '../../assets/img/patient/profile.jpg';
-import Heading from '../../components/patient-components/heading.component';
-import axios from 'axios';
+import React from 'react';
+import { Box, Button, Grid,  Typography, Stack,Link} from '@mui/material';
+
 //import ChanellinDetailsCard from '../../components/patient-components/chanelling-details-card';
 
 export default function UpcomingChanellings(){
@@ -12,60 +10,26 @@ export default function UpcomingChanellings(){
          import PatientNavigationBar from '../../views/patient-views/patient-navigation-bar'; */}
             <Grid container spacing={3}>
       
-        <Grid item xs={12} sm={6} md={4} lg={3} >
-          <Box border={1} p={2}>
-            <Typography variant="h6">
-             Hiiii
-            </Typography>
+        <Grid item xs={12} sm={6} md={4} lg={3} style={{backgroundColor:"lightyellow" , marginTop:20}} >
+          <Box  p={2} >
+            <Typography variant="h6">Date</Typography>
+            <Typography variant="h6">Time</Typography>
+            <Typography>Appointment Name</Typography>
+            <Typography variant="h6">Dr. Name</Typography>
+            <Typography variant="h6">Appointment number</Typography>
+
+              <Stack direction="column" spacing={2}>
+                <Button variant="contained" color="primary">
+                  <Link href="/rescedule-appointment" style={{ textDecoration: 'none', color: 'white' }}>Reschedule</Link>
+                </Button>
+                <Button variant="contained" color="error">
+                <Link href="/delete-appointment" style={{ textDecoration: 'none', color: 'white' }}>Cancel</Link>
+                </Button>
+              </Stack>
+
           </Box>
         </Grid>
-        <Grid item xs={12} sm={6} md={4} lg={3} >
-          <Box border={1} p={2}>
-            <Typography variant="h6">
-             Hiiii
-            </Typography>
-          </Box>
-        </Grid>
-     
-        <Grid item xs={12} sm={6} md={4} lg={3} >
-          <Box border={1} p={2}>
-            <Typography variant="h6">
-             Hiiii
-            </Typography>
-          </Box>
-        </Grid>
-     
-        <Grid item xs={12} sm={6} md={4} lg={3} >
-          <Box border={1} p={2}>
-            <Typography variant="h6">
-             Hiiii
-            </Typography>
-          </Box>
-        </Grid>
-     
-        <Grid item xs={12} sm={6} md={4} lg={3} >
-          <Box border={1} p={2}>
-            <Typography variant="h6">
-             Hiiii
-            </Typography>
-          </Box>
-        </Grid>
-     
-        <Grid item xs={12} sm={6} md={4} lg={3} >
-          <Box border={1} p={2}>
-            <Typography variant="h6">
-             Hiiii
-            </Typography>
-          </Box>
-        </Grid>
-     
-        <Grid item xs={12} sm={6} md={4} lg={3} >
-          <Box border={1} p={2}>
-            <Typography variant="h6">
-             Hiiii
-            </Typography>
-          </Box>
-        </Grid>
+        
      
     
      
