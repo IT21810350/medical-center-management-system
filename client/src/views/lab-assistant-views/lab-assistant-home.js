@@ -1,32 +1,55 @@
-// global imports
-import React from "react";
+import React from 'react';
+import {
+  AppBar,
+  Typography,
+  Container,
+  Grid,
+  Button,
+  Card,
+  CardContent,
+} from '@mui/material';
+import NavBar from '../../components/LA-component/la-nav-bar'
 import Box from '@mui/material/Box';
-import Grid from '@mui/material/Grid';
-import image from '../../assets/img/lab-assistant/home_background.png';
-//import {Link} from "react-router-dom";
+import { Link } from 'react-router-dom';
 
-// imports for navbar
-import Navbar from '../../components/LA-component/la-nav-bar'
-
-// Lab Assistant Interface Page
-function LabHome() {
-  return ( 
-    <div style={{ backgroundImage:`url(${image})`,backgroundRepeat:"no-repeat"}}>
-      <Box>
-        <Grid>
-          <Navbar/>
+function LabAssistantHomePage() {
+  return (
+    <div>
+      <AppBar position="static">
+        <Box>
+          <Grid>
+            <NavBar/>
+          </Grid>
+        </Box>
+      </AppBar>
+      <Container maxWidth="md" style={{ marginTop: '20px' }}>
+        <Typography variant="h4" gutterBottom>
+          Welcome, Lab Assistant!
+        </Typography>
+        <Grid container spacing={2}>
+          <Grid item xs={12} sm={6}>
+          <Card>
+              <CardContent>
+                <Typography variant="h5">Quick Links</Typography>
+                <Button variant="contained" color="primary" component={Link} to="/lab-sample">
+                  Manage Samples
+                </Button>
+                <Button variant="contained" color="primary" component={Link} to="/lab-inventory">
+                  Lab Inventory
+                </Button>
+                <Button variant="contained" color="primary" component={Link} to="/lab-report">
+                  Lab Reports
+                </Button>
+                <Button variant="contained" color="primary" component={Link} to="/lab-test">
+                  Lab Test
+                </Button>
+              </CardContent>
+            </Card>
+          </Grid>
         </Grid>
-      </Box>
+      </Container>
     </div>
   );
 }
 
-// Anon Function LA Calls the LabHome function
-// LabHome function loads lab-assistant home page content
-const LA = () => {
-  return (
-    LabHome()
-  );
-};
-
-export default LA;
+export default LabAssistantHomePage;

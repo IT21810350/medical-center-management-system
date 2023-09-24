@@ -178,3 +178,68 @@ const UpcomingChanneling = () => {
 };
 
 export default UpcomingChanneling;
+
+const columns  = [
+  { field: 'id', headerName: 'ID', width: 70 },
+  { field: 'firstName', headerName: 'First Name', width: 130 },
+  { field: 'lastName', headerName: 'Last Name', width: 130 },
+  { field: 'age', headerName: 'Age', type:'number', width: 200 },
+
+  {
+    field: 'fullName',
+    headerName: 'Full Name',
+    description: 'This column has a value getter and is not sortable.',
+    sortable: false,
+    width: 150,
+    valueGetter: (params) => `${params.row.firstName || ''} ${params.row.lastName || ''}`,
+  },
+
+  {
+    field: 'action',
+    headerName: 'Action',
+    width: 150,
+    renderCell: (params) => (
+      <div>
+        <IconButton onClick={() => console.log("edited")}>
+          <EditIcon color="primary" />
+        </IconButton>
+        <IconButton onClick={() => console.log("Delete")}>
+          <DeleteIcon color="secondary" />
+        </IconButton>
+      </div>
+    ),
+  },
+];
+
+<AppBar position="fixed">
+        <Toolbar>
+          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+            Logo
+          </Typography>
+          <Button color="inherit" href="#" variant="outlined" sx={{ mr: 2 }}>
+            Home
+          </Button>
+          <Button color="inherit" href="#" variant="outlined" sx={{ mr: 2 }}>
+            Contact Us
+          </Button>
+          <Button color="inherit" href="#" variant="outlined" sx={{ mr: 2 }}>
+            About Us
+          </Button>
+          <Button color="inherit" href="#" variant="outlined" sx={{ mr: 2 }}>
+            Lab Facilities
+          </Button>
+          <Button color="inherit" href="#" variant="outlined" sx={{ mr: 2 }}>
+            Popular Doctors
+          </Button>
+          <Link color="inherit" to="/signup">
+            <Button variant="contained" color="info">
+              Signup
+            </Button>
+          </Link>
+          {/* <Link color="inherit" href="#" onClick={handleLogout}>
+            <Button variant="contained" color="warning">
+              Logout
+            </Button>
+          </Link> */}
+        </Toolbar>
+      </AppBar>

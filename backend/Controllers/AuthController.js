@@ -7,11 +7,22 @@ const bcrypt = require("bcryptjs");
 module.exports.Signup = async (req, res, next) => {
   try {
     const { email, password, username, role, createdAt } = req.body;
-    const existingUser = await User.findOne({ email });
+    
+    // const existingEmail = await User.findOne({ email });
+    // const existingUsername = await User.findOne({ username });
+    // const existingPassword = await bcrypt.compare(password, existingEmail.password);
 
-    if (existingUser) {
-      return res.json({ message: "User already exists" });
-    }
+    // if (existingEmail) {
+    //   return res.json({ message: "Email already exists",success: false });
+    // }
+
+    // if (existingUsername) {
+    //   return res.json({ message: "User Name already exists",success: false });
+    // }
+
+    // if (existingPassword) {
+    //   return res.json({ message: "Password already exists",success: false });
+    // }
 
     const user = await User.create({ email, password, username, role, createdAt });
     const token = createSecretToken(user._id);

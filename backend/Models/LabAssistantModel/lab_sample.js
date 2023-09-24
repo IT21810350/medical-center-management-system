@@ -17,8 +17,8 @@ const lab_sample = new mongoose.Schema({
         type : Number,
     }
 },
-{
-    timestamps : true,
-});
+    {
+        timestamps : true,
+    });
 
 module.export = mongoose.model("labSample", lab_sample);

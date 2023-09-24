@@ -10,12 +10,20 @@ const HR =require("./Routes/HRroutes");;
 const SupplierRegistration = require("./Routes/SupplierRoutes");
 const SymptomAdd = require("./Routes/DoctorRoutes");
 
+
+
 //========================================
-const patientRouter = require("./routes/Patient_Routes/patient_routes.js");
-const inqRouter = require("./routes/Patient_Routes/inq-routes.js");
+const patientRouter = require("./Routes/Patient_Routes/patient_routes");
+const inqRouter = require("./Routes/Patient_Routes/inq-routes");
+const getDoctors = require("./Routes/Patient_Routes/getDoctors");
 //========================================
 
 
+<<<<<<< HEAD
+=======
+const validationRoute = require("./Routes/ValidateRoutes");
+
+>>>>>>> 4003b993c00b58d3161f72f8e8c81dfa23d940d4
 const { MONGO_URL, PORT } = process.env;
 
 const app = express();
@@ -47,6 +55,7 @@ connection.once('open', () => {
     console.log("MongoDB database connection established successfully")
 });
 
+<<<<<<< HEAD
 // resource person routes start
 const roomType = require("./Routes/resource-person-routes/roomType-routes");
 
@@ -54,11 +63,15 @@ app.use('/room-type', roomType);
 // resource person routes end
 
 app.use("/", authRoute, ProfileRoute, RegisterEmployee,HR, SymptomAdd,SupplierRegistration);
+=======
+app.use("/", authRoute, ProfileRoute, RegisterEmployee,HR, SymptomAdd, SupplierRegistration, validationRoute  );
+>>>>>>> 4003b993c00b58d3161f72f8e8c81dfa23d940d4
 
 
 //================================
-app.use("/patient",patientRouter);
+app.use("/patientData",patientRouter);
 app.use("/inqData" ,inqRouter);
+app.use("/getD",getDoctors);
 //=================================
 
 

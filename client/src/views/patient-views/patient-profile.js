@@ -1,16 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Box, Grid, FormControl, InputLabel , Select , MenuItem , RadioGroup , FormControlLabel , Radio , Checkbox , TextField } from '@mui/material';
-import { Card, CardMedia,CardContent, CardActions,Stack, Typography,Button  } from '@mui/material';
+import { Box, Grid, FormControl, InputLabel , Select , MenuItem , RadioGroup , FormControlLabel , Radio , Checkbox , TextField, } from '@mui/material';
+import { Card, CardMedia,CardContent, CardActions,Stack, Typography,Button,Table,TableContainer, TableBody, TableCell, TableHead, TableRow, Paper  } from '@mui/material';
 import img1 from '../../assets/img/patient/profile.jpg';
 import Heading from '../../components/patient-components/heading.component';
 import axios from 'axios';
-import ProfileCard from '../../components/patient-components/patient-profile-card';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import CustomTabPanel from '../../components/patient-components/tab-panel';
 import UpcomingChanellings from './upcomming-chanellings';
 import InquiryList from './inq-handle';
+import PatientDetails from './patient-details';
+import PatientList from './all-patients';
 import PatientNavigationBar from '../../views/patient-views/patient-navigation-bar';
 
 export default function PatientProfile() {
@@ -18,21 +19,8 @@ export default function PatientProfile() {
     // State to store the patient data retrieved from the db
     const [patientData, setPatientData] = useState([]);
 
-    // useEffect hook - fetch data when the component mounts
-    useEffect(() => {
-        // Make a GET request to MongoDB directly
-        axios.get('http://localhost:5000/patient/get/:id')
-            .then(response => {
-                // When the response is successful, update the patientData state with the received data
-                setPatientData(response.data);
-            })
-            .catch(error => {
-                // Handle any errors that occur during the request
-                console.error('Error fetching patient data:', error);
-            });
-    }, []); // The empty dependency array ensures this effect runs once when the component mounts
-
     
+    //======================================================
     const [value, setValue] = React.useState(0);
 
     const handleChange = (event, newValue) => {
@@ -45,11 +33,13 @@ export default function PatientProfile() {
         setValue2(newValue2);
     };
 
-    const [valueInq, setValueInq] = React.useState(0);
+    //======================================================
+    // const [valueInq, setValueInq] = React.useState(0);
 
-    const handleChangeInq = (event, newValueInq) => {
-        setValueInq(newValueInq);
-    };
+    // const handleChangeInq = (event, newValueInq) => {
+    //     setValueInq(newValueInq);
+    // };
+
 
 
     
@@ -88,42 +78,39 @@ export default function PatientProfile() {
 
                                             />
                                             <CardContent >
-                                                <Typography gutterBottom variant="h5" component="h2">
+                                                <Typography gutterBottom variant="h5" component="h2" align='center'>
                                                     Name
                                                 </Typography>
-                                                <Typography>
+                                                <Typography align='center'>
                                                     Age
                                                 </Typography>
                                             </CardContent>
                                             <CardActions>
-                                            <Stack spacing={3}>
+                                           
                                             
                                             <Button
                                                 component={Link}
                                                 to="/patient-inquiries"
                                                 variant="contained"
-                                                size="small"
+                                                // size="small"
+                                                style={{ width: '100%' }}
+                                               
                                                 color="primary"
                                             >
                                                 Inquiries
                                             </Button>
-                                        </Stack>
+                                        
                                             </CardActions>
                                         </Card>
                                         
                                     </Grid>
                                     <Grid item xs={12} sm={9}>
-                                        data
-                                        <ul>
-                                            {/* Map through the patientData array and display each patient's information */}
-                                            {patientData.map(patient => (
-                                                <li key={patient._id}>
-                                                    <h2>{patient.name}</h2>
-                                                    <p>Age: {patient.age}</p>
-                                                    Display other patient details
-                                                </li>
-                                            ))}
-                                        </ul>
+
+                                        <PatientDetails/>
+                                       <PatientList/>
+
+                                      
+
                                     </Grid>
                                 </Grid>
                             </CustomTabPanel>
@@ -158,158 +145,7 @@ export default function PatientProfile() {
 
                             {/**  Prescriptions*/}
                             <CustomTabPanel value={value} index={2}>
-                                <form style={{ padding: "100px", paddingTop: "0px", textDecoration: "bold" }}>
-
-                                    <Grid container spacing={1} lg={12}>
-                                        <Grid xs={12} item>
-                                            {/* Country Selection */}
-                                            <FormControl fullWidth variant="outlined">
-                                                <InputLabel>Select Country</InputLabel>
-                                                <Select
-                                                    label="Select Country"
-
-                                                >
-                                                    <MenuItem value="">
-                                                        <em>Select</em>
-                                                    </MenuItem>
-                                                    <MenuItem value="Sri Lanka">Sri Lanka</MenuItem>
-                                                    <MenuItem value="India">India</MenuItem>
-                                                    <MenuItem value="Australia">Australia</MenuItem>
-                                                    <MenuItem value="Canada">Canada</MenuItem>
-                                                    <MenuItem value="Other Country">Other Country</MenuItem>
-                                                </Select>
-                                            </FormControl>
-                                        </Grid>
-                                        <Grid xs={12} item>
-                                            {/* ID Type Selection */}
-                                            <FormControl component="fieldset">
-                                                <RadioGroup
-                                                    row
-                                                    name="idType"
-
-
-                                                >
-                                                    <FormControlLabel
-                                                        value="NIC"
-                                                        control={<Radio />}
-                                                        label="NIC"
-
-                                                    />
-                                                    <FormControlLabel
-                                                        value="Passport"
-                                                        control={<Radio />}
-                                                        label="Passport"
-
-                                                    />
-                                                </RadioGroup>
-                                            </FormControl>
-                                        </Grid>
-
-                                        <Grid xs={12} item>
-                                            {/* ID Input Field */}
-                                            <TextField
-                                                fullWidth
-                                                variant="outlined"
-
-
-                                                required
-                                            />
-                                        </Grid>
-
-                                        <Grid xs={12} sm={6} item>
-                                            <TextField label="First Name" placeholder='Enter first name' variant='outlined' fullWidth required />
-                                        </Grid>
-
-                                        <Grid xs={12} sm={6} item>
-                                            <TextField label="Last Name" placeholder='Enter last name' variant='outlined' fullWidth required />
-                                        </Grid>
-
-                                        <Grid xs={12} sm={6} item>
-                                            <FormControl component="fieldset" required>
-                                                <RadioGroup
-                                                    row
-                                                    name="Gender"
-
-
-                                                >
-                                                    <FormControlLabel
-                                                        value="Male"
-                                                        control={<Radio />}
-                                                        label="Male"
-                                                        defaultChecked
-                                                    />
-                                                    <FormControlLabel
-                                                        value="Female"
-                                                        control={<Radio />}
-                                                        label="Female"
-                                                    />
-
-                                                    <FormControlLabel
-                                                        value="Other"
-                                                        control={<Radio />}
-                                                        label="Other"
-                                                    />
-                                                </RadioGroup>
-                                            </FormControl>
-                                        </Grid>
-
-                                        <Grid xs={12} item>
-                                            <TextField type='date' label="Date of Birth" placeholder='Enter your birthday' variant='outlined' fullWidth required />
-                                        </Grid>
-
-                                        <Grid xs={12} item>
-                                            <TextField type='number' label="Phone" placeholder='Enter phone number' variant='outlined' fullWidth required />
-                                        </Grid>
-
-                                        <Grid xs={12} item>
-                                            <TextField type='email' label="Email" placeholder='Enter email' variant='outlined' fullWidth required />
-                                        </Grid>
-
-                                        <Grid xs={12} item>
-                                            <TextField type='text' label="Address" placeholder='Enter address - Optional' variant='outlined' fullWidth />
-                                        </Grid>
-
-                                        <Grid xs={12} item>
-                                            {/* Agree to Terms Checkbox */}
-                                            <FormControlLabel
-                                                control={
-                                                    <Checkbox
-
-
-                                                        color="primary"
-                                                    />
-                                                }
-                                                label="I agree to the terms and conditions"
-                                            />
-                                        </Grid>
-
-                                        <Grid item>
-                                            {/* Submit and Cancel Buttons */}
-                                            <Stack direction="row" spacing={2} >
-                                                <Button type='submit' variant="contained" color="error">Cancel</Button>
-                                                {/* <Button type='submit' variant="contained">Submit</Button> */}
-                                                <Button
-                                                    type="submit"
-                                                    variant="contained"
-                                                    color="primary"
-
-                                                >
-                                                    Submit
-                                                </Button>
-                                                {/* <Button
-type='submit'
-variant="contained"
-color="default"
-onClick={handleCancel}
->
-Cancel
-</Button> */}
-                                            </Stack>
-                                        </Grid>
-
-
-                                    </Grid>
-                                </form>
+                                
                             </CustomTabPanel>
 
                             {/**  Inquiries*/}
@@ -349,8 +185,46 @@ function a11yProps(index) {
     };
 }
 
+// function displayData() {
+//     //=========================== Retrieve data ====================================
+//     const [data, setData] = useState([]);
 
-// // //=========================================================
+//     // useEffect hook - fetch data when the component mounts
+//     useEffect(() => {
+//         // Make a GET request to MongoDB directly http://localhost:4000/inqData/add
+//         axios.get('http://localhost:4000/patient/get/:650efb90b6d7126c541b1fbe')
+//             .then(response => {
+//                 // When the response is successful, update the patientData state with the received data
+//                 setPatientData(response.data);
+//             })
+//             .catch(error => {
+//                 // Handle any errors that occur during the request
+//                 console.error('Error fetching patient data:', error);
+//             });
+//     }, []); // The empty dependency array ensures this effect runs once when the component mounts
+
+//     return (
+//         <>
+//             <TableContainer>
+//                 {data.map((item, index) => (
+//                     <Table key={index}>
+//                         <TableHead>Country: {item.country}</TableHead>
+//                         <TableCell>ID Type: {item.idType}</TableCell>
+//                         {/* Add other fields here */}
+//                     </Table>
+//                 ))};
+
+//             </TableContainer>
+//             <br />
+
+//             <Stack direction="row" spacing={4}>
+//                 <Button color="success" variant="contained" style={{ width: 150, marginLeft: '350px' }} >Edit</Button>
+//                 <Button color="error" variant="contained" style={{ width: 150 }}>Delete</Button>
+//             </Stack>
+//         </>
+//     );
+// }
+
 
 // import React, { useEffect, useState } from 'react';
 // import axios from 'axios'; // Import the Axios library for making HTTP requests

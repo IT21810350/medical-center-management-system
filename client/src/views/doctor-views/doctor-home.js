@@ -4,7 +4,7 @@ import Grid from '@mui/material/Grid';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
-import { Avatar, Paper } from '@mui/material';
+import { Avatar, Paper, CssBaseline } from '@mui/material';
 // for calender
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
@@ -30,7 +30,7 @@ const ProfileCard = () => {
 
   const time = useCurrentTime();
   return (
-    <Box sx={{ p: 2, height: '171px', backgroundColor: '#1E90FF' }}>
+    <Box sx={{ p: 2, height: '200x', backgroundColor: '#1E90FF' }}>
       <Grid container alignItems="center" spacing={2}>
         <Grid item>
           <Avatar
@@ -59,7 +59,7 @@ const SummaryCard = () => {
   return (
     <Card variant="outlined" sx={{ height: '200px', backgroundColor: '#4169E1' }}>
       <CardContent sx={{ color: 'white' }}>
-        <Typography variant="h4" align="center" sx={{ marginBottom: 5 }}>SUMMARY!!!!</Typography>
+        <Typography variant="h4" align="center" sx={{ marginBottom: 5 }}>SUMMARY</Typography>
         <Grid container spacing={2}>
           <Grid item xs={6}>
             <Typography variant="body1" align="center">Active Patients</Typography>
@@ -117,7 +117,7 @@ function createData(name, date, time, severity, view) {
 const rows = [
   createData('John Doe', '2023-09-05', '09:30 AM', 'High', 'View'),
   createData('Jane Smith', '2023-09-06', '02:15 PM', 'Medium', 'View'),
-  // Add more rows as needed
+  // Add more rows 
 ];
 
 const UpcommingChanneling = () => {
@@ -143,7 +143,7 @@ const UpcommingChanneling = () => {
               {columns.map((column) => (
                 <TableCell
                   key={column.id}
-                  align="center" // Center align the header cells
+                  align="center" 
                   style={{ minWidth: column.minWidth }}
                 >
                   {column.label}
@@ -191,6 +191,7 @@ const UpcommingChanneling = () => {
 const Doctor = () => {
   return (
     <Box sx={{ flexGrow: 1, backgroundColor: '#f2f2f2' }}>
+      <CssBaseline />
       <Grid>
         <Navbar />
       </Grid>

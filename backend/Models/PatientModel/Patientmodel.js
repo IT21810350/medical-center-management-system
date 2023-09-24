@@ -6,16 +6,20 @@ const patientSchema = new Schema({
         type: String,
         required: true
     },
-    identity: {
+    idType: {
+        type: String,
+        required: true
+    },
+    idNumber: {
         type: String,
         required: true
     },
 
-    firstName: {
+    fName: {
         type: String,
         required: true
     },
-    lastName: {
+    lName: {
         type: String,
         required: true
     },
@@ -37,6 +41,25 @@ const patientSchema = new Schema({
     },
 
     address: {
+        type: String,
+        required: true
+    },
+    gName: {
+        type: String,
+        required: true
+    },
+
+    relation: {
+        type: String,
+        required: true
+    },
+
+    gId: {
+        type: String,
+        required: true
+    },
+
+    gContact: {
         type: String,
         required: true
     },

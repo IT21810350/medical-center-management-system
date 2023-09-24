@@ -13,12 +13,12 @@ const lab_report = new mongoose.Schema({
     content : {
         type : String,
     },
-    labAssistant_id : {
+    lab_assistant_id : {
         type : Number,
     }
-},{
-    timestamps : true,
-}
-);
+},
+    {
+        timestamps : true,
+    });
 
 module.export = mongoose.model("labReport", lab_report);
