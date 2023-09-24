@@ -9,33 +9,15 @@ import {
     Button,
     TextField,
 } from "@mui/material";
-import Table from '@material-ui/core/Table';
-import TableHead from '@material-ui/core/TableHead';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableRow from '@material-ui/core/TableRow';
-import { makeStyles } from '@material-ui/core/styles';
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
 import axios from "axios";
 import backgroundImage from '../../assets/img/common/home-hero-background-img.jpg';
 
-const useStyles = makeStyles((theme) => ({
-    table: {
-        minWidth: 650,
-        backgroundColor: theme.palette.primary.main,
-        color: 'white',
-    },
-    tableHead: {
-        backgroundColor: theme.palette.primary.main,
-    },
-    tableRow: {
-        '&:hover': {
-            backgroundColor: theme.palette.primary.light,
-        },
-    },
-    tableCell: {
-        fontWeight: 'bold',
-    },
-}));
+
 
 const HeroSection = () => {
 
@@ -173,22 +155,20 @@ const SearchContainer = () => {
 
 const LoadData = ({ data }) => {
 
-    const classes = useStyles();
-
     return (
-        <Table className={classes.table}>
-            <TableHead className={classes.tableHead}>
+        <Table >
+            <TableHead >
                 <TableRow>
-                    <TableCell className={classes.tableCell}>Patient Name</TableCell>
-                    <TableCell className={classes.tableCell}>Date</TableCell>
-                    <TableCell className={classes.tableCell}>Time</TableCell>
-                    <TableCell className={classes.tableCell}>Channeling Serverity</TableCell>
-                    <TableCell className={classes.tableCell}>Action</TableCell>
+                    <TableCell>Patient Name</TableCell>
+                    <TableCell>Date</TableCell>
+                    <TableCell>Time</TableCell>
+                    <TableCell>Channeling Serverity</TableCell>
+                    <TableCell>Action</TableCell>
                 </TableRow>
             </TableHead>
             <TableBody>
                 {data.map((item) => (
-                    <TableRow key={item.id} className={classes.tableRow}>
+                    <TableRow key={item.id}>
                         <TableCell>{item.patientName}</TableCell>
                         <TableCell>{item.date}</TableCell>
                         <TableCell>{item.fromTime}</TableCell>
