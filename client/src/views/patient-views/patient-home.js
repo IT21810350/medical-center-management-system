@@ -14,10 +14,10 @@ import {Grid,
         FormControlLabel,
         Radio,
         Stack,
-        Container,
-        Avatar,
+       // Container,
+       // Avatar,
         Box } from '@mui/material';
-
+import img1 from '../../assets/img/patient/profile.jpg';
         
 const Patient = () => {
     return (
@@ -46,7 +46,7 @@ const Patient = () => {
                                     // 16:9
                                     pt: '56.25%',
                                 }}
-                                image="https://source.unsplash.com/random?wallpapers"
+                                image={img1}
                                 
                             />
                             <CardContent >
@@ -187,7 +187,7 @@ const Patient = () => {
                                     <TextField type='text' label="Address" placeholder='Enter address - Optional' variant='outlined' fullWidth />
                                 </Grid>
 
-                                <Grid item>
+                                <Grid item xs={12}>
                                     <Stack direction="row" spacing={2} >
                                         <Button  type='submit' variant="contained" color="error">Cancel</Button>
                                         <Button type='submit' variant="contained">Submit</Button>
@@ -210,12 +210,3 @@ const Patient = () => {
 };
 
 export default Patient;
-{/* 
-To do
-
-Validations of NIC / Passport
-Profile Picture
-Align the buttons to left corner
-
-
-*/}

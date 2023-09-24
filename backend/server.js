@@ -6,7 +6,19 @@ const cookieParser = require("cookie-parser");
 const authRoute = require("./Routes/AuthRoute");
 const ProfileRoute = require("./Routes/ProfileRoute");
 const RegisterEmployee = require("./Routes/EmployeeRoutes");
-const PharmacistRoutes = require("./Routes/PharmacistRoutes");
+const PharmacistRoutes = require("./Routes/PharmacistRoutes");;
+const HR =require("./Routes/HRroutes");;
+const SupplierRegistration = require("./Routes/SupplierRoutes");
+const doctorRoutes = require("./Routes/DoctorRoutes");
+
+//========================================
+const patientRouter = require("./Routes/Patient_Routes/patient_routes");
+const inqRouter = require("./Routes/Patient_Routes/inq-routes");
+const getDoctors = require("./Routes/Patient_Routes/getDoctors");
+//========================================
+
+
+const validationRoute = require("./Routes/ValidateRoutes");
 
 const { MONGO_URL, PORT } = process.env;
 
@@ -16,10 +28,17 @@ app.use(
   cors({
     origin: ["http://localhost:3000"],
     methods: ["GET", "POST", "PUT", "DELETE"],
-    allowedHeaders:["content type", "Authorization"],
-    //credentials: true,
+    credentials: true,
   })
 );
+
+// app.use(
+//   cors({
+//     origin: ["http://localhost:3000"],
+//     methods: ["GET", "POST", "PUT", "DELETE"],
+//     credentials: true,
+//   })
+// );
 
 app.use(express.json());
 app.use(cookieParser());
@@ -37,7 +56,15 @@ connection.once('open', () => {
 
 //app.use("/pharmacist",PharmacistRoutes);
 
-app.use("/", authRoute, ProfileRoute, RegisterEmployee, PharmacistRoutes);
+app.use("/", authRoute, ProfileRoute, RegisterEmployee, PharmacistRoutes,HR, doctorRoutes, SupplierRegistration, validationRoute);
+
+
+//================================
+app.use("/patientData",patientRouter);
+app.use("/inqData" ,inqRouter);
+app.use("/getD",getDoctors);
+//=================================
+
 
 app.listen(PORT, () => {
     console.log(`Server is running on port: ${PORT}`);

@@ -1,4 +1,3 @@
-import * as React from 'react';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -14,13 +13,54 @@ import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
 import { Link } from 'react-router-dom';
 import formatPageName from '../../utils/formatPageName'
+import React, { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { useCookies } from "react-cookie";
+import axios from "axios";
 
-const pages = ['Home', 'Contact Us', 'About Us', 'Lab Facilities', 'Popular Doctors','Channeling','Schedule'];
+const pages = ['Home', 'Contact Us', 'About Us', 'Lab Facilities', 'Popular Doctors', 'Channeling', 'Schedule'];
 const settings = ['Profile', 'Account', 'Logout'];
 
 function ResponsiveAppBar() {
     const [anchorElNav, setAnchorElNav] = React.useState(null);
     const [anchorElUser, setAnchorElUser] = React.useState(null);
+
+    const navigate = useNavigate();
+    const [cookies, removeCookie] = useCookies([]);
+
+    useEffect(() => {
+        const verifyCookie = async () => {
+            if (!cookies.token) {
+                navigate("/login");
+            }
+
+            try {
+                const { data } = await axios.post(
+                    "http://localhost:4000",
+                    {},
+                    { withCredentials: true }
+                );
+                const { status, user } = data;
+
+                if (status) {
+                    console.log(`Hello ${user}`);
+                } else {
+                    removeCookie("token");
+                    navigate("/login");
+                }
+            } catch (error) {
+                console.error(error);
+            }
+        };
+
+        verifyCookie();
+    }, [cookies, navigate, removeCookie]);
+
+    const handleLogout = () => {
+        removeCookie("token");
+        console.log("Logout button clicked");
+        navigate("/login");
+    };
 
     const handleOpenNavMenu = (event) => {
         setAnchorElNav(event.currentTarget);
@@ -127,36 +167,16 @@ function ResponsiveAppBar() {
                         ))}
                     </Box>
 
+                    <Link style={{ textDecoration: 'none' }} onClick={handleLogout}>
+                        <Typography textAlign="center">Log Out</Typography>
+                    </Link>
+
                     <Box sx={{ flexGrow: 0 }}>
                         <Tooltip title="Open settings">
                             <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                                 <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
                             </IconButton>
                         </Tooltip>
-                        <Menu
-                            sx={{ mt: '45px' }}
-                            id="menu-appbar"
-                            anchorEl={anchorElUser}
-                            anchorOrigin={{
-                                vertical: 'top',
-                                horizontal: 'right',
-                            }}
-                            keepMounted
-                            transformOrigin={{
-                                vertical: 'top',
-                                horizontal: 'right',
-                            }}
-                            open={Boolean(anchorElUser)}
-                            onClose={handleCloseUserMenu}
-                        >
-                            {settings.map((setting) => (
-                                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                                    <Link style={{ textDecoration: 'none' }}>
-                                        <Typography textAlign="center">{setting}</Typography>
-                                    </Link>
-                                </MenuItem>
-                            ))}
-                        </Menu>
                     </Box>
                 </Toolbar>
             </Container>

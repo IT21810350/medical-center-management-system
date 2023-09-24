@@ -4,7 +4,7 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
-import { CardActionArea} from '@mui/material';
+import { CardActionArea } from '@mui/material';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
@@ -39,7 +39,7 @@ const SupplierRegistration = () => {
     <Grid item xs={4}>
       <Item>
         <Card sx={{ maxWidth: 345 }}>
-          <Link to="/supplier/supplier-registration" style={{textDecoration:'none'}}>
+          <Link to="/supplier/supplier-registration" style={{ textDecoration: 'none' }}>
             <CardActionArea>
               <CardMedia
                 component="img"
@@ -83,36 +83,38 @@ const SupplierProfile = () => {
     <Grid item xs={4}>
       <Item>
         <Card sx={{ maxWidth: 345 }}>
-          <CardActionArea>
-            <CardMedia
-              component="img"
-              height="100"
-              image={img2}
-              alt="Supplier Profile"
-            />
-            <CardContent>
-              <Typography
-                gutterBottom
-                variant="h5"
-                component="div"
-                sx={{
-                  backgroundColor: 'darkblue',
-                  padding: '8px',
-                }}
-              >
+          <Link to="/supplier/supplier-profile" style={{ textDecoration: 'none' }}>
+            <CardActionArea>
+              <CardMedia
+                component="img"
+                height="100"
+                image={img2}
+                alt="Supplier Profile"
+              />
+              <CardContent>
                 <Typography
-                  component="span"
-                  variant="inherit"
-                  sx={{ color: 'lightblue' }}
+                  gutterBottom
+                  variant="h5"
+                  component="div"
+                  sx={{
+                    backgroundColor: 'darkblue',
+                    padding: '8px',
+                  }}
                 >
-                  Supplier Profile
+                  <Typography
+                    component="span"
+                    variant="inherit"
+                    sx={{ color: 'lightblue' }}
+                  >
+                    Supplier Profile
+                  </Typography>
                 </Typography>
-              </Typography>
-              <Typography variant="body2" color="text.secondary">
-                Description for Supplier Profile
-              </Typography>
-            </CardContent>
-          </CardActionArea>
+                <Typography variant="body2" color="text.secondary">
+                  Description for Supplier Profile
+                </Typography>
+              </CardContent>
+            </CardActionArea>
+          </Link>
         </Card>
       </Item>
     </Grid>
@@ -124,36 +126,38 @@ const SupplierList = () => {
     <Grid item xs={4}>
       <Item>
         <Card sx={{ maxWidth: 345 }}>
-          <CardActionArea>
-            <CardMedia
-              component="img"
-              height="100"
-              image={img3}
-              alt="Supplier List"
-            />
-            <CardContent>
-              <Typography
-                gutterBottom
-                variant="h5"
-                component="div"
-                sx={{
-                  backgroundColor: 'darkblue',
-                  padding: '8px',
-                }}
-              >
+          <Link to="/supplier/supplier-list" style={{ textDecoration: 'none' }}>
+            <CardActionArea>
+              <CardMedia
+                component="img"
+                height="100"
+                image={img3}
+                alt="Supplier List"
+              />
+              <CardContent>
                 <Typography
-                  component="span"
-                  variant="inherit"
-                  sx={{ color: 'lightblue' }}
+                  gutterBottom
+                  variant="h5"
+                  component="div"
+                  sx={{
+                    backgroundColor: 'darkblue',
+                    padding: '8px',
+                  }}
                 >
-                  Supplier List
+                  <Typography
+                    component="span"
+                    variant="inherit"
+                    sx={{ color: 'lightblue' }}
+                  >
+                    Supplier List
+                  </Typography>
                 </Typography>
-              </Typography>
-              <Typography variant="body2" color="text.secondary">
-                Description for Supplier List
-              </Typography>
-            </CardContent>
-          </CardActionArea>
+                <Typography variant="body2" color="text.secondary">
+                  Description for Supplier List
+                </Typography>
+              </CardContent>
+            </CardActionArea>
+          </Link>
         </Card>
       </Item>
     </Grid>
@@ -165,36 +169,38 @@ const InventoryItems = () => {
     <Grid item xs={4}>
       <Item>
         <Card sx={{ maxWidth: 345 }}>
-          <CardActionArea>
-            <CardMedia
-              component="img"
-              height="100"
-              image={img4}
-              alt="Inventory Items"
-            />
-            <CardContent>
-              <Typography
-                gutterBottom
-                variant="h5"
-                component="div"
-                sx={{
-                  backgroundColor: 'darkblue',
-                  padding: '8px',
-                }}
-              >
+          <Link to="/supplier/supplier-inventory-equipment" style={{ textDecoration: 'none' }}>
+            <CardActionArea>
+              <CardMedia
+                component="img"
+                height="100"
+                image={img4}
+                alt="Inventory Items"
+              />
+              <CardContent>
                 <Typography
-                  component="span"
-                  variant="inherit"
-                  sx={{ color: 'lightblue' }}
+                  gutterBottom
+                  variant="h5"
+                  component="div"
+                  sx={{
+                    backgroundColor: 'darkblue',
+                    padding: '8px',
+                  }}
                 >
-                  Inventory Items
+                  <Typography
+                    component="span"
+                    variant="inherit"
+                    sx={{ color: 'lightblue' }}
+                  >
+                    Inventory Items
+                  </Typography>
                 </Typography>
-              </Typography>
-              <Typography variant="body2" color="text.secondary">
-                Description for Inventory Items
-              </Typography>
-            </CardContent>
-          </CardActionArea>
+                <Typography variant="body2" color="text.secondary">
+                  Description for Inventory Items
+                </Typography>
+              </CardContent>
+            </CardActionArea>
+          </Link>
         </Card>
       </Item>
     </Grid>
@@ -206,36 +212,38 @@ const InventoryMedicine = () => {
     <Grid item xs={4}>
       <Item>
         <Card sx={{ maxWidth: 345 }}>
-          <CardActionArea>
-            <CardMedia
-              component="img"
-              height="100"
-              image={img5}
-              alt="Inventory Medicine"
-            />
-            <CardContent>
-              <Typography
-                gutterBottom
-                variant="h5"
-                component="div"
-                sx={{
-                  backgroundColor: 'darkblue',
-                  padding: '8px',
-                }}
-              >
+          <Link to="/supplier/supplier-inventory-medicine" style={{ textDecoration: 'none' }}>
+            <CardActionArea>
+              <CardMedia
+                component="img"
+                height="100"
+                image={img5}
+                alt="Inventory Medicine"
+              />
+              <CardContent>
                 <Typography
-                  component="span"
-                  variant="inherit"
-                  sx={{ color: 'lightblue' }}
+                  gutterBottom
+                  variant="h5"
+                  component="div"
+                  sx={{
+                    backgroundColor: 'darkblue',
+                    padding: '8px',
+                  }}
                 >
-                  Inventory Medicine
+                  <Typography
+                    component="span"
+                    variant="inherit"
+                    sx={{ color: 'lightblue' }}
+                  >
+                    Inventory Medicine
+                  </Typography>
                 </Typography>
-              </Typography>
-              <Typography variant="body2" color="text.secondary">
-                Description for Inventory Medicine
-              </Typography>
-            </CardContent>
-          </CardActionArea>
+                <Typography variant="body2" color="text.secondary">
+                  Description for Inventory Medicine
+                </Typography>
+              </CardContent>
+            </CardActionArea>
+          </Link>
         </Card>
       </Item>
     </Grid>
@@ -247,36 +255,38 @@ const OrderRequest = () => {
     <Grid item xs={4}>
       <Item>
         <Card sx={{ maxWidth: 345 }}>
-          <CardActionArea>
-            <CardMedia
-              component="img"
-              height="100"
-              image={img6}
-              alt="Order Request"
-            />
-            <CardContent>
-              <Typography
-                gutterBottom
-                variant="h5"
-                component="div"
-                sx={{
-                  backgroundColor: 'darkblue',
-                  padding: '8px',
-                }}
-              >
+          <Link to="/supplier/supplier-order-request" style={{ textDecoration: 'none' }}>
+            <CardActionArea>
+              <CardMedia
+                component="img"
+                height="100"
+                image={img6}
+                alt="Order Request"
+              />
+              <CardContent>
                 <Typography
-                  component="span"
-                  variant="inherit"
-                  sx={{ color: 'lightblue' }}
+                  gutterBottom
+                  variant="h5"
+                  component="div"
+                  sx={{
+                    backgroundColor: 'darkblue',
+                    padding: '8px',
+                  }}
                 >
-                  Order Request
+                  <Typography
+                    component="span"
+                    variant="inherit"
+                    sx={{ color: 'lightblue' }}
+                  >
+                    Order Request
+                  </Typography>
                 </Typography>
-              </Typography>
-              <Typography variant="body2" color="text.secondary">
-                Description for Order Request
-              </Typography>
-            </CardContent>
-          </CardActionArea>
+                <Typography variant="body2" color="text.secondary">
+                  Description for Order Request
+                </Typography>
+              </CardContent>
+            </CardActionArea>
+          </Link>
         </Card>
       </Item>
     </Grid>
@@ -288,36 +298,38 @@ const OrderConfirmation = () => {
     <Grid item xs={4}>
       <Item>
         <Card sx={{ maxWidth: 345 }}>
-          <CardActionArea>
-            <CardMedia
-              component="img"
-              height="100"
-              image={img7}
-              alt="Order Confirmation"
-            />
-            <CardContent>
-              <Typography
-                gutterBottom
-                variant="h5"
-                component="div"
-                sx={{
-                  backgroundColor: 'darkblue',
-                  padding: '8px',
-                }}
-              >
+          <Link to="/supplier/supplier-order-confirmation" style={{ textDecoration: 'none' }}>
+            <CardActionArea>
+              <CardMedia
+                component="img"
+                height="100"
+                image={img7}
+                alt="Order Confirmation"
+              />
+              <CardContent>
                 <Typography
-                  component="span"
-                  variant="inherit"
-                  sx={{ color: 'lightblue' }}
+                  gutterBottom
+                  variant="h5"
+                  component="div"
+                  sx={{
+                    backgroundColor: 'darkblue',
+                    padding: '8px',
+                  }}
                 >
-                  Order Confirmation
+                  <Typography
+                    component="span"
+                    variant="inherit"
+                    sx={{ color: 'lightblue' }}
+                  >
+                    Order Confirmation
+                  </Typography>
                 </Typography>
-              </Typography>
-              <Typography variant="body2" color="text.secondary">
-                Description for Order Confirmation
-              </Typography>
-            </CardContent>
-          </CardActionArea>
+                <Typography variant="body2" color="text.secondary">
+                  Description for Order Confirmation
+                </Typography>
+              </CardContent>
+            </CardActionArea>
+          </Link>
         </Card>
       </Item>
     </Grid>
@@ -329,36 +341,38 @@ const OrderForPharmacy = () => {
     <Grid item xs={4}>
       <Item>
         <Card sx={{ maxWidth: 345 }}>
-          <CardActionArea>
-            <CardMedia
-              component="img"
-              height="100"
-              image={img8}
-              alt="Order for Pharmacy"
-            />
-            <CardContent>
-              <Typography
-                gutterBottom
-                variant="h5"
-                component="div"
-                sx={{
-                  backgroundColor: 'darkblue',
-                  padding: '8px',
-                }}
-              >
+          <Link to="/supplier/supplier-order-pharmacy" style={{ textDecoration: 'none' }}>
+            <CardActionArea>
+              <CardMedia
+                component="img"
+                height="100"
+                image={img8}
+                alt="Order for Pharmacy"
+              />
+              <CardContent>
                 <Typography
-                  component="span"
-                  variant="inherit"
-                  sx={{ color: 'lightblue' }}
+                  gutterBottom
+                  variant="h5"
+                  component="div"
+                  sx={{
+                    backgroundColor: 'darkblue',
+                    padding: '8px',
+                  }}
                 >
-                  Order for Pharmacy
+                  <Typography
+                    component="span"
+                    variant="inherit"
+                    sx={{ color: 'lightblue' }}
+                  >
+                    Order for Pharmacy
+                  </Typography>
                 </Typography>
-              </Typography>
-              <Typography variant="body2" color="text.secondary">
-                Description for Order for Pharmacy
-              </Typography>
-            </CardContent>
-          </CardActionArea>
+                <Typography variant="body2" color="text.secondary">
+                  Description for Order for Pharmacy
+                </Typography>
+              </CardContent>
+            </CardActionArea>
+          </Link>
         </Card>
       </Item>
     </Grid>
@@ -370,36 +384,38 @@ const SupplierPayment = () => {
     <Grid item xs={4}>
       <Item>
         <Card sx={{ maxWidth: 345 }}>
-          <CardActionArea>
-            <CardMedia
-              component="img"
-              height="100"
-              image={img9}
-              alt="Supplier Payment"
-            />
-            <CardContent>
-              <Typography
-                gutterBottom
-                variant="h5"
-                component="div"
-                sx={{
-                  backgroundColor: 'darkblue',
-                  padding: '8px',
-                }}
-              >
+          <Link to="/supplier/supplier-payment" style={{ textDecoration: 'none' }}>
+            <CardActionArea>
+              <CardMedia
+                component="img"
+                height="100"
+                image={img9}
+                alt="Supplier Payment"
+              />
+              <CardContent>
                 <Typography
-                  component="span"
-                  variant="inherit"
-                  sx={{ color: 'lightblue' }}
+                  gutterBottom
+                  variant="h5"
+                  component="div"
+                  sx={{
+                    backgroundColor: 'darkblue',
+                    padding: '8px',
+                  }}
                 >
-                  Supplier Payment
+                  <Typography
+                    component="span"
+                    variant="inherit"
+                    sx={{ color: 'lightblue' }}
+                  >
+                    Supplier Payment
+                  </Typography>
                 </Typography>
-              </Typography>
-              <Typography variant="body2" color="text.secondary">
-                Description for Supplier Payment
-              </Typography>
-            </CardContent>
-          </CardActionArea>
+                <Typography variant="body2" color="text.secondary">
+                  Description for Supplier Payment
+                </Typography>
+              </CardContent>
+            </CardActionArea>
+          </Link>
         </Card>
       </Item>
     </Grid>

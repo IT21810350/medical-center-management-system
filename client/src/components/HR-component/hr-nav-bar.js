@@ -13,9 +13,9 @@ import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
 import { Link } from 'react-router-dom';
-import formatPageName from '../../utils/formatPageName'
+import formatPageName from '../../utils/formatPageName';
 
-const pages = ['Home', 'Contact Us', 'About Us', 'Lab Facilities', 'Popular Doctors','Channeling','Schedule'];
+const pages = ['Home', 'Contact Us', 'About Us', 'Lab Facilities', 'Popular Doctors','Channeling','Register employee'];
 const settings = ['Profile', 'Account', 'Logout'];
 
 function ResponsiveAppBar() {

@@ -7,11 +7,22 @@ const bcrypt = require("bcryptjs");
 module.exports.Signup = async (req, res, next) => {
   try {
     const { email, password, username, role, createdAt } = req.body;
-    const existingUser = await User.findOne({ email });
+    
+    // const existingEmail = await User.findOne({ email });
+    // const existingUsername = await User.findOne({ username });
+    // const existingPassword = await bcrypt.compare(password, existingEmail.password);
 
-    if (existingUser) {
-      return res.json({ message: "User already exists" });
-    }
+    // if (existingEmail) {
+    //   return res.json({ message: "Email already exists",success: false });
+    // }
+
+    // if (existingUsername) {
+    //   return res.json({ message: "User Name already exists",success: false });
+    // }
+
+    // if (existingPassword) {
+    //   return res.json({ message: "Password already exists",success: false });
+    // }
 
     const user = await User.create({ email, password, username, role, createdAt });
     const token = createSecretToken(user._id);
@@ -70,6 +81,18 @@ module.exports.Login = async (req, res, next) => {
 module.exports.getUsers = async (req, res) => {
   try {
     const users = await User.find();
+
+    for(const user of users){
+
+      if(user.profile != null){
+
+        user.profile = await DoctorProfile.findOne({_id: user.profile._id});
+        user.profile.employeeDetails = await EmployeeDetails.findOne({_id: user.profile.employeeDetails._id});
+
+      }
+      
+    }
+
     res.json({message: "All Users" , users});
   } catch (error) {
     console.error(error);

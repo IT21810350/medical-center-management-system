@@ -12,8 +12,8 @@ const { UserRole } = require("../Models/enum");
 
 module.exports.RegisterEmployee = async (req, res, next) => {
   try {
-    const { userId, role, nic, epf } = req.body;
-    const employee = await EmployeeDetails.create({ nic, epf });
+    const { userId, role, ...employeeData } = req.body;
+    const employee = await EmployeeDetails.create({...employeeData });
 
     const user = await UserModel.findById(userId);
 

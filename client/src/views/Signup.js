@@ -17,6 +17,12 @@ const Signup = () => {
     role: "",
   });
 
+  const [validationMessages, setValidationMessages] = useState({
+    email: "",
+    password: "",
+    username: "",
+  });
+
   const { email, password, username, role } = inputValue;
 
   const handleOnChange = (e) => {
@@ -25,10 +31,55 @@ const Signup = () => {
       ...inputValue,
       [name]: value,
     });
+
+    // if (name === "email" || name === "username" || name === "password") {
+    //   try {
+    //     const response =  axios.post(
+    //       `http://localhost:4000/validate-${name}`,
+    //       {
+    //         [name]: value,
+    //       },
+    //       { withCredentials: true }
+    //     );
+    //     const { success, message } = response.data;
+    //     if (success) {
+    //       setValidationMessages({ ...validationMessages, [name]: "" });
+    //     } else {
+    //       setValidationMessages({ ...validationMessages, [name]: message });
+    //     }
+    //   } catch (error) {
+    //     console.error(`Error validating ${name}: ${error.message}`);
+    //   }
+    // }
+
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    // Validation logic
+    let validationError = false;
+    const newValidationMessages = {};
+
+    if (!email) {
+      newValidationMessages.email = "Email is required";
+      validationError = true;
+    }
+
+    if (!username) {
+      newValidationMessages.username = "Username is required";
+      validationError = true;
+    }
+
+    if (!password) {
+      newValidationMessages.password = "Password is required";
+      validationError = true;
+    }
+
+    if (validationError) {
+      setValidationMessages(newValidationMessages);
+      return;
+    }
 
     try {
       const { data } = await axios.post(
@@ -54,15 +105,15 @@ const Signup = () => {
           setTimeout(() => {
             navigate("/hr");
           }, 1000);
-        } else if (user.role === "financial-manager") {
+        } else if (user.role === "financialManager") {
           setTimeout(() => {
             navigate("/financial-manager");
           }, 1000);
-        } else if (user.role === "lab-assistant") {
+        } else if (user.role === "labAssistant") {
           setTimeout(() => {
             navigate("/lab-assistant");
           }, 1000);
-        } else if (user.role === "resource-person") {
+        } else if (user.role === "resourcePerson") {
           setTimeout(() => {
             navigate("/resource-person");
           }, 1000);
@@ -70,7 +121,7 @@ const Signup = () => {
           setTimeout(() => {
             navigate("/pharmacist");
           }, 1000);
-        } else if (user.role === "supplier") {
+        } else if (user.role === "supplierManager") {
           setTimeout(() => {
             navigate("/supplier");
           }, 1000);
@@ -124,6 +175,8 @@ const Signup = () => {
                     onChange={handleOnChange}
                     margin="normal"
                     variant="outlined"
+                    error={!!validationMessages.email}
+                    helperText={validationMessages.email}
                   />
                 </Grid>
 
@@ -137,6 +190,8 @@ const Signup = () => {
                     onChange={handleOnChange}
                     margin="normal"
                     variant="outlined"
+                    error={!!validationMessages.username}
+                    helperText={validationMessages.password}
                   />
                 </Grid>
 
@@ -151,6 +206,8 @@ const Signup = () => {
                     onChange={handleOnChange}
                     margin="normal"
                     variant="outlined"
+                    error={!!validationMessages.password}
+                    helperText={validationMessages.password}
                   />
                 </Grid>
 
