@@ -5,7 +5,8 @@ require('dotenv').config();
 const cookieParser = require("cookie-parser");
 const authRoute = require("./Routes/AuthRoute");
 const ProfileRoute = require("./Routes/ProfileRoute");
-const RegisterEmployee = require("./Routes/EmployeeRoutes")
+const RegisterEmployee = require("./Routes/EmployeeRoutes");
+const PharmacistRoutes = require("./Routes/PharmacistRoutes");
 
 const { MONGO_URL, PORT } = process.env;
 
@@ -15,7 +16,8 @@ app.use(
   cors({
     origin: ["http://localhost:3000"],
     methods: ["GET", "POST", "PUT", "DELETE"],
-    credentials: true,
+    allowedHeaders:["content type", "Authorization"],
+    //credentials: true,
   })
 );
 
@@ -29,7 +31,13 @@ connection.once('open', () => {
     console.log("MongoDB database connection established successfully")
 });
 
-app.use("/", authRoute, ProfileRoute, RegisterEmployee);
+//const PharmacistRoutes = require ("../routes/PharmacistProfile.js");
+
+//http://Localhost:3000/pharmacist
+
+//app.use("/pharmacist",PharmacistRoutes);
+
+app.use("/", authRoute, ProfileRoute, RegisterEmployee, PharmacistRoutes);
 
 app.listen(PORT, () => {
     console.log(`Server is running on port: ${PORT}`);

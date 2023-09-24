@@ -13,8 +13,13 @@ import Contact from './views/ContactUs'
 import Channeling from './views/doctor-views/channeling'
 import Registration from './views/hr-views/hr-emp-registration';
 import Profile from './views/hr-views/emp-profile';
-import SearchDoctors from './views/patient-views/searchDoctors'
+import SearchDoctors from './views/patient-views/searchDoctors';
+import PharmacistProfile from './views/pharmacist-views/pharmacistProfile';
 import SupplierRegistration from './views/supplier-manager-views/supplier-registration';
+//import addMedicine from './views/pharmacist-views/addMedicine';
+import MedicineStore from './views/pharmacist-views/medicineStore';
+import MedicineOrder from './views/pharmacist-views/medicineOrders';
+import MedicineSales from './views/pharmacist-views/medicineSales';
 
 
 
@@ -49,6 +54,15 @@ function App() {
 
         {/* Patient Routes */}
         <Route path="/searchDoctors" element={<SearchDoctors />} />
+
+        {/*Pharmacist Routes */}
+        <Route path="/pharmacistProfile" element={<PharmacistProfile/>} />
+        <Route path="/addMedicine" element={<addMedicine/>} />
+        <Route path="/medicineStore" element={<MedicineStore/>} />
+        <Route path="/medicineOrder" element={<MedicineOrder/>} />
+        <Route path="/medicineSales" element={<MedicineSales/>} />
+        <Route path="/pharmacist/*" element={<Pharmacist />} />
+
       
 
         {/* Supplier Routes */}
@@ -58,6 +72,8 @@ function App() {
     </div>
   );
 }
+
+export default App;
 
 // import React from 'react';
 // import { BrowserRouter as Router, Routes, Route} from 'react-router-dom';
@@ -93,4 +109,4 @@ function App() {
 //   );
 // }
 
-export default App;
+
