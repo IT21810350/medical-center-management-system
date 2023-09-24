@@ -24,6 +24,7 @@ import PatientProfile from './views/patient-views/patient-profile';
 import PatientInquiries from './views/patient-views/inquiries';
 import PatientAdditionalFiles from './views/patient-views/patient-additional-files';
 import InquiryList from './views/patient-views/inq-handle';
+import EditInquiry  from "./views/patient-views/EditInquery";
 import Reschedule from './views/patient-views/reschedule';
 import Delete from './views/patient-views/delete';
 
@@ -113,6 +114,7 @@ function App() {
         <Route path="/patient-additional" exact Component={PatientAdditionalFiles} />
         <Route path="/rescedule-appointment" exact Component={Reschedule} />
         <Route path="/delete-appointment" exact Component={Delete} />
+        <Route path="/edit/:id" exact Component={EditInquiry} />
 
 
 

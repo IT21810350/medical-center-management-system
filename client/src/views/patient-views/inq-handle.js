@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-
+import { Link } from 'react-router-dom';
+import EditInquiry from './EditInquery';
 
 const InquiryList = () => {
   const [inquiries, setInquiries] = useState([]);
 
   const fetchInquiries = async () => {
     try {
-      const response = await axios.get('http://localhost:4000/inqData/'); // Fetch all inquiries
+      const response = await axios.get('http://localhost:4000/inqData/');
       setInquiries(response.data);
     } catch (error) {
       console.error('Error fetching inquiries:', error);
@@ -15,14 +16,12 @@ const InquiryList = () => {
   };
 
   useEffect(() => {
-    fetchInquiries(); // Fetch inquiries when the component mounts
+    fetchInquiries();
   }, []);
 
   const handleDelete = async (id) => {
     try {
-      // Delete the inquiry with the specified ID
       await axios.delete(`http://localhost:4000/deleteinq/${id}`);
-      // Refetch inquiries to update the list
       fetchInquiries();
     } catch (error) {
       console.error('Error deleting inquiry:', error);
@@ -31,9 +30,6 @@ const InquiryList = () => {
 
   return (
     <div>
-
-
-         
       <h2>All Inquiries</h2>
       <table>
         <thead>
@@ -52,7 +48,9 @@ const InquiryList = () => {
               <td>{inquiry.message}</td>
               <td>
                 <button onClick={() => handleDelete(inquiry._id)}>Delete</button>
-                <button>Edit</button>
+                <Link to={`/edit/${inquiry._id}`}>
+                  <button>Edit</button>
+                </Link>
               </td>
             </tr>
           ))}
@@ -63,6 +61,78 @@ const InquiryList = () => {
 };
 
 export default InquiryList;
+
+
+
+////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////
+// import React, { useState, useEffect } from 'react';
+// import axios from 'axios';
+
+
+// const InquiryList = () => {
+//   const [inquiries, setInquiries] = useState([]);
+
+//   const fetchInquiries = async () => {
+//     try {
+//       const response = await axios.get('http://localhost:4000/inqData/'); // Fetch all inquiries
+//       setInquiries(response.data);
+//     } catch (error) {
+//       console.error('Error fetching inquiries:', error);
+//     }
+//   };
+
+//   useEffect(() => {
+//     fetchInquiries(); // Fetch inquiries when the component mounts
+//   }, []);
+
+//   const handleDelete = async (id) => {
+//     try {
+//       // Delete the inquiry with the specified ID
+//       await axios.delete(`http://localhost:4000/deleteinq/${id}`);
+//       // Refetch inquiries to update the list
+//       fetchInquiries();
+//     } catch (error) {
+//       console.error('Error deleting inquiry:', error);
+//     }
+//   };
+
+//   return (
+//     <div>
+
+
+         
+//       <h2>All Inquiries</h2>
+//       <table>
+//         <thead>
+//           <tr>
+//             <th>Name</th>
+//             <th>Subject</th>
+//             <th>Message</th>
+//             <th>Actions</th>
+//           </tr>
+//         </thead>
+//         <tbody>
+//           {inquiries.map((inquiry) => (
+//             <tr key={inquiry._id}>
+//               <td>{inquiry.name}</td>
+//               <td>{inquiry.subject}</td>
+//               <td>{inquiry.message}</td>
+//               <td>
+//                 <button onClick={() => handleDelete(inquiry._id)}>Delete</button>
+//                 <button>Edit</button>
+//               </td>
+//             </tr>
+//           ))}
+//         </tbody>
+//       </table>
+//     </div>
+//   );
+// };
+
+// export default InquiryList;
+//////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////
 
 
 //===========================================================
