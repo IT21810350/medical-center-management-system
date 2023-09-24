@@ -1,9 +1,9 @@
 // global imports
 import { Route, Routes } from "react-router-dom";
-import { Login, Signup } from "./views/Index";
 
 // pages <- common for every actor type
 import Home from "./views/Home";
+import { Login, Signup } from "./views/Index";
 import Contact from './views/ContactUs';
 
 // doctor imports
@@ -25,19 +25,24 @@ import PatientProfile from './views/patient-views/patient-profile';
 import PatientInquiries from './views/patient-views/inquiries';
 import PatientAdditionalFiles from './views/patient-views/patient-additional-files';
 import InquiryList from './views/patient-views/inq-handle';
-import EditInquiry  from "./views/patient-views/EditInquery";
+import EditInquiry from "./views/patient-views/EditInquery";
 import Reschedule from './views/patient-views/reschedule';
 import Delete from './views/patient-views/delete';
 
 // pharmacist imports
 import Pharmacist from './views/pharmacist-views/parmacist-home';
+import PharmacistProfile from './views/pharmacist-views/pharmacistProfile';
+//import addMedicine from './views/pharmacist-views/addMedicine';
+import MedicineStore from './views/pharmacist-views/medicineStore';
+import MedicineOrder from './views/pharmacist-views/medicineOrders';
+import MedicineSales from './views/pharmacist-views/medicineSales';
 
 // hr imports
 import HR from './views/hr-views/hr-home';
 import Registration from './views/hr-views/hr-emp-registration';
 import Profile from './views/hr-views/emp-profile';
 import EditEmployee from './views/hr-views/Edit_employee';
-import Payrollsystem  from './views/hr-views/Payroll-Management';
+import Payrollsystem from './views/hr-views/Payroll-Management';
 
 // lab assistant imports
 import LA from './views/lab-assistant-views/lab-assistant-home';
@@ -55,13 +60,7 @@ import LabAssistantProfile from './views/lab-assistant-views/lab-assistant-profi
 
 // supplier manager imports
 import SM from "./views/supplier-manager-views/supplier-manager-home";
-//import SearchDoctors from './views/patient-views/searchDoctors';
-import PharmacistProfile from './views/pharmacist-views/pharmacistProfile';
 import SupplierRegistration from './views/supplier-manager-views/supplier-registration';
-//import addMedicine from './views/pharmacist-views/addMedicine';
-import MedicineStore from './views/pharmacist-views/medicineStore';
-import MedicineOrder from './views/pharmacist-views/medicineOrders';
-import MedicineSales from './views/pharmacist-views/medicineSales';
 import SupplierProfile from './views/supplier-manager-views/supplier-profile';
 import SupplierList from './views/supplier-manager-views/supplier-list';
 import SupplierPayment from './views/supplier-manager-views/supplier-payment';
@@ -74,17 +73,12 @@ import SupplierOrderPharmacy from './views/supplier-manager-views/supplier-order
 
 // resource person imports
 import RP from "./views/resource-manager-views/resource-manager-home";
+import RoomType from './views/resource-manager-views/roomType';
+
 
 // financial manager imports
 import FM from './views/financial-manager-views/financial-manager-home';
-// <<<<<<< HEAD
-// import Invoice from './views/financial-manager-views/invoice';
-
-// Resource person Imports
-import RoomType from './views/resource-manager-views/roomType';
-// =======
 //import Invoice from './views/financial-manager-views/invoice';
-// >>>>>>> 4003b993c00b58d3161f72f8e8c81dfa23d940d4
 
 
 
@@ -92,21 +86,15 @@ function App() {
   return (
     <div className="App">
       <Routes>
+
+        {/* common routes */}
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/contact-us" element={<Contact />} />
 
-        {/* actor routes */}
-
-        <Route path="/patient" element={<Patient />} />
-        <Route path="/doctor" element={<Doctor />} />
-        <Route path="/lab-assistant" element={<LA />} />
-        <Route path="/pharmacist" element={<Pharmacist />} />
-        <Route path="/resource-person" element={<RP />} />
-        <Route path="/supplier" element={<SM />} />
-
         {/* Doctor Routes */}
+        <Route path="/doctor" element={<Doctor />} />
         <Route path="/channeling" element={<Channeling />} />
         <Route path="/symptoms" element={<Symptoms />} />
         <Route path="/prescription" element={<Prescription />} />
@@ -117,20 +105,18 @@ function App() {
         <Route path="/edit-employee" element={<EditEmployee />} />
         <Route path="/profile/:id" element={<Profile />} />
         <Route path="/payroll" element={<Payrollsystem />} />
-        
+
+        {/*Pharmacist Routes */}
+        <Route path="/pharmacist" element={<Pharmacist />} />
+        <Route path="/pharmacistProfile" element={<PharmacistProfile />} />
+        <Route path="/addMedicine" element={<addMedicine />} />
+        <Route path="/medicineStore" element={<MedicineStore />} />
+        <Route path="/medicineOrder" element={<MedicineOrder />} />
+        <Route path="/medicineSales" element={<MedicineSales />} />
 
         {/* Patient Routes */}
         <Route path="/searchDoctors" element={<SearchDoctors />} />
-
-        {/*Pharmacist Routes */}
-        <Route path="/pharmacistProfile" element={<PharmacistProfile/>} />
-        <Route path="/addMedicine" element={<addMedicine/>} />
-        <Route path="/medicineStore" element={<MedicineStore/>} />
-        <Route path="/medicineOrder" element={<MedicineOrder/>} />
-        <Route path="/medicineSales" element={<MedicineSales/>} />
-        <Route path="/pharmacist/*" element={<Pharmacist />} />
-
-      
+        <Route path="/patient" element={<Patient />} />
         <Route path="/search-doctors" element={<SearchDoctors />} />
         <Route path="/dash" exact Component={CommonPatientDashboard} />
         <Route path="/search-chanelling" exact Component={SearchChanelling} />
@@ -147,10 +133,12 @@ function App() {
 
 
         {/* Resource person Routes */}
+        <Route path="/resource-person" element={<RP />} />
         <Route path="/room-types" element={<RoomType />} />
 
 
         {/* Supplier Routes */}
+        <Route path="/supplier" element={<SM />} />
         <Route path="/supplier/supplier-registration" element={<SupplierRegistration />} />
         <Route path="/supplier/supplier-profile" element={<SupplierProfile />} />
         <Route path="/supplier/supplier-list" element={<SupplierList />} />
@@ -163,21 +151,21 @@ function App() {
 
 
         {/*Lab Assistant Routes */}
+        <Route path="/lab-assistant" element={<LA />} />
         <Route path="/lab-test" element={<LabTest />} />
         <Route path="/lab-inventory" element={<LabInventory />} />
         <Route path="/lab-report" element={<LabReport />} />
         <Route path="/lab-sample" element={<LabSample />} />
-        <Route path="/lab-test" element={<LabTest/>}/>
-        <Route path="/lab-facilities" element={<LabFacilities/>}/>
-        <Route path="/lab-inventory/update" element={<LabUpdateInventory/>}/>
-        <Route path="/lab-report/update" element={<LabUpdateReport/>}/>
-        <Route path="/lab-sample/update" element={<LabUpdateSample/>}/>
-        <Route path="/lab-test/update" element={<LabUpdateTest/>}/>
-        <Route path="/labAssistant-profile" element={<LabAssistantProfile/>}/>
+        <Route path="/lab-test" element={<LabTest />} />
+        <Route path="/lab-facilities" element={<LabFacilities />} />
+        <Route path="/lab-inventory/update" element={<LabUpdateInventory />} />
+        <Route path="/lab-report/update" element={<LabUpdateReport />} />
+        <Route path="/lab-sample/update" element={<LabUpdateSample />} />
+        <Route path="/lab-test/update" element={<LabUpdateTest />} />
+        <Route path="/labAssistant-profile" element={<LabAssistantProfile />} />
 
-
+        
         {/*Financial Manager Routes */}
-
         <Route path="/financial-manager" element={<FM />} />
         {/* <Route path="/invoice" element={<Invoice />} /> */}
 
