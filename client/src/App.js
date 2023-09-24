@@ -10,6 +10,7 @@ import Contact from './views/ContactUs';
 import Doctor from './views/doctor-views/doctor-home';
 import Channeling from './views/doctor-views/channeling';
 import Symptoms from "./views/doctor-views/symptoms";
+import Prescription from "./views/doctor-views/prescription";
 
 // patient imports
 import Patient from './views/patient-views/patient-home';
@@ -78,6 +79,7 @@ function App() {
         {/* Doctor Routes */}
         <Route path="/channeling" element={<Channeling />} />
         <Route path="/symptoms" element={<Symptoms />} />
+        <Route path="/prescription" element={<Prescription />} />
 
         {/* Hr Routes */}
         <Route path="/hr" element={<HR />} />
