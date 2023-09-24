@@ -10,6 +10,8 @@ import Tab from '@mui/material/Tab';
 import CustomTabPanel from '../../components/patient-components/tab-panel';
 import UpcomingChanellings from './upcomming-chanellings';
 import InquiryList from './inq-handle';
+import PatientDetails from './patient-details';
+import PatientList from './all-patients';
 import PatientNavigationBar from '../../views/patient-views/patient-navigation-bar';
 
 export default function PatientProfile() {
@@ -103,18 +105,9 @@ export default function PatientProfile() {
                                         
                                     </Grid>
                                     <Grid item xs={12} sm={9}>
-                                       
-                                        {/* <ul> */}
-                                            {/* Map through the patientData array and display each patient's information */}
-                                            {/* {patientData.map(patient => (
-                                                <li key={patient._id}>
-                                                    <h2>{patient.name}</h2>
-                                                    <p>Age: {patient.age}</p>
-                                                    Display other patient details
-                                                </li>
-                                            ))}
-                                        </ul> */}
 
+                                        <PatientDetails/>
+                                       <PatientList/>
 
                                       
 
@@ -232,202 +225,6 @@ function a11yProps(index) {
 //     );
 // }
 
-// function AllDetails() {
-
-//     const [details, setDetails] = useState([]);
-  
-//     useEffect(() => {
-//       const getDetails = async () => {
-//         try {
-//           const response = await axios.get('http://localhost:4000/patients/');
-//           setDetails(response.data);
-//         } catch (error) {
-//           alert('Error fetching suppliers:', error.message);
-//         }
-//       };
-  
-//       getDetails();
-//     }, []);
-  
-//     return (
-//       <div >
-//         <h1>All Patients</h1>
-      
-//         <ul>
-//           {details.map((detail) => (
-//             <li key={detail.id}>
-//               Supplier ID: {detail.country}<br />
-//               Supplier Name: {detail.idNumber}<br />
-//               Item Type: {detail.fName}<br />
-//               Quantity: {detail.lName}<br />
-//               Quantity: {detail.gender}<br />
-//               Quantity: {detail.dob}<br />
-//               Quantity: {detail.phone}<br />
-//               Quantity: {detail.email}<br />
-//               Quantity: {detail.address}<br />
-//               Quantity: {detailgName}<br />
-//               Quantity: {detail.relation}<br />
-//               Quantity: {detail.gId}<br />
-//               Quantity: {detail.gContact}<br />
-            
-//               {/* <Link to={`/supplier/updateSupplier/${detail.id}`} state={{ patientData: details }}>
-//                 <button>Update</button>
-//               </Link>
-//               <Link to={`/supplier/uniqueSupplier/${detail.id}`} state={{ patientData: details }}>
-//                 <button>View</button>
-//               </Link> */}
-//             </li>
-//           ))}
-//         </ul>
-//       </div>
-//     );
-//   }
-
-  
-    const PatientList = () => {
-        const [patients, setPatients] = useState([]);
-      
-        const fetchPatients = async () => {
-          try {
-            const response = await axios.get('http://localhost:4000/patientData/'); // Fetch all patients
-            setPatients(response.data);
-          } catch (error) {
-            console.error('Error fetching patients:', error);
-          }
-        };
-      
-        useEffect(() => {
-          fetchPatients(); // Fetch patients when the component mounts
-        }, []);
-  
-    return (
-      <div>
-        <h1>List of Patients</h1>
-        {/* <table>
-          <thead>
-            <tr>
-              <th></th>
-              <th></th>
-              <th></th>
-              <th></th>
-              <th></th>
-              <th></th>
-              <th></th>
-              <th></th>
-              <th></th>
-              <th></th>
-              <th></th>
-              <th></th>
-              <th></th>
-              <th></th>
-              <th></th>
-            </tr>
-          </thead>
-          <tbody>
-            {patients.map((patient) => (
-              <tr key={patient._id}>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-              </tr>
-           
-          </tbody>
-        </table> */}
-        {patients.map((patient) => (
-        <TableContainer  key={patient._id}>
-        
-            <Table>
-                <TableHead>ID</TableHead>
-                <TableCell>{patient._id}</TableCell>
-            </Table>
-
-            <Table>
-                <TableHead>Country</TableHead>
-                <TableCell>{patient.country}</TableCell>
-            </Table>
-
-            <Table>
-                <TableHead>ID Type</TableHead>
-                <TableCell>{patient.idType}</TableCell>
-            </Table>
-
-            <Table>
-                <TableHead>ID Number</TableHead>
-                <TableCell>{patient.idNumber}</TableCell>
-            </Table>
-
-            <Table>
-                <TableHead>First Name</TableHead>
-                <TableCell>{patient.fName}</TableCell>
-            </Table>
-
-            <Table>
-                <TableHead>Last Name</TableHead>
-                <TableCell>{patient.lName}</TableCell>
-            </Table>
-
-            <Table>
-                <TableHead>Gender</TableHead>
-                <TableCell>{patient.gender}</TableCell>
-            </Table>
-
-            <Table>
-                <TableHead>Date of Birth</TableHead>
-                <TableCell>{patient.dob}</TableCell>
-            </Table>
-
-            <Table>
-                <TableHead>Phone</TableHead>
-                <TableCell>{patient.phone}</TableCell>
-            </Table>
-
-            <Table>
-                <TableHead>Email</TableHead>
-                <TableCell>{patient.email}</TableCell>
-            </Table>
-
-            <Table>
-                <TableHead>Address</TableHead>
-                <TableCell>{patient.address}</TableCell>
-            </Table>
-
-            <Table>
-                <TableHead>Guardian Name</TableHead>
-                <TableCell>{patient.gName}</TableCell>
-            </Table>
-
-            <Table>
-                <TableHead>Relation</TableHead>
-                <TableCell>{patient.relation}</TableCell>
-            </Table>
-
-            <Table>
-                <TableHead>Guardian ID</TableHead>
-                <TableCell>{patient.gId}</TableCell>
-            </Table>
-
-            <Table>
-                <TableHead>Guardian Contact</TableHead>
-                <TableCell>{patient.gContact}</TableCell>
-            </Table>
-        </TableContainer>
-         ))}
-      </div>
-    );
-  }
-// // //=========================================================
 
 // import React, { useEffect, useState } from 'react';
 // import axios from 'axios'; // Import the Axios library for making HTTP requests

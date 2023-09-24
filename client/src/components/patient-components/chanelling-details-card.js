@@ -1,8 +1,6 @@
-import React, {useEffect,useState} from 'react';
-import { Box, Grid, FormControl, InputLabel , Select , MenuItem , Stack, RadioGroup , Typography, FormControlLabel , Radio , Checkbox , Button, TextField, Paper } from '@mui/material';
-import imgProfile from '../../assets/patient/profile.jpg';
-import Heading from '../../components/patient-components/heading.component';
-import axios from 'axios';
+import React from 'react';
+import { Box, Grid, Typography,  } from '@mui/material';
+
 
 export default function ChanellinDetailsCard(color){
     return(

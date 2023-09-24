@@ -53,22 +53,22 @@ export default function PatientCreateAccount() {
      // console.log('Form submitted successfully', response.data);
 
       // Optionally, reset the form
-      setFormData({
-        country: '',
-        idType: '', 
-        idNumber: '', 
-        fName: '', 
-        lName: '', 
-        gender: '', 
-        dob: '', 
-        phone: '', 
-        email: '', 
-        address: '',
-        gName:'', 
-        relation:'', 
-        gId:'',
-        gContact:'',
-      });
+      // setFormData({
+      //   country: '',
+      //   idType: '', 
+      //   idNumber: '', 
+      //   fName: '', 
+      //   lName: '', 
+      //   gender: '', 
+      //   dob: '', 
+      //   phone: '', 
+      //   email: '', 
+      //   address: '',
+      //   gName:'', 
+      //   relation:'', 
+      //   gId:'',
+      //   gContact:'',
+      // });
     } catch (error) {
       // Handle errors 
      // console.error('Error submitting form', error.response.data);

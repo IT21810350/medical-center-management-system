@@ -8,11 +8,12 @@ const ProfileRoute = require("./Routes/ProfileRoute");
 const RegisterEmployee = require("./Routes/EmployeeRoutes");
 const HR =require("./Routes/HRroutes");;
 const SupplierRegistration = require("./Routes/SupplierRoutes");
-const SymptomAdd = require("./Routes/DoctorRoutes");
+const doctorRoutes = require("./Routes/DoctorRoutes");
 
 //========================================
 const patientRouter = require("./Routes/Patient_Routes/patient_routes");
 const inqRouter = require("./Routes/Patient_Routes/inq-routes");
+const getDoctors = require("./Routes/Patient_Routes/getDoctors");
 //========================================
 
 
@@ -27,6 +28,7 @@ app.use(
     origin: ["http://localhost:3000"],
     methods: ["GET", "POST", "PUT", "DELETE"],
     allowedHeaders: ["Content-Type", "Authorization"],
+    credentials: true,
     
   })
 );
@@ -49,12 +51,13 @@ connection.once('open', () => {
     console.log("MongoDB database connection established successfully")
 });
 
-app.use("/", authRoute, ProfileRoute, RegisterEmployee,HR, SymptomAdd, SupplierRegistration, validationRoute);
+app.use("/", authRoute, ProfileRoute, RegisterEmployee,HR, doctorRoutes, SupplierRegistration, validationRoute);
 
 
 //================================
 app.use("/patientData",patientRouter);
 app.use("/inqData" ,inqRouter);
+app.use("/getD",getDoctors);
 //=================================
 
 

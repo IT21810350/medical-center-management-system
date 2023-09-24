@@ -192,7 +192,7 @@ router.route("/deletepatient/:id").delete(async (req, res) => {
 //     })
 // })
 
-router.route("/get/:id").get(async (req, res) => {
+router.route("/patients/:id").get(async (req, res) => {
   try {
     const patientId = req.params.id;
     const patient = await Patient.findById(patientId);
@@ -208,5 +208,21 @@ router.route("/get/:id").get(async (req, res) => {
   }
 });
 
+// // Define the route to get a single patient by ID
+// router.route("/get/:id").get(async (req, res) => {
+//   try {
+//     const patientId = req.params.id;
+//     const patient = await Patient.findById(patientId);
+    
+//     if (!patient) {
+//       return res.status(404).json({ status: "Patient not found" });
+//     }
+
+//     return res.status(200).json({ status: "Patient found", patient });
+//   } catch (err) {
+//     console.error(err.message);
+//     return res.status(500).json({ status: "Error with getting patient", error: err.message });
+//   }
+// });
 
 module.exports = router;

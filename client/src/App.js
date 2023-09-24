@@ -10,6 +10,7 @@ import Contact from './views/ContactUs';
 import Doctor from './views/doctor-views/doctor-home';
 import Channeling from './views/doctor-views/channeling';
 import Symptoms from "./views/doctor-views/symptoms";
+import Prescription from "./views/doctor-views/prescription";
 
 // patient imports
 import Patient from './views/patient-views/patient-home';
@@ -24,6 +25,9 @@ import PatientProfile from './views/patient-views/patient-profile';
 import PatientInquiries from './views/patient-views/inquiries';
 import PatientAdditionalFiles from './views/patient-views/patient-additional-files';
 import InquiryList from './views/patient-views/inq-handle';
+import EditInquiry  from "./views/patient-views/EditInquery";
+import Reschedule from './views/patient-views/reschedule';
+import Delete from './views/patient-views/delete';
 
 // pharmacist imports
 import Pharmacist from './views/pharmacist-views/parmacist-home';
@@ -67,7 +71,14 @@ import RP from "./views/resource-manager-views/resource-manager-home";
 
 // financial manager imports
 import FM from './views/financial-manager-views/financial-manager-home';
+// <<<<<<< HEAD
+// import Invoice from './views/financial-manager-views/invoice';
+
+// Resource person Imports
+import RoomType from './views/resource-manager-views/roomType';
+// =======
 //import Invoice from './views/financial-manager-views/invoice';
+// >>>>>>> 4003b993c00b58d3161f72f8e8c81dfa23d940d4
 
 
 
@@ -92,6 +103,7 @@ function App() {
         {/* Doctor Routes */}
         <Route path="/channeling" element={<Channeling />} />
         <Route path="/symptoms" element={<Symptoms />} />
+        <Route path="/prescription" element={<Prescription />} />
 
         {/* Hr Routes */}
         <Route path="/hr" element={<HR />} />
@@ -112,6 +124,13 @@ function App() {
         <Route path="/patient-inquiries" exact Component={PatientInquiries} />
         <Route path="/inq-handle" exact Component={InquiryList} />
         <Route path="/patient-additional" exact Component={PatientAdditionalFiles} />
+        <Route path="/rescedule-appointment" exact Component={Reschedule} />
+        <Route path="/delete-appointment" exact Component={Delete} />
+        <Route path="/edit/:id" exact Component={EditInquiry} />
+
+
+        {/* Resource person Routes */}
+        <Route path="/room-types" element={<RoomType />} />
 
 
         {/* Supplier Routes */}
@@ -149,7 +168,7 @@ function App() {
 
 
 
-        
+
 
       </Routes>
 
