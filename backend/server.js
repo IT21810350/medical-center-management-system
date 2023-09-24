@@ -6,11 +6,10 @@ const cookieParser = require("cookie-parser");
 const authRoute = require("./Routes/AuthRoute");
 const ProfileRoute = require("./Routes/ProfileRoute");
 const RegisterEmployee = require("./Routes/EmployeeRoutes");
+const PharmacistRoutes = require("./Routes/PharmacistRoutes");;
 const HR =require("./Routes/HRroutes");;
 const SupplierRegistration = require("./Routes/SupplierRoutes");
-const SymptomAdd = require("./Routes/DoctorRoutes");
-
-
+const doctorRoutes = require("./Routes/DoctorRoutes");
 
 //========================================
 const patientRouter = require("./Routes/Patient_Routes/patient_routes");
@@ -29,8 +28,7 @@ app.use(
   cors({
     origin: ["http://localhost:3000"],
     methods: ["GET", "POST", "PUT", "DELETE"],
-    allowedHeaders: ["Content-Type", "Authorization"],
-    
+    credentials: true,
   })
 );
 
@@ -52,13 +50,13 @@ connection.once('open', () => {
     console.log("MongoDB database connection established successfully")
 });
 
-// resource person routes start
-const roomType = require("./Routes/resource-person-routes/roomType-routes");
+//const PharmacistRoutes = require ("../routes/PharmacistProfile.js");
 
-app.use('/room-type', roomType);
-// resource person routes end
+//http://Localhost:3000/pharmacist
 
-app.use("/", authRoute, ProfileRoute, RegisterEmployee,HR, SymptomAdd,SupplierRegistration);
+//app.use("/pharmacist",PharmacistRoutes);
+
+app.use("/", authRoute, ProfileRoute, RegisterEmployee, PharmacistRoutes,HR, doctorRoutes, SupplierRegistration, validationRoute);
 
 
 //================================

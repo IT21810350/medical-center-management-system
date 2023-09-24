@@ -43,29 +43,58 @@ router.route("/").get((req,res)=>{
 })
 //=====================================================
 //UPDATE
-router.route("/update/:id").put(async(req,res)=>{
-    let inqId = request.params.id;
+// router.route("/updateinq/:id").put(async(req,res)=>{
+//     let inqId = req.params.id;
 
-    const{name,subject,message} = req.body;
+//     const{name,subject,message} = req.body;
 
-    //crate an object
-    const updateInq = {
-        name,subject,message
-    };
-    try {
-        // Use findByIdAndUpdate to find and update the inq
-        const updatedInq = await Inquiries.findByIdAndUpdate(inqId, updateInq);
+//     //crate an object
+//     const updateInq = {
+//         name,subject,message
+//     };
+//     try {
+//         // Use findByIdAndUpdate to find and update the inq
+//         const updatedInq = await Inquiries.findByIdAndUpdate(inqId, updateInq);
     
-        if (!updatedInq) {
-          return res.status(404).send({ status: "Inq not found" });
-        }
+//         if (!updatedInq) {
+//           return res.status(404).send({ status: "Inq not found" });
+//         }
     
-        return res.status(200).send({ status: "Inq details updated successfully" });
-      } catch (err) {
-        console.error(err);
-        return res.status(500).send({ status: "Error with updating inqs", error: err.message });
-      }
-    });
+//         return res.status(200).send({ status: "Inq details updated successfully" });
+//       } catch (err) {
+//         console.error(err);
+//         return res.status(500).send({ status: "Error with updating inqs", error: err.message });
+//       }
+//     });
+
+// 
+router.route("/updateinq/:id").put(async (req, res) => {
+  const inqId = req.params.id;
+  const { name, subject, message } = req.body;
+
+  try {
+    // Find the inquiry by ID
+    const inquiry = await Inquiries.findById(inqId);
+
+    if (!inquiry) {
+      return res.status(404).send({ status: "Inq not found" });
+    }
+
+    // Update the inquiry details
+    inquiry.name = name;
+    inquiry.subject = subject;
+    inquiry.message = message;
+
+    // Save the updated inquiry
+    await inquiry.save();
+
+    return res.status(200).send({ status: "Inq details updated successfully" });
+  } catch (err) {
+    console.error(err);
+    return res.status(500).send({ status: "Error with updating inq", error: err.message });
+  }
+});
+
 
 //=====================================================
 // DELETE
@@ -89,15 +118,31 @@ router.route("/deleteinq/:id").delete(async (req, res) => {
   });
 //=====================================================
 //Select only one patient
-router.route("/get/:id").get(async (req,res) =>{
-    let inqId = req.params.id;
-    const inq = await Inquiries.findById(inqId)
-    .then((inq)=>{
-        res.status(200).send({status: "Inq found",inq})
-    }).catch((err)=>{
-        console.log(err.message);
-        res.status(500).send({status: "Error with getting inq", error: err.message});
-    })
-})
+
+router.route("/get/:id").get(async(req,res) => {
+  try{
+    const inqId = req.params.id;
+    const inq = await Inq.findById(inqId);
+
+    if(!inq){
+      return res.status(404).json({status: "Inquery not found" });
+    }
+
+    return res.status(200).json({status: "Inquery found", patient });
+  } catch (err) {
+    console.error(err.message);
+    return res.status(500).json({ status: "Error with getting inq", error: err.message });
+  }
+});
+// router.route("/get/:id").get(async (req,res) =>{
+//     let inqId = req.params.id;
+//     const inq = await Inquiries.findById(inqId)
+//     .then((inq)=>{
+//         res.status(200).send({status: "Inq found",inq})
+//     }).catch((err)=>{
+//         console.log(err.message);
+//         res.status(500).send({status: "Error with getting inq", error: err.message});
+//     })
+// })
 
 module.exports = router;
