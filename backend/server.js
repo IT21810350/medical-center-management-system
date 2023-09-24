@@ -10,6 +10,8 @@ const PharmacistRoutes = require("./Routes/PharmacistRoutes");;
 const HR =require("./Routes/HRroutes");;
 const SupplierRegistration = require("./Routes/SupplierRoutes");
 const doctorRoutes = require("./Routes/DoctorRoutes");
+const Room = require("./Routes/resource-person-routes/room-routes");
+const RoomType = require("./Routes/resource-person-routes/roomType-routes");
 
 //========================================
 const patientRouter = require("./Routes/Patient_Routes/patient_routes");
@@ -65,6 +67,8 @@ app.use("/inqData" ,inqRouter);
 app.use("/getD",getDoctors);
 //=================================
 
+app.use("/room", Room);
+app.use("/room-type", RoomType);
 
 app.listen(PORT, () => {
     console.log(`Server is running on port: ${PORT}`);

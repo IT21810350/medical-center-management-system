@@ -74,6 +74,8 @@ import SupplierOrderPharmacy from './views/supplier-manager-views/supplier-order
 // resource person imports
 import RP from "./views/resource-manager-views/resource-manager-home";
 import RoomType from './views/resource-manager-views/roomType';
+import Room from './views/resource-manager-views/room';
+import EditRoom from './views/resource-manager-views/editRoom';
 
 
 // financial manager imports
@@ -135,6 +137,8 @@ function App() {
         {/* Resource person Routes */}
         <Route path="/resource-person" element={<RP />} />
         <Route path="/room-types" element={<RoomType />} />
+        <Route path="/room" element={<Room/>}/>
+        <Route path="/editRoom" element={<EditRoom/>}/>
 
 
         {/* Supplier Routes */}
