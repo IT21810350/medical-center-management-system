@@ -69,14 +69,14 @@ import RP from "./views/resource-manager-views/resource-manager-home";
 
 // financial manager imports
 import FM from './views/financial-manager-views/financial-manager-home';
-<<<<<<< HEAD
+// <<<<<<< HEAD
 // import Invoice from './views/financial-manager-views/invoice';
 
 // Resource person Imports
 import RoomType from './views/resource-manager-views/roomType';
-=======
+// =======
 //import Invoice from './views/financial-manager-views/invoice';
->>>>>>> 4003b993c00b58d3161f72f8e8c81dfa23d940d4
+// >>>>>>> 4003b993c00b58d3161f72f8e8c81dfa23d940d4
 
 
 
