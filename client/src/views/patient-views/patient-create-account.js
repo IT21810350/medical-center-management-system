@@ -100,11 +100,11 @@ export default function PatientCreateAccount() {
               <InputLabel>Select Country</InputLabel>
               <Select
                 label="Select Country"
-                name='country'
+                name="country"
                 onChange={(e) => handleOnChange(e)}
                 value={patientDetails.country}
               >
-                <MenuItem value="null">
+                <MenuItem value="Not selected">
                   <em>Select</em>
                 </MenuItem>
                 <MenuItem value="Sri Lanka">Sri Lanka</MenuItem>
@@ -227,7 +227,7 @@ export default function PatientCreateAccount() {
                 onChange={(e) => handleOnChange(e)}
                 value={patientDetails.relation}
               >
-                <MenuItem value="null">
+                <MenuItem value="Not selected">
                   <em>Select</em>
                 </MenuItem>
                 <MenuItem value="Mother">Mother</MenuItem>

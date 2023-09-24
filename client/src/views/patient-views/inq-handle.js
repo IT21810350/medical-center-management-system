@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
-import EditInquiry from './EditInquery';
+import Button from '@mui/material/Button';
 
 const InquiryList = () => {
   const [inquiries, setInquiries] = useState([]);
@@ -48,9 +48,27 @@ const InquiryList = () => {
               <td>{inquiry.message}</td>
               <td>
                 <button onClick={() => handleDelete(inquiry._id)}>Delete</button>
-                <Link to={`/edit/${inquiry._id}`}>
-                  <button>Edit</button>
-                </Link>
+                {/* <Link 
+                  // to={{
+                  //   pathname: `/editinq/`,
+                  //   //state: { inquiryData: inquiry }, // Pass the inquiry object as state
+                  // }}
+                  
+                >
+                  
+                </Link> */}
+                {/* <button component={Link} to="/editinq" variant="contained" color="primary">Edit</button> */}
+                <Button
+                                                component={Link}
+                                                to="/editinq"
+                                                variant="contained"
+                                                // size="small"
+                                                style={{ width: '100%' }}
+                                               
+                                                color="primary"
+                                            >
+                                                Inquiries
+                                            </Button>
               </td>
             </tr>
           ))}
@@ -61,6 +79,7 @@ const InquiryList = () => {
 };
 
 export default InquiryList;
+
 
 
 

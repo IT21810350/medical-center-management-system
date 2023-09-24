@@ -107,7 +107,7 @@ export default function PatientProfile() {
                                     <Grid item xs={12} sm={9}>
 
                                         <PatientDetails/>
-                                       <PatientList/>
+                                       {/* <PatientList/> */}
 
                                       
 
