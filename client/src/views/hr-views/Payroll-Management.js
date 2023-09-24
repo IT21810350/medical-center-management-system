@@ -6,9 +6,9 @@ import { styled } from '@mui/material/styles';
 import payrollmanagement from '../../assets/img/HR/payrollmanagement.jpg';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
-import CardActions from '@mui/material/CardActions';
+
 import { CardActionArea } from '@mui/material';
-import Typography from '@mui/material/Typography';
+
 import CardMedia from '@mui/material/CardMedia';
 
 const PayrollManagement = () => {
@@ -111,8 +111,8 @@ const PayrollManagement = () => {
                             <TableCell>ID</TableCell>
                             <TableCell>Employee Name</TableCell>
                             <TableCell>Salary</TableCell>
-                            <TableCell>EPF</TableCell>
-                            <TableCell>ETF</TableCell>
+                            <TableCell>EPF(0.12)</TableCell>
+                            <TableCell>ETF(0.03)</TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
