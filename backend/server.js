@@ -19,11 +19,8 @@ const getDoctors = require("./Routes/Patient_Routes/getDoctors");
 //========================================
 
 
-<<<<<<< HEAD
-=======
 const validationRoute = require("./Routes/ValidateRoutes");
 
->>>>>>> 4003b993c00b58d3161f72f8e8c81dfa23d940d4
 const { MONGO_URL, PORT } = process.env;
 
 const app = express();
@@ -55,7 +52,6 @@ connection.once('open', () => {
     console.log("MongoDB database connection established successfully")
 });
 
-<<<<<<< HEAD
 // resource person routes start
 const roomType = require("./Routes/resource-person-routes/roomType-routes");
 
@@ -63,9 +59,6 @@ app.use('/room-type', roomType);
 // resource person routes end
 
 app.use("/", authRoute, ProfileRoute, RegisterEmployee,HR, SymptomAdd,SupplierRegistration);
-=======
-app.use("/", authRoute, ProfileRoute, RegisterEmployee,HR, SymptomAdd, SupplierRegistration, validationRoute  );
->>>>>>> 4003b993c00b58d3161f72f8e8c81dfa23d940d4
 
 
 //================================
