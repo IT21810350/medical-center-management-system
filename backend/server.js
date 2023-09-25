@@ -74,6 +74,9 @@ app.use("/inqData" ,inqRouter);
 app.use("/getD",getDoctors);
 //=================================
 
+app.use("/room", Room);
+app.use("/room-type", RoomType);
+
 // lab assistant routes end
 app.use("/patientData",equipmentRouter);
 app.use("/labAssistantData",labAssistantRouter);

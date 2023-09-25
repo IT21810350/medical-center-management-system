@@ -26,5 +26,10 @@ router.route('/add').post((req, res) => {
 });
 
 // delete room
+router.route('/:id').delete((req, res) => {
+    Room.findByIdAndDelete(req.params.id)
+        .then(() => res.json("Room Deleted!"))
+        .catch(err => res.status(400).json("Error: " + err));
+})
 
 module.exports = router;
