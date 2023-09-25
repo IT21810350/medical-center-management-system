@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   Container,
   Typography,
@@ -16,6 +16,7 @@ import {
   TextField,
   DialogActions,
 } from '@mui/material';
+import Axios from 'axios';
 import NavBar from '../../components/LA-component/la-nav-bar';
 
 const styles = {
@@ -34,26 +35,12 @@ const styles = {
   },
 };
 
-function LabInventoryPage() {
-  const [labInventoryItems, setLabInventoryItems] = useState([
-    {
-      equipment_id: '1', // Use String data type
-      name: 'Microscope',
-      manufacturer: 'Brand A',
-      purchase_date: new Date('2022-01-15'), // Use Date objects
-      maintenance_schedule: new Date('2023-02-10'),
-      status: 'Operational',
-    },
-    {
-      equipment_id: '2', // Use String data type
-      name: 'Chemical Reagents',
-      manufacturer: 'Supplier X',
-      purchase_date: new Date('2022-03-20'), // Use Date objects
-      maintenance_schedule: new Date('2023-04-05'),
-      status: 'In Use',
-    },
-  ]);
+const axiosConfig = Axios.create({
+  baseURL: 'localhost:4000', // Replace with your actual backend URL
+});
 
+function LabInventoryPage() {
+  const [labInventoryItems, setLabInventoryItems] = useState([]);
   const [openCreateDialog, setOpenCreateDialog] = useState(false);
   const [newItemEquipmentId, setNewItemEquipmentId] = useState('');
   const [newItemName, setNewItemName] = useState('');
@@ -62,25 +49,54 @@ function LabInventoryPage() {
   const [newItemMaintenanceSchedule, setNewItemMaintenanceSchedule] = useState('');
   const [newItemStatus, setNewItemStatus] = useState('');
   const [openItemDialog, setOpenItemDialog] = useState(false);
-  const [selectedItem, setSelectedItem] = useState(null); // Store the selected item for viewing
+  const [selectedItem, setSelectedItem] = useState(null);
+
+  // Load inventory data from the backend when the component mounts
+  useEffect(() => {
+    refreshInventoryList();
+  }, []);
+
+  const refreshInventoryList = () => {
+    axiosConfig
+      .get('/inventory') // Adjust the endpoint to your backend's API
+      .then((response) => {
+        setLabInventoryItems(response.data);
+      })
+      .catch((error) => {
+        console.error('Error fetching inventory:', error);
+      });
+  };
 
   const handleCreateItem = () => {
     const newItem = {
       equipment_id: newItemEquipmentId,
       name: newItemName,
       manufacturer: newItemManufacturer,
-      purchase_date: new Date(newItemPurchaseDate), // Convert to Date
-      maintenance_schedule: new Date(newItemMaintenanceSchedule), // Convert to Date
+      purchase_date: newItemPurchaseDate,
+      maintenance_schedule: newItemMaintenanceSchedule,
       status: newItemStatus,
     };
 
-    setLabInventoryItems([...labInventoryItems, newItem]);
-    setOpenCreateDialog(false);
+    axiosConfig
+      .post('/inventory', newItem) // Adjust the endpoint to your backend's API
+      .then((response) => {
+        setOpenCreateDialog(false);
+        refreshInventoryList();
+      })
+      .catch((error) => {
+        console.error('Error creating item:', error);
+      });
   };
 
   const handleDeleteItem = (equipment_id) => {
-    const updatedInventory = labInventoryItems.filter((item) => item.equipment_id !== equipment_id);
-    setLabInventoryItems(updatedInventory);
+    axiosConfig
+      .delete(`/inventory/${equipment_id}`) // Adjust the endpoint to your backend's API
+      .then((response) => {
+        refreshInventoryList();
+      })
+      .catch((error) => {
+        console.error('Error deleting item:', error);
+      });
   };
 
   const handleViewItem = (item) => {
@@ -89,9 +105,8 @@ function LabInventoryPage() {
   };
 
   const handleUpdateItem = () => {
-    // Redirect to the update page for the selected item
     if (selectedItem) {
-      window.location.href = `/lab-inventory/update`;
+      window.location.href = `/lab-inventory/update/${selectedItem.equipment_id}`;
     }
   };
 
@@ -130,8 +145,12 @@ function LabInventoryPage() {
                   <TableCell>{item.equipment_id}</TableCell>
                   <TableCell>{item.name}</TableCell>
                   <TableCell>{item.manufacturer}</TableCell>
-                  <TableCell>{item.purchase_date.toISOString().slice(0, 10)}</TableCell> {/* Display date in yyyy-mm-dd format */}
-                  <TableCell>{item.maintenance_schedule.toISOString().slice(0, 10)}</TableCell> {/* Display date in yyyy-mm-dd format */}
+                  <TableCell>
+                    {item.purchase_date.toISOString().slice(0, 10)}
+                  </TableCell>
+                  <TableCell>
+                    {item.maintenance_schedule.toISOString().slice(0, 10)}
+                  </TableCell>
                   <TableCell>{item.status}</TableCell>
                   <TableCell>
                     <Button
@@ -156,7 +175,6 @@ function LabInventoryPage() {
         </TableContainer>
       </Container>
 
-      {/* Create Item Dialog */}
       <Dialog open={openCreateDialog} onClose={() => setOpenCreateDialog(false)}>
         <DialogTitle>Create New Inventory Item</DialogTitle>
         <DialogContent>
@@ -215,16 +233,22 @@ function LabInventoryPage() {
         </DialogActions>
       </Dialog>
 
-      {/* View Item Dialog */}
       <Dialog open={openItemDialog} onClose={() => setOpenItemDialog(false)}>
         <DialogTitle>Item Details</DialogTitle>
         {selectedItem && (
           <DialogContent>
-            <Typography variant="h6">Equipment ID: {selectedItem.equipment_id}</Typography>
+            <Typography variant="h6">
+              Equipment ID: {selectedItem.equipment_id}
+            </Typography>
             <Typography>Name: {selectedItem.name}</Typography>
             <Typography>Manufacturer: {selectedItem.manufacturer}</Typography>
-            <Typography>Purchase Date: {selectedItem.purchase_date.toISOString().slice(0, 10)}</Typography> {/* Display date in yyyy-mm-dd format */}
-            <Typography>Maintenance Schedule: {selectedItem.maintenance_schedule.toISOString().slice(0, 10)}</Typography> {/* Display date in yyyy-mm-dd format */}
+            <Typography>
+              Purchase Date: {selectedItem.purchase_date.toISOString().slice(0, 10)}
+            </Typography>
+            <Typography>
+              Maintenance Schedule:{' '}
+              {selectedItem.maintenance_schedule.toISOString().slice(0, 10)}
+            </Typography>
             <Typography>Status: {selectedItem.status}</Typography>
           </DialogContent>
         )}

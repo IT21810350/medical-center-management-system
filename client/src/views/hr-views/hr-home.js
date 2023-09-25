@@ -323,7 +323,7 @@ const HR = () => {
               <Item elevation={0}>
                 <div>
                   
-                  <TableContainer component={Paper}>
+                  <TableContainer component={Paper} sx={{ width: '95%', margin: '0 auto' }}>
                     <Table>
                       <TableHead>
                         <TableRow>
