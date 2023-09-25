@@ -4,14 +4,46 @@ const doctorProfile = new mongoose.Schema({
 
     firstName: {
         type: String,
+        required: true,
     },
-    lastname: {
+    middleName: {
         type: String,
+        default: '', // You can set a default value if needed
     },
-    specialization: {
+    lastName: {
         type: String,
+        required: true,
     },
-    experienceYears: {
+    gender: {
+        type: String,
+        required: true,
+        enum: ['male', 'female'], // Assuming gender can only be 'male' or 'female'
+    },
+    addressLine1: {
+        type: String,
+        required: true,
+    },
+    addressLine2: {
+        type: String,
+        default: '', // You can set a default value if needed
+    },
+    city: {
+        type: String,
+        required: true,
+    },
+    code: {
+        type: String,
+        required: true,
+    },
+    specialty: {
+        type: String,
+        required: true,
+    },
+    licenseNumber: {
+        type: String,
+        required: true,
+    },
+    experience: {
         type: Number,
         default: 0,
     },

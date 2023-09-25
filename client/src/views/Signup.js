@@ -99,7 +99,7 @@ const Signup = () => {
           }, 1000);
         } else if (user.role === "doctor") {
           setTimeout(() => {
-            navigate("/doctor");
+            navigate("/doctor-create-profile");
           }, 1000);
         } else if (user.role === "hr") {
           setTimeout(() => {

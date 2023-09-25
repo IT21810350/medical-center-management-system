@@ -11,10 +11,14 @@ const {UserRole} = require("../Models/enum");
 
 module.exports.CreateProfile = async (req, res, next) => {
     try {
-        const { userId, role, ...profileData } = req.body;
+        const { userId, ...profileData } = req.body;
+
+        const userData = await UserModel.findById(userId);
+
+        console.log(userData)
 
         let userProfile;
-        switch (role) {
+        switch (userData.role) {
             case UserRole.PATIENT:
                 userProfile = await PatientProfile.create({ ...profileData });
                 break;

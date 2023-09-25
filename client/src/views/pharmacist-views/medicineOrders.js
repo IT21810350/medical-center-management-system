@@ -11,7 +11,7 @@ export default function OrderForm() {
     <Container
       maxWidth="xl"
       style={{
-        height: '80vh', 
+        height: '80vh',
         width: '40vw',
         backgroundSize: 'cover',
         backgroundRepeat: 'no-repeat',
@@ -37,8 +37,8 @@ export default function OrderForm() {
               id="outlined-required-dosage"
               label="Dosage"
             />
-            </Grid>
-            <Grid item xs={12}>
+          </Grid>
+          <Grid item xs={12}>
             <TextField
               required
               fullWidth
@@ -46,7 +46,7 @@ export default function OrderForm() {
               label="Medicine Type"
             />
           </Grid>
-          
+
           <Grid item xs={12}>
             <TextField
               required
@@ -71,14 +71,23 @@ export default function OrderForm() {
               label="Order No"
             />
           </Grid>
-        </Grid>  
+
+          <Grid item xs={12}>
+            <TextField
+              required
+              fullWidth
+              id="outlined-required-order-no"
+              label="Medicine Reorder"
+            />
+          </Grid>
+        </Grid>
       </div>
       <Box sx={{ display: 'flex', justifyContent: 'center', mt: 2 }}>
         <Button variant="contained" color="primary">
           Cancel
         </Button>
         <Button variant="contained" color="error">
-          Submit 
+          Submit
         </Button>
       </Box>
     </Container>

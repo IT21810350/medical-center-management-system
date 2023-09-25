@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import NavBar from '../../components/doctor-component/doctor-nav-bar';
-import { Box, Grid, TextField, Button, CssBaseline, Container, Typography } from '@mui/material';
+import { Box, Grid, TextField, Button, CssBaseline, Container, Typography, InputLabel, MenuItem } from '@mui/material';
+import Select from '@mui/material/Select';
 import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
@@ -14,8 +15,11 @@ import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
+import Autocomplete from '@mui/material/Autocomplete';
 import backgroundImage from '../../assets/img/common/home-hero-background-img.jpg';
 import axios from "axios";
+import { Link } from 'react-router-dom';
+import Cookies from 'js-cookie';
 
 
 const MedicineTable = ({ medicines, onEdit, onDelete }) => {
@@ -76,6 +80,7 @@ const Prescription = () => {
     const [isEditMode, setIsEditMode] = useState(false);
 
     console.log(medicines);
+    console.log("current medicines" + currentMedicine);
 
     const handleAddMedicine = () => {
         if (!currentMedicine.medicine) {
@@ -111,7 +116,7 @@ const Prescription = () => {
         setIsEditMode(false);
     };
 
-    
+
     const submitData = async () => {
 
         const medicinesToSend = medicines.map(({ id, ...rest }) => rest);
@@ -120,8 +125,8 @@ const Prescription = () => {
 
         try {
             await axios.post(
-                "http://localhost:4000/prescription", 
-                medicinesToSend, 
+                "http://localhost:4000/prescription",
+                medicinesToSend,
                 { withCredentials: true }
             );
 
@@ -130,6 +135,35 @@ const Prescription = () => {
             console.error('An error occurred while sending data to the backend:', error);
         }
     };
+
+    const token = Cookies.get('token');
+    const tokenParts = token.split('.');
+    const payload = JSON.parse(atob(tokenParts[1]));
+    const userId = payload.id;
+
+    const [userData, setUserData] = useState(null);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const response = await axios.get(`http://localhost:4000/getDoctorProfile/` + userId);
+                setUserData(response.data.user);
+            } catch (error) {
+                console.error('Error fetching user data:', error);
+            }
+        };
+
+        fetchData();
+    }, [userId]);
+
+    console.log("User Id: " + userId);
+    console.log("User Data: ", userData);
+
+    if (userData === null) {
+        return <div>Loading...</div>;
+    }
+
+    console.log("First Name: " + userData.profile.firstName);
 
     return (
         <Grid>
@@ -141,103 +175,196 @@ const Prescription = () => {
                 <HeroSection />
             </Grid>
 
+            <Container maxWidth="100px">
+                <Grid>
+
+                    <Grid>
+                        <Grid item xs={6} mt={5} sx={{ backgroundColor: '#1976D2' }}>
+                            <Typography variant="h5" sx={{ marginBottom: 2, color: 'white', textAlign: 'center' }}>
+                                Details Of Patient
+                            </Typography>
+                        </Grid>
+                    </Grid>
+
+                    <Grid item xs={6} mt={5}>
+
+                        <Typography variant="h5">
+                            Patient Name :  {userData.profile.firstName}
+                        </Typography>
+
+                        <Typography variant="h5">
+                            Gender :  {userData.profile.gender}
+                        </Typography>
+
+                        <Typography variant="h5">
+                            Email :  {userData.email}
+                        </Typography>
+
+                    </Grid>
+                </Grid>
+
+            </Container>
+
+            <Container maxWidth="100px">
+                <Grid>
+                    <Grid item xs={12} mt={5} sx={{ backgroundColor: '#1976D2' }}>
+                        <Typography variant="h5" sx={{ marginBottom: 2, color: 'white', textAlign: 'center' }}>
+                            Create Medicine Record
+                        </Typography>
+                    </Grid>
+                </Grid>
+            </Container>
+
             <Grid>
                 <Container maxWidth="100px">
                     <Grid container spacing={2} mt={2}>
                         <Grid item xs={12} sm={2}>
-                            <TextField
-                                fullWidth
-                                label="Medicine"
-                                name="medicine"
+                            <Autocomplete
+                                id="Medicine"
+                                options={top100Medicine.map((option) => option.medicine)}
+                                sx={{ width: 203 }}
+                                renderInput={(params) => (
+                                    <TextField
+                                        {...params}
+                                        label="Medicine"
+                                        fullWidth
+                                        margin="normal"
+                                        variant="outlined"
+                                    />
+                                )}
                                 value={currentMedicine.medicine || ''}
-                                onChange={(e) =>
+                                onChange={(event, newValue) => {
                                     setCurrentMedicine({
                                         ...currentMedicine,
-                                        medicine: e.target.value,
-                                    })
-                                }
-                                variant="outlined"
+                                        medicine: newValue,
+                                    });
+                                }}
                             />
                         </Grid>
 
                         <Grid item xs={12} sm={2}>
-                            <TextField
-                                fullWidth
-                                label="Dosage"
-                                name="dosage"
-                                value={currentMedicine.dosage || ''}
-                                onChange={(e) =>
-                                    setCurrentMedicine({
-                                        ...currentMedicine,
-                                        dosage: e.target.value,
-                                    })
-                                }
-                                variant="outlined"
-                            />
+                            <FormControl fullWidth sx={{ marginY: 2 }}>
+                                <InputLabel id="dosage">Dosage</InputLabel>
+                                <Select
+                                    labelId="dosage"
+                                    id="dosage"
+                                    name="dosage"
+                                    value={currentMedicine.dosage || ''}
+                                    label="Dosage"
+                                    onChange={(e) =>
+                                        setCurrentMedicine({
+                                            ...currentMedicine,
+                                            dosage: e.target.value,
+                                        })
+                                    }
+                                >
+                                    <MenuItem value={"5mg"}>5mg</MenuItem>
+                                    <MenuItem value={"10mg"}>10mg</MenuItem>
+                                    <MenuItem value={"20mg"}>20mg</MenuItem>
+                                    <MenuItem value={"50mg"}>50mg</MenuItem>
+                                </Select>
+                            </FormControl>
                         </Grid>
 
                         <Grid item xs={12} sm={2}>
-                            <TextField
-                                fullWidth
-                                label="Quantity"
-                                name="quantity"
-                                value={currentMedicine.quantity || ''}
-                                onChange={(e) =>
-                                    setCurrentMedicine({
-                                        ...currentMedicine,
-                                        quantity: e.target.value,
-                                    })
-                                }
-                                variant="outlined"
-                            />
+                            <FormControl fullWidth sx={{ marginY: 2 }}>
+                                <InputLabel id="quantity">Quantity for a Take</InputLabel>
+                                <Select
+                                    labelId="quantity"
+                                    id="quantity"
+                                    name="quantity"
+                                    value={currentMedicine.quantity || ''}
+                                    label="Quantity"
+                                    onChange={(e) =>
+                                        setCurrentMedicine({
+                                            ...currentMedicine,
+                                            quantity: e.target.value,
+                                        })
+                                    }
+                                >
+                                    <MenuItem value={"1"}>1</MenuItem>
+                                    <MenuItem value={"2"}>2</MenuItem>
+                                    <MenuItem value={"3"}>3</MenuItem>
+                                    <MenuItem value={"4"}>4</MenuItem>
+
+                                </Select>
+                            </FormControl>
                         </Grid>
 
                         <Grid item xs={12} sm={2}>
-                            <TextField
-                                fullWidth
-                                label="Frequency"
-                                name="frequency"
-                                value={currentMedicine.frequency || ''}
-                                onChange={(e) =>
-                                    setCurrentMedicine({
-                                        ...currentMedicine,
-                                        frequency: e.target.value,
-                                    })
-                                }
-                                variant="outlined"
-                            />
+                            <FormControl fullWidth sx={{ marginY: 2 }}>
+                                <InputLabel id="frequency">Frequency</InputLabel>
+                                <Select
+                                    labelId="frequency"
+                                    id="frequency"
+                                    name="frequency"
+                                    value={currentMedicine.frequency || ''}
+                                    label="Frequency"
+                                    onChange={(e) =>
+                                        setCurrentMedicine({
+                                            ...currentMedicine,
+                                            frequency: e.target.value,
+                                        })
+                                    }
+                                >
+                                    <MenuItem value={"daily"}>Daily</MenuItem>
+                                    <MenuItem value={"morning"}>Every Morning</MenuItem>
+                                    <MenuItem value={"evening"}>Every Evening</MenuItem>
+                                    <MenuItem value={"night"}>Every Night</MenuItem>
+                                    <MenuItem value={"weekly"}>Weekly</MenuItem>
+                                    <MenuItem value={"monthly"}>Monthly</MenuItem>
+                                    <MenuItem value={"as needed"}>As Needed</MenuItem>
+                                    <MenuItem value={"twice daily"}>Twice Daily</MenuItem>
+                                    <MenuItem value={"three times daily"}>Three Times Daily</MenuItem>
+                                </Select>
+                            </FormControl>
                         </Grid>
 
                         <Grid item xs={12} sm={2}>
-                            <TextField
-                                fullWidth
-                                label="Hours"
-                                name="hours"
-                                value={currentMedicine.hours || ''}
-                                onChange={(e) =>
-                                    setCurrentMedicine({
-                                        ...currentMedicine,
-                                        hours: e.target.value,
-                                    })
-                                }
-                                variant="outlined"
-                            />
+                            <FormControl fullWidth sx={{ marginY: 2 }}>
+                                <InputLabel id="hours">Hours</InputLabel>
+                                <Select
+                                    labelId="hours"
+                                    id="hours"
+                                    name="hours"
+                                    value={currentMedicine.hours || ''}
+                                    label="Hours"
+                                    onChange={(e) =>
+                                        setCurrentMedicine({
+                                            ...currentMedicine,
+                                            hours: e.target.value,
+                                        })
+                                    }
+                                >
+                                    <MenuItem value={"6 hours"}>After 6 Hours</MenuItem>
+                                    <MenuItem value={"8 hours"}>After 8 Hours</MenuItem>
+                                    <MenuItem value={"12 hours"}>After 12 Hours</MenuItem>
+                                </Select>
+                            </FormControl>
                         </Grid>
 
                         <Grid item xs={12} sm={2}>
-                            <TextField
-                                fullWidth
-                                label="Duration"
-                                name="duration"
-                                value={currentMedicine.duration || ''}
-                                onChange={(e) =>
-                                    setCurrentMedicine({
-                                        ...currentMedicine,
-                                        duration: e.target.value,
-                                    })
-                                }
-                                variant="outlined"
-                            />
+                            <FormControl fullWidth sx={{ marginY: 2 }}>
+                                <InputLabel id="duration">Duration</InputLabel>
+                                <Select
+                                    labelId="duration"
+                                    id="duration"
+                                    name="duration"
+                                    value={currentMedicine.duration || ''}
+                                    label="Duration"
+                                    onChange={(e) =>
+                                        setCurrentMedicine({
+                                            ...currentMedicine,
+                                            duration: e.target.value,
+                                        })
+                                    }
+                                >
+                                    <MenuItem value={"3 days"}>3 Days</MenuItem>
+                                    <MenuItem value={"7 days"}>7 Days</MenuItem>
+                                    <MenuItem value={"2 weeks"}>2 Weeks</MenuItem>
+                                    <MenuItem value={"1 month"}>1 Month</MenuItem>
+                                </Select>
+                            </FormControl>
                         </Grid>
 
                         <Grid item xs={12} sm={6}>
@@ -317,20 +444,24 @@ const Prescription = () => {
 
                     <Grid item xs={12} container justifyContent="center" alignItems="center" mt={5} spacing={2}>
                         <Grid item>
-                            <Button variant="outlined" color="primary" startIcon={<CloseIcon />}>
-                                CANCEL
-                            </Button>
+                            <Link to="/doctor">
+                                <Button variant="outlined" color="primary" startIcon={<CloseIcon />}>
+                                    CANCEL
+                                </Button>
+                            </Link>
                         </Grid>
                         <Grid item>
-                            <Button 
-                                type="submit" 
-                                variant="contained" 
-                                color="success" 
-                                startIcon={<SaveIcon />}
-                                onClick={submitData}
+                            <Link to="/doctor">
+                                <Button
+                                    type="submit"
+                                    variant="contained"
+                                    color="success"
+                                    startIcon={<SaveIcon />}
+                                    onClick={submitData}
                                 >
                                     SAVE
-                            </Button>
+                                </Button>
+                            </Link>
                         </Grid>
                     </Grid>
 
@@ -365,5 +496,27 @@ const HeroSection = () => {
         </Grid>
     );
 };
+
+const top100Medicine = [
+    { medicine: 'Acetaminophen' },
+    { medicine: 'Ibuprofen' },
+    { medicine: 'Aspirin' },
+    { medicine: 'Amoxicillin' },
+    { medicine: 'Penicillin' },
+    { medicine: 'Ciprofloxacin' },
+    { medicine: 'Lisinopril' },
+    { medicine: 'Atorvastatin' },
+    { medicine: 'Metformin' },
+    { medicine: 'Omeprazole' },
+    { medicine: 'Fluoxetine' },
+    { medicine: 'Sertraline' },
+    { medicine: 'Albuterol' },
+    { medicine: 'Hydrochlorothiazide' },
+    { medicine: 'Prednisone' },
+    { medicine: 'Morphine' },
+    { medicine: 'Hydromorphone' },
+    // ... other medicines
+];
+
 
 export default Prescription;
