@@ -5,7 +5,6 @@ const { request } = require("express");
 let Patient = require("../../Models/PatientModel/Patientmodel");
 
 //=====================================================
-//CREATE A PATIENT BEFORE MAKE A CHANNELLING
 
 router.post('/add', async (req, res) => {
   const {
@@ -192,7 +191,39 @@ router.route("/deletepatient/:id").delete(async (req, res) => {
 //     })
 // })
 
-router.route("/patients/:id").get(async (req, res) => {
+// router.route("/get/:id").get(async (req, res) => {
+//   try {
+//     const patientId = req.params.id;
+//     const patient = await Patient.findById(patientId);
+//     console.log('Patient ID:', patientId);
+ 
+//     if (!patient) {
+//       return res.status(404).json({ status: "Patient not found" });
+//     }
+
+//     return res.status(200).json({ status: "Patient found", patient });
+//   } catch (err) {
+//     console.error(err.message);
+//     return res.status(500).json({ status: "Error with getting patient", error: err.message });
+//   }
+// });
+
+
+// router.route("/get/:id").get(async(req,res) =>{
+//   let userId = req.params.id;
+
+//   const update = await Patient.findOne({patientId : userId})
+//   //const supplier = await Supplier.findById(userId) 
+//   .then((patient) =>{
+//     console.log("Patient",patient)
+//       res.status(200).send({status :"Supplier Data Successfully Fetched!!!!!!", patient});
+//   }).catch((err) => {
+//       console.log(err);
+//       res.status(500).send({status: "Not Fetched. Error in the supplier data Fetched!!!!", error: err.message});
+//   })
+// }
+// Define the route to get a single patient by ID
+router.route("/get/:id").get(async (req, res) => {
   try {
     const patientId = req.params.id;
     const patient = await Patient.findById(patientId);
@@ -208,21 +239,6 @@ router.route("/patients/:id").get(async (req, res) => {
   }
 });
 
-// // Define the route to get a single patient by ID
-// router.route("/get/:id").get(async (req, res) => {
-//   try {
-//     const patientId = req.params.id;
-//     const patient = await Patient.findById(patientId);
-    
-//     if (!patient) {
-//       return res.status(404).json({ status: "Patient not found" });
-//     }
 
-//     return res.status(200).json({ status: "Patient found", patient });
-//   } catch (err) {
-//     console.error(err.message);
-//     return res.status(500).json({ status: "Error with getting patient", error: err.message });
-//   }
-// });
 
 module.exports = router;

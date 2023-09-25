@@ -1,18 +1,15 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
-import { Box, Grid, FormControl, InputLabel , Select , MenuItem , RadioGroup , FormControlLabel , Radio , Checkbox , TextField, } from '@mui/material';
-import { Card, CardMedia,CardContent, CardActions,Stack, Typography,Button,Table,TableContainer, TableBody, TableCell, TableHead, TableRow, Paper  } from '@mui/material';
-import img1 from '../../assets/img/patient/profile.jpg';
+import { Box, Grid,Typography} from '@mui/material';
 import Heading from '../../components/patient-components/heading.component';
-import axios from 'axios';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import CustomTabPanel from '../../components/patient-components/tab-panel';
 import UpcomingChanellings from './upcomming-chanellings';
 import InquiryList from './inq-handle';
 import PatientDetails from './patient-details';
-import PatientList from './all-patients';
+import PrescriptionList from './all-prescriptions';
 import PatientNavigationBar from '../../views/patient-views/patient-navigation-bar';
+
 
 export default function PatientProfile() {
 
@@ -66,7 +63,7 @@ export default function PatientProfile() {
                             {/** Patient Details*/}
                             <CustomTabPanel value={value} index={0}>
                                 <Grid container spacing={2}>
-                                    <Grid item xs={12} sm={3}>
+                                    {/* <Grid item xs={12} sm={3}>
                                         <Card sx={{ height: '100%' }} >
                                             <CardMedia
                                                 component="div"
@@ -105,13 +102,10 @@ export default function PatientProfile() {
                                         
                                     </Grid>
                                     <Grid item xs={12} sm={9}>
-
-                                        <PatientDetails/>
-                                       <PatientList/>
-
-                                      
-
-                                    </Grid>
+                                        
+                                    </Grid> */}
+                                    <PatientDetails/>
+                                   
                                 </Grid>
                             </CustomTabPanel>
 
@@ -121,16 +115,16 @@ export default function PatientProfile() {
                                     <Box alignContent={'center'}>
                                         <Tabs style={{backgroundColor:"pink"}} value={value2} onChange={handleChange2} aria-label="basic tabs example">
                                             <Tab label="Upcoming" {...a11yProps(0)} />
-                                            <Tab label="Past" {...a11yProps(1)} />
+                                            {/* <Tab label="Past" {...a11yProps(1)} />
                                             <Tab label="Cancelled" {...a11yProps(2)} />
-                                            <Tab label="Refunds" {...a11yProps(3)} />
+                                            <Tab label="Refunds" {...a11yProps(3)} /> */}
                                         </Tabs>
 
                                     </Box>
                                     <CustomTabPanel value={value2} index={0}>
                                         <UpcomingChanellings/>
                                     </CustomTabPanel >
-                                    <CustomTabPanel value={value2} index={1}>
+                                    {/* <CustomTabPanel value={value2} index={1}>
                                         <Typography>Bla bla 2</Typography>
                                     </CustomTabPanel >
                                     <CustomTabPanel value={value2} index={2}>
@@ -138,14 +132,14 @@ export default function PatientProfile() {
                                     </CustomTabPanel >
                                     <CustomTabPanel value={value2} index={3}>
                                         <Typography>Bla bla 4</Typography>
-                                    </CustomTabPanel >
+                                    </CustomTabPanel > */}
                                 </Box>
 
                             </CustomTabPanel>
 
                             {/**  Prescriptions*/}
                             <CustomTabPanel value={value} index={2}>
-                                
+                                <PrescriptionList/>
                             </CustomTabPanel>
 
                             {/**  Inquiries*/}

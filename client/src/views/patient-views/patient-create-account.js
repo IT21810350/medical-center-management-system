@@ -14,6 +14,7 @@ import Checkbox from '@mui/material/Checkbox';
 import Heading from '../../components/patient-components/heading.component';
 import PatientNavigationBar from '../../views/patient-views/patient-navigation-bar';
 import axios from 'axios';
+import Input from '@mui/material/Input';
 
 export default function PatientCreateAccount() {
   //Create a state variable to store all the values with an initial value of an array containing an empty object {}.
@@ -53,22 +54,22 @@ export default function PatientCreateAccount() {
      // console.log('Form submitted successfully', response.data);
 
       // Optionally, reset the form
-      setFormData({
-        country: '',
-        idType: '', 
-        idNumber: '', 
-        fName: '', 
-        lName: '', 
-        gender: '', 
-        dob: '', 
-        phone: '', 
-        email: '', 
-        address: '',
-        gName:'', 
-        relation:'', 
-        gId:'',
-        gContact:'',
-      });
+      // setFormData({
+      //   country: '',
+      //   idType: '', 
+      //   idNumber: '', 
+      //   fName: '', 
+      //   lName: '', 
+      //   gender: '', 
+      //   dob: '', 
+      //   phone: '', 
+      //   email: '', 
+      //   address: '',
+      //   gName:'', 
+      //   relation:'', 
+      //   gId:'',
+      //   gContact:'',
+      // });
     } catch (error) {
       // Handle errors 
      // console.error('Error submitting form', error.response.data);
@@ -97,14 +98,14 @@ export default function PatientCreateAccount() {
           <Grid xs={12} item>
             {/* Country Selection */}
             <FormControl fullWidth variant="outlined">
-              <InputLabel>Select Country</InputLabel>
+              <h3>Select Country</h3>
               <Select
                 label="Select Country"
-                name='country'
+                name="country"
                 onChange={(e) => handleOnChange(e)}
                 value={patientDetails.country}
               >
-                <MenuItem value="null">
+                <MenuItem value="Not selected">
                   <em>Select</em>
                 </MenuItem>
                 <MenuItem value="Sri Lanka">Sri Lanka</MenuItem>
@@ -117,6 +118,7 @@ export default function PatientCreateAccount() {
           </Grid>
           <Grid xs={12} item>
             {/* ID Type Selection */}
+            <h3>Select Identity type</h3>
             <FormControl component="fieldset">
               <RadioGroup
                 row
@@ -143,6 +145,7 @@ export default function PatientCreateAccount() {
 
           <Grid xs={12} item>
             {/* ID Input Field */}
+            <h3>Select Identity number</h3>
             <TextField
               fullWidth
               variant="outlined"
@@ -161,14 +164,17 @@ export default function PatientCreateAccount() {
           </Grid>
 
           <Grid xs={12} sm={6} item>
-            <TextField label="First Name" value={patientDetails.fName} name='fName' onChange={(e) => handleOnChange(e)} placeholder='Enter first name' variant='outlined' fullWidth required />
+            <h3>Enter first name</h3>
+            <TextField label="First Name" style={{fontSize:"1000px"}} value={patientDetails.fName} name='fName' onChange={(e) => handleOnChange(e)} placeholder='Enter first name' variant='outlined' fullWidth required />
           </Grid>
 
           <Grid xs={12} sm={6} item>
-            <TextField label="Last Name" value={patientDetails.lName} name='lName' onChange={(e) => handleOnChange(e)} placeholder='Enter last name' variant='outlined' fullWidth required />
+          <h3>Enter last name</h3>
+            <TextField label="Last Name" style={{fontSize:"100px"}}  value={patientDetails.lName} name='lName' onChange={(e) => handleOnChange(e)} placeholder='Enter last name' variant='outlined' fullWidth required />
           </Grid>
 
           <Grid xs={12} sm={6} item>
+          <h3>Select Gender</h3>
             <FormControl component="fieldset" required>
               <RadioGroup
                 row
@@ -198,27 +204,33 @@ export default function PatientCreateAccount() {
           </Grid>
 
           <Grid xs={12} item>
-            <TextField type='number' value={patientDetails.phone} label="Phone" name='phone' onChange={(e) => handleOnChange(e)} placeholder='Enter phone number' variant='outlined' fullWidth required />
+            <h3>Enter Phone number</h3>
+            <TextField type='number' style={{fontSize:"100px"}}  value={patientDetails.phone} label="Phone" name='phone' onChange={(e) => handleOnChange(e)} placeholder='Enter phone number' variant='outlined' fullWidth required />
           </Grid>
 
           <Grid xs={12} item>
-            <TextField type='date' value={patientDetails.dob} label="Date of Birth" name='dob' onChange={(e) => handleOnChange(e)} placeholder='Enter date of birth' variant='outlined' fullWidth required />
+          <h3>Enter birth date</h3>
+            <TextField type='date' style={{fontSize:"100px"}} value={patientDetails.dob} label="Date of Birth" name='dob' onChange={(e) => handleOnChange(e)} placeholder='Enter date of birth' variant='outlined' fullWidth required />
           </Grid>
 
           <Grid xs={12} item>
-            <TextField type='email' value={patientDetails.email} label="Email" name='email' onChange={(e) => handleOnChange(e)} placeholder='Enter email' variant='outlined' fullWidth required />
+          <h3>Enter email</h3>
+            <TextField type='email' style={{fontSize:"100px"}} value={patientDetails.email} label="Email" name='email' onChange={(e) => handleOnChange(e)} placeholder='Enter email' variant='outlined' fullWidth required />
           </Grid>
 
           <Grid xs={12} item>
-            <TextField type='text' value={patientDetails.address} label="Address" name='address' onChange={(e) => handleOnChange(e)} placeholder='Enter address - Optional' variant='outlined' fullWidth />
+          <h3>Enter address</h3>
+            <TextField type='text' style={{fontSize:"100px"}} value={patientDetails.address} label="Address" name='address' onChange={(e) => handleOnChange(e)} placeholder='Enter address - Optional' variant='outlined' fullWidth />
           </Grid>
 
           <Grid xs={12} item>
-            <TextField type='text' value={patientDetails.gName} label="Guardian's Name" name='gName' onChange={(e) => handleOnChange(e)} placeholder='Enter name of the guardian - Optional' variant='outlined' fullWidth />
+          <h3>Enter Guardian's Name</h3>
+            <TextField type='text'style={{fontSize:"100px"}}  value={patientDetails.gName} label="Guardian's Name" name='gName' onChange={(e) => handleOnChange(e)} placeholder='Enter name of the guardian - Optional' variant='outlined' fullWidth />
           </Grid>
 
           <Grid xs={12} item>
             {/* Country Selection */}
+            <h3>Select Relationship</h3>
             <FormControl fullWidth variant="outlined">
               <InputLabel>Select Relationship</InputLabel>
               <Select
@@ -227,7 +239,7 @@ export default function PatientCreateAccount() {
                 onChange={(e) => handleOnChange(e)}
                 value={patientDetails.relation}
               >
-                <MenuItem value="null">
+                <MenuItem value="Not selected">
                   <em>Select</em>
                 </MenuItem>
                 <MenuItem value="Mother">Mother</MenuItem>
@@ -239,11 +251,13 @@ export default function PatientCreateAccount() {
           </Grid>
 
           <Grid xs={12} item>
-            <TextField type='text' value={patientDetails.gId} label="Guardian's Identity No" name='gId' onChange={(e) => handleOnChange(e)} placeholder='Enter Identity no of the guardian - Optional' variant='outlined' fullWidth />
+          <h3>Select Guardian's Identity Number</h3>
+            <TextField type='text' style={{fontSize:"100px"}} value={patientDetails.gId} label="Guardian's Identity No" name='gId' onChange={(e) => handleOnChange(e)} placeholder='Enter Identity no of the guardian - Optional' variant='outlined' fullWidth />
           </Grid>
 
           <Grid xs={12} item>
-            <TextField type='text' value={patientDetails.gContact} label="Guardian's contact no" name='gContact' onChange={(e) => handleOnChange(e)} placeholder='Enter contact no of the guardian - Optional' variant='outlined' fullWidth />
+          <h3>Select Guardian's contact no</h3>
+            <TextField type='text' style={{fontSize:"100px"}} value={patientDetails.gContact} label="Guardian's contact no" name='gContact' onChange={(e) => handleOnChange(e)} placeholder='Enter contact no of the guardian - Optional' variant='outlined' fullWidth />
           </Grid>
 
           <Grid xs={12} item>
@@ -278,7 +292,23 @@ export default function PatientCreateAccount() {
 
 
         </Grid>
+        {/* Enter First Name
+        <Input type='text'label="First Name"  fontSize="200px">First Name</Input> */}
       </form>
+      {/* <form>
+      <h3 fontSize="200px" >Enter Country</h3>
+        <input type='text' fontSize="200px"  />
+
+        <h3 fontSize="200px" >Enter first name</h3>
+        <input type='text' fontSize="200px"  />
+
+        <h3 fontSize="200px" >Enter last name</h3>
+        <input type='text' fontSize="200px"  />
+        <h3 fontSize="200px" >Enter name</h3>
+        <input type='text' fontSize="200px"  />
+        <h3 fontSize="200px" >Enter name</h3>
+        
+      </form> */}
 
 
 

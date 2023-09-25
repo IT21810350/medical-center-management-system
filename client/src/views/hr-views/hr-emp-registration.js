@@ -3,12 +3,12 @@ import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
-import Navbar from '../../components/HR-component/hr-nav-bar'
-import axios from "axios";
+import Navbar from '../../components/HR-component/hr-nav-bar';
+import axios from 'axios';
+import MenuItem from '@mui/material/MenuItem';
 
 export default function RegistrationForm() {
-
-  // State to store form values
+  // State to store form values and errors
   const [formData, setFormData] = useState({
     userId: '650474d11164fa8928fa72a8',
     role: 'doctor',
@@ -26,11 +26,81 @@ export default function RegistrationForm() {
     medicallicense: '',
     taxinformation: '',
     bankinformation: '',
-    insurancedetails: ''
+    insurancedetails: '',
   });
 
-  const { userId, role, firstName, lastName, email, nic, address, employeeRole, gender, birthday, educationlevel, phonenumber, certifications, medicallicense, taxinformation, bankinformation, insurancedetails } = formData
+  const [formErrors, setFormErrors] = useState({});
 
+  const {
+    userId,
+    role,
+    firstName,
+    lastName,
+    email,
+    nic,
+    address,
+    employeeRole,
+    gender,
+    birthday,
+    phonenumber,
+    educationlevel,
+    certifications,
+    medicallicense,
+    taxinformation,
+    bankinformation,
+    insurancedetails,
+  } = formData;
+
+  const validateForm = () => {
+    const errors = {};
+
+    // Required field validation
+    if (!firstName) {
+      errors.firstName = 'First Name is required';
+    }
+    if (!lastName) {
+      errors.lastName = 'Last Name is required';
+    }
+    if (!email) {
+      errors.email = 'Email is required';
+    } else if (!/^\S+@\S+\.\S+$/.test(email)) {
+      errors.email = 'Invalid email format';
+    }
+    if (!nic) {
+      errors.nic = 'NIC is required';
+    }else if (!/^\d{12}$/.test(nic)){
+      errors.nic = 'Phone Number must have exactly 10 digits';
+    }
+    if (!phonenumber) {
+      errors.phonenumber = 'Phone Number is required';
+    } else if (!/^\d{10}$/.test(phonenumber)) {
+      errors.phonenumber = 'Phone Number must have exactly 10 digits';
+    }
+    if (!birthday) {
+      errors.birthday = 'Birthday is required';
+    }
+    if (!educationlevel) {
+      errors.educationlevel = 'Education Level is required';
+    }
+    if (!certifications) {
+      errors.certifications = 'Certifications or Licenses are required';
+    }
+    if (!medicallicense) {
+      errors.medicallicense = 'Medical License is required';
+    }
+    if (!taxinformation) {
+      errors.taxinformation = 'Tax Information is required';
+    }
+    if (!bankinformation) {
+      errors.bankinformation = 'Bank Account Information is required';
+    }
+    if (!insurancedetails) {
+      errors.insurancedetails = 'Insurance Details are required';
+    }
+
+    setFormErrors(errors);
+    return Object.keys(errors).length === 0;
+  };
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -43,80 +113,78 @@ export default function RegistrationForm() {
   // Function to handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
-    try {
-       await axios.post(
-        "http://localhost:4000/register-employee",
-        {
+
+    if (validateForm()) {
+      try {
+        await axios.post('http://localhost:4000/register-employee', {
           ...formData,
-        },
-       
-        // { withCredentials: true }
-      );
-    } catch (error) {
-      console.error(error);
+        });
+      } catch (error) {
+        console.error(error);
+      }
+
+      // Reset form data after submission
+      setFormData({
+        ...formData,
+        userId: '64f4ba9b767974208f4fe06d',
+        role: 'doctor',
+        firstName: '',
+        lastName: '',
+        email: '',
+        nic: '',
+        address: '',
+        employeeRole: '',
+        gender: '',
+        phonenumber: '',
+        birthday: '',
+        educationlevel: '',
+        certifications: '',
+        medicallicense: '',
+        taxinformation: '',
+        bankinformation: '',
+        insurancedetails: '',
+      });
     }
-
-    setFormData({
-      ...formData,
-      userId: '64f4ba9b767974208f4fe06d',
-      role: 'doctor',
-      firstName: '',
-      lastName: '',
-      email: '',
-      nic: '',
-      address: '',
-      employeeRole: '',
-      gender: '',
-      phonenumber: '',
-      birthday: '',
-      educationlevel: '',
-      certifications: '',
-      medicallicense: '',
-      taxinformation: '',
-      bankinformation: '',
-      insurancedetails: ''
-    });
   };
-
-  // Function to handle input changes and update state
-
 
   return (
     <div>
-      <Box >
+      <Box>
         <Grid container>
           <Navbar />
         </Grid>
       </Box>
 
-      <Box sx={{
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        justifyContent: 'center',
-        minHeight: '100vh',
-      }}>
+      <Box
+        sx={{
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          justifyContent: 'center',
+          minHeight: '100vh',
+        }}
+      >
         <h1>Registration Form</h1>
         <form onSubmit={handleSubmit}>
-        {/* user ID */}
-        <TextField
+          {/* userID */}
+          <TextField
             fullWidth
-            label="userID"
+            label="UserID"
             name="userId"
             value={userId}
             onChange={handleInputChange}
             sx={{ marginTop: '10px' }}
-            required
+            disabled
           />
           {/* user role */}
           <TextField
             fullWidth
-            label="First Name"
-            role="role"
+            label="Role"
+            name="role"
             value={role}
             onChange={handleInputChange}
             sx={{ marginTop: '10px' }}
-            required
+            disabled
           />
 
           <TextField
@@ -127,6 +195,8 @@ export default function RegistrationForm() {
             onChange={handleInputChange}
             sx={{ marginTop: '10px' }}
             required
+            error={!!formErrors.firstName}
+            helperText={formErrors.firstName}
           />
           <TextField
             fullWidth
@@ -136,6 +206,8 @@ export default function RegistrationForm() {
             onChange={handleInputChange}
             sx={{ marginTop: '10px' }}
             required
+            error={!!formErrors.lastName}
+            helperText={formErrors.lastName}
           />
           <TextField
             fullWidth
@@ -146,6 +218,8 @@ export default function RegistrationForm() {
             onChange={handleInputChange}
             sx={{ marginTop: '10px' }}
             required
+            error={!!formErrors.email}
+            helperText={formErrors.email}
           />
           <TextField
             fullWidth
@@ -154,15 +228,26 @@ export default function RegistrationForm() {
             value={nic}
             onChange={handleInputChange}
             sx={{ marginTop: '10px' }}
+            required
+            error={!!formErrors.nic}
+            helperText={formErrors.nic}
           />
           <TextField
             fullWidth
             label="Gender"
             name="gender"
+            select
             value={gender}
             onChange={handleInputChange}
             sx={{ marginTop: '10px' }}
-          />
+            required
+            error={!!formErrors.gender}
+            helperText={formErrors.gender}
+          >
+            <MenuItem value="male">Male</MenuItem>
+            <MenuItem value="female">Female</MenuItem>
+            <MenuItem value="other">Other</MenuItem>
+          </TextField>
           <div style={{ marginTop: '10px', display: 'flex', alignItems: 'baseline' }}>
             <TextField
               fullWidth
@@ -171,6 +256,9 @@ export default function RegistrationForm() {
               value={birthday}
               onChange={handleInputChange}
               sx={{ marginRight: '20px', width: '50%', textAlign: 'left' }}
+              required
+              error={!!formErrors.birthday}
+              helperText={formErrors.birthday}
             />
 
             <TextField
@@ -188,6 +276,9 @@ export default function RegistrationForm() {
             value={phonenumber}
             onChange={handleInputChange}
             sx={{ marginTop: '10px' }}
+            required
+            error={!!formErrors.phonenumber}
+            helperText={formErrors.phonenumber}
           />
           <TextField
             fullWidth
@@ -206,6 +297,9 @@ export default function RegistrationForm() {
               value={educationlevel}
               onChange={handleInputChange}
               sx={{ marginTop: '10px' }}
+              required
+              error={!!formErrors.educationlevel}
+              helperText={formErrors.educationlevel}
             />
             <TextField
               fullWidth
@@ -214,6 +308,9 @@ export default function RegistrationForm() {
               value={certifications}
               onChange={handleInputChange}
               sx={{ marginTop: '10px' }}
+              required
+              error={!!formErrors.certifications}
+              helperText={formErrors.certifications}
             />
             <TextField
               fullWidth
@@ -222,6 +319,9 @@ export default function RegistrationForm() {
               value={medicallicense}
               onChange={handleInputChange}
               sx={{ marginTop: '10px' }}
+              required
+              error={!!formErrors.medicallicense}
+              helperText={formErrors.medicallicense}
             />
           </div>
 
@@ -234,6 +334,9 @@ export default function RegistrationForm() {
               value={bankinformation}
               onChange={handleInputChange}
               sx={{ marginTop: '10px' }}
+              required
+              error={!!formErrors.bankinformation}
+              helperText={formErrors.bankinformation}
             />
             <TextField
               fullWidth
@@ -242,6 +345,9 @@ export default function RegistrationForm() {
               value={taxinformation}
               onChange={handleInputChange}
               sx={{ marginTop: '10px' }}
+              required
+              error={!!formErrors.taxinformation}
+              helperText={formErrors.taxinformation}
             />
 
             <TextField
@@ -251,32 +357,19 @@ export default function RegistrationForm() {
               value={insurancedetails}
               onChange={handleInputChange}
               sx={{ marginTop: '10px' }}
+              required
+              error={!!formErrors.insurancedetails}
+              helperText={formErrors.insurancedetails}
             />
           </div>
-          {/* <input
-            type="file"
-            id="submitDocuments"
-            name="submitDocuments"
-            onChange={handleFileInputChange}
-            sx={{ marginTop: '10px' }}
-          /> */}
 
-
-          <div style={{ marginTop: '10px' }} className=''>
+          <div style={{ marginTop: '10px' }}>
             <Button type="submit" variant="contained" color="primary">
               Submit
             </Button>
           </div>
         </form>
       </Box>
-
-
-
     </div>
-
-
-
-
-
   );
 }
