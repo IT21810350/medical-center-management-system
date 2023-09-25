@@ -1,6 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { useParams} from "react-router-dom";
+import { Card, CardMedia,CardContent, CardActions,Grid,Typography,} from '@mui/material';
+import img1 from '../../assets/img/patient/profile.jpg';
+import Button from '@mui/material/Button';
+import Stack from '@mui/material/Stack';
+import { Link } from 'react-router-dom';
 
 export default function PatientDetails() {
   const [patient, setPatient] = useState(null);
@@ -18,14 +22,14 @@ export default function PatientDetails() {
   //     }
   //   } 
 
-   useEffect(() => {
+  useEffect(() => {
     const id = '650efb90b6d7126c541b1fbe';
     const fetchPatientDetails = async () => {
       try {
-        if(id){
+        if (id) {
           const response = await axios.get(`http://localhost:4000/patientData/get/${id}`);
-        setPatient(response.data.patient);
-        setLoading(false);
+          setPatient(response.data.patient);
+          setLoading(false);
         }
       } catch (error) {
         console.error('Error fetching patient details:', error);
@@ -35,33 +39,197 @@ export default function PatientDetails() {
 
     fetchPatientDetails();
   }, [id]);
-// console.log("error",patient)
-  return (
-    <div>
-      {loading ? (
-        <p>Loading...</p>
-      ) : (
-        <div>
-          <h2>Patient Details</h2>
-          <p>Country: {patient.country}</p>
-          <p>ID Type: {patient.idType}</p>
-          <p>ID Number: {patient.idNumber}</p>
-          <p>First Name: {patient.fName}</p>
-          <p>Last Name: {patient.lName}</p>
-          <p>Gender: {patient.gender}</p>
-          <p>Date of Birth: {patient.dob}</p>
-          <p>Contact Number: {patient.phone}</p>
-          <p>Email: {patient.email}</p>
-          <p>Address: {patient.address}</p>
-          <p>Guardian's Name: {patient.gName}</p>
-          <p>Relation: {patient.relation}</p>
-          <p>Guardian ID: {patient.gId}</p>
-          <p>Guardian Contact: {patient.gContact}</p>
-        </div>
-      )}
-    </div>
+  // console.log("error",patient)
+  return (<>
+ {loading ? (
+          <p>Loading...</p>
+        ) : (
+          <>
+    <Grid item xs={12} sm={3}>
+   
+      <Card sx={{ height: '100%' }} >
+        <CardMedia
+          component="div"
+          sx={{
+            // 16:9
+            pt: '56.25%',
+          }}
+          image={img1}
+
+        />
+        
+        <CardContent >
+          <Typography gutterBottom variant="h5" component="h2" align='center'>
+            {patient.fName}{patient.lName}
+          </Typography>
+        </CardContent>
+        <CardActions>
+
+
+          <Button
+            component={Link}
+            to="/patient-inquiries"
+            variant="contained"
+            // size="small"
+            style={{ width: '100%' }}
+
+            color="primary"
+          >
+            Inquiries
+          </Button>
+
+        </CardActions>
+      </Card>
+
+    </Grid>
+    <Grid item xs={12} sm={9}>
+      <div>
+      
+          <div>
+            <h2>Patient Details</h2>
+            <p>Country: {patient.country}</p>
+            <p>ID Type: {patient.idType}</p>
+            <p>ID Number: {patient.idNumber}</p>
+            <p>First Name: {patient.fName}</p>
+            <p>Last Name: {patient.lName}</p>
+            <p>Gender: {patient.gender}</p>
+            <p>Date of Birth: {patient.dob}</p>
+            <p>Contact Number: {patient.phone}</p>
+            <p>Email: {patient.email}</p>
+            <p>Address: {patient.address}</p>
+            <p>Guardian's Name: {patient.gName}</p>
+            <p>Relation: {patient.relation}</p>
+            <p>Guardian ID: {patient.gId}</p>
+            <p>Guardian Contact: {patient.gContact}</p>
+
+
+            <Stack direction="row" spacing={2}>
+              <Button
+                component={Link}
+                to="#"
+                variant="contained"
+                style={{ width: '25%' }}
+                color="success">
+                Edit
+              </Button>
+              <Button
+                component={Link}
+                to="#"
+                variant="contained"
+                style={{ width: '25%' }}
+                color="error">
+                Delete
+              </Button>
+            </Stack>
+          </div>
+       
+      </div>
+    </Grid>
+
+</>
+    )}
+  </>
   );
 }
+
+
+// import React, { useState, useEffect } from 'react';
+// import axios from 'axios';
+// import { useParams} from 'react-router-dom';
+
+// export default function EditPatient() {
+//   const { id } = useParams();
+//   const [patient, setPatient] = useState({});
+//   const [loading, setLoading] = useState(true);
+//   //const history = useHistory();
+
+//   useEffect(() => {
+//     const fetchPatientData = async () => {
+//       try {
+//         if (id) {
+//           const response = await axios.get(`http://localhost:4000/patientData/get/${id}`);
+//           setPatient(response.data.patient);
+//           setLoading(false);
+//         }
+//       } catch (error) {
+//         console.error('Error fetching patient details:', error);
+//         setLoading(false);
+//       }
+//     };
+
+//     fetchPatientData();
+//   }, [id]);
+
+  // const handleUpdate = async () => {
+  //   try {
+  //     // Send a PUT request to update the patient record
+  //     await axios.put(`http://localhost:4000/patientData/update/${id}`, patient);
+  //     alert('Patient updated successfully.');
+  //     history.push(`/patient-details/${id}`);
+  //   } catch (error) {
+  //     console.error('Error updating patient:', error);
+  //   }
+  // };
+//   const handleUpdate = async () => {
+//     try {
+//       // Send a PUT request to update the patient record
+//       await axios.put(`http://localhost:4000/patientData/update/${id}`, patient);
+//       alert('Patient updated successfully.');
+      
+//       // Manually navigate to the patient details page
+//       window.location.href = `/patient-details/${id}`;
+//     } catch (error) {
+//       console.error('Error updating patient:', error);
+//     }
+//   };
+  
+
+//   const handleInputChange = (e) => {
+//     const { name, value } = e.target;
+//     setPatient({
+//       ...patient,
+//       [name]: value,
+//     });
+//   };
+
+//   return (
+//     <div>
+//       <h1>Edit Patient</h1>
+//       {loading ? (
+//         <p>Loading...</p>
+//       ) : (
+//         <form>
+//           <div>
+//             <label htmlFor="fName">First Name</label>
+//             <input
+//               type="text"
+//               id="fName"
+//               name="fName"
+//               value={patient.fName}
+//               onChange={handleInputChange}
+//             />
+//           </div>
+//           <div>
+//             <label htmlFor="lName">Last Name</label>
+//             <input
+//               type="text"
+//               id="lName"
+//               name="lName"
+//               value={patient.lName}
+//               onChange={handleInputChange}
+//             />
+//           </div>
+//           {/* Add more input fields for other patient attributes */}
+//           <button type="button" onClick={handleUpdate}>
+//             Update Patient
+//           </button>
+//         </form>
+//       )}
+//     </div>
+//   );
+// }
+
+
 
 // import React, { useState, useEffect } from "react";
 // import axios from "axios";

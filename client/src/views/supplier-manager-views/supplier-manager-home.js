@@ -20,6 +20,7 @@ import img7 from '../../assets/img/supplier/confirm.jpeg';
 import img8 from '../../assets/img/supplier/pharmacy.jpeg';
 import img9 from '../../assets/img/supplier/pay.jpeg';
 
+
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
   ...theme.typography.body2,

@@ -92,7 +92,7 @@ export default function RegistrationForm() {
             />
           </Grid>
           <Grid item xs={12}>
-            <TextField
+            <TextField type ='date'
               required
               fullWidth
               id="outlined-required-date"
@@ -100,6 +100,7 @@ export default function RegistrationForm() {
               value={Date}
               onChange={handleInputChange}
               name="Date"
+
             />
           </Grid>
           <Grid item xs={12}>

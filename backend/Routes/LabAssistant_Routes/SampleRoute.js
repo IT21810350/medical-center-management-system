@@ -11,11 +11,11 @@ const {
 } = require("../../Controllers/LabAssistantControllers/SampleController"); 
 
 router.post("/lab-sample",createSampleController);
-router.get("/lab-sample/:sampleId",getAllSampleController);
-router.get("/lab-sample/:sampleId",getSampleByIdController);
-router.put("/lab-sample/:sampleId",updateSampleByIdController);
-router.delete("/lab-sample/:sampleId",deleteSampleByIdController);
+router.get("/lab-sample/:id",getAllSampleController);
+router.get("/lab-sample/:id",getSampleByIdController);
+router.put("/lab-sample/:id",updateSampleByIdController);
+router.delete("/lab-sample/:id",deleteSampleByIdController);
 
-router.put("/lab-sample/update/:sampleId",updateSampleByIdController);
+router.put("/lab-sample/update/:id",updateSampleByIdController);
 
 module.exports = router;

@@ -17,6 +17,7 @@ const RoomType = require("./Routes/resource-person-routes/roomType-routes");
 const patientRouter = require("./Routes/Patient_Routes/patient_routes");
 const inqRouter = require("./Routes/Patient_Routes/inq-routes");
 const getDoctors = require("./Routes/Patient_Routes/getDoctors");
+const getChannels = require("./Routes/Patient_Routes/channeling-routes");
 //========================================
 
 // Lab Assistant Route start
@@ -28,6 +29,7 @@ const testRouter = require("./Routes/LabAssistant_Routes/TestRoute");
 
 
 const validationRoute = require("./Routes/ValidateRoutes");
+const SupplierPayment = require('./Models/SupplierManagerModel/SupplierPayment');
 
 const { MONGO_URL, PORT } = process.env;
 
@@ -72,14 +74,15 @@ app.use("/", authRoute, ProfileRoute, RegisterEmployee, PharmacistRoutes,HR, doc
 app.use("/patientData",patientRouter);
 app.use("/inqData" ,inqRouter);
 app.use("/getD",getDoctors);
+app.use("/ch",getChannels);
 //=================================
 
 // lab assistant routes end
-app.use("/patientData",equipmentRouter);
-app.use("/labAssistantData",labAssistantRouter);
-app.use("/reportData",reportRouter);
-app.use("/sampleData",sampleRouter);
-app.use("/testData",testRouter);
+app.use("/lab-inventory",equipmentRouter);
+app.use("/labAssistant-profile",labAssistantRouter);
+app.use("/lab-report",reportRouter);
+app.use("/lab-sample",sampleRouter);
+app.use("/lab-test",testRouter);
 
 app.listen(PORT, () => {
     console.log(`Server is running on port: ${PORT}`);

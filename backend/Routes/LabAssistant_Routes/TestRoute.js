@@ -12,10 +12,10 @@ const {
 
 router.post("/lab-test",createTestController);
 router.get("/lab-test",getAllTestController);
-router.get("/lab-test/:testId",getTestByIdController);
-router.put("/lab-test/:testId",updateTestByIdController);
-router.delete("/lab-test/:testId",deleteTestByIdController);
+router.get("/lab-test/:id",getTestByIdController);
+router.put("/lab-test/:id",updateTestByIdController);
+router.delete("/lab-test/:id",deleteTestByIdController);
 
-router.post("/lab-test/update/:testId",updateTestByIdController);
+router.post("/lab-test/update/:id",updateTestByIdController);
 
 module.exports = router;

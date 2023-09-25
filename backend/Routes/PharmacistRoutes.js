@@ -3,6 +3,7 @@ const router = require("express").Router();
 let Pharmacist = require("../Models/PharmacistModel/PharmacistProfile");
 
 
+
 //pharmacistProfile
 //url of create
 
