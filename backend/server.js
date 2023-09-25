@@ -77,11 +77,11 @@ app.use("/ch",getChannels);
 //=================================
 
 // lab assistant routes end
-app.use("/patientData",equipmentRouter);
-app.use("/labAssistantData",labAssistantRouter);
-app.use("/reportData",reportRouter);
-app.use("/sampleData",sampleRouter);
-app.use("/testData",testRouter);
+app.use("/lab-inventory",equipmentRouter);
+app.use("/labAssistant-profile",labAssistantRouter);
+app.use("/lab-report",reportRouter);
+app.use("/lab-sample",sampleRouter);
+app.use("/lab-test",testRouter);
 
 app.listen(PORT, () => {
     console.log(`Server is running on port: ${PORT}`);

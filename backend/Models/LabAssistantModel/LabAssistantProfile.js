@@ -31,4 +31,4 @@ const LASchema = new mongoose.Schema({
 
 const LA =  mongoose.model("LabAssistantProfile",LASchema);
 
-module.export = LA;
+module.exports = LA;

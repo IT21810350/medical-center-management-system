@@ -23,4 +23,4 @@ const lab_sample = new mongoose.Schema({
 
 const LabSample = mongoose.model("labSample", lab_sample);
 
-module.export = LabSample;
+module.exports = LabSample;

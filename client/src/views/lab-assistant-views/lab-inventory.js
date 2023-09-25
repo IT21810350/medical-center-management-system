@@ -23,6 +23,7 @@ const styles = {
     display: 'flex',
     flexDirection: 'column',
     height: '100vh',
+    fontSize: '10px',
   },
   contentContainer: {
     flexGrow: 1,
@@ -99,7 +100,7 @@ function LabInventoryPage() {
     <div style={styles.labInventoryPage}>
       <NavBar />
       <Container style={styles.contentContainer}>
-        <Typography variant="h4" gutterBottom>
+        <Typography variant="h3" gutterBottom>
           Lab Inventory
         </Typography>
 
@@ -220,7 +221,7 @@ function LabInventoryPage() {
         <DialogTitle>Item Details</DialogTitle>
         {selectedItem && (
           <DialogContent>
-            <Typography variant="h6">Equipment ID: {selectedItem.equipment_id}</Typography>
+            <Typography variant="h3">Equipment ID: {selectedItem.equipment_id}</Typography>
             <Typography>Name: {selectedItem.name}</Typography>
             <Typography>Manufacturer: {selectedItem.manufacturer}</Typography>
             <Typography>Purchase Date: {selectedItem.purchase_date.toISOString().slice(0, 10)}</Typography> {/* Display date in yyyy-mm-dd format */}
