@@ -1,7 +1,7 @@
 const supplierRegistrationModel = require("../Models/SupplierManagerModel/SupplierRegistration");
 const supplierPaymentModel = require("../Models/SupplierManagerModel/SupplierManagerProfile");
 const supplierManagerProfileModel = require("../Models/SupplierManagerModel/SupplierManagerProfile");
-const SupplierInventoryMedicineModel = require('../Models/SupplierManagerModel/SupplierInventoryMedicine');
+const SupplierInventoryMedicine = require('../Models//SupplierManagerModel/SupplierInventoryMedicine');
 
 // Controller for supplier registration
 module.exports.registerSupplier = async (req, res, next) => {
@@ -70,8 +70,8 @@ module.exports.profileSupplier = async (req, res, next) => {
 };
 
 
- //Controller for supplier payment
- module.exports.addSupplierPayment = async (req, res, next) => {
+//Controller for supplier payment
+module.exports.addSupplierPayment = async (req, res, next) => {
     try {
         const { InvoiceNo, Date, NoOfItems, PaidAmount, SupplierID, Company, TotalAmount } = req.body;
 
@@ -85,43 +85,44 @@ module.exports.profileSupplier = async (req, res, next) => {
             TotalAmount
         });
 
-       res.status(201).json({
+        res.status(201).json({
             message: "Supplier payment data added successfully",
             success: true,
-             paymentData
-       });
+            paymentData
+        });
 
         next();
 
-     } catch (error) {
-         console.error(error);
+    } catch (error) {
+        console.error(error);
         res.status(500).json({
-             message: "Supplier payment data not added successfully",
-             success: false
-         });
+            message: "Supplier payment data not added successfully",
+            success: false
+        });
     }
- };
+};
 
- //Controller for inventory medicine
- 
+//Controller for inventory medicine
+
 module.exports.inventoryMedicine = async (req, res, next) => {
     try {
-        const {  no ,drugCode,drugName,specificationModel,unit ,expiryDate,manufacturer,quantity,unitPrice,} = req.body;
+        const {  drugCode, drugName, specificationModel, unit, expiryDate, manufacturer, quantity, unitPrice,reOrderLevel } = req.body;
 
-        const registrationData = await supplierManagerProfileModel.create({
-            no ,
+        const registrationData = await SupplierInventoryMedicine.create({
+            
             drugCode,
             drugName,
             specificationModel,
-            unit ,
+            unit,
             expiryDate,
             manufacturer,
             quantity,
             unitPrice,
+            reOrderLevel,
         });
 
         res.status(201).json({
-            message: "Supplier profile data added successfully",
+            message: "inventory medicine data added successfully",
             success: true,
             registrationData
         });
@@ -131,9 +132,52 @@ module.exports.inventoryMedicine = async (req, res, next) => {
     } catch (error) {
         console.error(error);
         res.status(500).json({
-            message: "Supplier profile data not added successfully",
+            message: "inventory medicine data not added successfully",
             success: false
         });
     }
 };
+// Get all medicines
+module.exports.getAllMedicines = async (req, res) => {
+    try {
+        const medicines = await SupplierInventoryMedicine.find();
+        res.status(200).json({ status: 'success', data: medicines });
+    } catch (error) {
+        res.status(500).json({ status: 'fail', message: error.message });
+    }
+};
 
+// Get a specific medicine by ID
+module.exports.getMedicineById = async (req, res) => {
+    try {
+        const medicine = await SupplierInventoryMedicine.findById(req.params.id);
+        res.status(200).json({ status: 'success', data: medicine });
+    } catch (error) {
+        res.status(404).json({ status: 'fail', message: 'Medicine not found' });
+    }
+};
+
+// Update a medicine by ID
+module.exports.updateMedicine = async (req, res) => {
+    try {
+        const medicine = await SupplierInventoryMedicine.findByIdAndUpdate(
+            req.params.id,
+            req.body,
+            { new: true, runValidators: true }
+        );
+        res.status(200).json({ status: 'success', data: medicine });
+    } catch (error) {
+        res.status(404).json({ status: 'fail', message: 'Medicine not found' });
+    }
+};
+
+
+// Delete a medicine by ID
+module.exports.deleteMedicine = async (req, res) => {
+    try {
+        await SupplierInventoryMedicine.findByIdAndDelete(req.params.id);
+        res.status(204).json({ status: 'success', data: null });
+    } catch (error) {
+        res.status(404).json({ status: 'fail', message: 'Medicine not found' });
+    }
+};

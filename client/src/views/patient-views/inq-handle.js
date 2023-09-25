@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import Button from '@mui/material/Button';
+import { Stack } from '@mui/material';
 
 const InquiryList = () => {
   const [inquiries, setInquiries] = useState([]);
@@ -31,7 +32,7 @@ const InquiryList = () => {
   return (
     <div>
       <h2>All Inquiries</h2>
-      <table>
+      <table border={2}>
         <thead>
           <tr>
             <th>Name</th>
@@ -47,7 +48,19 @@ const InquiryList = () => {
               <td>{inquiry.subject}</td>
               <td>{inquiry.message}</td>
               <td>
-                <button onClick={() => handleDelete(inquiry._id)}>Delete</button>
+                {/* <button onClick={() => handleDelete(inquiry._id)}>Delete</button> */}
+                <Stack direction={'row'} spacing={2}>
+                <Button
+                  component={Link}
+                  to="/editinq"
+                  variant="contained"
+                  // size="small"
+                  style={{ width: '100%' }}
+
+                  color="primary"
+                >
+                  Edit
+                </Button>
                 {/* <Link 
                   // to={{
                   //   pathname: `/editinq/`,
@@ -58,17 +71,31 @@ const InquiryList = () => {
                   
                 </Link> */}
                 {/* <button component={Link} to="/editinq" variant="contained" color="primary">Edit</button> */}
+               
                 <Button
-                                                component={Link}
-                                                to="/editinq"
-                                                variant="contained"
-                                                // size="small"
-                                                style={{ width: '100%' }}
-                                               
-                                                color="primary"
-                                            >
-                                                Inquiries
-                                            </Button>
+                  component={Link}
+                  to="/editinq"
+                  variant="contained"
+                  // size="small"
+                  style={{ width: '100%' }}
+
+                  color="primary"
+                >
+                  Delete
+                </Button>
+                </Stack>
+                
+                {/* <Link 
+                  // to={{
+                  //   pathname: `/editinq/`,
+                  //   //state: { inquiryData: inquiry }, // Pass the inquiry object as state
+                  // }}
+                  
+                >
+                  
+                </Link> */}
+                {/* <button component={Link} to="/editinq" variant="contained" color="primary">Edit</button> */}
+              
               </td>
             </tr>
           ))}

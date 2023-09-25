@@ -3,35 +3,15 @@ const router = require("express").Router();
 let Pharmacist = require("../Models/PharmacistModel/PharmacistProfile");
 
 
+
 //pharmacistProfile
 //url of create
 
-router.route("/add").post((req,res)=>{
+router.route("/addPharmacist").post((req,res)=>{
 
-    const firstName     =  req.body.firstName;
-    const lastName      =  req.body.lastName;
-    const emailAddress  =  req.body.emailAddress;
-    const contactNumber =  req.body.contactNumber;
-    const gender        =  req.body.gender;
-    const NIC           =  req.body.NIC;
-    const bio           =  req.body.bio;
+    const patientProfile = Pharmacist.create(req.body);
 
-    const newPharmacist = new Pharmacist({
-        firstName, 
-        lastName, 
-        emailAddress, 
-        contactNumber, 
-        gender, 
-        NIC, 
-        bio
-    })
-
-
-    newPharmacist.save().then(()=>{
-        res.json("Data Added")
-    }).catch((err)=>{
-        console.log(err);
-    })
+    res.json(patientProfile);
 })
 
 //http://Localhost

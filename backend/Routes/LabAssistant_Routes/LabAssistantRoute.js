@@ -12,9 +12,9 @@ const {
 
 router.post("/labAssistant-profile",createLabAssistantController);
 router.get("/labAssistant-profile",getAllLabAssistantController);
-router.get("/labAssistant-profile/:labAssistantId",getLabAssistantByIdController);
-router.put("/labAssistant-profile/:labAssistantId",updateLabAssistantByIdController);
-router.delete("/labAssistant-profile/:equipmentId",deleteLabAssistantByIdController);
+router.get("/labAssistant-profile/:id",getLabAssistantByIdController);
+router.put("/labAssistant-profile/:id",updateLabAssistantByIdController);
+router.delete("/labAssistant-profile/:id",deleteLabAssistantByIdController);
 
 
 module.exports = router;

@@ -40,12 +40,13 @@ module.experts.pharmacistProfile = async (req, res, next) => {
 //Controller for medicine profile
 module.experts.MedicineProfile = async (req, res, next) => {
     try {
-        const {medicineCode, medicineName, dosage, expiryDate, quantity, unitPrice} = req.body;
+        const {medicineCode, medicineName, dosage, medicineType, expiryDate, quantity, unitPrice} = req.body;
 
         const medicineData = await MedicineProfile.create({
             medicineCode,
             medicineName,
             dosage,
+            medicineType,
             expiryDate,
             quantity,
             unitPrice,

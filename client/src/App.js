@@ -31,6 +31,7 @@ import Delete from './views/patient-views/delete';
 
 // pharmacist imports
 import Pharmacist from './views/pharmacist-views/parmacist-home';
+
 import PharmacistProfile from './views/pharmacist-views/pharmacistProfile';
 //import addMedicine from './views/pharmacist-views/addMedicine';
 import MedicineStore from './views/pharmacist-views/medicineStore';
@@ -60,6 +61,7 @@ import LabAssistantProfile from './views/lab-assistant-views/lab-assistant-profi
 
 // supplier manager imports
 import SM from "./views/supplier-manager-views/supplier-manager-home";
+//import SearchDoctors from './views/patient-views/searchDoctors';
 import SupplierRegistration from './views/supplier-manager-views/supplier-registration';
 import SupplierProfile from './views/supplier-manager-views/supplier-profile';
 import SupplierList from './views/supplier-manager-views/supplier-list';
@@ -118,6 +120,17 @@ function App() {
 
         {/* Patient Routes */}
         <Route path="/searchDoctors" element={<SearchDoctors />} />
+
+        {/*Pharmacist Routes */}
+        <Route path="/pharmacistProfile" element={<PharmacistProfile/>} />
+        <Route path="/addMedicine" element={<addMedicine/>} />
+        <Route path="/medicineStore" element={<MedicineStore/>} />
+        <Route path="/medicineOrder" element={<MedicineOrder/>} />
+        <Route path="/medicineSales" element={<MedicineSales/>} />
+        <Route path="/pharmacist/*" element={<Pharmacist />} />
+
+
+      
         <Route path="/patient" element={<Patient />} />
         <Route path="/search-doctors" element={<SearchDoctors />} />
         <Route path="/dash" exact Component={CommonPatientDashboard} />
