@@ -15,7 +15,7 @@ router.post("/supplierManagerProfile", profileSupplier);
 
 // Route for supplier inventory
 // Create a new medicine
-router.post("/inventoryMedicine", inventoryMedicine);
+router.post("/addInventoryMedicine", inventoryMedicine);
 // Get all medicines
 router.get("/inventoryMedicine", getAllMedicines);
 // Get a specific medicine by ID

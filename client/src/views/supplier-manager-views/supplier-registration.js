@@ -6,6 +6,7 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Container from '@mui/material/Container';
 import axios from 'axios';
+import img1 from '../../assets/img/supplier/Registration.jpg';
 
 export default function RegistrationForm() {
   const [formData, setFormData] = useState({
@@ -56,8 +57,8 @@ export default function RegistrationForm() {
     <Container
       maxWidth="sm"
       style={{
-        height: '100vh',
-        width: '100vw',
+        height: '120vh',
+        width: '140vw',
         backgroundColor: '#E1F5FE', // Updated background color to light blue
         display: 'flex',
         justifyContent: 'center',
@@ -73,6 +74,14 @@ export default function RegistrationForm() {
         }}
       >
         <h1 style={{ textAlign: 'center' }}>Supplier Registration</h1>
+
+          <img
+            src={img1}
+            alt=""
+            style={{ maxWidth: '100%', height: 'auto', maxHeight: '200px' }}
+          />
+        
+
         <Grid container spacing={2}>
           <Grid item xs={6}>
             <TextField
@@ -84,6 +93,7 @@ export default function RegistrationForm() {
               onChange={handleInputChange}
               name="FirstName"
             />
+
           </Grid>
           <Grid item xs={6}>
             <TextField

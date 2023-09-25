@@ -20,6 +20,7 @@ const getDoctors = require("./Routes/Patient_Routes/getDoctors");
 
 
 const validationRoute = require("./Routes/ValidateRoutes");
+const SupplierPayment = require('./Models/SupplierManagerModel/SupplierPayment');
 
 const { MONGO_URL, PORT } = process.env;
 
@@ -52,7 +53,7 @@ connection.once('open', () => {
     console.log("MongoDB database connection established successfully")
 });
 
-app.use("/", authRoute, ProfileRoute, RegisterEmployee,HR, SymptomAdd, SupplierRegistration, validationRoute  );
+app.use("/", authRoute, ProfileRoute, RegisterEmployee,HR, SymptomAdd, SupplierRegistration, validationRoute ,);
 
 
 //================================

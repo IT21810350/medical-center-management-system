@@ -41,8 +41,13 @@ const supplierInventoryMedicineSchema = new mongoose.Schema(
             type: String,
             required: [true, "Manager bio is required"],
         },
+        reOrderLevel: {
+            type: String,
+            required: [true, "Manager reOrderLevel is required"],
+        },
 
     }
 );
+
 
 module.exports = mongoose.model('SupplierInventoryMedicine', supplierInventoryMedicineSchema);

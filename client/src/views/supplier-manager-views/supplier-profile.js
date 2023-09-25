@@ -157,7 +157,7 @@ export default function ColumnsGrid() {
               onChange={handleInputChange}
             />
             <Button variant="contained" startIcon={<EditIcon />} onClick={handleSubmit}>
-              Edit
+              Submit
             </Button>
           </Item>
         </Grid>
