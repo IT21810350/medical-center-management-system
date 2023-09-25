@@ -15,6 +15,7 @@ const doctorRoutes = require("./Routes/DoctorRoutes");
 const patientRouter = require("./Routes/Patient_Routes/patient_routes");
 const inqRouter = require("./Routes/Patient_Routes/inq-routes");
 const getDoctors = require("./Routes/Patient_Routes/getDoctors");
+const getChannels = require("./Routes/Patient_Routes/channeling-routes");
 //========================================
 
 
@@ -63,6 +64,7 @@ app.use("/", authRoute, ProfileRoute, RegisterEmployee, PharmacistRoutes,HR, doc
 app.use("/patientData",patientRouter);
 app.use("/inqData" ,inqRouter);
 app.use("/getD",getDoctors);
+app.use("/ch",getChannels);
 //=================================
 
 

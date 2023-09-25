@@ -119,8 +119,7 @@ function App() {
         <Route path="/payroll" element={<Payrollsystem />} />
         
 
-        {/* Patient Routes */}
-        <Route path="/searchDoctors" element={<SearchDoctors />} />
+        
 
         {/*Pharmacist Routes */}
         <Route path="/pharmacistProfile" element={<PharmacistProfile/>} />
@@ -130,7 +129,9 @@ function App() {
         <Route path="/medicineSales" element={<MedicineSales/>} />
         <Route path="/pharmacist/*" element={<Pharmacist />} />
 
-      
+
+        {/* Patient Routes */}
+    
         <Route path="/search-doctors" element={<SearchDoctors />} />
         <Route path="/dash" exact Component={CommonPatientDashboard} />
         <Route path="/search-chanelling" exact Component={SearchChanelling} />
@@ -144,6 +145,7 @@ function App() {
         <Route path="/rescedule-appointment" exact Component={Reschedule} />
         <Route path="/delete-appointment" exact Component={Delete} />
         <Route path="/editinq" component={EditInquiry} />
+        
 
 
         {/* Resource person Routes */}

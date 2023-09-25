@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
+
 import {
   Table,
   TableBody,
@@ -49,9 +49,14 @@ const SearchChanelling = () => {
     setSearchTerm(event.target.value);
   };
 
+  // const handleButtonClick = (id) => {
+  //   // Handle button click action here
+  //   console.log(`Button clicked for ID ${id}`);
+  // };
+
   const handleButtonClick = (id) => {
-    // Handle button click action here
-    console.log(`Button clicked for ID ${id}`);
+    // Redirect to the "make-chanelling" page with the doctor's ID as a query parameter
+    window.location.href = `/make-chanelling?doctorId=${id}`;
   };
 
   return (
@@ -73,7 +78,7 @@ const SearchChanelling = () => {
         <Table>
           <TableHead>
             <TableRow>
-              <TableCell>Number</TableCell>
+              
               <TableCell>Doctor</TableCell>
               <TableCell>Specialization</TableCell>
               <TableCell>Actions</TableCell>
@@ -82,7 +87,7 @@ const SearchChanelling = () => {
           <TableBody>
             {filteredDoctors.map((row) => (
               <TableRow key={row._id}>
-                <TableCell>{row._id}</TableCell>
+               
                 <TableCell>{`${row.firstName} ${row.lastname}`}</TableCell>
                 <TableCell>{row.specialization}</TableCell>
                 <TableCell>
@@ -93,13 +98,32 @@ const SearchChanelling = () => {
                     onClick={() => handleButtonClick(row._id)}
                   >Chanel</Button></Link> */}
 
-                  <Button
+                  {/* <Button
                     variant="contained"
                     color="primary"
                     // onClick={() => this.handleButtonClick(row.id)}
 
                   ><Link href="/make-chanelling" style={{ color: 'white' }}>Chanel</Link>
 
+                  </Button> */}
+                  {/* <Button
+                    component={Link}
+                    to="/make-chanelling"
+                    variant="contained"
+                    onClick={() => handleButtonClick(row._id)}
+
+
+                    color="primary"
+                  >
+                    Channel
+                  </Button> */}
+
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    onClick={() => handleButtonClick(row._id)}
+                  >
+                    Channel
                   </Button>
 
                 </TableCell>
