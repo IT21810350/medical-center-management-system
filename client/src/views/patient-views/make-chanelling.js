@@ -12,6 +12,12 @@ export default function PatientMakeChanelling() {
     const location = useLocation();
     const doctorId = new URLSearchParams(location.search).get('doctorId');
     const [doctorDetails, setDoctorDetails] = useState(null);
+    const [formData, setFormData] = useState({
+        date: '',
+        time: '',
+        patient: '',
+        doctor: '',
+    });
 
 
     // useEffect(() => {
@@ -48,27 +54,29 @@ export default function PatientMakeChanelling() {
     console.log('doctorDetails:', doctorDetails);
 
 
+
+
     const handleBookAppointment = async (doctorId) => {
         // Redirect to the desired page with doctorId
         window.location.href = `/confirm-chanelling?doctorId=${doctorId}`;
         try {
             // Make a POST request to your server or API endpoint
             const response = await axios.post('http://localhost:4000/ch/add', formData);
-      
+
             // Handle the response (e.g., show success message)
             console.log('Form submitted successfully', response.data);
-      
+
             // Optionally, reset the form
             setFormData({
-              date: '',
-              time: '',
-              patient:'',
-              doctor: '',
+                date: '',
+                time: '',
+                patient: '',
+                doctor: '',
             });
-          } catch (error) {
+        } catch (error) {
             // Handle errors (e.g., show error message)
             console.error('Error submitting form', error);
-          }
+        }
 
     };
 
