@@ -21,7 +21,7 @@ const PharmacistProfile = () => {
   return (
     <Grid item xs={3}>
       <Card sx={{ maxWidth: 345 }}>
-        <Link to="/parmacist/pharmacistProfile" style={{ textDecoration: 'none' }}>
+        <Link to="/pharmacistProfile" style={{ textDecoration: 'none' }}>
           <CardActionArea>
             <CardMedia
               component="img"

@@ -32,6 +32,7 @@ import Delete from './views/patient-views/delete';
 // pharmacist imports
 import Pharmacist from './views/pharmacist-views/parmacist-home';
 
+
 // hr imports
 import HR from './views/hr-views/hr-home';
 import Registration from './views/hr-views/hr-emp-registration';
@@ -55,10 +56,9 @@ import LabAssistantProfile from './views/lab-assistant-views/lab-assistant-profi
 
 // supplier manager imports
 import SM from "./views/supplier-manager-views/supplier-manager-home";
-import SearchDoctors from './views/patient-views/searchDoctors';
+//import SearchDoctors from './views/patient-views/searchDoctors';
 import PharmacistProfile from './views/pharmacist-views/pharmacistProfile';
 import SupplierRegistration from './views/supplier-manager-views/supplier-registration';
-//import addMedicine from './views/pharmacist-views/addMedicine';
 import MedicineStore from './views/pharmacist-views/medicineStore';
 import MedicineOrder from './views/pharmacist-views/medicineOrders';
 import MedicineSales from './views/pharmacist-views/medicineSales';
@@ -129,6 +129,7 @@ function App() {
         <Route path="/medicineOrder" element={<MedicineOrder/>} />
         <Route path="/medicineSales" element={<MedicineSales/>} />
         <Route path="/pharmacist/*" element={<Pharmacist />} />
+
 
       
         <Route path="/search-doctors" element={<SearchDoctors />} />
