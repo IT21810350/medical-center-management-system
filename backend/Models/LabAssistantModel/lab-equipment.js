@@ -26,4 +26,4 @@ const lab_equipment = new mongoose.Schema({
 
 const LabEquipment = mongoose.model("LabEquipment",lab_equipment);
 
-module.export = LabEquipment;
+module.exports = LabEquipment;

@@ -12,10 +12,10 @@ const {
 
 router.post("/lab-report",createReportController);
 router.get("/lab-report",getAllReportController);
-router.get("/lab-report/:reportId",getReportByIdController);
-router.put("/lab-report/:reportId",updateReportByIdController);
-router.delete("/lab-report/:reportId",deleteReportByIdController);
+router.get("/lab-report/:id",getReportByIdController);
+router.put("/lab-report/:id",updateReportByIdController);
+router.delete("/lab-report/:id",deleteReportByIdController);
 
-router.put("/lab-report/update/:reportId",updateReportByIdController);
+router.put("/lab-report/update/:id",updateReportByIdController);
 
 module.exports = router;
