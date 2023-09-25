@@ -15,7 +15,7 @@ import AdbIcon from '@mui/icons-material/Adb';
 import { Link } from 'react-router-dom';
 import formatPageName from '../../utils/formatPageName'
 
-const pages = ['Home', 'Contact Us', 'About Us', 'Lab Facilities','Manage Resources'];
+const pages = ['Home', 'Contact Us', 'About Us', 'Lab Facilities','Manage Resources', 'Available Rooms'];
 const settings = ['Profile', 'Account', 'Logout'];
 
 function ResponsiveAppBar() {
@@ -46,7 +46,7 @@ function ResponsiveAppBar() {
                         variant="h6"
                         noWrap
                         component="a"
-                        href="/"
+                        href="/room-types"
                         sx={{
                             mr: 2,
                             display: { xs: 'none', md: 'flex' },

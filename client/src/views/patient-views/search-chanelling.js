@@ -86,13 +86,22 @@ const SearchChanelling = () => {
                 <TableCell>{`${row.firstName} ${row.lastname}`}</TableCell>
                 <TableCell>{row.specialization}</TableCell>
                 <TableCell>
-                  <Button
+                  
+                    {/* <Link to={`/make-chanelling/${row._id}`} style={{ color: 'white' }}><Button
                     variant="contained"
                     color="primary"
                     onClick={() => handleButtonClick(row._id)}
-                  >
-                    <Link to={`/make-chanelling/${row._id}`} style={{ color: 'white' }}>Chanel</Link>
+                  >Chanel</Button></Link> */}
+
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    // onClick={() => this.handleButtonClick(row.id)}
+
+                  ><Link href="/make-chanelling" style={{ color: 'white' }}>Chanel</Link>
+
                   </Button>
+
                 </TableCell>
               </TableRow>
             ))}
@@ -204,14 +213,14 @@ export default SearchChanelling;
 //                   <TableCell>{row.col1}</TableCell>
 //                   <TableCell>{row.col2}</TableCell>
 //                   <TableCell>
-//                     <Button
-//                       variant="contained"
-//                       color="primary"
-//                       onClick={() => this.handleButtonClick(row.id)}
+                    // <Button
+                    //   variant="contained"
+                    //   color="primary"
+                    //   onClick={() => this.handleButtonClick(row.id)}
                       
-//                     ><Link href="/make-chanelling" style={{ color: 'white' }}>Chanel</Link>
+                    // ><Link href="/make-chanelling" style={{ color: 'white' }}>Chanel</Link>
                       
-//                     </Button>
+                    // </Button>
 //                   </TableCell>
 //                 </TableRow>
 //               ))}

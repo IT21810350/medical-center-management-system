@@ -86,3 +86,14 @@ module.exports.PrescriptionController = async (req, res) => {
         res.status(500).json({ error: 'Prescription data not loaded properly' });
     }
 };
+
+module.exports.GetPrescriptionController = async (req, res) => {
+    try {
+      const prescriptions = await PrescriptionModel.find();
+  
+      res.json({message: "All prescriptions" , prescriptions});
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: 'An error occurred while fetching users' });
+    }
+  };

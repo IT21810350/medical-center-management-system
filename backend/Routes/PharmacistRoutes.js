@@ -1,7 +1,6 @@
 const express = require("express");
 const router = require("express").Router();
 let Pharmacist = require("../Models/PharmacistModel/PharmacistProfile");
-let Pharmacist = require("../Models/PharmacistModel/MedicineProfile");
 
 
 //pharmacistProfile

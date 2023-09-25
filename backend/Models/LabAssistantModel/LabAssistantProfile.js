@@ -1,6 +1,9 @@
 const mongoose = require("mongoose");
 
 const LASchema = new mongoose.Schema({
+    lab_assistant_id : {
+        type: String,
+    },
     firstName: {
         type: String,
         //require: [true,"lab Assistant first Name is required"]
@@ -26,4 +29,6 @@ const LASchema = new mongoose.Schema({
         timestamps : true
     });
 
-module.export = mongoose.model("LabAssistantProfile",LASchema);
+const LA =  mongoose.model("LabAssistantProfile",LASchema);
+
+module.export = LA;
