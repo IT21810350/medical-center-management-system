@@ -1,130 +1,276 @@
-import React from 'react';
-import CssBaseline from '@mui/material/CssBaseline';
+import React, { useState, useEffect } from 'react';
 import Box from '@mui/material/Box';
-import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
-import { List, ListItem, ListItemAvatar, Avatar, ListItemText, Button  } from '@mui/material';
-import img1 from '../../assets/img/doctor/doctor-profile-img.jpg';
+import { Avatar, Paper, CssBaseline, Container, Button } from '@mui/material';
+// for calender
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { DateCalendar } from '@mui/x-date-pickers/DateCalendar';
 
-const RecentPatientsCard = () => {
-    const recentPatients = [
-      { id: 1, name: 'Malshan Rathnayake', diagnostic: 'Fever', avatarUrl: '/assets/img/avatar1.jpg' },
-      { id: 2, name: 'Ravindu Kavishka', diagnostic: 'Back Pain', avatarUrl: '/assets/img/avatar2.jpg' },
-      { id: 3, name: 'Inupa Tharindu', diagnostic: 'Headache', avatarUrl: '/assets/img/avatar2.jpg' },
-      { id: 4, name: 'Pathum Nishajith', diagnostic: 'Running Nose', avatarUrl: '/assets/img/avatar2.jpg' }
-    ];
-  
-    return (
-      <Card sx={{ backgroundColor: '#F0FFFF' }}>
-        <CardContent>
-          <Typography variant="h6" gutterBottom>
-            Recent Patients
-          </Typography>
-          <List>
-            {recentPatients.map((patient) => (
-              <ListItem key={patient.id}>
-                <ListItemAvatar>
-                  <Avatar alt={patient.name} src={patient.avatarUrl} />
-                </ListItemAvatar>
-                <ListItemText primary={patient.name} secondary={patient.diagnostic} />
-                <Button variant="outlined" size="small">
-                    View
+import Navbar from '../../components/doctor-component/doctor-nav-bar';
+import { useCurrentTime } from '../../utils/getCurrentTime'
+
+import docImg from '../../assets/img/doctor/doctor-profile-img.jpg';
+
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
+
+import axios from 'axios';
+import Cookies from 'js-cookie';
+import { Link } from 'react-router-dom';
+
+
+const Item = Paper;
+
+const ProfileCard = ({ userData }) => {
+
+  const time = useCurrentTime();
+
+  // if (!userData) {
+  //   return <div>Loading...</div>;
+  // }
+
+  // const { profile } = userData.user;
+
+  return (
+    <Box sx={{ p: 2, height: '190x', backgroundColor: '#1E90FF' }}>
+      <Grid container alignItems="center" spacing={2}>
+        <Grid item>
+          <Avatar
+            src={docImg}
+            sx={{ width: 80, height: 80 }}
+          />
+        </Grid>
+        <Grid item>
+          <Typography variant="h6" sx={{ color: 'white' }}>Dr. {userData.profile.firstName}</Typography>
+          <Typography variant="body2" sx={{ color: 'white' }}>Specialization: {userData.profile.specialty}</Typography>
+          <Typography variant="body2" sx={{ color: 'white' }}>Time: {time}</Typography>
+        </Grid>
+      </Grid>
+
+      <Grid container mt={2}>
+        <Grid item xs={12}>
+          <Typography variant="h6" sx={{ color: 'white' }}>Center Name: XYZ Hospital</Typography>
+          <Typography variant="body2" sx={{ color: 'white' }}>Branch: Malabe Branch</Typography>
+        </Grid>
+      </Grid>
+    </Box>
+  );
+};
+
+const SummaryCard = () => {
+  return (
+    <Card variant="outlined" sx={{ height: '180px', backgroundColor: '#4169E1' }}>
+      <CardContent sx={{ color: 'white' }}>
+        <Typography variant="h4" align="center" sx={{ marginBottom: 3 }}>SUMMARY</Typography>
+        <Grid container spacing={2}>
+          <Grid item xs={6}>
+            <Typography variant="body1" align="center">Active Patients</Typography>
+            <Typography variant="h4" align="center">0</Typography>
+          </Grid>
+          <Grid item xs={6}>
+            <Typography variant="body1" align="center">Ongoing Channelings</Typography>
+            <Typography variant="h4" align="center">0</Typography>
+          </Grid>
+        </Grid>
+      </CardContent>
+    </Card>
+  );
+};
+
+const NextAppointmentCard = () => {
+  return (
+    <Card variant="outlined" sx={{ height: '180px', backgroundColor: '#F33A6A', color: 'white' }}>
+      <CardContent>
+        <Typography variant="h4" align="center" sx={{ marginBottom: 3 }}>NEXT APPOINTMENT</Typography>
+        <Grid container spacing={1} justifyContent="center">
+          <Grid item xs={3}>
+            <Typography variant="body1">Patient</Typography>
+            <Typography variant="body1">Time</Typography>
+            <Typography variant="body1">Room</Typography>
+          </Grid>
+          <Grid item xs={1}>
+            <Typography variant="body1" >:</Typography>
+            <Typography variant="body1" >:</Typography>
+            <Typography variant="body1" >:</Typography>
+          </Grid>
+          <Grid item xs={5}>
+            <Typography variant="body1">null</Typography>
+            <Typography variant="body1">null</Typography>
+            <Typography variant="body1">null</Typography>
+          </Grid>
+        </Grid>
+      </CardContent>
+    </Card>
+  );
+};
+
+const UpcomingChanneling = () => {
+
+  return (
+    <Table>
+      <TableHead>
+        <TableRow>
+          <TableCell>Patient Name</TableCell>
+          <TableCell>Date</TableCell>
+          <TableCell>Time</TableCell>
+          <TableCell>Servirity Level</TableCell>
+          <TableCell>View</TableCell>
+        </TableRow>
+      </TableHead>
+      <TableBody>
+
+        <TableRow>
+          <TableCell>malshan</TableCell>
+          <TableCell>13/09/2023</TableCell>
+          <TableCell>1.00 PM</TableCell>
+          <TableCell>low</TableCell>
+          <TableCell>
+            <Link to="/symptoms">
+              <Button
+                variant="outlined"
+                color="primary"
+              >
+                View
               </Button>
-              </ListItem>
-            ))}
-          </List>
-        </CardContent>
-      </Card>
-    );
+            </Link>
+          </TableCell>
+        </TableRow>
+
+        <TableRow>
+          <TableCell>kaveesha</TableCell>
+          <TableCell>13/09/2023</TableCell>
+          <TableCell>3.00 PM</TableCell>
+          <TableCell>low</TableCell>
+          <TableCell>
+            <Link to="/symptoms">
+              <Button
+                variant="outlined"
+                color="primary"
+              >
+                View
+              </Button>
+            </Link>
+          </TableCell>
+        </TableRow>
+
+        <TableRow>
+          <TableCell>ravindu</TableCell>
+          <TableCell>14/09/2023</TableCell>
+          <TableCell>4.00 PM</TableCell>
+          <TableCell>medium</TableCell>
+          <TableCell>
+            <Link to="/symptoms">
+              <Button
+                variant="outlined"
+                color="primary"
+              >
+                View
+              </Button>
+            </Link>
+          </TableCell>
+        </TableRow>
+
+      </TableBody>
+    </Table>
+  );
 };
 
-const UpcomingAppointmentsCard = () => {
 
-    const upcomingAppointments = [
-        {id: 1, name: 'Amalsha rathnayake', date: '2023-10-11', time: '10:00 AM'},
-        {id: 2, name: 'Shehan Dilisha', date: '2023-09-10', time: '11:00 AM'},
-        {id: 3, name: 'Tharindu Shehan', date: '2023-11-11', time: '12:00 PM'},
-        {id: 4, name: 'Nadun Thennakoon', date: '2023-08-17', time: '01:00 PM'},
-    ];
-
-    return (
-        <Card sx={{ backgroundColor: '#F0FFFF' }}>
-          <CardContent>
-            <Typography variant="h6" gutterBottom>
-              Upcomming Appointments
-            </Typography>
-            <List>
-              {upcomingAppointments.map((upcomingAppointments) => (
-                <ListItem key={upcomingAppointments.id}>
-                  <ListItemAvatar>
-                    <Avatar alt={upcomingAppointments.name} />
-                  </ListItemAvatar>
-                  <ListItemText primary={upcomingAppointments.name} secondary={`${upcomingAppointments.date} at ${upcomingAppointments.time}`} />
-                  <Button variant="outlined" size="small">
-                      View
-                </Button>
-                </ListItem>
-              ))}
-            </List>
-          </CardContent>
-        </Card>
-      );
-};
 
 const Doctor = () => {
-    return (
-        <React.Fragment>
 
-            <CssBaseline />
+  const token = Cookies.get('token');
+  const tokenParts = token.split('.');
+  const payload = JSON.parse(atob(tokenParts[1]));
+  const userId = payload.id;
 
-            <Container maxWidth="100%">
+  const [userData, setUserData] = useState(null);
 
-                <Box sx={{ flexGrow: 1 }}>
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(`http://localhost:4000/getDoctorProfile/` + userId);
+        setUserData(response.data.user);
+      } catch (error) {
+        console.error('Error fetching user data:', error);
+      }
+    };
 
-                    <Grid container spacing={2}>
+    fetchData();
+  }, [userId]);
 
-                        <Grid item lg={4} sx={{backgroundColor: '#f5f5f5', padding: '10px' }}>
-                            <RecentPatientsCard />
-                        </Grid>
+  console.log("User Id: " + userId);
+  console.log("User Data: ", userData);
 
-                        <Grid item lg={4} sx={{ backgroundColor: '#f5f5f5', padding: '10px' }}>
-                            <UpcomingAppointmentsCard />
-                        </Grid>
+  if (userData === null) {
+    return <div>Loading...</div>;
+  }
 
-                        <Grid item lg={4} sx={{ backgroundColor: '#f5f5f5', padding: '10px' }}>
+  console.log("First Name: " + userData.profile.firstName);
+  return (
+    <Box sx={{ flexGrow: 1, backgroundColor: '#f2f2f2' }}>
+      <CssBaseline />
+      <Grid>
+        <Navbar />
+      </Grid>
 
-                            <Card sx={{ backgroundColor: '#F0FFFF' }}>
-                                <CardMedia 
-                                    sx={{ height: 500 }}
-                                    image= {img1}
-                                    title="doctor"
-                                />
+      <Container maxWidth="100px">
+        <Grid container mt={2}>
+          <Grid Item xs={3}>
+            <Item>
+              <ProfileCard userData={userData} />
+            </Item>
+          </Grid>
 
-                                <CardContent sx={{ textAlign: 'center' }}>
-                                    <Typography gutterBottom variant="h5" component="div">
-                                        Welcome Doctor
-                                    </Typography>
-                                    <Typography variant="body2" color="text.secondary">
-                                        Dr. Emily Johnson is a dedicated and compassionate doctor with a strong commitment to patient well-being. With extensive experience in internal medicine, she focuses on delivering personalized care and promoting preventive health practices.
-                                    </Typography>
-                                </CardContent>
+          <Grid Item xs={4} sx={{ marginLeft: 'auto' }}>
+            <Item sx={{ marginX: 2 }}>
+              <SummaryCard />
+            </Item>
+          </Grid>
 
-                            </Card>
+          <Grid Item xs={4} sx={{ marginLeft: 'auto' }}>
+            <Item>
+              <NextAppointmentCard />
+            </Item>
+          </Grid>
+        </Grid>
+      </Container>
 
-                        </Grid>
+      <Grid item xs={12} mt={5} sx={{ backgroundColor: '#1976D2' }}>
+        <Typography variant="h5" sx={{ marginBottom: 2, color: 'white', textAlign: 'center' }}>
+          Upcoming Channeling
+        </Typography>
+      </Grid>
 
-                    </Grid>
+      <Container maxWidth="100px">
+        <Grid container mt={5} >
+          <Grid Item xs={3} style={{ marginRight: '90px' }}>
+            <Item>
+              <LocalizationProvider dateAdapter={AdapterDayjs}>
+                <DateCalendar />
+              </LocalizationProvider>
+            </Item>
+          </Grid>
+          <Grid Item xs={8}>
 
-                </Box>
+            <Item>
+              <UpcomingChanneling />
+            </Item>
+          </Grid>
 
-            </Container>
-            
-      </React.Fragment>
-    );
+        </Grid>
+      </Container>
+
+    </Box>
+
+  );
 };
 
 export default Doctor;

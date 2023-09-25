@@ -1,0 +1,231 @@
+import React, { useState } from 'react';
+import {
+  Container,
+  Typography,
+  Paper,
+  Table,
+  TableContainer,
+  TableHead,
+  TableRow,
+  TableCell,
+  TableBody,
+  Button,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  TextField,
+  DialogActions,
+} from '@mui/material';
+import NavBar from '../../components/LA-component/la-nav-bar';
+
+const styles = {
+  labSamplePage: {
+    display: 'flex',
+    flexDirection: 'column',
+    height: '100vh',
+  },
+  contentContainer: {
+    flexGrow: 1,
+    padding: '20px',
+  },
+  tableContainer: {
+    maxHeight: '400px',
+    overflowY: 'auto',
+  },
+};
+
+function LabSamplePage() {
+  const [labSamples, setLabSamples] = useState([
+    {
+      sample_id: '1', // Use String data type
+      collection_date: new Date('2022-01-15'), // Use Date objects
+      sample_type: 'Blood', // Use String data type
+      status: 'Received', // Use String data type
+      lab_assistant_id: 'LA101', // Use String data type
+    },
+    {
+      sample_id: '2', // Use String data type
+      collection_date: new Date('2022-03-20'), // Use Date objects
+      sample_type: 'Urine', // Use String data type
+      status: 'In Progress', // Use String data type
+      lab_assistant_id: 'LA102', // Use String data type
+    },
+  ]);
+
+  const [openCreateDialog, setOpenCreateDialog] = useState(false);
+  const [newSampleCollectionDate, setNewSampleCollectionDate] = useState('');
+  const [newSampleType, setNewSampleType] = useState('');
+  const [newSampleStatus, setNewSampleStatus] = useState('');
+  const [newLabAssistantId, setNewLabAssistantId] = useState('');
+  const [openSampleDialog, setOpenSampleDialog] = useState(false);
+  const [selectedSample, setSelectedSample] = useState(null); // Store the selected sample for viewing
+  const [newSampleId, setNewSampleId] = useState('');
+
+  const handleCreateSample = () => {
+    const newSample = {
+      sample_id: newSampleId, // Convert to String
+      collection_date: new Date(newSampleCollectionDate), // Convert to Date
+      sample_type: newSampleType, // Use String data type
+      status: newSampleStatus, // Use String data type
+      lab_assistant_id: newLabAssistantId, // Use String data type
+    };
+
+    setLabSamples([...labSamples, newSample]);
+    setOpenCreateDialog(false);
+  };
+
+  const handleDeleteSample = (sample_id) => {
+    const updatedSamples = labSamples.filter((sample) => sample.sample_id !== sample_id);
+    setLabSamples(updatedSamples);
+  };
+
+  const handleViewSample = (sample) => {
+    setSelectedSample(sample);
+    setOpenSampleDialog(true);
+  };
+
+  const handleUpdateSample = () => {
+    // Redirect to the update page for the selected sample
+    if (selectedSample) {
+      window.location.href = `/lab-sample/update`;
+    }
+  };
+
+  return (
+    <div style={styles.labSamplePage}>
+      <NavBar />
+      <Container style={styles.contentContainer}>
+        <Typography variant="h4" gutterBottom>
+          Lab Samples
+        </Typography>
+
+        <Button
+          variant="outlined"
+          color="primary"
+          onClick={() => setOpenCreateDialog(true)}
+        >
+          Create New Sample
+        </Button>
+
+        <TableContainer component={Paper} style={styles.tableContainer}>
+          <Table>
+            <TableHead>
+              <TableRow>
+                <TableCell>Sample ID</TableCell>
+                <TableCell>Collection Date</TableCell>
+                <TableCell>Sample Type</TableCell>
+                <TableCell>Status</TableCell>
+                <TableCell>Lab Assistant ID</TableCell>
+                <TableCell>Actions</TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {labSamples.map((sample) => (
+                <TableRow key={sample.sample_id}>
+                  <TableCell>{sample.sample_id}</TableCell>
+                  <TableCell>{sample.collection_date.toISOString().slice(0, 10)}</TableCell> {/* Display date in yyyy-mm-dd format */}
+                  <TableCell>{sample.sample_type}</TableCell>
+                  <TableCell>{sample.status}</TableCell>
+                  <TableCell>{sample.lab_assistant_id}</TableCell>
+                  <TableCell>
+                    <Button
+                      variant="outlined"
+                      color="primary"
+                      onClick={() => handleViewSample(sample)}
+                    >
+                      View
+                    </Button>
+                    <Button
+                      variant="outlined"
+                      color="secondary"
+                      onClick={() => handleDeleteSample(sample.sample_id)}
+                    >
+                      Delete
+                    </Button>
+                    <Button
+                      variant="outlined"
+                      color="primary"
+                      onClick={handleUpdateSample}
+                    >
+                      Update
+                    </Button>
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
+      </Container>
+
+     {/* Create Sample Dialog */}
+  <Dialog open={openCreateDialog} onClose={() => setOpenCreateDialog(false)}>
+    <DialogTitle>Create New Lab Sample</DialogTitle>
+    <DialogContent>
+      <TextField
+        label="Sample ID"
+        value={newSampleId}
+        onChange={(e) => setNewSampleId(e.target.value)}
+        fullWidth
+      />
+      <TextField
+        label="Collection Date"
+        type="date"
+        value={newSampleCollectionDate}
+        onChange={(e) => setNewSampleCollectionDate(e.target.value)}
+        fullWidth
+        InputLabelProps={{
+          shrink: true,
+        }}
+      />
+      <TextField
+        label="Sample Type"
+        value={newSampleType}
+        onChange={(e) => setNewSampleType(e.target.value)}
+        fullWidth
+      />
+      <TextField
+        label="Status"
+        value={newSampleStatus}
+        onChange={(e) => setNewSampleStatus(e.target.value)}
+        fullWidth
+      />
+      <TextField
+        label="Lab Assistant ID"
+        value={newLabAssistantId}
+        onChange={(e) => setNewLabAssistantId(e.target.value)}
+        fullWidth
+      />
+    </DialogContent>
+    <DialogActions>
+      <Button onClick={() => setOpenCreateDialog(false)} color="primary">
+        Cancel
+      </Button>
+      <Button onClick={handleCreateSample} color="primary">
+        Create
+      </Button>
+    </DialogActions>
+  </Dialog>
+
+      {/* View Sample Dialog */}
+      <Dialog open={openSampleDialog} onClose={() => setOpenSampleDialog(false)}>
+        <DialogTitle>Lab Sample Details</DialogTitle>
+        {selectedSample && (
+          <DialogContent>
+            <Typography variant="h6">Sample ID: {selectedSample.sample_id}</Typography>
+            <Typography>Collection Date: {selectedSample.collection_date.toISOString().slice(0, 10)}</Typography> {/* Display date in yyyy-mm-dd format */}
+            <Typography>Sample Type: {selectedSample.sample_type}</Typography>
+            <Typography>Status: {selectedSample.status}</Typography>
+            <Typography>Lab Assistant ID: {selectedSample.lab_assistant_id}</Typography>
+          </DialogContent>
+        )}
+        <DialogActions>
+          <Button onClick={() => setOpenSampleDialog(false)} color="primary">
+            Close
+          </Button>
+        </DialogActions>
+      </Dialog>
+    </div>
+  );
+}
+
+export default LabSamplePage;
