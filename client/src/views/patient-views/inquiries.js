@@ -50,7 +50,7 @@ const PatientInquiries = () => {
     <Container maxWidth="md">
       <PatientNavigationBar/>
         
-        <h2>Get patient name and id from database. Autofill and no editing</h2>
+        
       <form onSubmit={handleSubmit}>
         <Typography variant="h4" align="center" gutterBottom>
           Patient Inquiry

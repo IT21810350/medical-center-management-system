@@ -25,13 +25,11 @@ const theme = createTheme({
 export default function BasicTable() {
   const [rows, setRows] = useState([
     {
-      no: '',
       medicineCode: '',
       medicineName: '',
-      specificationModel: '',
-      unit: '',
+      dosage :  '',
+      medicineType: '',
       expiryDate: '',
-      manufacturer: '',
       quantity: '',
       unitPrice: '',
     }
@@ -45,13 +43,11 @@ export default function BasicTable() {
 
   const addRow = () => {
     setRows([...rows, {
-      no: '',
-      medicineCode: '',
-      medicineName: '',
-      specificationModel: '',
-      unit: '',
+      medicineCode : '',
+      medicineName : '',
+      dosage : '',
+      medicineType : '',
       expiryDate: '',
-      manufacturer: '',
       quantity: '',
       unitPrice: '',
     }]);
@@ -69,13 +65,11 @@ export default function BasicTable() {
         <Table sx={{ minWidth: 650 }} aria-label="simple table">
           <TableHead style={{ backgroundColor: '#BBDEFB', fontWeight: 'bold' }}>
             <TableRow>
-              <TableCell>No.</TableCell>
               <TableCell>Medicine Code</TableCell>
               <TableCell>Medicine Name</TableCell>
-              <TableCell>Specification Model</TableCell>
-              <TableCell>Unit</TableCell>
+              <TableCell>Dosage</TableCell>
+              <TableCell>MedicineType</TableCell>
               <TableCell>Expiry Date</TableCell>
-              <TableCell>Manufacturer</TableCell>
               <TableCell>Quantity</TableCell>
               <TableCell>Unit Price</TableCell>
               <TableCell></TableCell>

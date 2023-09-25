@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 const lab_sample = new mongoose.Schema({
     sample_id : {
-        type : Number, 
+        type : String, 
     },
     collection_date : {
         type : Date,
@@ -14,11 +14,13 @@ const lab_sample = new mongoose.Schema({
         type : String,
     },
     lab_assistant_id : {
-        type : Number,
+        type : String,
     }
 },
     {
         timestamps : true,
     });
 
-module.export = mongoose.model("labSample", lab_sample);
+const LabSample = mongoose.model("labSample", lab_sample);
+
+module.exports = LabSample;

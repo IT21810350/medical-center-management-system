@@ -23,6 +23,7 @@ const styles = {
     display: 'flex',
     flexDirection: 'column',
     height: '100vh',
+    fontSize: '10px',
   },
   contentContainer: {
     flexGrow: 1,
@@ -37,19 +38,19 @@ const styles = {
 function LabInventoryPage() {
   const [labInventoryItems, setLabInventoryItems] = useState([
     {
-      equipment_id: 1,
+      equipment_id: '1', // Use String data type
       name: 'Microscope',
       manufacturer: 'Brand A',
-      purchase_date: '2022-01-15',
-      maintenance_schedule: '2023-02-10',
+      purchase_date: new Date('2022-01-15'), // Use Date objects
+      maintenance_schedule: new Date('2023-02-10'),
       status: 'Operational',
     },
     {
-      equipment_id: 2,
+      equipment_id: '2', // Use String data type
       name: 'Chemical Reagents',
       manufacturer: 'Supplier X',
-      purchase_date: '2022-03-20',
-      maintenance_schedule: '2023-04-05',
+      purchase_date: new Date('2022-03-20'), // Use Date objects
+      maintenance_schedule: new Date('2023-04-05'),
       status: 'In Use',
     },
   ]);
@@ -69,8 +70,8 @@ function LabInventoryPage() {
       equipment_id: newItemEquipmentId,
       name: newItemName,
       manufacturer: newItemManufacturer,
-      purchase_date: newItemPurchaseDate,
-      maintenance_schedule: newItemMaintenanceSchedule,
+      purchase_date: new Date(newItemPurchaseDate), // Convert to Date
+      maintenance_schedule: new Date(newItemMaintenanceSchedule), // Convert to Date
       status: newItemStatus,
     };
 
@@ -99,7 +100,7 @@ function LabInventoryPage() {
     <div style={styles.labInventoryPage}>
       <NavBar />
       <Container style={styles.contentContainer}>
-        <Typography variant="h4" gutterBottom>
+        <Typography variant="h3" gutterBottom>
           Lab Inventory
         </Typography>
 
@@ -130,8 +131,8 @@ function LabInventoryPage() {
                   <TableCell>{item.equipment_id}</TableCell>
                   <TableCell>{item.name}</TableCell>
                   <TableCell>{item.manufacturer}</TableCell>
-                  <TableCell>{item.purchase_date}</TableCell>
-                  <TableCell>{item.maintenance_schedule}</TableCell>
+                  <TableCell>{item.purchase_date.toISOString().slice(0, 10)}</TableCell> {/* Display date in yyyy-mm-dd format */}
+                  <TableCell>{item.maintenance_schedule.toISOString().slice(0, 10)}</TableCell> {/* Display date in yyyy-mm-dd format */}
                   <TableCell>{item.status}</TableCell>
                   <TableCell>
                     <Button
@@ -220,11 +221,11 @@ function LabInventoryPage() {
         <DialogTitle>Item Details</DialogTitle>
         {selectedItem && (
           <DialogContent>
-            <Typography variant="h6">Equipment ID: {selectedItem.equipment_id}</Typography>
+            <Typography variant="h3">Equipment ID: {selectedItem.equipment_id}</Typography>
             <Typography>Name: {selectedItem.name}</Typography>
             <Typography>Manufacturer: {selectedItem.manufacturer}</Typography>
-            <Typography>Purchase Date: {selectedItem.purchase_date}</Typography>
-            <Typography>Maintenance Schedule: {selectedItem.maintenance_schedule}</Typography>
+            <Typography>Purchase Date: {selectedItem.purchase_date.toISOString().slice(0, 10)}</Typography> {/* Display date in yyyy-mm-dd format */}
+            <Typography>Maintenance Schedule: {selectedItem.maintenance_schedule.toISOString().slice(0, 10)}</Typography> {/* Display date in yyyy-mm-dd format */}
             <Typography>Status: {selectedItem.status}</Typography>
           </DialogContent>
         )}

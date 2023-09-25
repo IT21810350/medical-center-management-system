@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 const lab_report = new mongoose.Schema({
     report_id : {
-        type : Number,
+        type : String,
     },
     report_name : {
         type : String,
@@ -14,11 +14,13 @@ const lab_report = new mongoose.Schema({
         type : String,
     },
     lab_assistant_id : {
-        type : Number,
+        type : String,
     }
 },
     {
         timestamps : true,
     });
 
-module.export = mongoose.model("labReport", lab_report);
+const LabReport = mongoose.model("labReport", lab_report);
+
+module.exports = LabReport;

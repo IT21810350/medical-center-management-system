@@ -1,0 +1,268 @@
+import React, { useState, useEffect } from 'react';
+import {
+  Container,
+  Typography,
+  Paper,
+  Table,
+  TableContainer,
+  TableHead,
+  TableRow,
+  TableCell,
+  TableBody,
+  Button,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  TextField,
+  DialogActions,
+} from '@mui/material';
+import Axios from 'axios';
+import NavBar from '../../components/LA-component/la-nav-bar';
+
+const styles = {
+  labInventoryPage: {
+    display: 'flex',
+    flexDirection: 'column',
+    height: '100vh',
+  },
+  contentContainer: {
+    flexGrow: 1,
+    padding: '20px',
+  },
+  tableContainer: {
+    maxHeight: '400px',
+    overflowY: 'auto',
+  },
+};
+
+const axiosConfig = Axios.create({
+  baseURL: 'localhost:4000', // Replace with your actual backend URL
+});
+
+function LabInventoryPage() {
+  const [labInventoryItems, setLabInventoryItems] = useState([]);
+  const [openCreateDialog, setOpenCreateDialog] = useState(false);
+  const [newItemEquipmentId, setNewItemEquipmentId] = useState('');
+  const [newItemName, setNewItemName] = useState('');
+  const [newItemManufacturer, setNewItemManufacturer] = useState('');
+  const [newItemPurchaseDate, setNewItemPurchaseDate] = useState('');
+  const [newItemMaintenanceSchedule, setNewItemMaintenanceSchedule] = useState('');
+  const [newItemStatus, setNewItemStatus] = useState('');
+  const [openItemDialog, setOpenItemDialog] = useState(false);
+  const [selectedItem, setSelectedItem] = useState(null);
+
+  // Load inventory data from the backend when the component mounts
+  useEffect(() => {
+    refreshInventoryList();
+  }, []);
+
+  const refreshInventoryList = () => {
+    axiosConfig
+      .get('/inventory') // Adjust the endpoint to your backend's API
+      .then((response) => {
+        setLabInventoryItems(response.data);
+      })
+      .catch((error) => {
+        console.error('Error fetching inventory:', error);
+      });
+  };
+
+  const handleCreateItem = () => {
+    const newItem = {
+      equipment_id: newItemEquipmentId,
+      name: newItemName,
+      manufacturer: newItemManufacturer,
+      purchase_date: newItemPurchaseDate,
+      maintenance_schedule: newItemMaintenanceSchedule,
+      status: newItemStatus,
+    };
+
+    axiosConfig
+      .post('/inventory', newItem) // Adjust the endpoint to your backend's API
+      .then((response) => {
+        setOpenCreateDialog(false);
+        refreshInventoryList();
+      })
+      .catch((error) => {
+        console.error('Error creating item:', error);
+      });
+  };
+
+  const handleDeleteItem = (equipment_id) => {
+    axiosConfig
+      .delete(`/inventory/${equipment_id}`) // Adjust the endpoint to your backend's API
+      .then((response) => {
+        refreshInventoryList();
+      })
+      .catch((error) => {
+        console.error('Error deleting item:', error);
+      });
+  };
+
+  const handleViewItem = (item) => {
+    setSelectedItem(item);
+    setOpenItemDialog(true);
+  };
+
+  const handleUpdateItem = () => {
+    if (selectedItem) {
+      window.location.href = `/lab-inventory/update/${selectedItem.equipment_id}`;
+    }
+  };
+
+  return (
+    <div style={styles.labInventoryPage}>
+      <NavBar />
+      <Container style={styles.contentContainer}>
+        <Typography variant="h4" gutterBottom>
+          Lab Inventory
+        </Typography>
+
+        <Button
+          variant="outlined"
+          color="primary"
+          onClick={() => setOpenCreateDialog(true)}
+        >
+          Create New Item
+        </Button>
+
+        <TableContainer component={Paper} style={styles.tableContainer}>
+          <Table>
+            <TableHead>
+              <TableRow>
+                <TableCell>Equipment ID</TableCell>
+                <TableCell>Name</TableCell>
+                <TableCell>Manufacturer</TableCell>
+                <TableCell>Purchase Date</TableCell>
+                <TableCell>Maintenance Schedule</TableCell>
+                <TableCell>Status</TableCell>
+                <TableCell>Actions</TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {labInventoryItems.map((item) => (
+                <TableRow key={item.equipment_id}>
+                  <TableCell>{item.equipment_id}</TableCell>
+                  <TableCell>{item.name}</TableCell>
+                  <TableCell>{item.manufacturer}</TableCell>
+                  <TableCell>
+                    {item.purchase_date.toISOString().slice(0, 10)}
+                  </TableCell>
+                  <TableCell>
+                    {item.maintenance_schedule.toISOString().slice(0, 10)}
+                  </TableCell>
+                  <TableCell>{item.status}</TableCell>
+                  <TableCell>
+                    <Button
+                      variant="outlined"
+                      color="primary"
+                      onClick={() => handleViewItem(item)}
+                    >
+                      View
+                    </Button>
+                    <Button
+                      variant="outlined"
+                      color="secondary"
+                      onClick={() => handleDeleteItem(item.equipment_id)}
+                    >
+                      Delete
+                    </Button>
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
+      </Container>
+
+      <Dialog open={openCreateDialog} onClose={() => setOpenCreateDialog(false)}>
+        <DialogTitle>Create New Inventory Item</DialogTitle>
+        <DialogContent>
+          <TextField
+            label="Equipment ID"
+            value={newItemEquipmentId}
+            onChange={(e) => setNewItemEquipmentId(e.target.value)}
+            fullWidth
+          />
+          <TextField
+            label="Name"
+            value={newItemName}
+            onChange={(e) => setNewItemName(e.target.value)}
+            fullWidth
+          />
+          <TextField
+            label="Manufacturer"
+            value={newItemManufacturer}
+            onChange={(e) => setNewItemManufacturer(e.target.value)}
+            fullWidth
+          />
+          <TextField
+            label="Purchase Date"
+            type="date"
+            value={newItemPurchaseDate}
+            onChange={(e) => setNewItemPurchaseDate(e.target.value)}
+            fullWidth
+            InputLabelProps={{
+              shrink: true,
+            }}
+          />
+          <TextField
+            label="Maintenance Schedule"
+            type="date"
+            value={newItemMaintenanceSchedule}
+            onChange={(e) => setNewItemMaintenanceSchedule(e.target.value)}
+            fullWidth
+            InputLabelProps={{
+              shrink: true,
+            }}
+          />
+          <TextField
+            label="Status"
+            value={newItemStatus}
+            onChange={(e) => setNewItemStatus(e.target.value)}
+            fullWidth
+          />
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={() => setOpenCreateDialog(false)} color="primary">
+            Cancel
+          </Button>
+          <Button onClick={handleCreateItem} color="primary">
+            Create
+          </Button>
+        </DialogActions>
+      </Dialog>
+
+      <Dialog open={openItemDialog} onClose={() => setOpenItemDialog(false)}>
+        <DialogTitle>Item Details</DialogTitle>
+        {selectedItem && (
+          <DialogContent>
+            <Typography variant="h6">
+              Equipment ID: {selectedItem.equipment_id}
+            </Typography>
+            <Typography>Name: {selectedItem.name}</Typography>
+            <Typography>Manufacturer: {selectedItem.manufacturer}</Typography>
+            <Typography>
+              Purchase Date: {selectedItem.purchase_date.toISOString().slice(0, 10)}
+            </Typography>
+            <Typography>
+              Maintenance Schedule:{' '}
+              {selectedItem.maintenance_schedule.toISOString().slice(0, 10)}
+            </Typography>
+            <Typography>Status: {selectedItem.status}</Typography>
+          </DialogContent>
+        )}
+        <DialogActions>
+          <Button onClick={() => setOpenItemDialog(false)} color="primary">
+            Close
+          </Button>
+          <Button onClick={handleUpdateItem} color="primary">
+            Update
+          </Button>
+        </DialogActions>
+      </Dialog>
+    </div>
+  );
+}
+
+export default LabInventoryPage;

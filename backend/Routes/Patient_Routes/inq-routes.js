@@ -119,21 +119,22 @@ router.route("/deleteinq/:id").delete(async (req, res) => {
 //=====================================================
 //Select only one patient
 
-router.route("/get/:id").get(async(req,res) => {
-  try{
-    const inqId = req.params.id;
-    const inq = await Inq.findById(inqId);
+// router.route("/get/:id").get(async(req,res) => {
+//   try{
+//     const inqId = req.params.id;
+//     const inq = await Inq.findById(inqId);
 
-    if(!inq){
-      return res.status(404).json({status: "Inquery not found" });
-    }
+//     if(!inq){
+//       return res.status(404).json({status: "Inquery not found" });
+//     }
 
-    return res.status(200).json({status: "Inquery found", patient });
-  } catch (err) {
-    console.error(err.message);
-    return res.status(500).json({ status: "Error with getting inq", error: err.message });
-  }
-});
+//     return res.status(200).json({status: "Inquery found", patient });
+//   } catch (err) {
+//     console.error(err.message);
+//     return res.status(500).json({ status: "Error with getting inq", error: err.message });
+//   }
+// });
+//========================================================================
 // router.route("/get/:id").get(async (req,res) =>{
 //     let inqId = req.params.id;
 //     const inq = await Inquiries.findById(inqId)
@@ -144,5 +145,20 @@ router.route("/get/:id").get(async(req,res) => {
 //         res.status(500).send({status: "Error with getting inq", error: err.message});
 //     })
 // })
+
+router.route("/get/:id").get(async(req,res) => {
+const fetchInquiry = async () => {
+  try {
+
+    const url = window.location.href;
+    const parts = url.split('/');
+    const id = parts[parts.length - 1]
+
+    const response = await axios.get(`http://localhost:4000/inqData/` + id);
+    setInquiry(response.data);
+  } catch (error) {
+    console.error('Error fetching inquiry for editing:', error);
+  }
+}});
 
 module.exports = router;
