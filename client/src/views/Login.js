@@ -51,15 +51,15 @@ const Login = () => {
           setTimeout(() => {
             navigate("/hr");
           }, 1000);
-        } else if (user.role === "financial-manager") {
+        } else if (user.role === "financialManager") {
           setTimeout(() => {
             navigate("/financial-manager");
           }, 1000);
-        } else if (user.role === "lab-assistant") {
+        } else if (user.role === "labAssistant") {
           setTimeout(() => {
             navigate("/lab-assistant");
           }, 1000);
-        } else if (user.role === "resource-person") {
+        } else if (user.role === "resourcePerson") {
           setTimeout(() => {
             navigate("/resource-person");
           }, 1000);
@@ -67,7 +67,7 @@ const Login = () => {
           setTimeout(() => {
             navigate("/pharmacist");
           }, 1000);
-        } else if (user.role === "supplier") {
+        } else if (user.role === "supplierManager") {
           setTimeout(() => {
             navigate("/supplier");
           }, 1000);
