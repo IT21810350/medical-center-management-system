@@ -1,7 +1,6 @@
 import * as React from 'react'; // Importing React library
 
 import { styled, alpha } from '@mui/material/styles'; // Importing styled and alpha functions from Material-UI
-
 import AppBar from '@mui/material/AppBar'; // Importing AppBar component from Material-UI
 import Box from '@mui/material/Box'; // Importing Box component from Material-UI
 import Toolbar from '@mui/material/Toolbar'; // Importing Toolbar component from Material-UI

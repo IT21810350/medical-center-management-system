@@ -9,9 +9,10 @@ import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
 import { styled } from '@mui/material/styles';
-import img from '../../assets/img/supplier/supplier.jpg';
-import img1 from '../../assets/img/supplier/Registration.jpg';
-import img2 from '../../assets/img/supplier/profile.jpg';
+
+import img from '../../assets/img/supplier/supplier2.webp';
+import img1 from '../../assets/img/supplier/register2.png';
+import img2 from '../../assets/img/supplier/profile2.jpeg';
 import img3 from '../../assets/img/supplier/list.jpeg';
 import img4 from '../../assets/img/supplier/inven_item.jpeg';
 import img5 from '../../assets/img/supplier/inven_medicine.jpeg';

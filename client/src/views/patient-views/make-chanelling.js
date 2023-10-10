@@ -53,9 +53,6 @@ export default function PatientMakeChanelling() {
     }, [doctorId]);
     console.log('doctorDetails:', doctorDetails);
 
-
-
-
     const handleBookAppointment = async (doctorId) => {
         // Redirect to the desired page with doctorId
         window.location.href = `/confirm-chanelling?doctorId=${doctorId}`;
