@@ -234,7 +234,7 @@ export default function CombinedComponent() {
               onChange={handleInputChange}
             />
             <Button variant="contained" startIcon={<EditIcon />} onClick={handleSubmit}>
-              Submit
+              Edit
             </Button>
           </Item>
         </Grid>

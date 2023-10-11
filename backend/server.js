@@ -30,7 +30,6 @@ const testRouter = require("./Routes/LabAssistant_Routes/TestRoute");
 
 const validationRoute = require("./Routes/ValidateRoutes");
 const SupplierPayment = require('./Models/SupplierManagerModel/SupplierPayment');
-
 const { MONGO_URL, PORT } = process.env;
 
 const app = express();
@@ -53,6 +52,7 @@ app.use(
 
 app.use(express.json());
 app.use(cookieParser());
+app.use("/supplier",SupplierRegistration);
 
 mongoose.connect(MONGO_URL, { useNewUrlParser: true, useUnifiedTopology: true });
 

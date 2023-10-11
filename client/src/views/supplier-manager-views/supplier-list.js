@@ -10,6 +10,8 @@ import MenuIcon from '@mui/icons-material/Menu';
 import SearchIcon from '@mui/icons-material/Search';
 import { DataGrid, GridToolbar } from '@mui/x-data-grid';
 import TextField from '@mui/material/TextField';
+import jsPDF from 'jspdf';
+import 'jspdf-autotable';
 
 const columns = [
   { field: 'supplierName', headerName: 'Supplier name', flex: 1 },
@@ -84,6 +86,31 @@ export default function CombinedComponent() {
     );
   };
 
+  const handleExportPDF = () => {
+    const unit = 'pt';
+    const size = 'A4'; 
+    const orientation = 'portrait'; 
+
+    const marginLeft = 40;
+    const doc = new jsPDF(orientation, unit, size);
+
+    doc.setFontSize(12);
+
+    const title = 'Supplier List';
+    const headers = columns.map(column => column.headerName);
+    const data = rows.map(row => columns.map(column => row[column.field]));
+
+    const content = {
+      startY: 50,
+      head: [headers],
+      body: data
+    };
+
+    doc.text(title, marginLeft, 40);
+    doc.autoTable(content);
+    doc.save('supplier_list.pdf');
+  };
+
   return (
     <div>
       <Box sx={{ flexGrow: 1 }}>
@@ -114,6 +141,7 @@ export default function CombinedComponent() {
                 placeholder="Search…"
                 inputProps={{ 'aria-label': 'search' }}
               />
+              <button onClick={handleExportPDF}>Export to PDF</button> {/* Added button */}
             </Search>
           </Toolbar>
         </AppBar>
