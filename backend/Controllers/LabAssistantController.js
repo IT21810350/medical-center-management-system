@@ -1,4 +1,4 @@
-const LabAssistant = require("../../Models/LabAssistantModel/LabAssistantProfile"); // Import your Lab Assistant model
+const LabAssistant = require("../Models/LabAssistantModel/LabAssistantProfile"); 
 
 // Lab User Profile Controller
 module.exports.createLabAssistantController = async (req, res, next) => {

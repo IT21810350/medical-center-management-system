@@ -8,7 +8,7 @@ const {
     getReportByIdController,
     updateReportByIdController,
     deleteReportByIdController
-} = require("../../Controllers/LabAssistantControllers/ReportController"); 
+} = require("../../Controllers/ReportController"); 
 
 router.post("/lab-report",createReportController);
 router.get("/lab-report",getAllReportController);
