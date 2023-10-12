@@ -1,14 +1,13 @@
 const mongoose = require("mongoose");
 
 const doctorProfile = new mongoose.Schema({
-
     firstName: {
         type: String,
         required: true,
     },
     middleName: {
         type: String,
-        default: '', // You can set a default value if needed
+        default: '', 
     },
     lastName: {
         type: String,
@@ -17,7 +16,7 @@ const doctorProfile = new mongoose.Schema({
     gender: {
         type: String,
         required: true,
-        enum: ['male', 'female'], // Assuming gender can only be 'male' or 'female'
+        enum: ['male', 'female'], 
     },
     addressLine1: {
         type: String,
@@ -25,7 +24,7 @@ const doctorProfile = new mongoose.Schema({
     },
     addressLine2: {
         type: String,
-        default: '', // You can set a default value if needed
+        default: '', 
     },
     city: {
         type: String,
@@ -50,11 +49,26 @@ const doctorProfile = new mongoose.Schema({
     employeeDetails: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'EmployeeDetails'
-    }
+    },
+    availableTime: [
+        {
+            day: {
+                type: String,
+                required: true,
+            },
+            startTime: {
+                type: String,
+                required: true,
+            },
+            endTime: {
+                type: String,
+                required: true,
+            }
+        }
+    ]
 },
-    {
-        timestamps: true
-    });
+{
+    timestamps: true
+});
 
 module.exports = mongoose.model("DoctorProfile", doctorProfile);
-
