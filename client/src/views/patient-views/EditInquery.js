@@ -1,3 +1,143 @@
+import React, { useEffect, useState } from 'react';
+//import { TextField, Button, Typography, Grid } from '@mui/material';
+//import SendIcon from '@mui/icons-material/Send';
+import axios from 'axios';
+import PatientNavigationBar from '../../views/patient-views/patient-navigation-bar';
+import { useParams } from 'react-router-dom';
+
+
+export default function EditInquiry(){
+  
+    const [isEditing, setIsEditing] = useState(false); 
+    const {id} = useParams();
+   const[inquery, setInquery] = useState({
+    name : '',
+    subject : '',
+    message : '',
+   });
+
+   useEffect(() => {
+        axios
+        .get(`http://localhost:4000/inqData/get/${id}`)
+        .then((response) => {
+          console.log(response)
+        //   {
+        //     "status": "Inquiry found",
+        //     "inq": {
+        //         "_id": "652561205b4f2d395202cf5a",
+        //         "name": "Himaya",
+        //         "subject": "New Message",
+        //         "message": "Message 123",
+        //         "createdAt": "2023-10-10T14:35:12.066Z",
+        //         "updatedAt": "2023-10-10T14:35:12.066Z",
+        //         "__v": 0
+        //     }
+        // }
+            setInquery(response.data.inq);
+        })
+        .catch((error) => {
+            console.error('Error fetching data', error);
+        });
+   }, [id]);
+
+   const handleEditInquery = async () => {
+    try{
+        const response = await axios.put(
+            `http://localhost:4000/inqData/updateinq/${id}`, inquery
+        );
+        if(response.status === 200){
+            setIsEditing(false);
+        }
+    } catch(error){
+        console.error('Error in updation ', error);
+    }
+   };
+
+   const handleInputChange = (e) => {
+    const {name, value} = e.target;
+    setInquery({
+        ...inquery,
+        [name]: value,
+    });
+   };
+
+   
+   
+    return(
+    <>
+    <PatientNavigationBar/>
+
+
+    <input type ="text" name = "name" value={inquery.name} disabled={!isEditing} onChange ={handleInputChange}></input>
+    <input type ="text" name = "subject" value={inquery.subject} disabled={!isEditing} onChange ={handleInputChange}></input>
+    <input type ="text" name = "message" value={inquery.message} disabled={!isEditing} onChange ={handleInputChange}></input>
+    {/* <textField 
+        label = "name"
+        name = "name"
+        value= {inquery.name}
+        onChange ={handleInputChange}
+        disabled={!isEditing}
+    />
+    
+    <textField 
+        label = "subject"
+        name = "subject"
+        value= {inquery.subject}
+        onChange ={handleInputChange}
+        disabled={!isEditing}
+    />
+    
+    <textField 
+        label = "message"
+        name = "message"
+        value= {inquery.message}
+        onChange ={handleInputChange}
+        disabled={!isEditing}
+    /> */}
+    <button
+    onClick={isEditing ? handleEditInquery : () => setIsEditing(true)}
+    >
+        {isEditing ? 'Save' : 'Edit'}
+    </button>
+    </>
+    
+    );
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // import React, { useState, useEffect } from 'react';
 // import axios from 'axios';
 // import { useParams, useNavigate, useLocation } from 'react-router-dom';
@@ -331,45 +471,57 @@
 
 
 
+//===========================================
+//===========================================
+//===========================================
+//===========================================
+//===========================================
+//===========================================
 
 
-import React, { useState } from 'react';
+// import React, { useState } from 'react';
 
-function InquiryForm({ inquiry, onSubmit }) {
-  const [formData, setFormData] = useState({
-    name: inquiry.name,
-    subject: inquiry.subject,
-    message: inquiry.message,
-  });
+// function InquiryForm({ inquiry, onSubmit }) {
+//   const [formData, setFormData] = useState({
+//     name: inquiry.name,
+//     subject: inquiry.subject,
+//     message: inquiry.message,
+//   });
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
-  };
+//   const handleChange = (e) => {
+//     const { name, value } = e.target;
+//     setFormData({ ...formData, [name]: value });
+//   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    onSubmit(formData);
-  };
+//   const handleSubmit = (e) => {
+//     e.preventDefault();
+//     onSubmit(formData);
+//   };
 
-  return (
-    <form onSubmit={handleSubmit}>
-      <div>
-        <label>Name:</label>
-        <input type="text" name="name" value={formData.name} onChange={handleChange} />
-      </div>
-      <div>
-        <label>Subject:</label>
-        <input type="text" name="subject" value={formData.subject} onChange={handleChange} />
-      </div>
-      <div>
-        <label>Message:</label>
-        <textarea name="message" value={formData.message} onChange={handleChange} />
-      </div>
-      <button type="submit">Update Inquiry</button>
-    </form>
-  );
-}
+//   return (
+//     <form onSubmit={handleSubmit}>
+//       <div>
+//         <label>Name:</label>
+//         <input type="text" name="name" value={formData.name} onChange={handleChange} />
+//       </div>
+//       <div>
+//         <label>Subject:</label>
+//         <input type="text" name="subject" value={formData.subject} onChange={handleChange} />
+//       </div>
+//       <div>
+//         <label>Message:</label>
+//         <textarea name="message" value={formData.message} onChange={handleChange} />
+//       </div>
+//       <button type="submit">Update Inquiry</button>
+//     </form>
+//   );
+// }
 
-export default InquiryForm;
+// export default InquiryForm;
 
+//===========================================
+//===========================================
+//===========================================
+//===========================================
+//===========================================
+//===========================================

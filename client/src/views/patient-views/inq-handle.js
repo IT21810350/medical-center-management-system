@@ -7,6 +7,7 @@ import { Stack } from '@mui/material';
 const InquiryList = () => {
   const [inquiries, setInquiries] = useState([]);
 
+  
   const fetchInquiries = async () => {
     try {
       const response = await axios.get('http://localhost:4000/inqData/');
@@ -15,6 +16,7 @@ const InquiryList = () => {
       console.error('Error fetching inquiries:', error);
     }
   };
+
 
   useEffect(() => {
     fetchInquiries();
@@ -28,6 +30,21 @@ const InquiryList = () => {
       console.error('Error deleting inquiry:', error);
     }
   };
+
+  const handleDeleteInq = (id) => {
+    console.log("Delete button clicked for id:", id)
+    
+    axios
+      .delete(`http://localhost:4000/inqData/deleteinq/${id}`)
+      .then(() => {
+       
+        setData((prevData) => prevData.filter((inquery) => inquery._id !== id));
+      })
+      .catch((error) => {
+        console.error('Error deleting inquery:', error);
+      });
+  };
+   
 
   return (
     <div>
@@ -50,9 +67,9 @@ const InquiryList = () => {
               <td>
                 {/* <button onClick={() => handleDelete(inquiry._id)}>Delete</button> */}
                 <Stack direction={'row'} spacing={2}>
-                <Button
+                <Link
                   component={Link}
-                  to="/editinq"
+                  to={`/editinq/${inquiry._id}`}
                   variant="contained"
                   // size="small"
                   style={{ width: '100%' }}
@@ -60,7 +77,7 @@ const InquiryList = () => {
                   color="primary"
                 >
                   Edit
-                </Button>
+                </Link>
                 {/* <Link 
                   // to={{
                   //   pathname: `/editinq/`,
@@ -83,6 +100,7 @@ const InquiryList = () => {
                 >
                   Delete
                 </Button>
+                <Button onClick={() => handleDeleteInq(inquiry._id)} style={{ backgroundColor: 'red', color: 'white' }} >Delete</Button>
                 </Stack>
                 
                 {/* <Link 

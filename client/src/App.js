@@ -122,17 +122,6 @@ function App() {
 
         {/* Patient Routes */}
         <Route path="/searchDoctors" element={<SearchDoctors />} />
-
-        {/*Pharmacist Routes */}
-        <Route path="/pharmacistProfile" element={<PharmacistProfile/>} />
-        <Route path="/addMedicine" element={<addMedicine/>} />
-        <Route path="/medicineStore" element={<MedicineStore/>} />
-        <Route path="/medicineOrder" element={<MedicineOrder/>} />
-        <Route path="/medicineSales" element={<MedicineSales/>} />
-        <Route path="/pharmacist/*" element={<Pharmacist />} />
-
-
-      
         <Route path="/patient" element={<Patient />} />
         <Route path="/search-doctors" element={<SearchDoctors />} />
         <Route path="/dash" exact Component={CommonPatientDashboard} />
@@ -146,7 +135,20 @@ function App() {
         <Route path="/patient-additional" exact Component={PatientAdditionalFiles} />
         <Route path="/rescedule-appointment" exact Component={Reschedule} />
         <Route path="/delete-appointment" exact Component={Delete} />
-        <Route path="/editinq" component={EditInquiry} />
+        <Route path="/editinq/:id" element={<EditInquiry/>} />
+
+
+        {/*Pharmacist Routes */}
+        <Route path="/pharmacistProfile" element={<PharmacistProfile/>} />
+        <Route path="/addMedicine" element={<addMedicine/>} />
+        <Route path="/medicineStore" element={<MedicineStore/>} />
+        <Route path="/medicineOrder" element={<MedicineOrder/>} />
+        <Route path="/medicineSales" element={<MedicineSales/>} />
+        <Route path="/pharmacist/*" element={<Pharmacist />} />
+
+
+      
+        
 
 
         {/* Resource person Routes */}

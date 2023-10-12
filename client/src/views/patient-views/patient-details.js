@@ -1,116 +1,335 @@
+// import React, { useState, useEffect } from 'react';
+// import axios from 'axios';
+
+
+// import { Link } from 'react-router-dom';
+// import Button from '@mui/material/Button';
+// import { Stack } from '@mui/material';
+
+// export default function PatientDetails(){
+
+//     const {id} = "650efb90b6d7126c541b1fbe";
+//     //const {id} = useParams();
+//     const [patient, setPatient] = useState({
+//         country : '',
+//         identity : '',
+//         fName : '',
+//         lName : '',
+//         gender : '',
+//         dob : '',
+//         phone : '',
+//         email : '',
+//         address : '',
+//         gName : '',
+//         relation : '',
+//         gId : '',
+//         gContact : '',
+//     });
+//     const [isEditing, setIsEditing] = useState(false);
+    
+//     useEffect (() => {
+//         axios
+//         .get(`http://localhost:4000/patientData/get/650efb90b6d7126c541b1fbe`)
+//         .then((response) => {
+//             console.log(response)
+//             setPatient(response.data.data.patients);
+//         })
+//         .catch((error) => {
+//             console.error('Error fetching data', error);
+//         });
+//     }, [id]);
+
+//     const handleEditPatientProfile = async () =>{
+//         try{
+//             const response = await axios.put(`http://localhost:4000/patientData/update/${id}`, patient);
+//             if(response.status ===  200){
+//                 setIsEditing(false);
+//             }
+//         }catch(error){
+//             console.error('Error in updation', error);
+//         }
+//     };
+
+//     const handleInputChange = (e) => {
+//         const {name, value} = e.target;
+//         setPatient({
+//             ...patient,
+//             [name]: value,
+//         });
+//        };
+
+       
+//     return (
+//         <>
+        
+//         <input type ="text" name = "name" value={patient.fName} disabled={!isEditing} onChange ={handleInputChange}></input>
+
+//         <button
+//     onClick={isEditing ? handleEditPatientProfile : () => setIsEditing(true)}
+//     >
+//         {isEditing ? 'Save' : 'Edit'}
+//     </button>
+   
+//         </>
+
+//     );
+// }
+
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Card, CardMedia,CardContent, CardActions,Grid,Typography,} from '@mui/material';
-import img1 from '../../assets/img/patient/profile.jpg';
-import Button from '@mui/material/Button';
-import Stack from '@mui/material/Stack';
+import { TextField} from '@mui/material';
+
 import { Link } from 'react-router-dom';
+import Button from '@mui/material/Button';
+import { Card, CardMedia,CardContent, CardActions,Grid,Typography} from '@mui/material';
+import img1 from '../../assets/img/patient/profile.jpg';
+import { Stack } from '@mui/material';
 
-export default function PatientDetails() {
-  const [patient, setPatient] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const { id } = '650efb90b6d7126c541b1fbe';
-  // const [supplier, setSupplier] = useState(null);
+export default function PatientDetails(){
 
-  // const id = '650f256bb408726a4815564a';
+    //const {id} = "650efb90b6d7126c541b1fbe"; //Defining an id in this way is incorrect, (string)
+    const id = "650f2459b408726a48155646";
 
-  // const fetchSupplierData = async () => {
-  //   try {
-  //     if (id) {
-  //       const response = await axios.get(`http://localhost:8411/supplier/get/${id}`);
-  //       setSupplier(response.data.supplier);
-  //     }
-  //   } 
+    //const {id} = useParams();
+    const [patient, setPatient] = useState({
+        country : '',
+        identity : '',
+        fName : '',
+        lName : '',
+        gender : '',
+        dob : '',
+        phone : '',
+        email : '',
+        address : '',
+        gName : '',
+        relation : '',
+        gId : '',
+        gContact : '',
+    });
+    const [isEditing, setIsEditing] = useState(false);
+    
+    useEffect (() => {
+        axios
+        .get("http://localhost:4000/patientData/get/" + id)
+        .then((response) => {
+            console.log(response)
+            setPatient(response.data.patient);
+        })
+        .catch((error) => {
+            console.error('Error fetching data', error);
+        });
+    }, [id]);
 
-  useEffect(() => {
-    const id = '650efb90b6d7126c541b1fbe';
-    const fetchPatientDetails = async () => {
-      try {
-        if (id) {
-          const response = await axios.get(`http://localhost:4000/patientData/get/${id}`);
-          setPatient(response.data.patient);
-          setLoading(false);
+    const handleEditPatientProfile = async () =>{
+        try{
+            const response = await axios.put("http://localhost:4000/patientData/update/" + id, patient);
+            if(response.status ===  200){
+                setIsEditing(false);
+            }
+        }catch(error){
+            console.error('Error in updation', error);
         }
-      } catch (error) {
-        console.error('Error fetching patient details:', error);
-        setLoading(false);
-      }
     };
 
-    fetchPatientDetails();
-  }, [id]);
-  // console.log("error",patient)
-  return (<>
- {loading ? (
-          <p>Loading...</p>
-        ) : (
-          <>
-    <Grid item xs={12} sm={3}>
+    const handleInputChange = (e) => {
+        const {name, value} = e.target;
+        setPatient({
+            ...patient,
+            [name]: value,
+        });
+       };
+
+       
+    return (
+        <>
+         <Grid item xs={12} sm={3}>
    
-      <Card sx={{ height: '100%' }} >
-        <CardMedia
-          component="div"
-          sx={{
-            // 16:9
-            pt: '56.25%',
-          }}
-          image={img1}
+   <Card sx={{ height: '100%' }} >
+     <CardMedia
+       component="div"
+       sx={{
+         // 16:9
+         pt: '56.25%',
+       }}
+       image={img1}
 
-        />
-        
-        <CardContent >
-          <Typography gutterBottom variant="h5" component="h2" align='center'>
-            {patient.fName}{patient.lName}
-          </Typography>
-        </CardContent>
-        <CardActions>
+     />
+     
+     <CardContent >
+       <Typography gutterBottom variant="h5" component="h2" align='center'>
+         {patient.fName}{patient.lName}
+       </Typography>
+     </CardContent>
+     <CardActions>
 
 
-          <Button
-            component={Link}
-            to="/patient-inquiries"
-            variant="contained"
-            // size="small"
-            style={{ width: '100%' }}
+       <Button
+         component={Link}
+         to="/patient-inquiries"
+         variant="contained"
+         // size="small"
+         style={{ width: '100%' }}
 
-            color="primary"
-          >
-            Inquiries
-          </Button>
+         color="primary"
+       >
+         Inquiries
+       </Button>
 
-        </CardActions>
-      </Card>
+     </CardActions>
+   </Card>
 
-    </Grid>
-    <Grid item xs={12} sm={9}>
+ </Grid>
+ <Grid item xs={12} sm={9}>
       <div>
       
           <div>
             <h2>Patient Details</h2>
-            <p>Country: {patient.country}</p>
-            <p>ID Type: {patient.idType}</p>
-            <p>ID Number: {patient.idNumber}</p>
-            <p>First Name: {patient.fName}</p>
-            <p>Last Name: {patient.lName}</p>
-            <p>Gender: {patient.gender}</p>
-            <p>Date of Birth: {patient.dob}</p>
-            <p>Contact Number: {patient.phone}</p>
-            <p>Email: {patient.email}</p>
-            <p>Address: {patient.address}</p>
-            <p>Guardian's Name: {patient.gName}</p>
+            {/* <p>Id {patient.idNumber}</p>
+            {/* <TextField  
+                  label="country"
+                  name="name"
+                  value={patient.country}
+                  onChange={handleInputChange}
+                  disabled={!isEditing} /> */}
+            
+            {/* <p>Relation: {patient.relation}</p> */}
+            
+                {/* <p>fname : {patient.fName}</p>
+                <TextField  
+                  label="country"
+                  name="country"
+                  value={patient.country}
+                  onChange={handleInputChange}
+                  disabled={!isEditing} />
+
+                <TextField  
+                  label="ID Type"
+                  name="idType"
+                  onChange={handleInputChange}
+                  value={patient.idType}
+                  disabled={!isEditing} />
+
+                <TextField  
+                  label="ID Number"
+                  name="idNumber"
+                  value={patient.idNumber}
+                  onChange={handleInputChange}
+                  disabled={!isEditing} />
+
+                <TextField  
+                  label="First Name"
+                  name="fName"
+                  value={patient.fName}
+                  onChange={handleInputChange}
+                  disabled={!isEditing} />
+
+            <TextField  
+                  label="Last Name"
+                  name="lName"
+                  value={patient.lName}
+                  onChange={handleInputChange}
+                  disabled={!isEditing} />
+
+            <TextField  
+                  label="Gender"
+                  name="gender"
+                  value={patient.gender}
+                  onChange={handleInputChange}
+                  disabled={!isEditing} />
+
+            <TextField  
+                  label="Date of Birth"
+                  name="dob"
+                  type='date'
+                  value={patient.dob}
+                  onChange={handleInputChange}
+                  disabled={!isEditing} />
+
+            <TextField  
+                  label="Contact Number"
+                  name="phone"
+                  value={patient.phone}
+                  onChange={handleInputChange}
+                  disabled={!isEditing} />
+
+            <TextField  
+                  label="Email"
+                  name="email"
+                  value={patient.email}
+                  onChange={handleInputChange}
+                  disabled={!isEditing} />
+
+            <TextField  
+                  label="Address"
+                  name="address"
+                  value={patient.address}
+                  onChange={handleInputChange}
+                  disabled={!isEditing} />
+
+            <TextField  
+                  label="Guardian's Name"
+                  name="gName"
+                  value={patient.gName}
+                  onChange={handleInputChange}
+                  disabled={!isEditing} />
+
             <p>Relation: {patient.relation}</p>
-            <p>Guardian ID: {patient.gId}</p>
-            <p>Guardian Contact: {patient.gContact}</p>
+
+            <TextField  
+                  label="Relation"
+                  name="relation"
+                  value={patient.relation}
+                  onChange={handleInputChange}
+                  disabled={!isEditing} />
+
+            <TextField  
+                  label="Guardian ID"
+                  name="gId"
+                  value={patient.gId}
+                  onChange={handleInputChange}
+                  disabled={!isEditing} /> */}
+
+            {/* <TextField  
+                  label="Guardian Contact"
+                  name="gContact"
+                  value={patient.gContact}
+                  onChange={handleInputChange}
+                  disabled={!isEditing} /> */} 
+
+                {/* <button
+                  onClick={isEditing ? handleEditProfile : () => setIsEditing(true)}
+                >
+                  {isEditing ? 'Save' : 'Edit'}
+                </button> */}
+
+        First Name <TextField label="First Name" type ="text" name = "fName" value={patient.fName} disabled={!isEditing} onChange ={handleInputChange}></TextField>
+        Last Name<TextField label="Last Name" type ="text" name = "lName" value={patient.lName} disabled={!isEditing} onChange ={handleInputChange}></TextField>
+        Country<TextField label="Country" type ="text" name = "country" value={patient.country} disabled={!isEditing} onChange ={handleInputChange}></TextField>
+        Identity<TextField label="Identity" type ="text" name = "identity" value={patient.identity} disabled={!isEditing} onChange ={handleInputChange}></TextField>
+        Gender<TextField label="Gender" type ="text" name = "gender" value={patient.gender} disabled={!isEditing} onChange ={handleInputChange}></TextField>
+        Date of Birth<TextField label="Date of Birth" type ="text" name = "dob" value={patient.dob} disabled={!isEditing} onChange ={handleInputChange}></TextField>
+        Phone Number<TextField label="Phone Number" type ="text" name = "phone" value={patient.phone} disabled={!isEditing} onChange ={handleInputChange}></TextField>
+        Email<TextField label="Email" type ="text" name = "email" value={patient.email} disabled={!isEditing} onChange ={handleInputChange}></TextField>
+        Address<TextField label="Address" type ="text" name = "address" value={patient.address} disabled={!isEditing} onChange ={handleInputChange}></TextField>
+        Guardian Name<TextField label="Guardian Name" type ="text" name = "gName" value={patient.gName} disabled={!isEditing} onChange ={handleInputChange}></TextField>
+        Relation<TextField label="Relation" type ="text" name = "relation" value={patient.relation} disabled={!isEditing} onChange ={handleInputChange}></TextField>
+        Guardian Id<TextField label="Guardian Id" type ="text" name = "gId" value={patient.gId} disabled={!isEditing} onChange ={handleInputChange}></TextField>
+        Guardian Contact<TextField label="fNaGuardian Contactme" type ="text" name = "gContact" value={patient.gContact} disabled={!isEditing} onChange ={handleInputChange}></TextField>
 
 
             <Stack direction="row" spacing={2}>
+            {/* <button
+    onClick={isEditing ? handleEditPatientProfile : () => setIsEditing(true)}
+    >
+        {isEditing ? 'Save' : 'Edit'}
+    </button>
+    */}
               <Button
-                component={Link}
-                to="#"
+                onClick={isEditing ? handleEditPatientProfile : () => setIsEditing(true)}
                 variant="contained"
                 style={{ width: '25%' }}
                 color="success">
-                Edit
+                {isEditing ? 'Save' : 'Edit'}
               </Button>
               <Button
                 component={Link}
@@ -125,13 +344,18 @@ export default function PatientDetails() {
        
       </div>
     </Grid>
+        
+       
+        
 
-</>
-    )}
-  </>
-  );
+
+
+
+      
+        </>
+
+    );
 }
-
 
 // import React, { useState, useEffect } from 'react';
 // import axios from 'axios';
