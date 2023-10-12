@@ -20,6 +20,7 @@ const getDoctors = require("./Routes/Patient_Routes/getDoctors");
 const getChannels = require("./Routes/Patient_Routes/channeling-routes");
 //========================================
 
+
 // Lab Assistant Route start
 const equipmentRouter = require("./Routes/LabAssistant_Routes/EquipmentRoute");
 const labAssistantRouter = require("./Routes/LabAssistant_Routes/LabAssistantRoute");
@@ -86,6 +87,10 @@ app.use("/labAssistant-profile",labAssistantRouter);
 app.use("/lab-report",reportRouter);
 app.use("/lab-sample",sampleRouter);
 app.use("/lab-test",testRouter);
+
+
+//Hansanie
+app.use("/pharmacistProfile",PharmacistRoutes);
 
 app.listen(PORT, () => {
     console.log(`Server is running on port: ${PORT}`);

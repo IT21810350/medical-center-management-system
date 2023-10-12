@@ -14,7 +14,6 @@ import Checkbox from '@mui/material/Checkbox';
 import Heading from '../../components/patient-components/heading.component';
 import PatientNavigationBar from '../../views/patient-views/patient-navigation-bar';
 import axios from 'axios';
-import Input from '@mui/material/Input';
 
 export default function PatientCreateAccount() {
   //Create a state variable to store all the values with an initial value of an array containing an empty object {}.

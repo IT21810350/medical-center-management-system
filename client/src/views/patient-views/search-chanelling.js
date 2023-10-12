@@ -85,7 +85,7 @@ const SearchChanelling = () => {
           <TableBody>
             {filteredDoctors.map((row) => (
               <TableRow key={row._id}>
-                <TableCell>{`${row.firstName || ''} ${row.lastName || ''}`}</TableCell>
+                <TableCell>{`${row.firstName || ''} ${row.middleName || ''} ${row.lastName || ''}`}</TableCell>
                 <TableCell>{row.specialization || row.specialty || ''}</TableCell>
                 <TableCell>
                   <Button

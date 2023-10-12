@@ -13,17 +13,48 @@ import RadioGroup from '@mui/material/RadioGroup';
 import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
 import FormControlLabel from '@mui/material/FormControlLabel';
+import axios from 'axios';
 
 const Pharmacist = () => {
   const [email, setEmail] = useState('');
   const [isEmailValid, setIsEmailValid] = useState(true);
+  const [parmacistDetails, setparmacistDetails] = useState({
+            firstName: '', 
+            lastName: '', 
+            emailAddress: '', 
+            contactNumber: '', 
+            gender: '', 
+            nic: '', 
+            bio: '',
+  });
+
+  const handleOnChange = (e) => {
+    const { name, value } = e.target;
+
+    setparmacistDetails({
+      ...parmacistDetails,
+      [name]: value,
+    });
+  };
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      const response = await axios.post('http://localhost:4000/pharmacistProfile/add', parmacistDetails);
+
+    } catch (error) {
+      
+    }
+
+  };
+
 
   // Function to validate email using a regular expression
   const validateEmail = () => {
     const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
     if (!emailPattern.test(email)) {
       setIsEmailValid(false);
-    } else {
+    } else { 
       setIsEmailValid(true);
     }
   };
@@ -89,28 +120,38 @@ const Pharmacist = () => {
               <TextField
                 required
                 fullWidth
+                name='firstName'
+                value={parmacistDetails.firstName}
+                onChange={(e) => handleOnChange(e)}
                 id="outlined-required-first-name"
                 label="First Name"
+                
               />
             </Grid>
             <Grid item xs={6}>
               <TextField
                 required
                 fullWidth
+                name='lastName'
+                value={parmacistDetails.lastName}
+                onChange={(e) => handleOnChange(e)}
                 id="outlined-required-last-name"
                 label="Last Name"
+                
               />
             </Grid>
             <Grid item xs={12}>
               <TextField
                 required
                 fullWidth
+                name='emailAddress'
                 id="outlined-required-email"
                 label="Email Address"
                 type="email"
-                value={email}
-                error={!isEmailValid}
-                onChange={(e) => setEmail(e.target.value)}
+                value={parmacistDetails.emailAddress}
+                //error={!isEmailValid}
+                onChange={(e) => handleOnChange(e)}
+                //onChange={(e) => setEmail(e.target.value)}
                 onBlur={validateEmail}
                 helperText={!isEmailValid ? 'Invalid email address' : ''}
               />
@@ -119,14 +160,24 @@ const Pharmacist = () => {
               <TextField
                 required
                 fullWidth
+                name='contactNumber'
+                value={parmacistDetails.contactNumber}
+                onChange={(e) => handleOnChange(e)}
                 id="outlined-required-phone"
                 label="Contact Number"
+                
               />
             </Grid>
             <Grid xs={12} sm={6} item>
-              <FormControl required>
+              <FormControl 
+              
+              required>
                 <FormLabel>Gender</FormLabel>
-                <RadioGroup row>
+                <RadioGroup
+                 row
+                 name='gender'
+                 value={parmacistDetails.gender}
+                 onChange={(e) => handleOnChange(e)}>
                   <FormControlLabel value="male" control={<Radio size="small" />} label="Male" />
                   <FormControlLabel value="female" control={<Radio size="small" />} label="Female" />
                 </RadioGroup>
@@ -136,18 +187,25 @@ const Pharmacist = () => {
               <TextField
                 required
                 fullWidth
+                name='nic'
                 id="outlined-required-nic"
                 label="NIC"
+                value={parmacistDetails.NIC}
+                onChange={(e) => handleOnChange(e)}
+                
               />
             </Grid>
             <Grid item xs={12}>
               <TextField
                 required
                 fullWidth
+                name='bio'
                 id="outlined-required-bio"
                 label="Bio"
                 multiline
                 rows={4}
+                value={parmacistDetails.bio}
+                onChange={(e) => handleOnChange(e)}
               />
             </Grid>
           </Grid>
@@ -157,7 +215,8 @@ const Pharmacist = () => {
             <Button type='submit' variant="contained" color="error">
               UPDATE
             </Button>
-            <Button type='submit' variant="contained">ADD</Button>
+            <button type='submit' variant="contained" onClick={handleSubmit}>Add</button>
+            <Button type='submit' variant="contained" onClick={handleSubmit}>ADD</Button>
           </Stack>
         </Grid>
       </Container>

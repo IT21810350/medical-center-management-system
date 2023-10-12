@@ -174,7 +174,7 @@ export default function PatientMakeChanelling() {
 
                     <Box p={2} >
                         {doctorDetails ? (<>
-                            <Typography variant="h5">Name: Dr.{`${doctorDetails.firstName} ${doctorDetails.lastname}`}</Typography>
+                            <Typography variant="h5">Name: Dr.{`${doctorDetails.firstName} ${doctorDetails.middleName} ${doctorDetails.lastName}`}</Typography>
                             <Typography variant="h6">Specialization: {doctorDetails.specialization || doctorDetails.specialty}</Typography>
                             {/* <Typography variant="h4">{doctorDetails.availableTime[startTime]}</Typography> */}
                             {/* <Typography> Time slots <ul>
