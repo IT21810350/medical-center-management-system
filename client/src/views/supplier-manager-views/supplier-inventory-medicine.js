@@ -106,7 +106,7 @@ export default function CombinedComponent() {
   const [editableCell, setEditableCell] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [rowToRemove, setRowToRemove] = useState(null);
- // const [isCellEdited, setIsCellEdited] = useState(false);
+  // const [isCellEdited, setIsCellEdited] = useState(false);
   const [editedRowIndex, setEditedRowIndex] = useState(null);
   const [, setSearchQuery] = useState('');
   const [fetchedRows, setFetchedRows] = useState([]);
@@ -149,7 +149,7 @@ export default function CombinedComponent() {
     try {
       const deletedItemId = rows[rowToRemove]._id;
       const response = await axios.delete(`http://localhost:4000/supplier/inventoryMedicine/${deletedItemId}`);
-  
+
       if (response.status === 200) {
         console.log('Item deleted successfully.');
       } else {
@@ -158,7 +158,7 @@ export default function CombinedComponent() {
     } catch (error) {
       console.error('Error deleting item:', error);
     } finally {
-      setIsModalOpen(false); 
+      setIsModalOpen(false);
       const updatedRows = [...rows];
       updatedRows.splice(rowToRemove, 1);
       setRows(updatedRows);
@@ -196,6 +196,7 @@ export default function CombinedComponent() {
         unitPrice: updatedRow.unitPrice,
         reOrderLevel: updatedRow.reOrderLevel,
       };
+      
 
       const updatedRows = [...rows];
       updatedRows[editedRowIndex] = updatedRow;
@@ -266,8 +267,8 @@ export default function CombinedComponent() {
 
   const generateReport = async () => {
     const unit = 'pt';
-    const size = 'A4'; 
-    const orientation = 'portrait'; 
+    const size = 'A4';
+    const orientation = 'portrait';
 
     const marginLeft = 40;
     const doc = new jsPDF(orientation, unit, size);
@@ -298,7 +299,7 @@ export default function CombinedComponent() {
               <MenuIcon />
             </IconButton>
             <Typography variant="h6" noWrap component="div" sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}>
-              MUI
+              Supplier Inventory Medicine
             </Typography>
             <Search>
               <SearchIconWrapper>
@@ -316,18 +317,19 @@ export default function CombinedComponent() {
 
       <TableContainer component={Paper}>
         <Table sx={{ minWidth: 650 }} aria-label="simple table">
-          <TableHead style={{ backgroundColor: '#BBDEFB', fontWeight: 'bold' }}>
+          <TableHead style={{ backgroundColor: '#BBDEFB', fontWeight: 'bold', fontSize: '28px' }}>
             <TableRow>
-              <TableCell>Drug Code</TableCell>
-              <TableCell>Drug Name</TableCell>
-              <TableCell>Specification Model</TableCell>
-              <TableCell>Unit</TableCell>
-              <TableCell>Expiry Date</TableCell>
-              <TableCell>Manufacturer</TableCell>
-              <TableCell>Quantity</TableCell>
-              <TableCell>Unit Price</TableCell>
-              <TableCell>Re-Order Level</TableCell>
-              <TableCell>Actions</TableCell>
+              
+            <TableCell style={{ fontSize: '20px' , fontWeight: 'bold'}}>Drug Code</TableCell>
+              <TableCell style={{ fontSize: '20px', fontWeight: 'bold' }}>Drug Name</TableCell>
+              <TableCell style={{ fontSize: '20px', fontWeight: 'bold' }}>Specification Model</TableCell>
+              <TableCell style={{ fontSize: '20px', fontWeight: 'bold' }}>Unit</TableCell>
+              <TableCell style={{ fontSize: '20px', fontWeight: 'bold' }}>Expiry Date</TableCell>
+              <TableCell style={{ fontSize: '20px', fontWeight: 'bold' }}>Manufacturer</TableCell>
+              <TableCell style={{ fontSize: '20px', fontWeight: 'bold' }}>Quantity</TableCell>
+              <TableCell style={{ fontSize: '20px', fontWeight: 'bold' }}>Unit Price</TableCell>
+              <TableCell style={{ fontSize: '20px', fontWeight: 'bold' }}>Re-Order Level</TableCell>
+              <TableCell style={{ fontSize: '20px', fontWeight: 'bold' }}>Actions</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -337,11 +339,14 @@ export default function CombinedComponent() {
                   if (key !== '_id') {
                     return (
                       <TableCell key={key} onClick={() => handleCellClick(index, key)}>
+                        
                         {editableCell && editableCell.index === index && editableCell.name === key ? (
+                          
                           <TextField
                             fullWidth
                             value={row[key]}
                             onChange={(e) => handleInputChange(index, key, e.target.value)}
+                            style={{ fontSize: '20px' }}  // Add this style
                           />
                         ) : (
                           row[key]
@@ -352,25 +357,45 @@ export default function CombinedComponent() {
                   return null;
                 })}
                 <TableCell>
-                  <Button variant="outlined" color="secondary" onClick={() => handleRemoveClick(index)}>
+                  <Button
+                    variant="outlined"
+                    style={{ backgroundColor: '#E57373', color: '#8B0000' }}
+                    onClick={() => handleRemoveClick(index)}
+                  >
                     Remove
                   </Button>
                 </TableCell>
+
                 <TableCell>
                   {editedRowIndex === index ? (
-                    <Button variant="outlined" color="primary" onClick={() => handleSave(index)}>
+                    <Button
+                      variant="contained"
+                      style={{ backgroundColor: '#A5D6A7', color: '#004D40' }}
+                      onClick={() => handleSave(index)}
+                    >
                       Save
                     </Button>
                   ) : null}
                 </TableCell>
+
               </TableRow>
             ))}
           </TableBody>
           <ConfirmModal open={isModalOpen} onClose={handleCloseModal} onConfirm={handleConfirmRemove} />
         </Table>
       </TableContainer>
-      <Button variant="outlined" color="primary" onClick={addRow}>Add Row</Button>
-      <Button variant="outlined" color="primary" onClick={generateReport}>
+      <Button 
+  variant="outlined" 
+  style={{ backgroundColor: '#FFCDD2', color: '#8B0000' }}
+  onClick={addRow}
+>
+  Add Row
+</Button>
+
+      <Button 
+      variant="outlined"
+      style={{ backgroundColor: 'rgba(255, 255, 0, 0.5)', color: '#004D40' }}
+       onClick={generateReport}>
         Generate Report
       </Button>
     </ThemeProvider>
