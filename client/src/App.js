@@ -31,12 +31,12 @@ import Delete from './views/patient-views/delete';
 
 // pharmacist imports
 import Pharmacist from './views/pharmacist-views/parmacist-home';
-
+import UpdateMedicine from './views/pharmacist-views/updateMedicine';
 import PharmacistProfile from './views/pharmacist-views/pharmacistProfile';
-//import addMedicine from './views/pharmacist-views/addMedicine';
 import MedicineStore from './views/pharmacist-views/medicineStore';
 import MedicineOrder from './views/pharmacist-views/medicineOrders';
 import MedicineSales from './views/pharmacist-views/medicineSales';
+import FormPage from "./views/pharmacist-views/addMedicine";
 
 // hr imports
 import HR from './views/hr-views/hr-home';
@@ -113,24 +113,14 @@ function App() {
         {/*Pharmacist Routes */}
         <Route path="/pharmacist" element={<Pharmacist />} />
         <Route path="/pharmacistProfile" element={<PharmacistProfile />} />
-        <Route path="/addMedicine" element={<addMedicine />} />
+        <Route path="/addMedicine" element={<FormPage />} />
+        <Route path="/updateMedicine" element={<UpdateMedicine/>}/>
         <Route path="/medicineStore" element={<MedicineStore />} />
         <Route path="/medicineOrder" element={<MedicineOrder />} />
         <Route path="/medicineSales" element={<MedicineSales />} />
 
         {/* Patient Routes */}
         <Route path="/searchDoctors" element={<SearchDoctors />} />
-
-        {/*Pharmacist Routes */}
-        <Route path="/pharmacistProfile" element={<PharmacistProfile/>} />
-        <Route path="/addMedicine" element={<addMedicine/>} />
-        <Route path="/medicineStore" element={<MedicineStore/>} />
-        <Route path="/medicineOrder" element={<MedicineOrder/>} />
-        <Route path="/medicineSales" element={<MedicineSales/>} />
-        <Route path="/pharmacist/*" element={<Pharmacist />} />
-
-
-      
         <Route path="/patient" element={<Patient />} />
         <Route path="/search-doctors" element={<SearchDoctors />} />
         <Route path="/dash" exact Component={CommonPatientDashboard} />
