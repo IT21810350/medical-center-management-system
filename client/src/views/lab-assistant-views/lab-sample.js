@@ -63,8 +63,8 @@ function LabSamplePage() {
   const handleCreateSample = () => {
     const newSample = {
       sample_id: labSamples.length + 1, // Convert to String
-      collection_date: new Date(newSampleCollectionDate), // Convert to Date
       sample_type: newSampleType, // Use String data type
+      collection_date: new Date(newSampleCollectionDate), // Convert to Date
       status: newSampleStatus, // Use String data type
       lab_assistant_name: newLabAssistantName, // Use String data type
     };
@@ -112,8 +112,8 @@ function LabSamplePage() {
             <TableHead>
               <TableRow style={{fontSize: 34}}>
                 <TableCell style={{fontSize: 22, fontWeight:'bold'}}>Sample ID</TableCell>
-                <TableCell style={{fontSize: 22, fontWeight:'bold'}}>Collection Date</TableCell>
                 <TableCell style={{fontSize: 22, fontWeight:'bold'}}>Sample Type</TableCell>
+                <TableCell style={{fontSize: 22, fontWeight:'bold'}}>Collection Date</TableCell>
                 <TableCell style={{fontSize: 22, fontWeight:'bold'}}>Status</TableCell>
                 <TableCell style={{fontSize: 22, fontWeight:'bold'}}>Lab Assistant Name</TableCell>
                 <TableCell style={{fontSize: 22, fontWeight:'bold'}}>Actions</TableCell>
@@ -123,8 +123,8 @@ function LabSamplePage() {
               {labSamples.map((sample) => (
                 <TableRow key={sample.sample_id} style={{fontSize: 34}}>
                   <TableCell style={{fontSize: 22}}>{sample.sample_id}</TableCell>
-                  <TableCell style={{fontSize: 22}}>{sample.collection_date.toISOString().slice(0, 10)}</TableCell> {/* Display date in yyyy-mm-dd format */}
                   <TableCell style={{fontSize: 22}}>{sample.sample_type}</TableCell>
+                  <TableCell style={{fontSize: 22}}>{sample.collection_date.toISOString().slice(0, 10)}</TableCell> {/* Display date in yyyy-mm-dd format */}                  
                   <TableCell style={{fontSize: 22}}>{sample.status}</TableCell>
                   <TableCell style={{fontSize: 22}}>{sample.lab_assistant_name}</TableCell>
                   <TableCell>
@@ -213,8 +213,8 @@ function LabSamplePage() {
         {selectedSample && (
           <DialogContent style={{fontSize: 32}}>
             <Typography variant="h6" style={{fontSize: 32}}>Sample ID: {selectedSample.sample_id}</Typography>
-            <Typography style={{fontSize: 32}}>Collection Date: {selectedSample.collection_date.toISOString().slice(0, 10)}</Typography> {/* Display date in yyyy-mm-dd format */}
             <Typography style={{fontSize: 32}}>Sample Type: {selectedSample.sample_type}</Typography>
+            <Typography style={{fontSize: 32}}>Collection Date: {selectedSample.collection_date.toISOString().slice(0, 10)}</Typography> {/* Display date in yyyy-mm-dd format */}            
             <Typography style={{fontSize: 32}}>Status: {selectedSample.status}</Typography>
             <Typography style={{fontSize: 32}}>Lab Assistant Name: {selectedSample.lab_assistant_name}</Typography>
           </DialogContent>

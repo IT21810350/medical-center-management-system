@@ -20,6 +20,7 @@ const getDoctors = require("./Routes/Patient_Routes/getDoctors");
 const getChannels = require("./Routes/Patient_Routes/channeling-routes");
 //========================================
 
+
 // Lab Assistant Route start
 const equipmentRouter = require("./Routes/LabAssistant_Routes/EquipmentRoute");
 const labAssistantRouter = require("./Routes/LabAssistant_Routes/LabAssistantRoute");
@@ -30,7 +31,6 @@ const testRouter = require("./Routes/LabAssistant_Routes/TestRoute");
 
 const validationRoute = require("./Routes/ValidateRoutes");
 const SupplierPayment = require('./Models/SupplierManagerModel/SupplierPayment');
-
 const { MONGO_URL, PORT } = process.env;
 
 const app = express();
@@ -53,6 +53,7 @@ app.use(
 
 app.use(express.json());
 app.use(cookieParser());
+app.use("/supplier",SupplierRegistration);
 
 mongoose.connect(MONGO_URL, { useNewUrlParser: true, useUnifiedTopology: true });
 
@@ -77,12 +78,19 @@ app.use("/getD",getDoctors);
 app.use("/ch",getChannels);
 //=================================
 
+app.use("/room", Room);
+app.use("/room-type", RoomType);
+
 // lab assistant routes end
 app.use("/lab-inventory",equipmentRouter);
 app.use("/labAssistant-profile",labAssistantRouter);
 app.use("/lab-report",reportRouter);
 app.use("/lab-sample",sampleRouter);
 app.use("/lab-test",testRouter);
+
+
+//Hansanie
+app.use("/pharmacistProfile",PharmacistRoutes);
 
 app.listen(PORT, () => {
     console.log(`Server is running on port: ${PORT}`);

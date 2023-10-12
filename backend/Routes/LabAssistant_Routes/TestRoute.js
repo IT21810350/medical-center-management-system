@@ -8,7 +8,7 @@ const {
     getTestByIdController,
     updateTestByIdController,
     deleteTestByIdController
-} = require("../../Controllers/LabAssistantControllers/TestController"); 
+} = require("../../Controllers/TestController"); 
 
 router.post("/lab-test",createTestController);
 router.get("/lab-test",getAllTestController);

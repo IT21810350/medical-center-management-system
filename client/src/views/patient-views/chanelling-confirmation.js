@@ -175,23 +175,59 @@ import { Paper, Typography, List, ListItem, ListItemText, ListItemSecondaryActio
 
 export default function PaymentDetails() {
     const location = useLocation();
-    const doctorId = new URLSearchParams(location.search).get('doctorId');
+    const bookingId = new URLSearchParams(location.search).get('bookingId');
     const [doctorDetails, setDoctorDetails] = useState(null);
     const [showPaymentSuccessAlert, setShowPaymentSuccessAlert] = useState(false);
 
-    useEffect(() => {
-        const fetchDoctorDetails = async () => {
-            try {
-                if (doctorId) {
-                    const response = await axios.get(`http://localhost:4000/getD/get/${doctorId}`);
-                    setDoctorDetails(response.data.doctor);
-                }
-            } catch (error) {
-                console.error('Error fetching doctor details:', error);
-            }
-        };
-        fetchDoctorDetails();
-    }, [doctorId]);
+    // useEffect(() => {
+    //     const fetchDoctorDetails = async () => {
+
+
+
+
+
+
+            
+    //         try {
+    //             if (bookingId) {
+    //                 const response = await axios.get(`http://localhost:4000/getD/get/${bookingId}`);
+    //                 setDoctorDetails(response.data.doctor);
+    //             }
+    //         } catch (error) {
+    //             console.error('Error fetching doctor details:', error);
+    //         }
+    //     };
+    //     fetchDoctorDetails();
+    // }, [bookingId]);
+
+
+//const urlDoctorId = "652751764a208fad4cd63abc"; // Replace with the actual ID from the URL
+
+// Make an Axios GET request to fetch the list of doctors
+axios.get('http://localhost:4000/getD/')
+  .then((response) => {
+    const doctors = response.data;
+
+    // Iterate through the list of doctors
+    let relevantDoctor = null;
+    doctors.forEach((doctor) => {
+      const foundTime = doctor.availableTime.find((time) => time._id === bookingId);
+      if (foundTime) {
+        relevantDoctor = doctor;
+        setDoctorDetails(relevantDoctor);
+      }
+    });
+
+    if (relevantDoctor) {
+      console.log("Relevant Doctor:", relevantDoctor);
+    } else {
+      console.log("Doctor not found");
+    }
+  })
+  .catch((error) => {
+    console.error('Error fetching doctor details:', error);
+  });
+
 
     // Function to handle payment confirmation
     const handlePaymentConfirmation = () => {
@@ -213,9 +249,10 @@ export default function PaymentDetails() {
                 <List>
                     <ListItem>
                         {doctorDetails ? (
-                            <ListItemText primary={`${doctorDetails.firstName} ${doctorDetails.lastname}`} secondary={doctorDetails.specialization} />
+                            <ListItemText primary={`${doctorDetails.firstName} ${doctorDetails.middleName} ${doctorDetails.lastName}`} secondary={doctorDetails.specialization} />
                         ) : (
                             <p>Loading doctor details...</p>
+                            
                         )}
                         <ListItemSecondaryAction>
                             <Typography variant="body1" color="primary">

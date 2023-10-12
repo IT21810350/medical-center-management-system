@@ -1,88 +1,64 @@
-import * as React from 'react';
-import { useState } from 'react';
-import Grid from '@mui/material/Grid';
-import TextField from '@mui/material/TextField';
-import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import Container from '@mui/material/Container';
-import axios from 'axios';
-import img1 from '../../assets/img/supplier/Registration.jpg';
+import * as React from 'react'; // Importing React
+import { useState } from 'react'; // Importing useState hook
+import Grid from '@mui/material/Grid'; // Importing Grid component from Material-UI
+import TextField from '@mui/material/TextField'; // Importing TextField component from Material-UI
+import Box from '@mui/material/Box'; // Importing Box component from Material-UI
+import Button from '@mui/material/Button'; // Importing Button component from Material-UI
+import Container from '@mui/material/Container'; // Importing Container component from Material-UI
+import axios from 'axios'; // Importing axios for making HTTP requests
 
-export default function RegistrationForm() {
-  const [formData, setFormData] = useState({
-    FirstName: '',
-    LastName: '',
-    Email: '',
-    PhoneNumber: '',
-    Address: '',
-    CompanyName: '',
-    NIC: '',
-    Bio: '',
+export default function RegistrationForm() { // Creating a functional component named RegistrationForm
+  const [formData, setFormData] = useState({ // Creating state variables for form data
+    FirstName: '', // Initialize FirstName field with an empty string
+    LastName: '', // Initialize LastName field with an empty string
+    Email: '', // Initialize Email field with an empty string
+    PhoneNumber: '', // Initialize PhoneNumber field with an empty string
+    Address: '', // Initialize Address field with an empty string
+    CompanyName: '', // Initialize CompanyName field with an empty string
+    NIC: '', // Initialize NIC field with an empty string
+    Bio: '', // Initialize Bio field with an empty string
   });
 
-  const { FirstName, LastName, Email, PhoneNumber, Address, CompanyName, NIC, Bio } = formData;
+  const { FirstName, LastName, Email, PhoneNumber, Address, CompanyName, NIC, Bio } = formData; // Destructuring values from formData for convenience
 
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({
-      ...formData,
-      [name]: value,
+  const handleInputChange = (e) => { // Define a function to handle input changes
+    const { name, value } = e.target; // Destructure the name and value properties from the target of the event
+    setFormData({ // Update the formData state
+      ...formData, // Spread the existing formData
+      [name]: value, // Update the property with the name from the event with the provided value
     });
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const handleSubmit = async (e) => { // Define a function to handle form submission
+    e.preventDefault(); // Prevent the default behavior of form submission
     try {
-      await axios.post(
-        "http://localhost:4000/supplierRegistration",
-        { ...formData },
-        { withCredentials: true }
+      await axios.post( // Send a POST request using axios
+        "http://localhost:4000/supplierRegistration", // URL for the request
+        { ...formData }, // Data to be sent in the request body (spread the formData)
+        { withCredentials: true } // Additional configuration options for the request
       );
-      setFormData({
-        FirstName: '',
-        LastName: '',
-        Email: '',
-        PhoneNumber: '',
-        Address: '',
-        CompanyName: '',
-        NIC: '',
-        Bio: '',
+      setFormData({ // Reset the form data after successful submission
+        FirstName: '', // Reset FirstName field
+        LastName: '', // Reset LastName field
+        Email: '', // Reset Email field
+        PhoneNumber: '', // Reset PhoneNumber field
+        Address: '', // Reset Address field
+        CompanyName: '', // Reset CompanyName field
+        NIC: '', // Reset NIC field
+        Bio: '', // Reset Bio field
       });
+      alert("Your response is successful"); // Show an alert for successful submission
     } catch (error) {
-      console.error(error);
+      console.error(error); // Log any errors that occur during the submission process
     }
   };
 
   return (
-    <Container
-      maxWidth="sm"
-      style={{
-        height: '120vh',
-        width: '140vw',
-        backgroundColor: '#E1F5FE', // Updated background color to light blue
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-      }}
-    >
-      <Box
-        sx={{
-          p: 3,
-          border: '2px solid #90A4AE', // Added border styling
-          borderRadius: '8px', // Added border radius
-          backgroundColor: '#FFFFFF', // Set background color to white
-        }}
-      >
-        <h1 style={{ textAlign: 'center' }}>Supplier Registration</h1>
+    <Container maxWidth="sm"> {/* Render a Container component with a maximum width of 'sm' */}
+      <Box sx={{ p: 3, border: '2px solid #90A4AE', borderRadius: '8px', backgroundColor: '#FFFFFF' }}> {/* Render a Box component with custom styles */}
+        <h1 style={{ textAlign: 'center' }}>Supplier Registration</h1> {/* Render a heading element with centered text */}
 
-          <img
-            src={img1}
-            alt=""
-            style={{ maxWidth: '100%', height: 'auto', maxHeight: '200px' }}
-          />
-        
-
-        <Grid container spacing={2}>
+        <Grid container spacing={2}> {/* Render a Grid component with specified spacing */}
           <Grid item xs={6}>
             <TextField
               required
@@ -93,7 +69,6 @@ export default function RegistrationForm() {
               onChange={handleInputChange}
               name="FirstName"
             />
-
           </Grid>
           <Grid item xs={6}>
             <TextField
@@ -138,8 +113,10 @@ export default function RegistrationForm() {
               value={PhoneNumber}
               onChange={handleInputChange}
               name="PhoneNumber"
+              inputProps={{ inputMode: 'numeric', pattern: '[0-9]*' }}
             />
           </Grid>
+
           <Grid item xs={6}>
             <TextField
               required
@@ -176,11 +153,13 @@ export default function RegistrationForm() {
             />
           </Grid>
         </Grid>
-        <Box sx={{ display: 'flex', justifyContent: 'center', mt: 2 }}>
-          <Button variant="contained" color="primary" onClick={handleSubmit}>
-            Submit
+
+        <Box sx={{ display: 'flex', justifyContent: 'left', mt: 2 }}> {/* Render a Box component with custom styles */}
+          <Button variant="contained" color="primary" onClick={handleSubmit}> {/* Render a Button component with specified variant, color, and click event handler */}
+            Submit {/* Button text */}
           </Button>
         </Box>
+
       </Box>
     </Container>
   );

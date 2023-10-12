@@ -8,7 +8,7 @@ const {
     getAllLabAssistantController,
     getLabAssistantByIdController,
     updateLabAssistantByIdController
-} = require("../../Controllers/LabAssistantControllers/LabAssistantController"); 
+} = require("../../Controllers/LabAssistantController"); 
 
 router.post("/labAssistant-profile",createLabAssistantController);
 router.get("/labAssistant-profile",getAllLabAssistantController);

@@ -8,7 +8,7 @@ const {
     getSampleByIdController,
     updateSampleByIdController,
     deleteSampleByIdController
-} = require("../../Controllers/LabAssistantControllers/SampleController"); 
+} = require("../../Controllers/SampleController"); 
 
 router.post("/lab-sample",createSampleController);
 router.get("/lab-sample/:id",getAllSampleController);

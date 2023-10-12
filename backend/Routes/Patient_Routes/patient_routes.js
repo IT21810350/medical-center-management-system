@@ -122,41 +122,80 @@ router.route("/").get((req,res)=>{
 // });
 //=====================================================
 //UPDATE
-router.route("/update/:id").put(async(req,res)=>{
-    let patientId = request.params.id;
+// router.route("/update/:id").put(async(req,res)=>{
+//     // let patientId = request.params.id;
 
-    const{country,identity,firstName,lastName,gender,dob,phone,email,address,gName,relation,gId,gContact,} = req.body;
+//     // const{country,identity,firstName,lastName,gender,dob,phone,email,address,gName,relation,gId,gContact,} = req.body;
 
-    //crate an object
-    const updatePatient = {
-      country,
-      identity,
-      firstName,
-      lastName,
-      gender,
-      dob,
-      phone,
-      email,
-      address,
-      gName,
-      relation,
-      gId,
-      gContact,
-    };
-    try {
-        // Use findByIdAndUpdate to find and update the patient
-        const updatedPatient = await Patient.findByIdAndUpdate(patientId, updatePatient);
+//     // //crate an object
+//     // const updatePatient = {
+//     //   country,
+//     //   identity,
+//     //   firstName,
+//     //   lastName,
+//     //   gender,
+//     //   dob,
+//     //   phone,
+//     //   email,
+//     //   address,
+//     //   gName,
+//     //   relation,
+//     //   gId,
+//     //   gContact,
+//     // };
+//     try {
+//         // Use findByIdAndUpdate to find and update the patient
+//         //const updatedPatient = await Patient.findByIdAndUpdate(patientId, updatePatient);
+//         const updatedPatient = await Patient.findByIdAndUpdate(patientId, req.body,{ new: true, runValidators: true });
+
+//         if (!updatedPatient) {
+//           return res.status(404).send({ status: "Patient not found" });
+//         }
     
-        if (!updatedPatient) {
+//         return res.status(200).send({ status: "Patient details updated successfully" });
+//       } catch (err) {
+//         console.error(err);
+//         return res.status(500).send({ status: "Error with updating details", error: err.message });
+//       }
+//     });
+
+router.route("/update/:id").put(async (req, res) => {
+  const patientId = req.params.id; // Extract the patient ID from the request parameters
+
+  // const { country, identity, firstName, lastName, gender, dob, phone, email, address, gName, relation, gId, gContact } = req.body;
+
+  // // Create an object
+  // const updatePatient = {
+  //     country,
+  //     identity,
+  //     firstName,
+  //     lastName,
+  //     gender,
+  //     dob,
+  //     phone,
+  //     email,
+  //     address,
+  //     gName,
+  //     relation,
+  //     gId,
+  //     gContact,
+  // };
+
+  try {
+      // Use findByIdAndUpdate to find and update the patient
+      // const updatedPatient = await Patient.findByIdAndUpdate(patientId, updatePatient);
+      const updatedPatient = await Patient.findByIdAndUpdate(patientId, req.body, { new: true, runValidators: true });
+
+      if (!updatedPatient) {
           return res.status(404).send({ status: "Patient not found" });
-        }
-    
-        return res.status(200).send({ status: "Patient details updated successfully" });
-      } catch (err) {
-        console.error(err);
-        return res.status(500).send({ status: "Error with updating details", error: err.message });
       }
-    });
+
+      return res.status(200).send({ status: "Patient details updated successfully" });
+  } catch (err) {
+      console.error(err);
+      return res.status(500).send({ status: "Error with updating details", error: err.message });
+  }
+});
 
 //=====================================================
 // DELETE

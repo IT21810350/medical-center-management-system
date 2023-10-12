@@ -11,6 +11,7 @@ import Doctor from './views/doctor-views/doctor-home';
 import Channeling from './views/doctor-views/channeling';
 import Symptoms from "./views/doctor-views/symptoms";
 import Prescription from "./views/doctor-views/prescription";
+import DoctorProfileCreate from "./views/doctor-views/doctor-profile-create";
 
 // patient imports
 import Patient from './views/patient-views/patient-home';
@@ -38,7 +39,7 @@ import MedicineOrder from './views/pharmacist-views/medicineOrders';
 import MedicineSales from './views/pharmacist-views/medicineSales';
 import FormPage from "./views/pharmacist-views/addMedicine";
 
-// hr imports
+// hr imports 
 import HR from './views/hr-views/hr-home';
 import Registration from './views/hr-views/hr-emp-registration';
 import Profile from './views/hr-views/emp-profile';
@@ -102,6 +103,7 @@ function App() {
         <Route path="/channeling" element={<Channeling />} />
         <Route path="/symptoms" element={<Symptoms />} />
         <Route path="/prescription" element={<Prescription />} />
+        <Route path="/doctor-create-profile" element={<DoctorProfileCreate />} />
 
         {/* Hr Routes */}
         <Route path="/hr" element={<HR />} />
@@ -134,7 +136,20 @@ function App() {
         <Route path="/patient-additional" exact Component={PatientAdditionalFiles} />
         <Route path="/rescedule-appointment" exact Component={Reschedule} />
         <Route path="/delete-appointment" exact Component={Delete} />
-        <Route path="/editinq" component={EditInquiry} />
+        <Route path="/editinq/:id" element={<EditInquiry/>} />
+
+
+        {/*Pharmacist Routes */}
+        <Route path="/pharmacistProfile" element={<PharmacistProfile/>} />
+        <Route path="/addMedicine" element={<addMedicine/>} />
+        <Route path="/medicineStore" element={<MedicineStore/>} />
+        <Route path="/medicineOrder" element={<MedicineOrder/>} />
+        <Route path="/medicineSales" element={<MedicineSales/>} />
+        <Route path="/pharmacist/*" element={<Pharmacist />} />
+
+
+      
+        
 
 
         {/* Resource person Routes */}

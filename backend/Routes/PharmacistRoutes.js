@@ -7,12 +7,47 @@ let Pharmacist = require("../Models/PharmacistModel/PharmacistProfile");
 //pharmacistProfile
 //url of create
 
-router.route("/addPharmacist").post((req,res)=>{
+// router.route("/addPharmacist").post((req,res)=>{
 
-    const patientProfile = Pharmacist.create(req.body);
+//     const patientProfile = Pharmacist.create(req.body);
 
-    res.json(patientProfile);
-})
+//     res.json(patientProfile);
+// })
+
+//Hansanie
+
+    router.post ('/add', async (req, res) => {
+    
+    const {firstName, lastName, emailAddress, contactNumber, gender, nic, bio} = req.body;
+    try {
+    const newP = new Pharmacist({
+        firstName, 
+        lastName, 
+        emailAddress, 
+        contactNumber, 
+        gender, 
+        nic, 
+        bio,
+
+        
+    });
+    await newP.save();
+
+
+    res.status(201).json({
+        message : "Pharmacist profile data added successfully"
+    });
+    
+}catch (error) {
+    console.error(error);
+    res.status(500).json({
+        message : "Pharmacist profile data not added successfully",
+
+    });
+
+}
+});
+
 
 //http://Localhost
 

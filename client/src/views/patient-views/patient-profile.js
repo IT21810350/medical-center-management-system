@@ -115,16 +115,16 @@ export default function PatientProfile() {
                                     <Box alignContent={'center'}>
                                         <Tabs style={{backgroundColor:"pink"}} value={value2} onChange={handleChange2} aria-label="basic tabs example">
                                             <Tab label="Upcoming" {...a11yProps(0)} />
-                                            {/* <Tab label="Past" {...a11yProps(1)} />
+                                            <Tab label="Past" {...a11yProps(1)} />
                                             <Tab label="Cancelled" {...a11yProps(2)} />
-                                            <Tab label="Refunds" {...a11yProps(3)} /> */}
+                                            <Tab label="Refunds" {...a11yProps(3)} /> 
                                         </Tabs>
 
                                     </Box>
                                     <CustomTabPanel value={value2} index={0}>
                                         <UpcomingChanellings/>
                                     </CustomTabPanel >
-                                    {/* <CustomTabPanel value={value2} index={1}>
+                                    <CustomTabPanel value={value2} index={1}>
                                         <Typography>Bla bla 2</Typography>
                                     </CustomTabPanel >
                                     <CustomTabPanel value={value2} index={2}>
@@ -132,7 +132,7 @@ export default function PatientProfile() {
                                     </CustomTabPanel >
                                     <CustomTabPanel value={value2} index={3}>
                                         <Typography>Bla bla 4</Typography>
-                                    </CustomTabPanel > */}
+                                    </CustomTabPanel > 
                                 </Box>
 
                             </CustomTabPanel>

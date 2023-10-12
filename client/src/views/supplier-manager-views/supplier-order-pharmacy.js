@@ -74,7 +74,7 @@ export default function CombinedComponent() {
             component="div"
             sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}
           >
-            Supplier List
+           Order for Pharmacy
           </Typography>
           <Search>
             <SearchIconWrapper>
