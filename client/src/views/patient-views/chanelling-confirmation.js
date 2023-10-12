@@ -175,15 +175,22 @@ import { Paper, Typography, List, ListItem, ListItemText, ListItemSecondaryActio
 
 export default function PaymentDetails() {
     const location = useLocation();
-    const doctorId = new URLSearchParams(location.search).get('doctorId');
+    const bookingId = new URLSearchParams(location.search).get('bookingId');
     const [doctorDetails, setDoctorDetails] = useState(null);
     const [showPaymentSuccessAlert, setShowPaymentSuccessAlert] = useState(false);
 
     useEffect(() => {
         const fetchDoctorDetails = async () => {
+
+
+
+
+
+
+            
             try {
-                if (doctorId) {
-                    const response = await axios.get(`http://localhost:4000/getD/get/${doctorId}`);
+                if (bookingId) {
+                    const response = await axios.get(`http://localhost:4000/getD/get/${bookingId}`);
                     setDoctorDetails(response.data.doctor);
                 }
             } catch (error) {
@@ -191,7 +198,7 @@ export default function PaymentDetails() {
             }
         };
         fetchDoctorDetails();
-    }, [doctorId]);
+    }, [bookingId]);
 
     // Function to handle payment confirmation
     const handlePaymentConfirmation = () => {

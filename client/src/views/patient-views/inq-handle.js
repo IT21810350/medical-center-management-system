@@ -38,7 +38,7 @@ const InquiryList = () => {
       .delete(`http://localhost:4000/inqData/deleteinq/${id}`)
       .then(() => {
        
-        setData((prevData) => prevData.filter((inquery) => inquery._id !== id));
+        setInquiries((prevData) => prevData.filter((inquery) => inquery._id !== id));
       })
       .catch((error) => {
         console.error('Error deleting inquery:', error);
