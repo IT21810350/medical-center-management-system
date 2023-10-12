@@ -13,10 +13,10 @@ import Grid from '@mui/material/Grid';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
-import TextField from '@mui/material/TextField'; 
-import Button from '@mui/material/Button'; 
-import EditIcon from '@mui/icons-material/Edit'; 
-import axios from 'axios'; 
+import TextField from '@mui/material/TextField';
+import Button from '@mui/material/Button';
+import EditIcon from '@mui/icons-material/Edit';
+import axios from 'axios';
 
 import img from '../../assets/img/supplier/supplier2.webp';
 
@@ -159,17 +159,17 @@ export default function CombinedComponent() {
           <Card sx={{ display: 'flex' }}>
             <CardMedia
               component="img"
-              style={{ height: '220px' }} 
-              image={img} 
+              style={{ height: '220px' }}
+              image={img}
               alt="green iguana"
             />
             <CardContent>
               <Typography gutterBottom variant="h5" component="div" >
-                Ms.Olivia Harris 
+                Ms.Olivia Harris
               </Typography>
               <Typography variant="body2" color="text.secondary">
                 Supplier
-                Leeds, 
+                Leeds,
                 United Kingdom
               </Typography>
             </CardContent>
@@ -177,58 +177,58 @@ export default function CombinedComponent() {
         </Grid>
         <Grid item xs={4.5}>
           <Item>
-            <StyledTextField 
-              label="First Name" 
-              variant="outlined" 
-              name="FirstName" 
+            <StyledTextField
+              label="First Name"
+              variant="outlined"
+              name="FirstName"
               value={FirstName}
               onChange={handleInputChange}
             />
-            <StyledTextField 
-              label="Last Name" 
-              variant="outlined" 
+            <StyledTextField
+              label="Last Name"
+              variant="outlined"
               name="LastName"
               value={LastName}
               onChange={handleInputChange}
             />
-            <StyledTextField 
-              label="Email Address" 
-              variant="outlined" 
+            <StyledTextField
+              label="Email Address"
+              variant="outlined"
               name="Email"
               value={Email}
               onChange={handleInputChange}
             />
-            <StyledTextField 
-              label="Phone Number" 
-              variant="outlined" 
+            <StyledTextField
+              label="Phone Number"
+              variant="outlined"
               name="PhoneNumber"
               value={PhoneNumber}
               onChange={handleInputChange}
             />
-            <StyledTextField 
-              label="Address" 
-              variant="outlined" 
+            <StyledTextField
+              label="Address"
+              variant="outlined"
               name="Address"
               value={Address}
               onChange={handleInputChange}
             />
-            <StyledTextField 
-              label="Company Name" 
-              variant="outlined" 
+            <StyledTextField
+              label="Company Name"
+              variant="outlined"
               name="CompanyName"
               value={CompanyName}
               onChange={handleInputChange}
             />
-            <StyledTextField 
-              label="NIC" 
-              variant="outlined" 
+            <StyledTextField
+              label="NIC"
+              variant="outlined"
               name="NIC"
               value={NIC}
               onChange={handleInputChange}
             />
-            <StyledTextField 
-              label="Bio" 
-              variant="outlined" 
+            <StyledTextField
+              label="Bio"
+              variant="outlined"
               name="Bio"
               value={Bio}
               onChange={handleInputChange}
