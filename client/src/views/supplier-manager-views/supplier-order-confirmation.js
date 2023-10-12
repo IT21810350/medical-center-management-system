@@ -103,7 +103,7 @@ const SearchAppBar = () => {
           component="div"
           sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}
         >
-          MUI
+          Order Confirmation
         </Typography>
         <Search>
           <SearchIconWrapper>

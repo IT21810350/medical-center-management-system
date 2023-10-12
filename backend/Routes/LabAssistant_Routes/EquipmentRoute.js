@@ -8,7 +8,7 @@ const {
     getEquipmentByIdController,
     updateEquipmentByIdController,
     deleteEquipmentByIdController
-} = require("../../Controllers/LabAssistantControllers/EquipmentController"); 
+} = require("../../Controllers/EquipmentController"); 
 
 // Define your API routes for CRUD operations
 router.post('/lab-inventory', async (req, res) => {

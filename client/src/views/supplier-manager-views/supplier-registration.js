@@ -6,7 +6,6 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Container from '@mui/material/Container';
 import axios from 'axios';
-import img1 from '../../assets/img/supplier/Registration.jpg';
 
 export default function RegistrationForm() {
   const [formData, setFormData] = useState({
@@ -57,30 +56,23 @@ export default function RegistrationForm() {
     <Container
       maxWidth="sm"
       style={{
-        height: '120vh',
+        height: '100vh',
         width: '140vw',
-        backgroundColor: '#E1F5FE', // Updated background color to light blue
+        backgroundColor: '#E1F5FE',
         display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
+        justifyContent: 'left',
+        alignItems: 'left',
       }}
     >
       <Box
         sx={{
           p: 3,
-          border: '2px solid #90A4AE', // Added border styling
-          borderRadius: '8px', // Added border radius
-          backgroundColor: '#FFFFFF', // Set background color to white
+          border: '2px solid #90A4AE',
+          borderRadius: '8px',
+          backgroundColor: '#FFFFFF',
         }}
       >
         <h1 style={{ textAlign: 'center' }}>Supplier Registration</h1>
-
-          <img
-            src={img1}
-            alt=""
-            style={{ maxWidth: '100%', height: 'auto', maxHeight: '200px' }}
-          />
-        
 
         <Grid container spacing={2}>
           <Grid item xs={6}>
@@ -93,7 +85,6 @@ export default function RegistrationForm() {
               onChange={handleInputChange}
               name="FirstName"
             />
-
           </Grid>
           <Grid item xs={6}>
             <TextField
@@ -138,6 +129,7 @@ export default function RegistrationForm() {
               value={PhoneNumber}
               onChange={handleInputChange}
               name="PhoneNumber"
+              inputProps={{ inputMode: 'numeric', pattern: '[0-9]*' }}
             />
           </Grid>
           <Grid item xs={6}>
@@ -176,7 +168,8 @@ export default function RegistrationForm() {
             />
           </Grid>
         </Grid>
-        <Box sx={{ display: 'flex', justifyContent: 'center', mt: 2 }}>
+
+        <Box sx={{ display: 'flex', justifyContent: 'left', mt: 2 }}>
           <Button variant="contained" color="primary" onClick={handleSubmit}>
             Submit
           </Button>
