@@ -59,21 +59,26 @@ const SearchChanelling = () => {
   };
 
   return (
-    <div>
+    <div >
       <PatientNavigationBar />
       <Heading
         title="Doctor Channeling"
         description="Use filters to select your preferred doctor"
       />
+      <div className='container'> 
       <TextField
         label="Search"
+        
         variant="outlined"
         value={searchTerm}
         onChange={handleSearchChange}
         fullWidth
         placeholder="Enter name of the doctor/specialization"
       />
-      <TableContainer component={Paper}>
+      
+      </div>
+      <br/><br/>
+      <TableContainer className='container' component={Paper}>
         <Table>
           <TableHead>
             <TableRow>

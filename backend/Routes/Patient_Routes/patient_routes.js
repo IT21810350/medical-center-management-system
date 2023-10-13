@@ -3,6 +3,7 @@ const router = require("express").Router();
 const { request } = require("express");
 
 let Patient = require("../../Models/PatientModel/Patientmodel");
+let User = require("../../Models/UserModel");
 
 //=====================================================
 
@@ -264,14 +265,16 @@ router.route("/deletepatient/:id").delete(async (req, res) => {
 // Define the route to get a single patient by ID
 router.route("/get/:id").get(async (req, res) => {
   try {
-    const patientId = req.params.id;
-    const patient = await Patient.findById(patientId);
+    const user = await User.findById(req.params.id);
+    //const patientId = req.params.id;
+   // const patient = await Patient.findById(patientId);
+    user.profile = await Patient.findOne({_id: user.profile._id});
     
     if (!patient) {
       return res.status(404).json({ status: "Patient not found" });
     }
 
-    return res.status(200).json({ status: "Patient found", patient });
+    return res.status(200).json({ status: "Patient found", user });
   } catch (err) {
     console.error(err.message);
     return res.status(500).json({ status: "Error with getting patient", error: err.message });

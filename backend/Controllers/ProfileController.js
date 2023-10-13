@@ -1,5 +1,6 @@
 const DoctorProfile = require ("../Models/DoctorModels/DoctorProfile");
-const PatientProfile = require("../Models/PatientModel/PatientProfile");
+//const PatientProfile = require("../Models/PatientModel/PatientProfile");
+const PatientProfile = require("../Models/PatientModel/Patientmodel");
 const PharmacistProfile = require("../Models/PharmacistModel/PharmacistProfile");
 const HumanResourceManagerProfile = require("../Models/hrmodel/HumanResourceManagerProfile");
 const FinancialManagerProfile = require("../Models/FinancialManagerModel/FinancialManagerProfile");

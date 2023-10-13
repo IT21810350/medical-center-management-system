@@ -1,6 +1,7 @@
 // global imports
 import { Route, Routes } from "react-router-dom";
 
+
 // pages <- common for every actor type
 import Home from "./views/Home";
 import { Login, Signup } from "./views/Index";

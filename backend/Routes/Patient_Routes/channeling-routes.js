@@ -35,24 +35,30 @@ const Channeling = require('../../Models/PatientModel/channelingmodel'); // Impo
 
 router.post('/add', async (req, res) => {
   const {
-    date,
-    appointmentNumber,
-    patient,
-    doctor,
-    prescription,
-    labReports,
-    payments,
+    // date,
+    // appointmentNumber,
+    // patient,
+    // doctor,
+    // prescription,
+    // labReports,
+    // payments,
+    patientId,
+            bookingId,
+            doctorId, 
   } = req.body;
 
   try {
     const newChanneling = new Channeling({
-      date,
-      appointmentNumber,
-      patient,
-      doctor,
-      prescription,
-      labReports,
-      payments,
+      // date,
+      // appointmentNumber,
+      // patient,
+      // doctor,
+      // prescription,
+      // labReports,
+      // payments,
+      patientId,
+            bookingId,
+            doctorId, 
     });
 
     const savedChanneling = await newChanneling.save();
