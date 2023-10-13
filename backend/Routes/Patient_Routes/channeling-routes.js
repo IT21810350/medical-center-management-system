@@ -1,34 +1,77 @@
 const router = require("express").Router();
 const { request } = require("express");
 
-let Channels = require("../../Models/PatientModel/channelings");
+// let Channels = require("../../Models/PatientModel/channelings");
+
+// router.post('/add', async (req, res) => {
+//     const {
+//       date,
+//       time,
+//       patient,
+//       doctor,
+     
+//     } = req.body;
+  
+//     try {
+//       const newC = new Channels({
+//         date,
+//         time,
+//         patient,
+//         doctor,
+        
+//       });
+  
+//       await newC.save();
+  
+//       res.status(201).json({ message: 'Chanelling successful' });
+//     } catch (error) {
+//       console.error('Error adding chanel:', error);
+//       res.status(500).json({ error: 'Internal server error' });
+//     }
+//   });
+// const express = require('express');
+// const router = express.Router();
+const Channeling = require('../../Models/PatientModel/channelingmodel'); // Import the Channeling model
 
 router.post('/add', async (req, res) => {
-    const {
-      date,
-      time,
-      patient,
-      doctor,
-     
-    } = req.body;
-  
-    try {
-      const newC = new Channels({
-        date,
-        time,
-        patient,
-        doctor,
-        
-      });
-  
-      await newC.save();
-  
-      res.status(201).json({ message: 'Chanelling successful' });
-    } catch (error) {
-      console.error('Error adding chanel:', error);
-      res.status(500).json({ error: 'Internal server error' });
-    }
-  });
+  const {
+    // date,
+    // appointmentNumber,
+    // patient,
+    // doctor,
+    // prescription,
+    // labReports,
+    // payments,
+    patientId,
+            bookingId,
+            doctorId, 
+  } = req.body;
+
+  try {
+    const newChanneling = new Channeling({
+      // date,
+      // appointmentNumber,
+      // patient,
+      // doctor,
+      // prescription,
+      // labReports,
+      // payments,
+      patientId,
+            bookingId,
+            doctorId, 
+    });
+
+    const savedChanneling = await newChanneling.save();
+
+    res.status(201).json({ message: 'Channeling successful', data: savedChanneling });
+  } catch (error) {
+    console.error('Error adding channeling:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
+
+module.exports = router;
+
   
 //cs = channelings
   router.route("/").get((req,res)=>{

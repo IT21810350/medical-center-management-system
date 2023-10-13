@@ -1,6 +1,7 @@
 // global imports
 import { Route, Routes } from "react-router-dom";
 
+
 // pages <- common for every actor type
 import Home from "./views/Home";
 import { Login, Signup } from "./views/Index";
@@ -32,12 +33,12 @@ import Delete from './views/patient-views/delete';
 
 // pharmacist imports
 import Pharmacist from './views/pharmacist-views/parmacist-home';
-
+import UpdateMedicine from './views/pharmacist-views/updateMedicine';
 import PharmacistProfile from './views/pharmacist-views/pharmacistProfile';
-//import addMedicine from './views/pharmacist-views/addMedicine';
 import MedicineStore from './views/pharmacist-views/medicineStore';
 import MedicineOrder from './views/pharmacist-views/medicineOrders';
 import MedicineSales from './views/pharmacist-views/medicineSales';
+import FormPage from "./views/pharmacist-views/addMedicine";
 
 // hr imports 
 import HR from './views/hr-views/hr-home';
@@ -51,14 +52,12 @@ import LA from './views/lab-assistant-views/lab-assistant-home';
 import LabTest from './views/lab-assistant-views/lab-test';
 import LabInventory from './views/lab-assistant-views/lab-inventory';
 import LabReport from './views/lab-assistant-views/lab-report';
-import LabSample from './views/lab-assistant-views/lab-sample';
 import LabFacilities from './views/lab-assistant-views/lab-facilities';
-import LabUpdateInventory from './views/lab-assistant-views/updateInventory';
-import LabUpdateReport from './views/lab-assistant-views/updateReport';
-import LabUpdateSample from './views/lab-assistant-views/updateSample';
-import LabUpdateTest from './views/lab-assistant-views/updateTest';
 import LabAssistantProfile from './views/lab-assistant-views/lab-assistant-profile';
 
+import updateSample from "./views/lab-assistant-views/sample/updateSample";
+import CreateSampleForm from "./views/lab-assistant-views/sample/createSample";
+import ViewSample from "./views/lab-assistant-views/sample/viewSample";
 
 // supplier manager imports
 import SM from "./views/supplier-manager-views/supplier-manager-home";
@@ -115,24 +114,14 @@ function App() {
         {/*Pharmacist Routes */}
         <Route path="/pharmacist" element={<Pharmacist />} />
         <Route path="/pharmacistProfile" element={<PharmacistProfile />} />
-        <Route path="/addMedicine" element={<addMedicine />} />
+        <Route path="/addMedicine" element={<FormPage />} />
+        <Route path="/updateMedicine" element={<UpdateMedicine/>}/>
         <Route path="/medicineStore" element={<MedicineStore />} />
         <Route path="/medicineOrder" element={<MedicineOrder />} />
         <Route path="/medicineSales" element={<MedicineSales />} />
 
         {/* Patient Routes */}
         <Route path="/searchDoctors" element={<SearchDoctors />} />
-
-        {/*Pharmacist Routes */}
-        <Route path="/pharmacistProfile" element={<PharmacistProfile/>} />
-        <Route path="/addMedicine" element={<addMedicine/>} />
-        <Route path="/medicineStore" element={<MedicineStore/>} />
-        <Route path="/medicineOrder" element={<MedicineOrder/>} />
-        <Route path="/medicineSales" element={<MedicineSales/>} />
-        <Route path="/pharmacist/*" element={<Pharmacist />} />
-
-
-      
         <Route path="/patient" element={<Patient />} />
         <Route path="/search-doctors" element={<SearchDoctors />} />
         <Route path="/dash" exact Component={CommonPatientDashboard} />
@@ -146,7 +135,20 @@ function App() {
         <Route path="/patient-additional" exact Component={PatientAdditionalFiles} />
         <Route path="/rescedule-appointment" exact Component={Reschedule} />
         <Route path="/delete-appointment" exact Component={Delete} />
-        <Route path="/editinq" component={EditInquiry} />
+        <Route path="/editinq/:id" element={<EditInquiry/>} />
+
+
+        {/*Pharmacist Routes */}
+        <Route path="/pharmacistProfile" element={<PharmacistProfile/>} />
+        <Route path="/addMedicine" element={<addMedicine/>} />
+        <Route path="/medicineStore" element={<MedicineStore/>} />
+        <Route path="/medicineOrder" element={<MedicineOrder/>} />
+        <Route path="/medicineSales" element={<MedicineSales/>} />
+        <Route path="/pharmacist/*" element={<Pharmacist />} />
+
+
+      
+        
 
 
         {/* Resource person Routes */}
@@ -174,13 +176,14 @@ function App() {
         <Route path="/lab-test" element={<LabTest />} />
         <Route path="/lab-inventory" element={<LabInventory />} />
         <Route path="/lab-report" element={<LabReport />} />
-        <Route path="/lab-sample" element={<LabSample />} />
+        
+        <Route path="/lab-sample" element={<ViewSample/>}/>
+        <Route path="/lab-sample/create" element={<CreateSampleForm/>}/>
+        <Route path="/lab-sample/update" element={<updateSample/>}/>
+        
+        
         <Route path="/lab-test" element={<LabTest />} />
         <Route path="/lab-facilities" element={<LabFacilities />} />
-        <Route path="/lab-inventory/update" element={<LabUpdateInventory />} />
-        <Route path="/lab-report/update" element={<LabUpdateReport />} />
-        <Route path="/lab-sample/update" element={<LabUpdateSample />} />
-        <Route path="/lab-test/update" element={<LabUpdateTest />} />
         <Route path="/labAssistant-profile" element={<LabAssistantProfile />} />
 
         

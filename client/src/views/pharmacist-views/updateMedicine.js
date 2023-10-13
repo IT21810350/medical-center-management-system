@@ -1,5 +1,6 @@
 import React from 'react';
 import { Container, Paper, TextField, Button, Grid } from '@mui/material';
+import {Link } from 'react-router-dom';
 
 const initialFormData = {
   id: '001',
@@ -10,11 +11,17 @@ const initialFormData = {
   col5: '12/12/2023',
 };
 
-function FormPage() {
+function UpdateMedicine() {
   const [formData, setFormData] = React.useState(initialFormData);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleUpdate = () => {
+    return (
+      <Link to={`/medicineStore`} />
+    );
   };
 
   return (
@@ -34,7 +41,7 @@ function FormPage() {
             </Grid>
             <Grid item xs={12}>
               <TextField
-                label="Name"
+                label="ID"
                 fullWidth
                 name="col1"
                 value={formData.col1}
@@ -43,7 +50,7 @@ function FormPage() {
             </Grid>
             <Grid item xs={12}>
               <TextField
-                label="Dose"
+                label="ID"
                 fullWidth
                 name="col2"
                 value={formData.col2}
@@ -52,7 +59,7 @@ function FormPage() {
             </Grid>
             <Grid item xs={12}>
               <TextField
-                label="Type"
+                label="ID"
                 fullWidth
                 name="col3"
                 value={formData.col3}
@@ -61,7 +68,7 @@ function FormPage() {
             </Grid>
             <Grid item xs={12}>
               <TextField
-                label="Packs"
+                label="ID"
                 fullWidth
                 name="col4"
                 value={formData.col4}
@@ -70,7 +77,7 @@ function FormPage() {
             </Grid>
             <Grid item xs={12}>
               <TextField
-                label="Expiration Date"
+                label="ID"
                 fullWidth
                 name="col5"
                 value={formData.col5}
@@ -78,8 +85,13 @@ function FormPage() {
               />
             </Grid>
           </Grid>
-          <Button variant="contained" color="primary" style={{ marginTop: '20px' }}>
-            Submit
+          <Button
+            variant="contained"
+            color="primary"
+            style={{ marginTop: '20px' }}
+            onClick={handleUpdate}
+          >
+            Update
           </Button>
         </form>
       </Paper>
@@ -87,4 +99,4 @@ function FormPage() {
   );
 }
 
-export default FormPage;
+export default UpdateMedicine;

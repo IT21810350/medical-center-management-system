@@ -3,6 +3,7 @@ const router = require("express").Router();
 const { request } = require("express");
 
 let Patient = require("../../Models/PatientModel/Patientmodel");
+let User = require("../../Models/UserModel");
 
 //=====================================================
 
@@ -122,41 +123,80 @@ router.route("/").get((req,res)=>{
 // });
 //=====================================================
 //UPDATE
-router.route("/update/:id").put(async(req,res)=>{
-    let patientId = request.params.id;
+// router.route("/update/:id").put(async(req,res)=>{
+//     // let patientId = request.params.id;
 
-    const{country,identity,firstName,lastName,gender,dob,phone,email,address,gName,relation,gId,gContact,} = req.body;
+//     // const{country,identity,firstName,lastName,gender,dob,phone,email,address,gName,relation,gId,gContact,} = req.body;
 
-    //crate an object
-    const updatePatient = {
-      country,
-      identity,
-      firstName,
-      lastName,
-      gender,
-      dob,
-      phone,
-      email,
-      address,
-      gName,
-      relation,
-      gId,
-      gContact,
-    };
-    try {
-        // Use findByIdAndUpdate to find and update the patient
-        const updatedPatient = await Patient.findByIdAndUpdate(patientId, updatePatient);
+//     // //crate an object
+//     // const updatePatient = {
+//     //   country,
+//     //   identity,
+//     //   firstName,
+//     //   lastName,
+//     //   gender,
+//     //   dob,
+//     //   phone,
+//     //   email,
+//     //   address,
+//     //   gName,
+//     //   relation,
+//     //   gId,
+//     //   gContact,
+//     // };
+//     try {
+//         // Use findByIdAndUpdate to find and update the patient
+//         //const updatedPatient = await Patient.findByIdAndUpdate(patientId, updatePatient);
+//         const updatedPatient = await Patient.findByIdAndUpdate(patientId, req.body,{ new: true, runValidators: true });
+
+//         if (!updatedPatient) {
+//           return res.status(404).send({ status: "Patient not found" });
+//         }
     
-        if (!updatedPatient) {
+//         return res.status(200).send({ status: "Patient details updated successfully" });
+//       } catch (err) {
+//         console.error(err);
+//         return res.status(500).send({ status: "Error with updating details", error: err.message });
+//       }
+//     });
+
+router.route("/update/:id").put(async (req, res) => {
+  const patientId = req.params.id; // Extract the patient ID from the request parameters
+
+  // const { country, identity, firstName, lastName, gender, dob, phone, email, address, gName, relation, gId, gContact } = req.body;
+
+  // // Create an object
+  // const updatePatient = {
+  //     country,
+  //     identity,
+  //     firstName,
+  //     lastName,
+  //     gender,
+  //     dob,
+  //     phone,
+  //     email,
+  //     address,
+  //     gName,
+  //     relation,
+  //     gId,
+  //     gContact,
+  // };
+
+  try {
+      // Use findByIdAndUpdate to find and update the patient
+      // const updatedPatient = await Patient.findByIdAndUpdate(patientId, updatePatient);
+      const updatedPatient = await Patient.findByIdAndUpdate(patientId, req.body, { new: true, runValidators: true });
+
+      if (!updatedPatient) {
           return res.status(404).send({ status: "Patient not found" });
-        }
-    
-        return res.status(200).send({ status: "Patient details updated successfully" });
-      } catch (err) {
-        console.error(err);
-        return res.status(500).send({ status: "Error with updating details", error: err.message });
       }
-    });
+
+      return res.status(200).send({ status: "Patient details updated successfully" });
+  } catch (err) {
+      console.error(err);
+      return res.status(500).send({ status: "Error with updating details", error: err.message });
+  }
+});
 
 //=====================================================
 // DELETE
@@ -225,14 +265,16 @@ router.route("/deletepatient/:id").delete(async (req, res) => {
 // Define the route to get a single patient by ID
 router.route("/get/:id").get(async (req, res) => {
   try {
-    const patientId = req.params.id;
-    const patient = await Patient.findById(patientId);
+    const user = await User.findById(req.params.id);
+    //const patientId = req.params.id;
+   // const patient = await Patient.findById(patientId);
+    user.profile = await Patient.findOne({_id: user.profile._id});
     
     if (!patient) {
       return res.status(404).json({ status: "Patient not found" });
     }
 
-    return res.status(200).json({ status: "Patient found", patient });
+    return res.status(200).json({ status: "Patient found", user });
   } catch (err) {
     console.error(err.message);
     return res.status(500).json({ status: "Error with getting patient", error: err.message });

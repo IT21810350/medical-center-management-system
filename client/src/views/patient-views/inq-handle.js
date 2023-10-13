@@ -2,11 +2,12 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import Button from '@mui/material/Button';
-import { Stack } from '@mui/material';
+import { Stack,Table, TableBody, TableCell, TableRow ,TableHead,TableContainer,Paper} from '@mui/material';
 
 const InquiryList = () => {
   const [inquiries, setInquiries] = useState([]);
 
+  
   const fetchInquiries = async () => {
     try {
       const response = await axios.get('http://localhost:4000/inqData/');
@@ -15,6 +16,7 @@ const InquiryList = () => {
       console.error('Error fetching inquiries:', error);
     }
   };
+
 
   useEffect(() => {
     fetchInquiries();
@@ -29,10 +31,25 @@ const InquiryList = () => {
     }
   };
 
+  const handleDeleteInq = (id) => {
+    console.log("Delete button clicked for id:", id)
+    
+    axios
+      .delete(`http://localhost:4000/inqData/deleteinq/${id}`)
+      .then(() => {
+       
+        setInquiries((prevData) => prevData.filter((inquery) => inquery._id !== id));
+      })
+      .catch((error) => {
+        console.error('Error deleting inquery:', error);
+      });
+  };
+   
+
   return (
     <div>
       <h2>All Inquiries</h2>
-      <table border={2}>
+      {/* <table border={2}>
         <thead>
           <tr>
             <th>Name</th>
@@ -41,6 +58,7 @@ const InquiryList = () => {
             <th>Actions</th>
           </tr>
         </thead>
+
         <tbody>
           {inquiries.map((inquiry) => (
             <tr key={inquiry._id}>
@@ -49,10 +67,10 @@ const InquiryList = () => {
               <td>{inquiry.message}</td>
               <td>
                 {/* <button onClick={() => handleDelete(inquiry._id)}>Delete</button> */}
-                <Stack direction={'row'} spacing={2}>
-                <Button
+                {/* <Stack direction={'row'} spacing={2}>
+                <Link
                   component={Link}
-                  to="/editinq"
+                  to={`/editinq/${inquiry._id}`}
                   variant="contained"
                   // size="small"
                   style={{ width: '100%' }}
@@ -60,7 +78,7 @@ const InquiryList = () => {
                   color="primary"
                 >
                   Edit
-                </Button>
+                </Link> */}
                 {/* <Link 
                   // to={{
                   //   pathname: `/editinq/`,
@@ -72,7 +90,7 @@ const InquiryList = () => {
                 </Link> */}
                 {/* <button component={Link} to="/editinq" variant="contained" color="primary">Edit</button> */}
                
-                <Button
+                {/* <Button
                   component={Link}
                   to="/editinq"
                   variant="contained"
@@ -83,7 +101,8 @@ const InquiryList = () => {
                 >
                   Delete
                 </Button>
-                </Stack>
+                <Button onClick={() => handleDeleteInq(inquiry._id)} style={{ backgroundColor: 'red', color: 'white' }} >Delete</Button>
+                </Stack> */}
                 
                 {/* <Link 
                   // to={{
@@ -95,12 +114,109 @@ const InquiryList = () => {
                   
                 </Link> */}
                 {/* <button component={Link} to="/editinq" variant="contained" color="primary">Edit</button> */}
-              
+{/*               
               </td>
             </tr>
           ))}
         </tbody>
-      </table>
+      </table> */} 
+      {/* <TableContainer className='container' component={Paper}>
+        <Table>
+          <TableHead>
+            <TableRow>
+              <TableCell>Name</TableCell>
+              <TableCell>Subject</TableCell>
+              <TableCell>Message</TableCell>
+              <TableCell>Action</TableCell>
+            </TableRow>
+            <TableBody>
+            {inquiries.map((inquiry) => (
+              <TableRow key={inquiry._id}>
+                <TableCell>{inquiry.name}</TableCell>
+                <TableCell>{inquiry.subject}</TableCell>
+                <TableCell>{inquiry.message}</TableCell>
+                <TableCell>
+                <Stack direction={'row'} spacing={2}>
+                <Link
+                  component={Link}
+                  to={`/editinq/${inquiry._id}`}
+                  variant="contained"
+                  // size="small"
+                  style={{ width: '100%' }}
+
+                  color="primary"
+                >
+                  Edit
+                </Link>
+                <Button
+                  component={Link}
+                  to="/editinq"
+                  variant="contained"
+                  // size="small"
+                  style={{ width: '100%' }}
+
+                  color="primary"
+                >
+                  Delete
+                </Button>
+                <Button onClick={() => handleDeleteInq(inquiry._id)} style={{ backgroundColor: 'red', color: 'white' }} >Delete</Button>
+                </Stack>
+                </TableCell>
+              </TableRow>
+              ))}
+            </TableBody>
+          </TableHead>
+        </Table>
+      </TableContainer> */}
+
+
+
+      <TableContainer component={Paper}>
+      <Table sx={{ minWidth: 650 }} aria-label="simple table">
+        <TableHead>
+          <TableRow>
+            
+            <TableCell align="center">Name</TableCell>
+            <TableCell align="center">Subject&nbsp;</TableCell>
+            <TableCell align="center">Messgae&nbsp;</TableCell>
+            <TableCell align="center">Action&nbsp;</TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+        {inquiries.map((inquiry) => (
+            <TableRow
+            key={inquiry._id}
+              sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+            >
+              {/* <TableCell component="th" scope="row">
+                
+              </TableCell> */}
+              <TableCell align="center">{inquiry.name}</TableCell>
+              <TableCell align="center">{inquiry.subject}</TableCell>
+              <TableCell align="center">{inquiry.message}</TableCell>
+              <TableCell align="center">
+              <Stack direction={'row'} spacing={2}>
+                <Button
+                  component={Link}
+                  to={`/editinq/${inquiry._id}`}
+                  variant="contained"
+                  // size="small"
+                  
+
+                  color="primary"
+                >
+                  Edit
+                </Button>
+                
+                
+                <Button onClick={() => handleDeleteInq(inquiry._id)} style={{ backgroundColor: 'red', color: 'white' }} >Delete</Button>
+                </Stack>
+              </TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
+    </TableContainer>
     </div>
   );
 };

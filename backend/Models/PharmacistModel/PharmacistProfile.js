@@ -12,7 +12,7 @@ const pharmacistSchema = new Schema({
         type: String,
         required : true
     },
-    emailAddresss : {
+    emailAddress : {
         type : String,
         required : true
     },

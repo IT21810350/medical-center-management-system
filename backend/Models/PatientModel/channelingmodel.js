@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 const channelingSchema = new mongoose.Schema({
   date: Date,
-  appointmentNumber: String,
+  //appointmentNumber: String,
   patient: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Patient',
@@ -11,18 +11,18 @@ const channelingSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Doctor',
   },
-  prescription: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Prescription',
-  },
-  labReports: [{
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'LabReport',
-  }],
-  payments: [{
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Payment',
-  }],
+  // prescription: {
+  //   type: mongoose.Schema.Types.ObjectId,
+  //   ref: 'Prescription',
+  // },
+  // labReports: [{
+  //   type: mongoose.Schema.Types.ObjectId,
+  //   ref: 'LabReport',
+  // }],
+  // payments: [{
+  //   type: mongoose.Schema.Types.ObjectId,
+  //   ref: 'Payment',
+  // }],
 });
 
 const Channeling = mongoose.model('Channeling', channelingSchema);

@@ -13,8 +13,6 @@ import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import InputLabel from '@mui/material/InputLabel';
-import IconButton from '@mui/material/IconButton';
-import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 const theme = createTheme({
@@ -74,14 +72,13 @@ export default function InventoryTable() {
         <Table sx={{ minWidth: 650 }} aria-label="simple table">
           <TableHead style={{ backgroundColor: '#BBDEFB', fontWeight: 'bold' }}>
             <TableRow>
-              <TableCell>Supplier Name</TableCell>
-              <TableCell>Drug or Equipment Name</TableCell>
-              <TableCell>Name</TableCell>
-              <TableCell>Company Name</TableCell>
-              <TableCell>Quantity</TableCell>
-              <TableCell>Unit Price</TableCell>
-              <TableCell></TableCell>
-              <TableCell></TableCell>
+              <TableCell sx={{ fontWeight: 'bold', width: '15%', fontSize: '20px' }}>Supplier Name</TableCell>
+              <TableCell sx={{ fontWeight: 'bold', width: '15%', fontSize: '20px' }}>Drug or Equipment Name</TableCell>
+              <TableCell sx={{ fontWeight: 'bold', width: '15%', fontSize: '20px' }}>Name</TableCell>
+              <TableCell sx={{ fontWeight: 'bold', width: '15%', fontSize: '20px' }}>Company Name</TableCell>
+              <TableCell sx={{ fontWeight: 'bold', width: '15%', fontSize: '20px' }}>Quantity</TableCell>
+              <TableCell sx={{ fontWeight: 'bold', width: '15%', fontSize: '20px' }}>Unit Price</TableCell>
+
             </TableRow>
           </TableHead>
           <TableBody>
@@ -138,11 +135,7 @@ export default function InventoryTable() {
                 <TableCell>
                   <Button variant="contained" color="error" onClick={() => removeRow(index)}>Remove</Button>
                 </TableCell>
-                <TableCell>
-                  <IconButton color="primary" aria-label="add to shopping cart">
-                    <AddShoppingCartIcon />
-                  </IconButton>
-                </TableCell>
+
               </TableRow>
             ))}
           </TableBody>
