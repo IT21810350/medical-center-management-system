@@ -266,13 +266,11 @@ router.route("/deletepatient/:id").delete(async (req, res) => {
 router.route("/get/:id").get(async (req, res) => {
   try {
     const user = await User.findById(req.params.id);
+
     //const patientId = req.params.id;
    // const patient = await Patient.findById(patientId);
     user.profile = await Patient.findOne({_id: user.profile._id});
     
-    if (!patient) {
-      return res.status(404).json({ status: "Patient not found" });
-    }
 
     return res.status(200).json({ status: "Patient found", user });
   } catch (err) {

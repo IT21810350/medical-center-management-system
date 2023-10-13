@@ -127,7 +127,8 @@ export default function PatientDetails(){
         .then((response) => {
             console.log(response)
             console.log(id)
-            setPatient(response.data.user);
+            setPatient(response.data.user.profile);
+            console.log(response.data.user.profile);
         })
         .catch((error) => {
             console.error('Error fetching data', error);
