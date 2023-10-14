@@ -1,7 +1,7 @@
 const express = require("express");
 const router = require("express").Router();
 let Pharmacist = require("../Models/PharmacistModel/PharmacistProfile");
-
+let Order = require("../Models/PharmacistModel/Order");
 
 
 //pharmacistProfile
@@ -115,33 +115,63 @@ router.route("/get/:id").get(async (req,res) => {
 //Medicine Profile 
 
 
-router.post('/add',async (req,res) =>  {
+// router.post('/add',async (req,res) =>  {
 
-    const {medicineCode,medicineName, dosage,medicineType,availability,expiryDate} = req.body;
+//     const {medicineCode,medicineName, dosage,medicineType,availability,expiryDate} = req.body;
     
-try{
-    const newP = new Pharmacist({
-        medicineCode,
-        medicineName, 
-        dosage, 
-        medicineType, 
-        availability,
-        expiryDate, 
+// try{
+//     const newP = new Pharmacist({
+//         medicineCode,
+//         medicineName, 
+//         dosage, 
+//         medicineType, 
+//         availability,
+//         expiryDate, 
 
-    });
-    await newP.save();
+//     });
+//     await newP.save();
 
-    res.status(201).json({
-        message : "Medicine details added successfully"
-    });
-}catch(error){
-    console.error(error);
-    res.status(500).json({
-        message : "Medicine details added successfully",
-    });
-} 
-});
+//     res.status(201).json({
+//         message : "Medicine details added successfully"
+//     });
+// }catch(error){
+//     console.error(error);
+//     res.status(500).json({
+//         message : "Medicine details added successfully",
+//     });
+// } 
+// });
 
+//Medicine orders
+router.post('/moadd', async (req, res) => {
+    const { name, dosage, type, quantity, due, order, reorder, more } = req.body;
+    
+    try {
+      const newOrder = new Order({
+        name,
+        dosage,
+        type,
+        quantity,
+        due,
+        order,
+        reorder,
+        more
+      });
+      
+      await newOrder.save();
+  
+      res.status(201).json({
+        message: "Medicine order added successfully"
+      });
+  
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({
+        message: "Medicine order not added successfully",
+      });
+    }
+  });
+  
 
 
 

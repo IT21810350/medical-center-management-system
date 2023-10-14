@@ -2,29 +2,37 @@ const mongoose = require('mongoose');
 
 const Schema = mongoose.Schema;
 
-const medicineSchema = new Schema({
+const orderSchema = new Schema({
 
-    medicineCode : {
+    name : {
         type :String,
         requied : true
     },
-    medicineName : {
+    dosage : {
         type: String,
         required : true
     },
-    dosage : {
+    type : {
         type : String,
         required : true
     },
-    medicineType : {
+    quantity : {
         type :String,
         required : true
     },
-    availability : {
+    due : {
         type : String,
         required : true
     },
-    expiryDate : {
+    order : {
+        type : String,
+        required : true
+    },
+    reorder : {
+        type : String,
+        required : true
+    },
+    more : {
         type : String,
         required : true
     }
@@ -35,6 +43,6 @@ const medicineSchema = new Schema({
 })
 
 
-const Pharmacist = mongoose.model("Pharmacist", medicineSchema);
+const Orders = mongoose.model("Order", orderSchema);
 
-module.exports = Pharmacist;
+module.exports = Orders;

@@ -8,8 +8,10 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import Paper from '@mui/material/Paper';
-import Link from '@mui/material/Link';
+//import Link from '@mui/material/Link';
 
+//========
+import { Link } from 'react-router-dom';
 
 
 // Corrected file paths for image imports
@@ -49,7 +51,7 @@ const MedicineStore = () => {
   return (
     <Grid item xs={3}>
       <Card sx={{ maxWidth: 345 }}>
-        <Link to="/pharmacist/medicineStore" style={{ textDecoration: 'none' }}>
+        <Link to="/medicineStore" style={{ textDecoration: 'none' }}>
           <CardActionArea>
             <CardMedia
               component="img"
@@ -72,11 +74,40 @@ const MedicineStore = () => {
   );
 };
 
+// const MedicineOrder = () => {
+//   return (
+//     <Grid item xs={3}>
+//       <Card sx={{ maxWidth: 345 }}>
+//         <Link to="/pharmacist/medicineOrder" style={{ textDecoration: 'none' }}>
+//           <CardActionArea>
+//             <CardMedia
+//               component="img"
+//               height="260"
+//               image={img3}
+//               alt="Medicine Order"
+//             />
+//             <CardContent>
+//               <Typography gutterBottom variant="h5" component="div">
+//                 Medicine Order
+//               </Typography>
+//               <Typography variant="body2" color="text.secondary">
+//               The process of requesting and purchasing medications and submitting a prescription or selecting healthcare products.
+//               </Typography>
+//             </CardContent>
+//           </CardActionArea>
+//         </Link>
+//       </Card>
+//     </Grid>
+//   );
+// };
+
+
+
 const MedicineOrder = () => {
   return (
     <Grid item xs={3}>
       <Card sx={{ maxWidth: 345 }}>
-        <Link to="/pharmacist/medicineOrder" style={{ textDecoration: 'none' }}>
+        <Link to="/medicineOrder" style={{ textDecoration: 'none' }}>
           <CardActionArea>
             <CardMedia
               component="img"
@@ -89,7 +120,7 @@ const MedicineOrder = () => {
                 Medicine Order
               </Typography>
               <Typography variant="body2" color="text.secondary">
-              The process of requesting and purchasing medications and submitting a prescription or selecting healthcare products.
+                The process of requesting and purchasing medications and submitting a prescription or selecting healthcare products.
               </Typography>
             </CardContent>
           </CardActionArea>
@@ -99,11 +130,12 @@ const MedicineOrder = () => {
   );
 };
 
+
 const MedicineSales = () => {
   return (
     <Grid item xs={3}>
       <Card sx={{ maxWidth: 345 }}>
-        <Link to="/pharmacist/medicineSales" style={{ textDecoration: 'none' }}>
+        <Link to="/medicineSales" style={{ textDecoration: 'none' }}>
           <CardActionArea>
             <CardMedia
               component="img"
