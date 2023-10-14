@@ -16,62 +16,55 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import axios from 'axios';
 import NavBar from '../../components/pharmacist-component/pharmacist-nav-bar';
 
-const Pharmacist = () => {
-  const [email, setEmail] = useState('');
-  const [isEmailValid, setIsEmailValid] = useState(true);
-  const [parmacistDetails, setparmacistDetails] = useState({
-            firstName: '', 
-            lastName: '', 
-            emailAddress: '', 
-            contactNumber: '', 
-            gender: '', 
-            nic: '', 
-            bio: '',
+const UpdateProfile = () => {
+  const [pharmacistDetails, setPharmacistDetails] = useState({
+    firstName: '',
+    lastName: '',
+    emailAddress: '',
+    contactNumber: '',
+    gender: '',
+    nic: '',
+    bio: '',
   });
 
   const handleOnChange = (e) => {
     const { name, value } = e.target;
 
-    setparmacistDetails({
-      ...parmacistDetails,
+    setPharmacistDetails({
+      ...pharmacistDetails,
       [name]: value,
     });
   };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
-      const response = await axios.post('http://localhost:4000/pharmacistProfile/add', parmacistDetails);
-      setparmacistDetails({
-        firstName: '', 
-            lastName: '', 
-            emailAddress: '', 
-            contactNumber: '', 
-            gender: '', 
-            nic: '', 
-            bio: '',
+      const response = await axios.post('http://localhost:4000/pharmacistProfile/update', pharmacistDetails);
+      setPharmacistDetails({
+        firstName: '',
+        lastName: '',
+        emailAddress: '',
+        contactNumber: '',
+        gender: '',
+        nic: '',
+        bio: '',
       });
 
     } catch (error) {
-      
+      // Handle the error
     }
-
   };
-
 
   // Function to validate email using a regular expression
   const validateEmail = () => {
     const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
-    if (!emailPattern.test(email)) {
-      setIsEmailValid(false);
-    } else { 
-      setIsEmailValid(true);
-    }
+    return emailPattern.test(pharmacistDetails.emailAddress);
   };
 
   return (
     <div>
-      <NavBar/>
+      <NavBar />
       <Paper
         sx={{
           position: 'relative',
@@ -132,11 +125,10 @@ const Pharmacist = () => {
                 required
                 fullWidth
                 name='firstName'
-                value={parmacistDetails.firstName}
+                value={pharmacistDetails.firstName}
                 onChange={(e) => handleOnChange(e)}
                 id="outlined-required-first-name"
                 label="First Name"
-                
               />
             </Grid>
             <Grid item xs={6}>
@@ -144,11 +136,10 @@ const Pharmacist = () => {
                 required
                 fullWidth
                 name='lastName'
-                value={parmacistDetails.lastName}
+                value={pharmacistDetails.lastName}
                 onChange={(e) => handleOnChange(e)}
                 id="outlined-required-last-name"
                 label="Last Name"
-                
               />
             </Grid>
             <Grid item xs={12}>
@@ -159,12 +150,10 @@ const Pharmacist = () => {
                 id="outlined-required-email"
                 label="Email Address"
                 type="email"
-                value={parmacistDetails.emailAddress}
-                //error={!isEmailValid}
+                value={pharmacistDetails.emailAddress}
                 onChange={(e) => handleOnChange(e)}
-                //onChange={(e) => setEmail(e.target.value)}
                 onBlur={validateEmail}
-                helperText={!isEmailValid ? 'Invalid email address' : ''}
+                helperText={!validateEmail() ? 'Invalid email address' : ''}
               />
             </Grid>
             <Grid item xs={6}>
@@ -172,23 +161,21 @@ const Pharmacist = () => {
                 required
                 fullWidth
                 name='contactNumber'
-                value={parmacistDetails.contactNumber}
+                value={pharmacistDetails.contactNumber}
                 onChange={(e) => handleOnChange(e)}
                 id="outlined-required-phone"
                 label="Contact Number"
-                
               />
             </Grid>
             <Grid xs={12} sm={6} item>
-              <FormControl 
-              
-              required>
+              <FormControl required>
                 <FormLabel>Gender</FormLabel>
                 <RadioGroup
-                 row
-                 name='gender'
-                 value={parmacistDetails.gender}
-                 onChange={(e) => handleOnChange(e)}>
+                  row
+                  name='gender'
+                  value={pharmacistDetails.gender}
+                  onChange={(e) => handleOnChange(e)}
+                >
                   <FormControlLabel value="male" control={<Radio size="small" />} label="Male" />
                   <FormControlLabel value="female" control={<Radio size="small" />} label="Female" />
                 </RadioGroup>
@@ -201,9 +188,8 @@ const Pharmacist = () => {
                 name='nic'
                 id="outlined-required-nic"
                 label="NIC"
-                value={parmacistDetails.NIC}
+                value={pharmacistDetails.nic}
                 onChange={(e) => handleOnChange(e)}
-                
               />
             </Grid>
             <Grid item xs={12}>
@@ -215,7 +201,7 @@ const Pharmacist = () => {
                 label="Bio"
                 multiline
                 rows={4}
-                value={parmacistDetails.bio}
+                value={pharmacistDetails.bio}
                 onChange={(e) => handleOnChange(e)}
               />
             </Grid>
@@ -226,8 +212,9 @@ const Pharmacist = () => {
             <Button type='submit' variant="contained" color="error">
               Cancel
             </Button>
-            
-            <Button type='submit' variant="contained" onClick={handleSubmit}>ADD</Button>
+            <Button type='submit' variant="contained" onClick={handleSubmit}>
+              ADD
+            </Button>
           </Stack>
         </Grid>
       </Container>
@@ -235,4 +222,4 @@ const Pharmacist = () => {
   );
 };
 
-export default Pharmacist;
+export default UpdateProfile;

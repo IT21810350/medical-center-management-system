@@ -1,5 +1,6 @@
 import React from 'react';
 import { Container, Paper, TextField, Button, Grid } from '@mui/material';
+import NavBar from '../../components/pharmacist-component/pharmacist-nav-bar';
 
 const initialFormData = {
   id: '001',
@@ -18,72 +19,80 @@ function FormPage() {
   };
 
   return (
-    <Container maxWidth="sm">
-      <Paper elevation={3} style={{ padding: '20px' }}>
-        <h1>Product Details</h1>
-        <form>
-          <Grid container spacing={2}>
-            <Grid item xs={12}>
-              <TextField
-                label="ID"
-                fullWidth
-                name="id"
-                value={formData.id}
-                onChange={handleChange}
-              />
+    <div>
+      <NavBar style={{ marginBottom: '20px' }} /> {/* Add margin-bottom to create space */}
+      <Container maxWidth="sm">
+        <Paper elevation={3} style={{ padding: '20px', minHeight: '400px' }}>
+          <h1>Medicine Details</h1>
+          <form>
+            <Grid container spacing={2}>
+              <Grid item xs={12}>
+                <TextField
+                  label="Medicine Code"
+                  fullWidth
+                  name="id"
+                  value={formData.id}
+                  onChange={handleChange}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  label="Medicine Name"
+                  fullWidth
+                  name="col1"
+                  value={formData.col1}
+                  onChange={handleChange}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  label="Dosage"
+                  fullWidth
+                  name="col2"
+                  value={formData.col2}
+                  onChange={handleChange}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  label="Medicine Type"
+                  fullWidth
+                  name="col3"
+                  value={formData.col3}
+                  onChange={handleChange}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  label="Availability"
+                  fullWidth
+                  name="col4"
+                  value={formData.col4}
+                  onChange={handleChange}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  label="Expiry Date"
+                  fullWidth
+                  name="col5"
+                  value={formData.col5}
+                  onChange={handleChange}
+                />
+              </Grid>
             </Grid>
-            <Grid item xs={12}>
-              <TextField
-                label="Name"
-                fullWidth
-                name="col1"
-                value={formData.col1}
-                onChange={handleChange}
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <TextField
-                label="Dose"
-                fullWidth
-                name="col2"
-                value={formData.col2}
-                onChange={handleChange}
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <TextField
-                label="Type"
-                fullWidth
-                name="col3"
-                value={formData.col3}
-                onChange={handleChange}
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <TextField
-                label="Packs"
-                fullWidth
-                name="col4"
-                value={formData.col4}
-                onChange={handleChange}
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <TextField
-                label="Expiration Date"
-                fullWidth
-                name="col5"
-                value={formData.col5}
-                onChange={handleChange}
-              />
-            </Grid>
-          </Grid>
-          <Button variant="contained" color="primary" style={{ marginTop: '20px' }}>
-            Submit
-          </Button>
-        </form>
-      </Paper>
-    </Container>
+            <div style={{ marginTop: '20px', display: 'flex', justifyContent: 'center' }}>
+              <Button variant="contained" color="error" style={{ marginRight: '10px' }}>
+                Cancel
+              </Button>
+              <Button variant="contained" color="primary">
+                Submit
+              </Button>
+            </div>
+          </form>
+        </Paper>
+      </Container>
+    </div>
   );
 }
 

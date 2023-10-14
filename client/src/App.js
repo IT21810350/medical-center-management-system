@@ -34,6 +34,7 @@ import Delete from './views/patient-views/delete';
 import Pharmacist from './views/pharmacist-views/parmacist-home';
 import UpdateMedicine from './views/pharmacist-views/updateMedicine';
 import PharmacistProfile from './views/pharmacist-views/pharmacistProfile';
+import UpdateProfile from './views/pharmacist-views/updateProfile';
 import MedicineStore from './views/pharmacist-views/medicineStore';
 import MedicineOrder from './views/pharmacist-views/medicineOrders';
 import MedicineSales from './views/pharmacist-views/medicineSales';
@@ -116,6 +117,7 @@ function App() {
         <Route path="/pharmacist" element={<Pharmacist />} />
         <Route path="/pharmacistProfile" element={<PharmacistProfile />} />
         <Route path="/addMedicine" element={<FormPage />} />
+        <Route path="/updateProfile" element={<updateProfile />} />
         <Route path="/updateMedicine" element={<UpdateMedicine/>}/>
         <Route path="/medicineStore" element={<MedicineStore />} />
         <Route path="/medicineOrder" element={<MedicineOrder />} />
@@ -141,6 +143,7 @@ function App() {
 
         {/*Pharmacist Routes */}
         <Route path="/pharmacistProfile" element={<PharmacistProfile/>} />
+        <Route path="/updateProfile" element={<updateProfile />} />
         <Route path="/addMedicine" element={<addMedicine/>} />
         <Route path="/medicineStore" element={<MedicineStore/>} />
         <Route path="/medicineOrder" element={<MedicineOrder/>} />
