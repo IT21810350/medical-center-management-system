@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const lab_report = new mongoose.Schema({
+const report = new mongoose.Schema({
     report_id : {
         type : String,
     },
@@ -13,7 +13,7 @@ const lab_report = new mongoose.Schema({
     content : {
         type : String,
     },
-    lab_assistant_id : {
+    lab_assistant_name : {
         type : String,
     }
 },
@@ -21,6 +21,6 @@ const lab_report = new mongoose.Schema({
         timestamps : true,
     });
 
-const LabReport = mongoose.model("labReport", lab_report);
+const Report = mongoose.model("Report", report);
 
-module.exports = LabReport;
+module.exports = Report;

@@ -1,7 +1,17 @@
-// viewSample.jsx
+// ViewEquipment.jsx
 import React, { useState, useEffect } from 'react';
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
-import { Container, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Typography } from '@mui/material';
+import {
+  Container,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Paper,
+  Typography,
+  Button,
+} from '@mui/material';
 import axios from 'axios';
 
 const ViewSample = () => {
@@ -22,19 +32,27 @@ const ViewSample = () => {
 
   const handleDelete = async (id) => {
     try {
+      console.log('Deleting sample with ID:', id);
       await axios.delete(`http://localhost:4000/samples/${id}`);
+      console.log('Sample deleted successfully.');
       // Update the local state after deletion
       setSamples(samples.filter((sample) => sample.sample_id !== id));
     } catch (error) {
       console.error("Error deleting sample:", error);
     }
   };
-  
+
   return (
     <Container>
       <Typography variant="h4" gutterBottom>
         All Samples
       </Typography>
+      {/* Create Sample Form */}
+      <Paper elevation={3} style={{ padding: '20px', marginBottom: '20px' }}>
+        {/* You can add a create sample form here if needed */}
+      </Paper>
+
+      {/* Samples Table */}
       <TableContainer component={Paper}>
         <Table>
           <TableHead>
@@ -44,6 +62,7 @@ const ViewSample = () => {
               <TableCell>Collection Date</TableCell>
               <TableCell>Status</TableCell>
               <TableCell>Lab Assistant Name</TableCell>
+              <TableCell>Actions</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -55,12 +74,14 @@ const ViewSample = () => {
                 <TableCell>{sample.status}</TableCell>
                 <TableCell>{sample.lab_assistant_name}</TableCell>
                 <TableCell>
-                  <Link to={`/lab-sample/update/`+sample.sample_id}>
-                    <button>Edit</button>
-                  </Link>
+                  <Button variant="contained" color="primary">
+                    Edit
+                  </Button>
                 </TableCell>
                 <TableCell>
-                  <button onClick={() => handleDelete(sample.sample_id)}>Delete</button>
+                  <Button variant="contained" color="secondary" onClick={() => handleDelete(sample.sample_id)}>
+                    Delete
+                  </Button>
                 </TableCell>
               </TableRow>
             ))}

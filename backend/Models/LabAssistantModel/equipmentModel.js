@@ -1,10 +1,10 @@
 const mongoose = require("mongoose");
 
-const lab_equipment = new mongoose.Schema({
+const equipment = new mongoose.Schema({
    equipment_id : {
         type : String,
    },
-   name : {
+   equipment_name : {
         type : String,
    }, 
    manufacturer : {
@@ -24,6 +24,6 @@ const lab_equipment = new mongoose.Schema({
         timestamps : true
     });
 
-const LabEquipment = mongoose.model("LabEquipment",lab_equipment);
+const Equipment = mongoose.model("Equipment",equipment);
 
-module.exports = LabEquipment;
+module.exports = Equipment;

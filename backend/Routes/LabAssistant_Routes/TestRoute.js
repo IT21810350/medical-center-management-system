@@ -2,20 +2,21 @@ const express = require("express");
 const router = express.Router();
 
 // TEST
-const {
-    createTestController,
-    getAllTestController,
-    getTestByIdController,
-    updateTestByIdController,
-    deleteTestByIdController
-} = require("../../Controllers/TestController"); 
+const {createTests,deleteTestById,getAllTests,getTestById,updateTestById} = require("../../Controllers/TestController"); 
 
-router.post("/lab-test",createTestController);
-router.get("/lab-test",getAllTestController);
-router.get("/lab-test/:id",getTestByIdController);
-router.put("/lab-test/:id",updateTestByIdController);
-router.delete("/lab-test/:id",deleteTestByIdController);
+// create Test
+router.post("/tests",createTests);
 
-router.post("/lab-test/update/:id",updateTestByIdController);
+// get all Tests
+router.get("/tests",getAllTests);
+
+// get Test by id
+router.get("/tests/:id",getTestById);
+
+// update Test by id
+router.put("/tests/:id",updateTestById);
+
+// delete Test by id
+router.delete("/tests/:id",deleteTestById);
 
 module.exports = router;

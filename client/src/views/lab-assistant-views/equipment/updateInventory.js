@@ -8,30 +8,30 @@ import {
   Paper,
   Box,
 } from '@mui/material';
-import NavBar from '../../components/LA-component/la-nav-bar';
+import NavBar from '../../../components/LA-component/la-nav-bar';
 
-const UpdateTestPage = () => {
-  const [test, setTest] = useState({
-    result_id: '',
-    sample_id: '',
-    test_name: '',
-    test_date: '',
-    lab_assistant_id: '',
-    result_data: '',
+const UpdateInventoryPage = () => {
+  const [equipment, setEquipment] = useState({
+    equipment_id: '',
+    name: '',
+    manufacturer: '',
+    purchase_date: '',
+    maintenance_schedule: '',
+    status: '',
   });
 
   const handleChange = (event) => {
     const { name, value } = event.target;
-    setTest({
-      ...test,
+    setEquipment({
+      ...equipment,
       [name]: value,
     });
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    // Perform the update test operation here
-    console.log('Updated test:', test);
+    // Perform the update equipment operation here
+    console.log('Updated equipment:', equipment);
   };
 
   return (
@@ -41,7 +41,7 @@ const UpdateTestPage = () => {
 
       <Container>
         <Typography variant="h4" gutterBottom>
-          Update Test
+          Update Equipment
         </Typography>
         <Paper elevation={3}>
           <Box p={3}>
@@ -49,38 +49,38 @@ const UpdateTestPage = () => {
               <Grid container spacing={3}>
                 <Grid item xs={12}>
                   <TextField
-                    label="Result ID"
+                    label="Equipment ID"
                     fullWidth
-                    name="result_id"
-                    value={test.result_id}
+                    name="equipment_id"
+                    value={equipment.equipment_id}
                     onChange={handleChange}
                   />
                 </Grid>
                 <Grid item xs={12}>
                   <TextField
-                    label="Sample ID"
+                    label="Name"
                     fullWidth
-                    name="sample_id"
-                    value={test.sample_id}
+                    name="name"
+                    value={equipment.name}
                     onChange={handleChange}
                   />
                 </Grid>
                 <Grid item xs={12}>
                   <TextField
-                    label="Test Name"
+                    label="Manufacturer"
                     fullWidth
-                    name="test_name"
-                    value={test.test_name}
+                    name="manufacturer"
+                    value={equipment.manufacturer}
                     onChange={handleChange}
                   />
                 </Grid>
                 <Grid item xs={12}>
                   <TextField
-                    label="Test Date"
+                    label="Purchase Date"
                     fullWidth
                     type="date"
-                    name="test_date"
-                    value={test.test_date}
+                    name="purchase_date"
+                    value={equipment.purchase_date}
                     onChange={handleChange}
                     InputLabelProps={{
                       shrink: true,
@@ -89,21 +89,23 @@ const UpdateTestPage = () => {
                 </Grid>
                 <Grid item xs={12}>
                   <TextField
-                    label="Lab Assistant ID"
+                    label="Maintenance Schedule"
                     fullWidth
-                    name="lab_assistant_id"
-                    value={test.lab_assistant_id}
+                    type="date"
+                    name="maintenance_schedule"
+                    value={equipment.maintenance_schedule}
                     onChange={handleChange}
+                    InputLabelProps={{
+                      shrink: true,
+                    }}
                   />
                 </Grid>
                 <Grid item xs={12}>
                   <TextField
-                    label="Result Data"
+                    label="Status"
                     fullWidth
-                    multiline
-                    rows={4}
-                    name="result_data"
-                    value={test.result_data}
+                    name="status"
+                    value={equipment.status}
                     onChange={handleChange}
                   />
                 </Grid>
@@ -113,7 +115,7 @@ const UpdateTestPage = () => {
                     color="primary"
                     type="submit"
                   >
-                    Update Test
+                    Update Equipment
                   </Button>
                 </Grid>
               </Grid>
@@ -125,4 +127,4 @@ const UpdateTestPage = () => {
   );
 };
 
-export default UpdateTestPage;
+export default UpdateInventoryPage;
