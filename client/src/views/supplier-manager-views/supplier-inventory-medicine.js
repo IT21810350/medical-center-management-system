@@ -333,54 +333,63 @@ export default function CombinedComponent() {
             </TableRow>
           </TableHead>
           <TableBody>
-            {rows.map((row, index) => (
-              <TableRow key={index}>
-                {Object.keys(row).map((key) => {
-                  if (key !== '_id') {
-                    return (
-                      <TableCell key={key} onClick={() => handleCellClick(index, key)}>
-                        
-                        {editableCell && editableCell.index === index && editableCell.name === key ? (
-                          
-                          <TextField
-                            fullWidth
-                            value={row[key]}
-                            onChange={(e) => handleInputChange(index, key, e.target.value)}
-                            style={{ fontSize: '20px' }}  // Add this style
-                          />
-                        ) : (
-                          row[key]
-                        )}
-                      </TableCell>
-                    );
-                  }
-                  return null;
-                })}
-                <TableCell>
-                  <Button
-                    variant="outlined"
-                    style={{ backgroundColor: '#E57373', color: '#8B0000' }}
-                    onClick={() => handleRemoveClick(index)}
-                  >
-                    Remove
-                  </Button>
-                </TableCell>
+  {rows.map((row, index) => (
+    <TableRow key={index}>
+      {Object.keys(row).map((key) => {
+        if (key !== '_id') {
+          return (
+            <TableCell key={key} onClick={() => handleCellClick(index, key)}>
+              {editableCell && editableCell.index === index && editableCell.name === key ? (
+                key === 'expiryDate' ? (
+                  <input
+                    type="date"
+                    value={row[key]}
+                    onChange={(e) => handleInputChange(index, key, e.target.value)}
+                    style={{ fontSize: '20px' }}
+                    min={new Date().toISOString().split('T')[0]} // Disable past dates
+                  />
+                ) : (
+                  <TextField
+                    fullWidth
+                    value={row[key]}
+                    onChange={(e) => handleInputChange(index, key, e.target.value)}
+                    style={{ fontSize: '20px' }}
+                  />
+                )
+              ) : (
+                row[key]
+              )}
+            </TableCell>
+          );
+        }
+        return null;
+      })}
+      <TableCell>
+        <Button
+          variant="outlined"
+          style={{ backgroundColor: '#E57373', color: '#8B0000' }}
+          onClick={() => handleRemoveClick(index)}
+        >
+          Remove
+        </Button>
+      </TableCell>
 
-                <TableCell>
-                  {editedRowIndex === index ? (
-                    <Button
-                      variant="contained"
-                      style={{ backgroundColor: '#A5D6A7', color: '#004D40' }}
-                      onClick={() => handleSave(index)}
-                    >
-                      Save
-                    </Button>
-                  ) : null}
-                </TableCell>
+      <TableCell>
+        {editedRowIndex === index ? (
+          <Button
+            variant="contained"
+            style={{ backgroundColor: '#A5D6A7', color: '#004D40' }}
+            onClick={() => handleSave(index)}
+          >
+            Save
+          </Button>
+        ) : null}
+      </TableCell>
 
-              </TableRow>
-            ))}
-          </TableBody>
+    </TableRow>
+  ))}
+</TableBody>
+
           <ConfirmModal open={isModalOpen} onClose={handleCloseModal} onConfirm={handleConfirmRemove} />
         </Table>
       </TableContainer>
