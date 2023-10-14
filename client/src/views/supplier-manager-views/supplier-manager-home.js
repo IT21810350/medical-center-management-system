@@ -84,7 +84,7 @@ const mainCardData = {
 };
 const Navbar = () => {
   return (
-    <div style={{ width: '1800px', height: '80px' }}>
+    <div style={{ width: '1528px', height: '80px' }}>
       <Box sx={{ flexGrow: 1 }}>
         <AppBar position="static">
           <Toolbar>
@@ -103,7 +103,7 @@ const Navbar = () => {
               component="div"
               sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}
             >
-              MUI
+              Supplier Manager
             </Typography>
             <Search>
               <SearchIconWrapper>

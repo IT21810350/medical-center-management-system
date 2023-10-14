@@ -78,19 +78,29 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { TextField} from '@mui/material';
-
+import { useParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import Button from '@mui/material/Button';
 import { Card, CardMedia,CardContent, CardActions,Grid,Typography} from '@mui/material';
 import img1 from '../../assets/img/patient/profile.jpg';
 import { Stack } from '@mui/material';
 
+import Cookies from 'js-cookie';
+
 export default function PatientDetails(){
 
-    //const {id} = "650efb90b6d7126c541b1fbe"; //Defining an id in this way is incorrect, (string)
-    const id = "650f2459b408726a48155646";
 
-    //const {id} = useParams();
+  const token = Cookies.get('token');
+  const tokenParts = token.split('.');
+  const payload = JSON.parse(atob(tokenParts[1]));
+  const id = payload.id;
+  
+  console.log(id)
+    //const {id} = "650efb90b6d7126c541b1fbe"; //Defining an id in this way is incorrect, (string)
+    //const id = "650f2459b408726a48155646";
+    
+
+   // const id = useParams();
     const [patient, setPatient] = useState({
         country : '',
         identity : '',
@@ -105,15 +115,20 @@ export default function PatientDetails(){
         relation : '',
         gId : '',
         gContact : '',
+        id,
+        
     });
     const [isEditing, setIsEditing] = useState(false);
     
     useEffect (() => {
+
         axios
-        .get("http://localhost:4000/patientData/get/" + id)
+        .get(`http://localhost:4000/patientData/get/${id}`)
         .then((response) => {
             console.log(response)
-            setPatient(response.data.patient);
+            console.log(id)
+            setPatient(response.data.user.profile);
+            console.log(response.data.user.profile);
         })
         .catch((error) => {
             console.error('Error fetching data', error);
@@ -302,21 +317,52 @@ export default function PatientDetails(){
                   {isEditing ? 'Save' : 'Edit'}
                 </button> */}
 
-        First Name <TextField label="First Name" type ="text" name = "fName" value={patient.fName} disabled={!isEditing} onChange ={handleInputChange}></TextField>
-        Last Name<TextField label="Last Name" type ="text" name = "lName" value={patient.lName} disabled={!isEditing} onChange ={handleInputChange}></TextField>
-        Country<TextField label="Country" type ="text" name = "country" value={patient.country} disabled={!isEditing} onChange ={handleInputChange}></TextField>
-        Identity<TextField label="Identity" type ="text" name = "identity" value={patient.identity} disabled={!isEditing} onChange ={handleInputChange}></TextField>
-        Gender<TextField label="Gender" type ="text" name = "gender" value={patient.gender} disabled={!isEditing} onChange ={handleInputChange}></TextField>
-        Date of Birth<TextField label="Date of Birth" type ="text" name = "dob" value={patient.dob} disabled={!isEditing} onChange ={handleInputChange}></TextField>
-        Phone Number<TextField label="Phone Number" type ="text" name = "phone" value={patient.phone} disabled={!isEditing} onChange ={handleInputChange}></TextField>
-        Email<TextField label="Email" type ="text" name = "email" value={patient.email} disabled={!isEditing} onChange ={handleInputChange}></TextField>
-        Address<TextField label="Address" type ="text" name = "address" value={patient.address} disabled={!isEditing} onChange ={handleInputChange}></TextField>
-        Guardian Name<TextField label="Guardian Name" type ="text" name = "gName" value={patient.gName} disabled={!isEditing} onChange ={handleInputChange}></TextField>
-        Relation<TextField label="Relation" type ="text" name = "relation" value={patient.relation} disabled={!isEditing} onChange ={handleInputChange}></TextField>
-        Guardian Id<TextField label="Guardian Id" type ="text" name = "gId" value={patient.gId} disabled={!isEditing} onChange ={handleInputChange}></TextField>
-        Guardian Contact<TextField label="fNaGuardian Contactme" type ="text" name = "gContact" value={patient.gContact} disabled={!isEditing} onChange ={handleInputChange}></TextField>
+      <Grid>
+      <Grid xs={12} item>
+      First Name <TextField label="First Name" type ="text" name = "fName" value={patient.fName} disabled onChange ={handleInputChange} fullWidth required></TextField>
 
+      </Grid>
 
+      
+                <Grid xs={12} item>
+                  Last Name<TextField label="Last Name" type="text" name="lName" value={patient.lName} disabled onChange={handleInputChange} fullWidth required></TextField>
+
+                </Grid>
+                <Grid xs={12} item>
+                  Country<TextField label="Country" type="text" name="country" value={patient.country} disabled={!isEditing} onChange={handleInputChange} fullWidth required></TextField>
+                </Grid>
+                <Grid xs={12} item>
+                  Identity<TextField label="Identity" type="text" name="identity" value={patient.identity} disabled onChange={handleInputChange} fullWidth required></TextField>
+                </Grid>
+                <Grid xs={12} item>
+                  Gender<TextField label="Gender" type="text" name="gender" value={patient.gender} disabled={!isEditing} onChange={handleInputChange} fullWidth required></TextField>
+                </Grid>
+                <Grid xs={12} item>
+                  Date of Birth<TextField label="Date of Birth" type="text" name="dob" value={patient.dob} disabled onChange={handleInputChange} fullWidth required></TextField>
+                </Grid>
+                <Grid xs={12} item>
+                  Phone Number<TextField label="Phone Number" type="text" name="phone" value={patient.phone} disabled={!isEditing} onChange={handleInputChange} fullWidth required></TextField>
+                </Grid>
+                <Grid xs={12} item>
+                  Email<TextField label="Email" type="text" name="email" value={patient.email} disabled={!isEditing} onChange={handleInputChange} fullWidth required></TextField>
+                </Grid>
+                <Grid xs={12} item>
+                  Address<TextField label="Address" type="text" name="address" value={patient.address} disabled={!isEditing} onChange={handleInputChange} fullWidth required></TextField>
+                </Grid>
+                <Grid xs={12} item>
+                  Guardian Name<TextField label="Guardian Name" type="text" name="gName" value={patient.gName} disabled={!isEditing} onChange={handleInputChange} fullWidth required></TextField>
+                </Grid>
+                <Grid xs={12} item>
+                  Relation<TextField label="Relation" type="text" name="relation" value={patient.relation} disabled={!isEditing} onChange={handleInputChange} fullWidth required></TextField>
+                </Grid>
+                <Grid xs={12} item>
+                  Guardian Id<TextField label="Guardian Id" type="text" name="gId" value={patient.gId} disabled={!isEditing} onChange={handleInputChange} fullWidth required></TextField>
+                </Grid>
+                <Grid xs={12} item>
+                  Guardian Contact<TextField label="Guardian Contact Number" type="text" name="gContact" value={patient.gContact} disabled={!isEditing} onChange={handleInputChange} fullWidth required></TextField>
+                </Grid>
+              <Grid xs={12} item>
+                <br/>
             <Stack direction="row" spacing={2}>
             {/* <button
     onClick={isEditing ? handleEditPatientProfile : () => setIsEditing(true)}
@@ -340,6 +386,8 @@ export default function PatientDetails(){
                 Delete
               </Button>
             </Stack>
+            </Grid>
+            </Grid>
           </div>
        
       </div>

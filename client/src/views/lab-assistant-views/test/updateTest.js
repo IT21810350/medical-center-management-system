@@ -8,29 +8,30 @@ import {
   Paper,
   Box,
 } from '@mui/material';
-import NavBar from '../../components/LA-component/la-nav-bar';
+import NavBar from '../../../components/LA-component/la-nav-bar';
 
-const UpdateReportPage = () => {
-  const [report, setReport] = useState({
-    report_id: '',
-    report_name: '',
-    created_date: '',
-    content: '',
+const UpdateTestPage = () => {
+  const [test, setTest] = useState({
+    result_id: '',
+    sample_id: '',
+    test_name: '',
+    test_date: '',
     lab_assistant_id: '',
+    result_data: '',
   });
 
   const handleChange = (event) => {
     const { name, value } = event.target;
-    setReport({
-      ...report,
+    setTest({
+      ...test,
       [name]: value,
     });
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    // Perform the update report operation here
-    console.log('Updated report:', report);
+    // Perform the update test operation here
+    console.log('Updated test:', test);
   };
 
   return (
@@ -40,7 +41,7 @@ const UpdateReportPage = () => {
 
       <Container>
         <Typography variant="h4" gutterBottom>
-          Update Report
+          Update Test
         </Typography>
         <Paper elevation={3}>
           <Box p={3}>
@@ -48,29 +49,38 @@ const UpdateReportPage = () => {
               <Grid container spacing={3}>
                 <Grid item xs={12}>
                   <TextField
-                    label="Report ID"
+                    label="Result ID"
                     fullWidth
-                    name="report_id"
-                    value={report.report_id}
+                    name="result_id"
+                    value={test.result_id}
                     onChange={handleChange}
                   />
                 </Grid>
                 <Grid item xs={12}>
                   <TextField
-                    label="Report Name"
+                    label="Sample ID"
                     fullWidth
-                    name="report_name"
-                    value={report.report_name}
+                    name="sample_id"
+                    value={test.sample_id}
                     onChange={handleChange}
                   />
                 </Grid>
                 <Grid item xs={12}>
                   <TextField
-                    label="Created Date"
+                    label="Test Name"
+                    fullWidth
+                    name="test_name"
+                    value={test.test_name}
+                    onChange={handleChange}
+                  />
+                </Grid>
+                <Grid item xs={12}>
+                  <TextField
+                    label="Test Date"
                     fullWidth
                     type="date"
-                    name="created_date"
-                    value={report.created_date}
+                    name="test_date"
+                    value={test.test_date}
                     onChange={handleChange}
                     InputLabelProps={{
                       shrink: true,
@@ -79,21 +89,21 @@ const UpdateReportPage = () => {
                 </Grid>
                 <Grid item xs={12}>
                   <TextField
-                    label="Content"
+                    label="Lab Assistant ID"
                     fullWidth
-                    multiline
-                    rows={4}
-                    name="content"
-                    value={report.content}
+                    name="lab_assistant_id"
+                    value={test.lab_assistant_id}
                     onChange={handleChange}
                   />
                 </Grid>
                 <Grid item xs={12}>
                   <TextField
-                    label="Lab Assistant ID"
+                    label="Result Data"
                     fullWidth
-                    name="lab_assistant_id"
-                    value={report.lab_assistant_id}
+                    multiline
+                    rows={4}
+                    name="result_data"
+                    value={test.result_data}
                     onChange={handleChange}
                   />
                 </Grid>
@@ -103,7 +113,7 @@ const UpdateReportPage = () => {
                     color="primary"
                     type="submit"
                   >
-                    Update Report
+                    Update Test
                   </Button>
                 </Grid>
               </Grid>
@@ -115,4 +125,4 @@ const UpdateReportPage = () => {
   );
 };
 
-export default UpdateReportPage;
+export default UpdateTestPage;

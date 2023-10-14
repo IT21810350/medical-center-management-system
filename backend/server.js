@@ -82,12 +82,7 @@ app.use("/room", Room);
 app.use("/room-type", RoomType);
 
 // lab assistant routes end
-app.use("/lab-inventory",equipmentRouter);
-app.use("/labAssistant-profile",labAssistantRouter);
-app.use("/lab-report",reportRouter);
-app.use("/lab-sample",sampleRouter);
-app.use("/lab-test",testRouter);
-
+app.use("/",sampleRouter,testRouter,reportRouter,labAssistantRouter,equipmentRouter);
 
 //Hansanie
 app.use("/pharmacistProfile",PharmacistRoutes);

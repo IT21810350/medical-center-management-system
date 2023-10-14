@@ -95,7 +95,7 @@ const Signup = () => {
       if (success) {
         if (user.role === "patient") {
           setTimeout(() => {
-            navigate("/patient");
+            navigate("/patient-create-account");
           }, 1000);
         } else if (user.role === "doctor") {
           setTimeout(() => {

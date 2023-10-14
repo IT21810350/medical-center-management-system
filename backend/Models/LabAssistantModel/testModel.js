@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
-const lab_test = new mongoose.Schema({
-    result_id : {
+const test = new mongoose.Schema({
+    test_id : {
         type : String,
     },
     sample_id : { // refer to sample id in the sample table 
@@ -13,7 +13,7 @@ const lab_test = new mongoose.Schema({
     test_date : {
         type : Date,
     },
-    lab_assistant_id : {
+    lab_assistant_name : {
         type : String,
     },
     result_data : {
@@ -24,6 +24,6 @@ const lab_test = new mongoose.Schema({
         timestamps : true
     });
 
-const LabTest = mongoose.model("LabTest",lab_test);
+const Test = mongoose.model("Test",test);
 
-module.exports = LabTest;
+module.exports = Test;

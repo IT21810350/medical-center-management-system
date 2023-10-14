@@ -14,12 +14,23 @@ import Checkbox from '@mui/material/Checkbox';
 import Heading from '../../components/patient-components/heading.component';
 import PatientNavigationBar from '../../views/patient-views/patient-navigation-bar';
 import axios from 'axios';
+import Cookies from 'js-cookie';
+import { useNavigate } from "react-router-dom";
 
 export default function PatientCreateAccount() {
+
+  const token = Cookies.get('token');
+  const tokenParts = token.split('.');
+  const payload = JSON.parse(atob(tokenParts[1]));
+
+  const userId = payload.id;
+
+  const navigate = useNavigate();
+
   //Create a state variable to store all the values with an initial value of an array containing an empty object {}.
   //The setpatientDetails function is used to update the state.
   const [patientDetails, setpatientDetails] = useState({
-    country: '', idType: '', idNumber: '', fName: '', lName: '', gender: '', dob: '', phone: '', email: '', address: '',gName:'', relation:'', gId:'',gContact:'',
+    country: '', idType: '', idNumber: '', fName: '', lName: '', gender: '', dob: '', phone: '', email: '', address: '',gName:'', relation:'', gId:'',gContact:'',userId,
   });
 
 
@@ -47,28 +58,34 @@ export default function PatientCreateAccount() {
 
     try {
       // Make a POST request to your server or API endpoint
-      const response = await axios.post('http://localhost:4000/patientData/add', patientDetails);
+      const response = await axios.post('http://localhost:4000/create-profile', patientDetails);
 
       // Handle the response 
      // console.log('Form submitted successfully', response.data);
 
       // Optionally, reset the form
-      // setFormData({
-      //   country: '',
-      //   idType: '', 
-      //   idNumber: '', 
-      //   fName: '', 
-      //   lName: '', 
-      //   gender: '', 
-      //   dob: '', 
-      //   phone: '', 
-      //   email: '', 
-      //   address: '',
-      //   gName:'', 
-      //   relation:'', 
-      //   gId:'',
-      //   gContact:'',
-      // });
+      setpatientDetails({
+        country: '',
+        idType: '', 
+        idNumber: '', 
+        fName: '', 
+        lName: '', 
+        gender: '', 
+        dob: '', 
+        phone: '', 
+        email: '', 
+        address: '',
+        gName:'', 
+        relation:'', 
+        gId:'',
+        gContact:'',userId,
+      });
+
+      setTimeout(() => {
+        navigate(`/patient-profile`);
+      }, 1000);
+
+
     } catch (error) {
       // Handle errors 
      // console.error('Error submitting form', error.response.data);

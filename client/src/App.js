@@ -1,6 +1,7 @@
 // global imports
 import { Route, Routes } from "react-router-dom";
 
+
 // pages <- common for every actor type
 import Home from "./views/Home";
 import { Login, Signup } from "./views/Index";
@@ -49,17 +50,23 @@ import Payrollsystem from './views/hr-views/Payroll-Management';
 
 // lab assistant imports
 import LA from './views/lab-assistant-views/lab-assistant-home';
-import LabTest from './views/lab-assistant-views/lab-test';
-import LabInventory from './views/lab-assistant-views/lab-inventory';
-import LabReport from './views/lab-assistant-views/lab-report';
-import LabSample from './views/lab-assistant-views/lab-sample';
 import LabFacilities from './views/lab-assistant-views/lab-facilities';
-import LabUpdateInventory from './views/lab-assistant-views/updateInventory';
-import LabUpdateReport from './views/lab-assistant-views/updateReport';
-import LabUpdateSample from './views/lab-assistant-views/updateSample';
-import LabUpdateTest from './views/lab-assistant-views/updateTest';
 import LabAssistantProfile from './views/lab-assistant-views/lab-assistant-profile';
 
+// Lab Assistant <- Test
+import Test from './views/lab-assistant-views/test/viewTest';
+
+// Lab Assistant <- Inventory{Equipment}
+import Equipment from './views/lab-assistant-views/equipment/viewInventory';
+
+// Lab Assistant <- Report
+import LabReport from './views/lab-assistant-views/report/viewReport';
+import UpdateReport from "./views/lab-assistant-views/report/updateReport";
+
+// Lab Assistant <- Sample
+import UpdateSample from "./views/lab-assistant-views/sample/updateSample";
+import CreateSampleForm from "./views/lab-assistant-views/sample/createSample";
+import ViewSample from "./views/lab-assistant-views/sample/viewSample";
 
 // supplier manager imports
 import SM from "./views/supplier-manager-views/supplier-manager-home";
@@ -85,7 +92,6 @@ import EditRoom from './views/resource-manager-views/editRoom';
 // financial manager imports
 import FM from './views/financial-manager-views/financial-manager-home';
 //import Invoice from './views/financial-manager-views/invoice';
-
 
 
 function App() {
@@ -177,17 +183,21 @@ function App() {
 
         {/*Lab Assistant Routes */}
         <Route path="/lab-assistant" element={<LA />} />
-        <Route path="/lab-test" element={<LabTest />} />
-        <Route path="/lab-inventory" element={<LabInventory />} />
-        <Route path="/lab-report" element={<LabReport />} />
-        <Route path="/lab-sample" element={<LabSample />} />
-        <Route path="/lab-test" element={<LabTest />} />
         <Route path="/lab-facilities" element={<LabFacilities />} />
-        <Route path="/lab-inventory/update" element={<LabUpdateInventory />} />
-        <Route path="/lab-report/update" element={<LabUpdateReport />} />
-        <Route path="/lab-sample/update" element={<LabUpdateSample />} />
-        <Route path="/lab-test/update" element={<LabUpdateTest />} />
         <Route path="/labAssistant-profile" element={<LabAssistantProfile />} />
+        
+        <Route path="/lab-test" element={<Test />} />
+        
+        <Route path="/lab-inventory" element={<Equipment />} />
+        
+        <Route path="/lab-report" element={<LabReport />} />
+        <Route path="/lab-report/update/:id" element={<UpdateReport />} />
+        
+        
+        <Route path="/lab-sample" element={<ViewSample/>}/>
+        <Route path="/lab-sample/create" element={<CreateSampleForm/>}/>
+        <Route path="/lab-sample/update" element={<UpdateSample/>}/>
+        
 
         
         {/*Financial Manager Routes */}
