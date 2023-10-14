@@ -109,7 +109,7 @@ export default function CombinedComponent() {
   const [editedRowIndex, setEditedRowIndex] = useState(null);
   const [, setSearchQuery] = useState(''); // Changed from empty array to a string
   const [fetchedRows, setFetchedRows] = useState([]);
- const [, setExpiryDateFlag] = useState(false);
+  const [, setExpiryDateFlag] = useState(false);
 
   useEffect(() => {
     fetch('http://localhost:4000/supplier/inventoryMedicine')
@@ -333,7 +333,7 @@ export default function CombinedComponent() {
         <Table sx={{ minWidth: 650 }} aria-label="simple table">
           <TableHead style={{ backgroundColor: '#BBDEFB', fontWeight: 'bold', fontSize: '28px' }}>
             <TableRow>
-              <TableCell style={{ fontSize: '20px' , fontWeight: 'bold'}}>Drug Code</TableCell>
+              <TableCell style={{ fontSize: '20px', fontWeight: 'bold' }}>Drug Code</TableCell>
               <TableCell style={{ fontSize: '20px', fontWeight: 'bold' }}>Drug Name</TableCell>
               <TableCell style={{ fontSize: '20px', fontWeight: 'bold' }}>Specification Model</TableCell>
               <TableCell style={{ fontSize: '20px', fontWeight: 'bold' }}>Unit</TableCell>
@@ -397,15 +397,15 @@ export default function CombinedComponent() {
         <ConfirmModal open={isModalOpen} onClose={handleCloseModal} onConfirm={handleConfirmRemove} />
       </TableContainer>
 
-      <Button 
-        variant="outlined" 
+      <Button
+        variant="outlined"
         style={{ backgroundColor: '#FFCDD2', color: '#8B0000' }}
         onClick={addRow}
       >
         Add Row
       </Button>
 
-      <Button 
+      <Button
         variant="outlined"
         style={{ backgroundColor: 'rgba(255, 255, 0, 0.5)', color: '#004D40' }}
         onClick={generateReport}
