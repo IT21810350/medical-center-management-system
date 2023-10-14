@@ -106,10 +106,10 @@ export default function CombinedComponent() {
   const [editableCell, setEditableCell] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [rowToRemove, setRowToRemove] = useState(null);
-  // const [isCellEdited, setIsCellEdited] = useState(false);
   const [editedRowIndex, setEditedRowIndex] = useState(null);
-  const [, setSearchQuery] = useState('');
+  const [, setSearchQuery] = useState(''); // Changed from empty array to a string
   const [fetchedRows, setFetchedRows] = useState([]);
+ const [, setExpiryDateFlag] = useState(false);
 
   useEffect(() => {
     fetch('http://localhost:4000/supplier/inventoryMedicine')
@@ -173,6 +173,10 @@ export default function CombinedComponent() {
   const handleInputChange = (index, name, value) => {
     const updatedRows = [...rows];
     updatedRows[index][name === '_id' ? name : name] = value;
+    if (name === 'expiryDate') {
+      const isExpiryDateLessThanTwoWeeks = isDateLessThanTwoWeeksAhead(value);
+      setExpiryDateFlag(isExpiryDateLessThanTwoWeeks);
+    }
     setRows(updatedRows);
   };
 
@@ -196,7 +200,6 @@ export default function CombinedComponent() {
         unitPrice: updatedRow.unitPrice,
         reOrderLevel: updatedRow.reOrderLevel,
       };
-      
 
       const updatedRows = [...rows];
       updatedRows[editedRowIndex] = updatedRow;
@@ -226,6 +229,8 @@ export default function CombinedComponent() {
 
     if (isRowValid) {
       handleSubmit(updatedRow);
+      const isExpiryDateLessThanTwoWeeks = isDateLessThanTwoWeeksAhead(updatedRow.expiryDate);
+      setExpiryDateFlag(isExpiryDateLessThanTwoWeeks);
     } else {
       alert('Invalid data. Please fill all fields.');
     }
@@ -236,6 +241,15 @@ export default function CombinedComponent() {
 
   const validateRow = (row) => {
     return row.drugCode && row.drugName && row.specificationModel && row.unit && row.expiryDate && row.manufacturer && row.quantity && row.unitPrice && row.reOrderLevel;
+  };
+
+  const isDateLessThanTwoWeeksAhead = (expiryDate) => {
+    const twoWeeksFromNow = new Date();
+    twoWeeksFromNow.setDate(twoWeeksFromNow.getDate() + 14);
+
+    const expiryDateObject = new Date(expiryDate);
+
+    return expiryDateObject < twoWeeksFromNow;
   };
 
   const addRow = () => {
@@ -319,8 +333,7 @@ export default function CombinedComponent() {
         <Table sx={{ minWidth: 650 }} aria-label="simple table">
           <TableHead style={{ backgroundColor: '#BBDEFB', fontWeight: 'bold', fontSize: '28px' }}>
             <TableRow>
-              
-            <TableCell style={{ fontSize: '20px' , fontWeight: 'bold'}}>Drug Code</TableCell>
+              <TableCell style={{ fontSize: '20px' , fontWeight: 'bold'}}>Drug Code</TableCell>
               <TableCell style={{ fontSize: '20px', fontWeight: 'bold' }}>Drug Name</TableCell>
               <TableCell style={{ fontSize: '20px', fontWeight: 'bold' }}>Specification Model</TableCell>
               <TableCell style={{ fontSize: '20px', fontWeight: 'bold' }}>Unit</TableCell>
@@ -333,78 +346,70 @@ export default function CombinedComponent() {
             </TableRow>
           </TableHead>
           <TableBody>
-  {rows.map((row, index) => (
-    <TableRow key={index}>
-      {Object.keys(row).map((key) => {
-        if (key !== '_id') {
-          return (
-            <TableCell key={key} onClick={() => handleCellClick(index, key)}>
-              {editableCell && editableCell.index === index && editableCell.name === key ? (
-                key === 'expiryDate' ? (
-                  <input
-                    type="date"
-                    value={row[key]}
-                    onChange={(e) => handleInputChange(index, key, e.target.value)}
-                    style={{ fontSize: '20px' }}
-                    min={new Date().toISOString().split('T')[0]} // Disable past dates
-                  />
-                ) : (
-                  <TextField
-                    fullWidth
-                    value={row[key]}
-                    onChange={(e) => handleInputChange(index, key, e.target.value)}
-                    style={{ fontSize: '20px' }}
-                  />
-                )
-              ) : (
-                row[key]
-              )}
-            </TableCell>
-          );
-        }
-        return null;
-      })}
-      <TableCell>
-        <Button
-          variant="outlined"
-          style={{ backgroundColor: '#E57373', color: '#8B0000' }}
-          onClick={() => handleRemoveClick(index)}
-        >
-          Remove
-        </Button>
-      </TableCell>
-
-      <TableCell>
-        {editedRowIndex === index ? (
-          <Button
-            variant="contained"
-            style={{ backgroundColor: '#A5D6A7', color: '#004D40' }}
-            onClick={() => handleSave(index)}
-          >
-            Save
-          </Button>
-        ) : null}
-      </TableCell>
-
-    </TableRow>
-  ))}
-</TableBody>
-
-          <ConfirmModal open={isModalOpen} onClose={handleCloseModal} onConfirm={handleConfirmRemove} />
+            {rows.map((row, index) => (
+              <TableRow key={index}>
+                {Object.keys(row).map((key) => {
+                  if (key !== '_id') {
+                    return (
+                      <TableCell
+                        key={key}
+                        onClick={() => handleCellClick(index, key)}
+                        style={{
+                          color: key === 'expiryDate' && isDateLessThanTwoWeeksAhead(row[key]) ? 'red' : 'inherit',
+                        }}
+                      >
+                        {editableCell && editableCell.index === index && editableCell.name === key ? (
+                          key === 'expiryDate' ? (
+                            <input
+                              type="date"
+                              value={row[key]}
+                              onChange={(e) => handleInputChange(index, key, e.target.value)}
+                              style={{ fontSize: '20px' }}
+                              min={new Date().toISOString().split('T')[0]}
+                            />
+                          ) : (
+                            <TextField fullWidth value={row[key]} onChange={(e) => handleInputChange(index, key, e.target.value)} style={{ fontSize: '20px' }} />
+                          )
+                        ) : (
+                          row[key]
+                        )}
+                      </TableCell>
+                    );
+                  }
+                  return null;
+                })}
+                <TableCell>
+                  <Button variant="outlined" style={{ backgroundColor: '#E57373', color: '#8B0000' }} onClick={() => handleRemoveClick(index)}>
+                    Remove
+                  </Button>
+                </TableCell>
+                <TableCell>
+                  {editedRowIndex === index ? (
+                    <Button variant="contained" style={{ backgroundColor: '#A5D6A7', color: '#004D40' }} onClick={() => handleSave(index)}>
+                      Save
+                    </Button>
+                  ) : null}
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
         </Table>
+        <ConfirmModal open={isModalOpen} onClose={handleCloseModal} onConfirm={handleConfirmRemove} />
       </TableContainer>
-      <Button 
-  variant="outlined" 
-  style={{ backgroundColor: '#FFCDD2', color: '#8B0000' }}
-  onClick={addRow}
->
-  Add Row
-</Button>
 
       <Button 
-      variant="outlined"
-      style={{ backgroundColor: 'rgba(255, 255, 0, 0.5)', color: '#004D40' }}
-       onClick={generateReport}>
+        variant="outlined" 
+        style={{ backgroundColor: '#FFCDD2', color: '#8B0000' }}
+        onClick={addRow}
+      >
+        Add Row
+      </Button>
+
+      <Button 
+        variant="outlined"
+        style={{ backgroundColor: 'rgba(255, 255, 0, 0.5)', color: '#004D40' }}
+        onClick={generateReport}
+      >
         Generate Report
       </Button>
     </ThemeProvider>
