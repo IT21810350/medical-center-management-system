@@ -706,7 +706,7 @@ export default function PaymentDetails() {
                 </List>
 
                 {/* Confirm Button */}
-                <Button variant="contained" color="primary" onClick={() => handlePaymentConfirmation(doctorDetails._id)} style={{ marginTop: '20px' }}>
+                <Button variant="contained" color="primary" onClick={() => handlePaymentConfirmation(doctorDetails.id)} style={{ marginTop: '20px' }}>
                     Confirm Payment
                 </Button>
 

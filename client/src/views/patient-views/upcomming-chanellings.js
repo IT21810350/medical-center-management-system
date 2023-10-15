@@ -211,7 +211,7 @@ export default function UpcomingChanellings() {
                                     <>
                                         <Typography variant="h6">Doctor Name: {doctor.firstName} {doctor.middleName} {doctor.lastName}</Typography>
                                         {availableTime ? (
-                                            <Typography variant="h6">Time: {formatTimeSlot(availableTime.startTime)}</Typography>
+                                            <Typography variant="h6">Time: {availableTime.startTime}</Typography>
                                         ) : (
                                             <Typography variant="h6">Time not found</Typography>
                                         )}
