@@ -1,4 +1,4 @@
-// Reports.js
+// Test.js
 import React, { useState, useEffect } from 'react';
 import {
   Button,
@@ -12,6 +12,8 @@ import {
   TableRow,
 } from '@mui/material';
 import Axios from 'axios';
+import { Link } from 'react-router-dom';
+import NavBar from '../../../components/LA-component/la-nav-bar';
 
 const Test = () => {
   const [tests, setTests] = useState([]);
@@ -24,16 +26,22 @@ const Test = () => {
     result_data: '',
   });
 
+  // New state variables for search functionality
+  const [searchTerm, setSearchTerm] = useState('');
+  const [filteredTests, setFilteredTests] = useState([]);
+
   useEffect(() => {
-    // Fetch all tests when component mounts
     Axios.get('http://localhost:4000/tests')
-      .then(response => setTests(response.data.tests))
-      .catch(error => console.error(error));
+      .then((response) => {
+        setTests(response.data.tests);
+        setFilteredTests(response.data.tests); // Initialize filtered tests with all tests
+      })
+      .catch((error) => console.error(error));
   }, []);
 
   const handleCreateTest = () => {
     Axios.post('http://localhost:4000/tests', newTest)
-      .then(response => {
+      .then((response) => {
         setTests([...tests, response.data]);
         setNewTest({
           test_id: '',
@@ -43,19 +51,47 @@ const Test = () => {
           lab_assistant_name: '',
           result_data: '',
         });
+
+        // After creating a new test, update filtered tests to include the new test
+        setFilteredTests([...filteredTests, response.data]);
       })
-      .catch(error => console.error(error));
+      .catch((error) => console.error(error));
   };
 
-  const handleDeleteTest = id => {
+  const handleDeleteTest = (id) => {
     Axios.delete(`http://localhost:4000/tests/${id}`)
-      .then(() => setTests(tests.filter(test => test._id !== id)))
-      .catch(error => console.error(error));
+      .then(() => {
+        setTests(tests.filter((test) => test._id !== id));
+
+        // After deleting a test, update filtered tests to exclude the deleted test
+        setFilteredTests(filteredTests.filter((test) => test._id !== id));
+      })
+      .catch((error) => console.error(error));
   };
+
+  // Update filtered tests based on the search term
+  useEffect(() => {
+    const filtered = tests.filter(
+      (test) =>
+        test.test_name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        test.test_id.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+    setFilteredTests(filtered);
+  }, [searchTerm, tests]);
 
   return (
     <div>
-      <h1>Tests</h1>
+      <NavBar />
+      <h1 style={{ fontSize: '50px', fontFamily: 'Arial, sans-serif', fontWeight:'bold' }}>Tests</h1>
+
+      {/* Search Bar */}
+      <TextField
+        label="Search"
+        variant="outlined"
+        value={searchTerm}
+        onChange={(e) => setSearchTerm(e.target.value)}
+        style={{ marginBottom: '20px', fontSize: '39px' }}
+      />
 
       {/* Create Test Form */}
       <Paper elevation={3} style={{ padding: '20px', marginBottom: '20px' }}>
@@ -63,47 +99,47 @@ const Test = () => {
           label="Test ID"
           variant="outlined"
           value={newTest.test_id}
-          onChange={e => setNewTest({ ...newTest, test_id: e.target.value })}
-          style={{ marginRight: '10px' }}
+          onChange={(e) => setNewTest({ ...newTest, test_id: e.target.value })}
+          style={{ marginRight: '10px', fontSize: '28px' }}
         />
         <TextField
           label="Sample ID"
           variant="outlined"
           value={newTest.sample_id}
-          onChange={e => setNewTest({ ...newTest, sample_id: e.target.value })}
-          style={{ marginRight: '10px' }}
+          onChange={(e) => setNewTest({ ...newTest, sample_id: e.target.value })}
+          style={{ marginRight: '10px', fontSize: '28px' }}
         />
         <TextField
           label="Test Name"
           variant="outlined"
           value={newTest.test_name}
-          onChange={e => setNewTest({ ...newTest, test_name: e.target.value })}
-          style={{ marginRight: '10px' }}
+          onChange={(e) => setNewTest({ ...newTest, test_name: e.target.value })}
+          style={{ marginRight: '10px', fontSize: '28px' }}
         />
         <TextField
           label="Test Date"
           type="date"
           variant="outlined"
           value={newTest.test_date}
-          onChange={e => setNewTest({ ...newTest, test_date: e.target.value })}
-          style={{ marginRight: '10px' }}
+          onChange={(e) => setNewTest({ ...newTest, test_date: e.target.value })}
+          style={{ marginRight: '10px', fontSize: '28px' }}
         />
         <TextField
           label="Lab Assistant Name"
           variant="outlined"
           value={newTest.lab_assistant_name}
-          onChange={e => setNewTest({ ...newTest, lab_assistant_name: e.target.value })}
-          style={{ marginRight: '10px' }}
+          onChange={(e) => setNewTest({ ...newTest, lab_assistant_name: e.target.value })}
+          style={{ marginRight: '10px', fontSize: '28px' }}
         />
         <TextField
           label="Result Data"
           variant="outlined"
           value={newTest.result_data}
-          onChange={e => setNewTest({ ...newTest, result_data: e.target.value })}
-          style={{ marginRight: '10px' }}
+          onChange={(e) => setNewTest({ ...newTest, result_data: e.target.value })}
+          style={{ marginRight: '10px', fontSize: '28px' }}
         />
 
-        <Button variant="contained" color="primary" onClick={handleCreateTest}>
+        <Button variant="contained" color="primary" onClick={handleCreateTest} style={{ fontSize: '21px' }}>
           Create Test
         </Button>
       </Paper>
@@ -113,26 +149,26 @@ const Test = () => {
         <Table>
           <TableHead>
             <TableRow>
-              <TableCell>Test ID</TableCell>
-              <TableCell>Sample ID</TableCell>
-              <TableCell>Test Name</TableCell>
-              <TableCell>Test Date</TableCell>
-              <TableCell>Lab Assistant Name</TableCell>
-              <TableCell>Result Data</TableCell>
-              <TableCell>Actions</TableCell>
+              <TableCell style={{ fontSize: '30px', fontWeight:'bold' }}>Test ID</TableCell>
+              <TableCell style={{ fontSize: '30px',  fontWeight:'bold' }}>Sample ID</TableCell>
+              <TableCell style={{ fontSize: '30px',  fontWeight:'bold' }}>Test Name</TableCell>
+              <TableCell style={{ fontSize: '30px', fontWeight:'bold' }}>Test Date</TableCell>
+              <TableCell style={{ fontSize: '30px',  fontWeight:'bold' }}>Lab Assistant Name</TableCell>
+              <TableCell style={{ fontSize: '30px',  fontWeight:'bold' }}>Result Data</TableCell>
+              <TableCell style={{ fontSize: '30px',  fontWeight:'bold' }}>Actions</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
-            {tests.map(test => (
+            {filteredTests.map((test) => (
               <TableRow key={test._id}>
-                <TableCell>{test.test_id}</TableCell>
-                <TableCell>{test.sample_id}</TableCell>
-                <TableCell>{test.test_name}</TableCell>
-                <TableCell>{new Date(test.test_date).toLocaleDateString()}</TableCell>
-                <TableCell>{test.lab_assistant_name}</TableCell>
-                <TableCell>{test.result_data}</TableCell>
+                <TableCell style={{ fontSize: '27px' }}>{test.test_id}</TableCell>
+                <TableCell style={{ fontSize: '27px' }}>{test.sample_id}</TableCell>
+                <TableCell style={{ fontSize: '27px' }}>{test.test_name}</TableCell>
+                <TableCell style={{ fontSize: '27px' }}>{new Date(test.test_date).toLocaleDateString()}</TableCell>
+                <TableCell style={{ fontSize: '27px' }}>{test.lab_assistant_name}</TableCell>
+                <TableCell style={{ fontSize: '27px' }}>{test.result_data}</TableCell>
                 <TableCell>
-                  <Button variant="contained" color="secondary" onClick={() => handleDeleteTest(test._id)}>
+                  <Button variant="contained" color="secondary" onClick={() => handleDeleteTest(test._id)} style={{ fontSize: '21px' }}>
                     Delete
                   </Button>
                 </TableCell>

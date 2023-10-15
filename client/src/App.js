@@ -58,6 +58,7 @@ import Test from './views/lab-assistant-views/test/viewTest';
 
 // Lab Assistant <- Inventory{Equipment}
 import Equipment from './views/lab-assistant-views/equipment/viewInventory';
+import UpdateEquipment from "./views/lab-assistant-views/equipment/updateInventory";
 
 // Lab Assistant <- Report
 import LabReport from './views/lab-assistant-views/report/viewReport';
@@ -65,7 +66,6 @@ import UpdateReport from "./views/lab-assistant-views/report/updateReport";
 
 // Lab Assistant <- Sample
 import UpdateSample from "./views/lab-assistant-views/sample/updateSample";
-import CreateSampleForm from "./views/lab-assistant-views/sample/createSample";
 import ViewSample from "./views/lab-assistant-views/sample/viewSample";
 
 // supplier manager imports
@@ -187,16 +187,19 @@ function App() {
         <Route path="/labAssistant-profile" element={<LabAssistantProfile />} />
         
         <Route path="/lab-test" element={<Test />} />
+        <Route path="/lab-test/update/:id" element={<Test />} />
+
         
         <Route path="/lab-inventory" element={<Equipment />} />
+        <Route path="/lab-inventory/update/:id" element={<UpdateEquipment />} />
+        
         
         <Route path="/lab-report" element={<LabReport />} />
         <Route path="/lab-report/update/:id" element={<UpdateReport />} />
         
         
         <Route path="/lab-sample" element={<ViewSample/>}/>
-        <Route path="/lab-sample/create" element={<CreateSampleForm/>}/>
-        <Route path="/lab-sample/update" element={<UpdateSample/>}/>
+        <Route path="/lab-sample/update/:id" element={<UpdateSample/>}/>
         
 
         
