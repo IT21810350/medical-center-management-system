@@ -91,7 +91,7 @@ import EditRoom from './views/resource-manager-views/editRoom';
 
 // financial manager imports
 import FM from './views/financial-manager-views/financial-manager-home';
-//import Invoice from './views/financial-manager-views/invoice';
+import Invoice from './views/financial-manager-views/invoice';
 
 
 function App() {
@@ -205,7 +205,7 @@ function App() {
         
         {/*Financial Manager Routes */}
         <Route path="/financial-manager" element={<FM />} />
-        {/* <Route path="/invoice" element={<Invoice />} /> */}
+        <Route path="/invoice" element={<Invoice />} />
 
 
 
