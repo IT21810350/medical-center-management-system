@@ -13,6 +13,7 @@ import Channeling from './views/doctor-views/channeling';
 import Symptoms from "./views/doctor-views/symptoms";
 import Prescription from "./views/doctor-views/prescription";
 import DoctorProfileCreate from "./views/doctor-views/doctor-profile-create";
+import DoctorProfile from "./views/doctor-views/profile"
 
 // patient imports
 import Patient from './views/patient-views/patient-home';
@@ -85,7 +86,6 @@ import FM from './views/financial-manager-views/financial-manager-home';
 //import Invoice from './views/financial-manager-views/invoice';
 
 
-
 function App() {
   return (
     <div className="App">
@@ -103,6 +103,7 @@ function App() {
         <Route path="/symptoms" element={<Symptoms />} />
         <Route path="/prescription" element={<Prescription />} />
         <Route path="/doctor-create-profile" element={<DoctorProfileCreate />} />
+        <Route path="/your-profile" element={<DoctorProfile/>}/>
 
         {/* Hr Routes */}
         <Route path="/hr" element={<HR />} />
@@ -144,11 +145,7 @@ function App() {
         <Route path="/medicineStore" element={<MedicineStore/>} />
         <Route path="/medicineOrder" element={<MedicineOrder/>} />
         <Route path="/medicineSales" element={<MedicineSales/>} />
-        <Route path="/pharmacist/*" element={<Pharmacist />} />
-
-
-      
-        
+        <Route path="/pharmacist/*" element={<Pharmacist />} />    
 
 
         {/* Resource person Routes */}
@@ -192,11 +189,6 @@ function App() {
         {/* <Route path="/invoice" element={<Invoice />} /> */}
 
 
-
-
-
-
-
       </Routes>
 
     </div>
@@ -205,38 +197,6 @@ function App() {
 
 export default App;
 
-// import React from 'react';
-// import { BrowserRouter as Router, Routes, Route} from 'react-router-dom';
-// import CssBaseline from '@mui/material/CssBaseline';
 
-// import Navbar from './components/navbar.component';
-// import Patient from './views/patient-views/patient-home';
-// import Doctor from './views/doctor-views/doctor-home';
-// import Pharmacist from './views/pharmacist-views/parmacist-home';
-// import HR from './views/hr-views/hr-home';
-// import FM from './views/financial-manager-views/financial-manager-home';
-// import LA from './views/lab-assistant-views/lab-assistant-home';
-// import RM from './views/resource-manager-views/resource-manager-home';
-// import SM from './views/supplier-manager-views/supplier-manager-home';
-
-// function App() {
-//   return (
-//     <Router>
-//     <CssBaseline />
-//       <Navbar />
-//       <br/>
-//       <Routes>
-//         <Route path="/patient" element={<Patient/>} />
-//         <Route path="/doctor" element={<Doctor/>} />
-//         <Route path="/pharmacist" element={<Pharmacist/>} />
-//         <Route path="/hr" element={<HR/>} />
-//         <Route path="/fm" element={<FM/>} />
-//         <Route path="/la" element={<LA/>} />
-//         <Route path="/rm" element={<RM/>} />
-//         <Route path="/sm" element={<SM/>} />
-//       </Routes>
-//   </Router>
-//   );
-// }
 
 
