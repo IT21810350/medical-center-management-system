@@ -564,11 +564,22 @@ import { useLocation } from 'react-router-dom';
 import axios from 'axios';
 import PatientNavigationBar from '../../views/patient-views/patient-navigation-bar';
 import { Paper, Typography, List, ListItem, ListItemText, ListItemSecondaryAction, Divider, Button, Link } from '@mui/material';
+import Cookies from 'js-cookie';
+
+
+
 
 export default function PaymentDetails() {
+
+    const token = Cookies.get('token');
+    const tokenParts = token.split('.');
+    const payload = JSON.parse(atob(tokenParts[1]));
+    const id = payload.id;
+
     const location = useLocation();
     const bookingId = new URLSearchParams(location.search).get('bookingId');
-    const patientId = "650f2459b408726a48155646"; // Replace with the actual patient ID
+    const date = new URLSearchParams(location.search).get('date')
+    const patientId = id; // Actual patient ID
 
     const [upcoming, setUpcoming] = useState(null);
     const [doctorDetails, setDoctorDetails] = useState(null);
@@ -606,16 +617,19 @@ export default function PaymentDetails() {
     // Function to handle payment confirmation
     const handlePaymentConfirmation = async (doctorId) => {
         // Create the payment data object
-        const paymentData = {
-            patientId,
-            bookingId,
-            doctorId,
+        const upcoming = {
+            patient:id,
+            booking:bookingId,
+            doctor:doctorDetails._id,
+            date:date,
             // Add other payment details as needed
         };
+        console.log(upcoming);
+
 
         try {
             // Make a POST request to your server or API endpoint to store payment details
-            const response = await axios.post('http://localhost:4000/ch/add', paymentData);
+            const response = await axios.post('http://localhost:4000/ch/add', upcoming);
 
             // Handle the response
             if (response.status === 201) {

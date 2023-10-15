@@ -42,9 +42,9 @@ router.post('/add', async (req, res) => {
     // prescription,
     // labReports,
     // payments,
-    patientId,
-            bookingId,
-            doctorId, 
+    patient,
+            booking,
+            doctor, 
   } = req.body;
 
   try {
@@ -56,9 +56,10 @@ router.post('/add', async (req, res) => {
       // prescription,
       // labReports,
       // payments,
-      patientId,
-            bookingId,
-            doctorId, 
+      
+      patient,
+      booking,
+      doctor, 
     });
 
     const savedChanneling = await newChanneling.save();
@@ -70,17 +71,17 @@ router.post('/add', async (req, res) => {
   }
 });
 
-module.exports = router;
+
 
   
 //cs = channelings
   router.route("/").get((req,res)=>{
-    Channels.find().then((cs)=>{
+    Channeling.find().then((cs)=>{
         res.json(cs)
     }).catch((err)=>{
         console.log(err)
     })
-})
+});
 
 router.route("/updatec/:id").put(async (req, res) => {
     const cId = req.params.id;

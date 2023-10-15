@@ -1,16 +1,22 @@
 const mongoose = require('mongoose');
 
 const channelingSchema = new mongoose.Schema({
-  date: Date,
+  //date: Date,
   //appointmentNumber: String,
   patient: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Patient',
-  },
-  doctor: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Doctor',
-  },
+    type: String,
+    required: true
+},
+booking: {
+  type: String,
+  required: true
+},
+doctor: {
+  type: String,
+  required: true
+},
+date: Date,
+ 
   // prescription: {
   //   type: mongoose.Schema.Types.ObjectId,
   //   ref: 'Prescription',
