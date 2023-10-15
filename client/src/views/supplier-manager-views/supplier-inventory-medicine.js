@@ -463,3 +463,11 @@ const ConfirmModal = ({ open, onClose, onConfirm }) => {
 };
 
 export default CombinedComponent;
+const styles = `
+  .highlighted-row {
+    background-color: yellow !important;
+  }
+`;
+
+const styleSheet = document.styleSheets[0];
+styleSheet.insertRule(styles, styleSheet.cssRules.length);
