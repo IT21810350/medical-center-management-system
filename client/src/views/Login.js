@@ -41,7 +41,7 @@ const Login = () => {
       if (success) {
         if (user.role === "patient") {
           setTimeout(() => {
-            navigate("/patient");
+            navigate("/patient-profile");
           }, 1000);
         } else if (user.role === "doctor") {
           setTimeout(() => {

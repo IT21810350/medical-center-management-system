@@ -25,6 +25,8 @@ import { styled, alpha } from '@mui/material/styles';
 import jsPDF from 'jspdf';
 import 'jspdf-autotable';
 
+
+// Define your custom theme
 const theme = createTheme({
   palette: {
     primary: {
@@ -33,6 +35,9 @@ const theme = createTheme({
   },
 });
 
+
+
+// Create a styled search component
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
   borderRadius: theme.shape.borderRadius,
@@ -48,6 +53,7 @@ const Search = styled('div')(({ theme }) => ({
   },
 }));
 
+// Create a styled search icon wrapper
 const SearchIconWrapper = styled('div')(({ theme }) => ({
   padding: theme.spacing(0, 2),
   height: '100%',
@@ -58,6 +64,7 @@ const SearchIconWrapper = styled('div')(({ theme }) => ({
   justifyContent: 'center',
 }));
 
+// Create a styled input base component
 const StyledInputBase = styled(InputBase)(({ theme }) => ({
   color: 'inherit',
   '& .MuiInputBase-input': {
@@ -74,6 +81,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
+// Define the columns for your table
 const columns = [
   { field: 'drugCode', headerName: 'Drug Code', flex: 1 },
   { field: 'drugName', headerName: 'Drug Name', flex: 1 },
@@ -84,33 +92,24 @@ const columns = [
   { field: 'unitPrice', headerName: 'Unit Price', flex: 1 },
 ];
 
-const ConfirmModal = ({ open, onClose, onConfirm }) => {
-  return (
-    <Modal
-      open={open}
-      onClose={onClose}
-      aria-labelledby="modal-modal-title"
-      aria-describedby="modal-modal-description"
-    >
-      <Box sx={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', width: 300, bgcolor: 'background.paper', borderRadius: '20', p: 2 }}>
-        <p>Are you sure you want to remove this row?</p>
-        <Button style={{ color: 'red' }} onClick={onConfirm}>Yes</Button>
-        <Button onClick={onClose}>No</Button>
-      </Box>
-    </Modal>
-  );
+// Define a function to check if quantity is below reorder level
+const isQuantityBelowReorderLevel = (row) => {
+  const quantity = parseFloat(row.quantity);
+  const reorderLevel = parseFloat(row.reOrderLevel);
+  return quantity < reorderLevel;
 };
 
-export default function CombinedComponent() {
+const CombinedComponent = () => {
   const [rows, setRows] = useState([]);
   const [editableCell, setEditableCell] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [rowToRemove, setRowToRemove] = useState(null);
   const [editedRowIndex, setEditedRowIndex] = useState(null);
-  const [, setSearchQuery] = useState(''); // Changed from empty array to a string
+  const [, setSearchQuery] = useState('');
   const [fetchedRows, setFetchedRows] = useState([]);
   const [, setExpiryDateFlag] = useState(false);
 
+  // Fetch data from API when component mounts
   useEffect(() => {
     fetch('http://localhost:4000/supplier/inventoryMedicine')
       .then(response => response.json())
@@ -140,11 +139,13 @@ export default function CombinedComponent() {
       });
   }, []);
 
+  // Handle click event to remove a row
   const handleRemoveClick = (index) => {
     setRowToRemove(index);
     setIsModalOpen(true);
   };
 
+  // Handle confirmation of row removal
   const handleConfirmRemove = async () => {
     try {
       const deletedItemId = rows[rowToRemove]._id;
@@ -166,10 +167,12 @@ export default function CombinedComponent() {
     }
   };
 
+  // Handle modal close
   const handleCloseModal = () => {
     setIsModalOpen(false);
   };
 
+  // Handle input change in a cell
   const handleInputChange = (index, name, value) => {
     const updatedRows = [...rows];
     updatedRows[index][name === '_id' ? name : name] = value;
@@ -180,6 +183,7 @@ export default function CombinedComponent() {
     setRows(updatedRows);
   };
 
+  // Handle cell click event
   const handleCellClick = (index, name) => {
     if (name !== '_id') {
       setEditableCell({ index, name });
@@ -187,6 +191,7 @@ export default function CombinedComponent() {
     }
   };
 
+  // Handle form submission
   const handleSubmit = async (updatedRow) => {
     try {
       const updatedDrugData = {
@@ -222,6 +227,7 @@ export default function CombinedComponent() {
     }
   };
 
+  // Handle save button click
   const handleSave = (index) => {
     const updatedRow = rows[index];
 
@@ -239,10 +245,12 @@ export default function CombinedComponent() {
     setEditedRowIndex(null);
   };
 
+  // Validate a row
   const validateRow = (row) => {
     return row.drugCode && row.drugName && row.specificationModel && row.unit && row.expiryDate && row.manufacturer && row.quantity && row.unitPrice && row.reOrderLevel;
   };
 
+  // Check if a date is less than two weeks ahead
   const isDateLessThanTwoWeeksAhead = (expiryDate) => {
     const twoWeeksFromNow = new Date();
     twoWeeksFromNow.setDate(twoWeeksFromNow.getDate() + 14);
@@ -252,6 +260,7 @@ export default function CombinedComponent() {
     return expiryDateObject < twoWeeksFromNow;
   };
 
+  // Add a new row to the table
   const addRow = () => {
     setRows([...rows, {
       drugCode: '',
@@ -266,6 +275,7 @@ export default function CombinedComponent() {
     }]);
   };
 
+  // Handle search input change
   const handleSearchChange = (e) => {
     const query = e.target.value.toLowerCase();
     setSearchQuery(query);
@@ -279,6 +289,7 @@ export default function CombinedComponent() {
     setRows(filteredRows);
   };
 
+  // Generate a report as a PDF
   const generateReport = async () => {
     const unit = 'pt';
     const size = 'A4';
@@ -347,7 +358,10 @@ export default function CombinedComponent() {
           </TableHead>
           <TableBody>
             {rows.map((row, index) => (
-              <TableRow key={index}>
+              <TableRow
+               key={index}
+               className={isQuantityBelowReorderLevel(row) ? 'highlighted-row' : ''} // Use the correct function here
+               >
                 {Object.keys(row).map((key) => {
                   if (key !== '_id') {
                     return (
@@ -429,4 +443,31 @@ export default function CombinedComponent() {
       </Button>
     </ThemeProvider>
   );
-}
+};
+
+const ConfirmModal = ({ open, onClose, onConfirm }) => {
+  return (
+    <Modal
+      open={open}
+      onClose={onClose}
+      aria-labelledby="modal-modal-title"
+      aria-describedby="modal-modal-description"
+    >
+      <Box sx={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', width: 300, bgcolor: 'background.paper', borderRadius: '20', p: 2 }}>
+        <p>Are you sure you want to remove this row?</p>
+        <Button style={{ color: 'red' }} onClick={onConfirm}>Yes</Button>
+        <Button onClick={onClose}>No</Button>
+      </Box>
+    </Modal>
+  );
+};
+
+export default CombinedComponent;
+const styles = `
+  .highlighted-row {
+    background-color: yellow !important;
+  }
+`;
+
+const styleSheet = document.styleSheets[0];
+styleSheet.insertRule(styles, styleSheet.cssRules.length);

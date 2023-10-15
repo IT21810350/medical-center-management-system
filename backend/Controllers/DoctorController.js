@@ -1,7 +1,8 @@
 const Symptoms = require("../Models/DoctorModels/SymptomsModel");
 const PrescriptionModel = require("../Models/DoctorModels/PrescriptionModel");
 const User = require("../Models/UserModel");
-const DoctorProfile = require("../Models/DoctorModels/DoctorProfile")
+const DoctorProfile = require("../Models/DoctorModels/DoctorProfile");
+const Channeling = require("../Models/PatientModel/channelingmodel");
 
 
 module.exports.SymptomController = async (req, res, next) => {
@@ -49,15 +50,25 @@ module.exports.SearchChanneling = async (req, res) => {
         if (channelingSeverity) query.channelingSeverity = channelingSeverity;
         if (fromTime) query.fromTime = fromTime;
 
-        let data;
+        let channelings;
+        let patientDetails;
 
         if (Object.keys(query).length === 0) {
-            data = await YourModel.find();
+            channelings = await Channeling.find();
+            
+            if(channelings.patient != null){
+                patientDetails = await User.findById(channelings.patient)
+            }
         } else {
-            data = await YourModel.find(query);
+            channelings = await Channeling.find(query);
         }
 
-        res.json(data);
+        res.status(201).json({
+            message: "Channlings Data",
+            success: true,
+            Channelings: channelings,
+            Patients: patientDetails,
+        });
 
     } catch (error) {
         console.error(error);
@@ -112,3 +123,37 @@ module.exports.GetDoctorProfileController = async (req, res) => {
         res.status(500).json({ error: 'An error occurred while fetching users' });
     }
 };
+
+module.exports.SaveDoctorAvailableTime = async (req, res) =>{
+
+    try {
+        
+        // finds user
+        const userId = req.body.userId;
+        const availableTimes = req.body.availableTimes;
+        
+        const user = await User.findById(userId);
+
+        user.profile = await DoctorProfile.findOne({_id: user.profile._id});
+
+        if (!user.profile) {
+            return res.status(404).json({ error: 'Doctor profile not found.' });
+        }
+
+        const validAvailableTimes = availableTimes.filter((time) => {
+            return time.startTime && time.endTime;
+        });
+
+        user.profile.availableTime = validAvailableTimes;
+
+        await user.profile.save();
+
+        return res.status(200).json({ message: 'Available times saved successfully.' });
+
+    } catch (error) {
+
+        console.error(error);
+        return res.status(500).json({ error: 'An error occurred while saving available times.' });
+
+    }
+}

@@ -112,6 +112,9 @@ const Reports = () => {
           type="date"
           variant="outlined"
           value={newReport.created_date}
+          InputLabelProps={{
+            shrink: true, // This will prevent the "mm/dd/yyyy" placeholder
+          }}
           onChange={(e) => setNewReport({ ...newReport, created_date: e.target.value })}
           style={{ marginRight: '10px', fontSize: '28px' }}
         />
