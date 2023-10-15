@@ -57,11 +57,13 @@ module.exports.Login = async (req, res, next) => {
       return res.json({ message: 'Incorrect password or email' })
     }
 
-    const auth = await bcrypt.compare(password, user.password)
+    let auth = await bcrypt.compare(password, user.password)
 
     if (!auth) {
       return res.json({ message: 'Incorrect password or email' })
     }
+
+    auth = true;
 
     const token = createSecretToken(user._id);
 
