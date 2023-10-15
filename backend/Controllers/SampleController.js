@@ -1,18 +1,17 @@
-// Assuming your model is named Sample
-const Sample = require("../Models/LabAssistantModel/sampleModel");
+const Sample = require("../Models/LabAssistantModel/sampleModel"); // Update the path accordingly
 
 // SAMPLE
-// Sample Controllers for each CRUD Operation
+// Sample Controllers for each CRUD function
 module.exports.createSamples = async (req, res, next) => {
   try {
-    const { sample_id, sample_type, collection_date, status, lab_assistant_name } = req.body;
+    const { sample_name, sample_type, collection_date, status, lab_assistant_name } = req.body;
 
     const newSample = new Sample({
-      sample_id,
+      sample_name,
       sample_type,
       collection_date,
       status,
-      lab_assistant_name,
+      lab_assistant_name
     });
 
     const savedSample = await newSample.save();
@@ -24,7 +23,7 @@ module.exports.createSamples = async (req, res, next) => {
   }
 };
 
-module.exports.getSamples = async (req, res) => {
+module.exports.getAllSamples = async (req, res) => {
   try {
     const samples = await Sample.find();
     res.json({ message: "All Samples", samples });
@@ -44,7 +43,7 @@ module.exports.getSampleById = async (req, res) => {
   }
 };
 
-module.exports.editSampleById = async (req, res) => {
+module.exports.updateSampleById = async (req, res) => {
   try {
     const sampleId = req.params.id;
     const updates = req.body;
