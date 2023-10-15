@@ -52,7 +52,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
     [theme.breakpoints.up('sm')]: {
       width: '12ch',
       '&:focus': {
-        width: '20ch',
+        width: '12ch',
       },
     },
   },
@@ -66,7 +66,7 @@ const BackgroundContainer = styled(Container)(({ theme }) => ({
   left: 0,
   width: '100%',
   height: '100%',
-  zIndex: -1,
+  zIndex: -3,
 }));
 
 export default function App() {
@@ -117,7 +117,7 @@ export default function App() {
 
   return (
     <div>
-      <AppBar position="static" sx={{ marginBottom: '20px' }}>
+      <AppBar position="static" sx={{ marginBottom: '0px', marginTop: '0px' }}>
 
         <Toolbar>
           <IconButton
@@ -150,8 +150,18 @@ export default function App() {
       </AppBar>
       <Container maxWidth="sm">
         <BackgroundContainer>
-          <Box sx={{ p: 3, border: '2px solid #90A4AE', borderRadius: '8px', backgroundColor: '#FFFFFF', margin: '20px 0' }}>
-            <h1 style={{ textAlign: 'center' }}>Supplier Registration</h1>
+        <Box sx={{ 
+  p: 3, 
+  border: '2px solid #90A4AE', 
+  borderRadius: '8px', 
+  backgroundColor: '#FFFFFF', 
+  margin: '10px 0',  // Increase the top margin to 30px
+  marginTop: '25px', // Adjust top margin further if needed
+  marginBottom: '15px' // Decrease the bottom margin to 15px
+}}>
+
+
+            <h1  style={{ textAlign: 'center' }}>Supplier Registration</h1>
 
             <Grid container spacing={2}>
               <Grid item xs={6}>
