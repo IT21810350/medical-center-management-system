@@ -13,7 +13,7 @@ import {
 } from '@mui/material';
 import Axios from 'axios';
 import { Link } from 'react-router-dom';
-import NavBar from '../../../components/LA-component/la-nav-bar';
+import NavBar from '../../components/LA-component/la-nav-bar';
 
 const Reports = () => {
   const [reports, setReports] = useState([]);

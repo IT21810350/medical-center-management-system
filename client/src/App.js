@@ -55,15 +55,16 @@ import LabFacilities from './views/lab-assistant-views/lab-facilities';
 import LabAssistantProfile from './views/lab-assistant-views/lab-assistant-profile';
 
 // Lab Assistant <- Test
-import Test from './views/lab-assistant-views/test/viewTest';
+import Test from './views/lab-assistant-views/viewTest';
+import UpdateTest from "./views/lab-assistant-views/updateTest";
 
 // Lab Assistant <- Inventory{Equipment}
-import Equipment from './views/lab-assistant-views/equipment/viewInventory';
-import UpdateEquipment from "./views/lab-assistant-views/equipment/updateInventory";
+import Equipment from './views/lab-assistant-views/viewInventory';
+import UpdateEquipment from "./views/lab-assistant-views/updateInventory";
 
 // Lab Assistant <- Report
-import LabReport from './views/lab-assistant-views/report/viewReport';
-import UpdateReport from "./views/lab-assistant-views/report/updateReport";
+import LabReport from './views/lab-assistant-views/viewReport';
+import UpdateReport from "./views/lab-assistant-views/updateReport";
 
 // Lab Assistant <- Sample
 import UpdateSample from "./views/lab-assistant-views/sample/updateSample";
@@ -186,17 +187,11 @@ function App() {
         <Route path="/labAssistant-profile" element={<LabAssistantProfile />} />
         
         <Route path="/lab-test" element={<Test />} />
-        <Route path="/lab-test/update/:id" element={<Test />} />
-
-        
+        <Route path="/lab-test/update/:id" element={<UpdateTest />} />
         <Route path="/lab-inventory" element={<Equipment />} />
-        <Route path="/lab-inventory/update/:id" element={<UpdateEquipment />} />
-        
-        
+        <Route path="/lab-inventory/update/:id" element={<UpdateEquipment />} />        
         <Route path="/lab-report" element={<LabReport />} />
         <Route path="/lab-report/update/:id" element={<UpdateReport />} />
-        
-        
         <Route path="/lab-sample" element={<ViewSample/>}/>
         <Route path="/lab-sample/update/:id" element={<UpdateSample/>}/>
         

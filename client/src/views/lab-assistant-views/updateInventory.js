@@ -5,10 +5,9 @@ import Axios from 'axios';
 import { useParams, Link } from 'react-router-dom';
 
 const UpdateEquipment = () => {
-  const { id } = useParams(); // Extract the equipment ID from the URL
+  const { id } = useParams();
 
   const [equipment, setEquipment] = useState({
-    equipment_id: '',
     equipment_name: '',
     manufacturer: '',
     purchase_date: '',
@@ -17,20 +16,18 @@ const UpdateEquipment = () => {
   });
 
   useEffect(() => {
-    // Fetch the equipment details using the equipment ID
-    Axios.get(`http://localhost:4000/equipment/${id}`)
+    Axios.get(`http://localhost:4000/equipments/${id}`)
       .then((response) => {
-        setEquipment(response.data);
+        setEquipment(response.data.equipment);
       })
       .catch((error) => console.error(error));
   }, [id]);
 
   const handleUpdateEquipment = () => {
-    // Update the equipment details
-    Axios.put(`http://localhost:4000/equipment/${id}`, equipment)
+    Axios.put(`http://localhost:4000/equipments/${id}`, equipment)
       .then(() => {
-        // Redirect back to the original page
-        return <Link to="/lab-equipment" />;
+        // Use Link to navigate to the '/lab-inventory' route
+        window.location.href = '/lab-inventory';  // Simulate navigation
       })
       .catch((error) => console.error(error));
   };
@@ -41,15 +38,6 @@ const UpdateEquipment = () => {
 
       <Paper elevation={3} style={{ padding: '20px', marginBottom: '20px' }}>
         <Grid container spacing={2}>
-          <Grid item xs={6}>
-            <TextField
-              label="Equipment ID"
-              variant="outlined"
-              fullWidth
-              value={equipment.equipment_id}
-              onChange={(e) => setEquipment({ ...equipment, equipment_id: e.target.value })}
-            />
-          </Grid>
           <Grid item xs={6}>
             <TextField
               label="Equipment Name"
@@ -98,10 +86,12 @@ const UpdateEquipment = () => {
             />
           </Grid>
           <Grid item xs={12}>
-            <Link to='/equipment-list'/>
-            <Button variant="contained" color="primary" onClick={handleUpdateEquipment}>
-              Update Equipment
-            </Button>
+            {/* Use Link component for navigation */}
+            <Link to="/lab-inventory" style={{ textDecoration: 'none' }}>
+              <Button variant="contained" color="primary" onClick={handleUpdateEquipment}>
+                Update Equipment
+              </Button>
+            </Link>
           </Grid>
         </Grid>
       </Paper>
