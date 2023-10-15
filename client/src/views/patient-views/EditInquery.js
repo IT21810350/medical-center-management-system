@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import PatientNavigationBar from '../../views/patient-views/patient-navigation-bar';
 import { useParams } from 'react-router-dom';
-
+import  {Button, TextField} from '@mui/material';
 
 export default function EditInquiry(){
   
@@ -67,38 +67,55 @@ export default function EditInquiry(){
     <>
     <PatientNavigationBar/>
 
+<br/><br/>
+  
 
-    <input type ="text" name = "name" value={inquery.name} disabled={!isEditing} onChange ={handleInputChange}></input>
-    <input type ="text" name = "subject" value={inquery.subject} disabled={!isEditing} onChange ={handleInputChange}></input>
-    <input type ="text" name = "message" value={inquery.message} disabled={!isEditing} onChange ={handleInputChange}></input>
-    {/* <textField 
-        label = "name"
-        name = "name"
-        value= {inquery.name}
-        onChange ={handleInputChange}
-        disabled={!isEditing}
-    />
+<TextField
+              fullWidth
+              label = "name"
+              name = "name"
+              variant="outlined"
+              value= {inquery.name}
+              onChange ={handleInputChange}
+              disabled={!isEditing}
+              required
+            />
+
+<br/><br/>
+
+<TextField
+              fullWidth
+              label = "subject"
+              name = "subject"
+              variant="outlined"
+              value= {inquery.subject}
+              onChange ={handleInputChange}
+              disabled={!isEditing}
+              required
+            />
+            <br/><br/>
+            <TextField
+              fullWidth
+              label = "message"
+              name = "message"
+              variant="outlined"
+              value= {inquery.message}
+              onChange ={handleInputChange}
+              disabled={!isEditing}
+              required
+            />
+<br/><br/>
     
-    <textField 
-        label = "subject"
-        name = "subject"
-        value= {inquery.subject}
-        onChange ={handleInputChange}
-        disabled={!isEditing}
-    />
     
-    <textField 
-        label = "message"
-        name = "message"
-        value= {inquery.message}
-        onChange ={handleInputChange}
-        disabled={!isEditing}
-    /> */}
-    <button
+    <Button
+    type="submit"
+    variant="contained"
+    color="success"
+    style={{width:200}}
     onClick={isEditing ? handleEditInquery : () => setIsEditing(true)}
     >
         {isEditing ? 'Save' : 'Edit'}
-    </button>
+    </Button>
     </>
     
     );
