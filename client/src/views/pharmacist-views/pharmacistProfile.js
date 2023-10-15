@@ -104,7 +104,7 @@ const Pharmacist = () => {
               }}
             >
               <Typography component="h1" variant="h3" color="inherit" align="center" gutterBottom sx={{ fontWeight: 'bold' }}>
-                Welcome to Our Pharmacy!
+                Welcome to Our Pharmacy..!
               </Typography>
               <Link variant="subtitle1" href="#">
               </Link>
