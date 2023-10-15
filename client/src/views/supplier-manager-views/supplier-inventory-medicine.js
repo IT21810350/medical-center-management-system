@@ -301,7 +301,7 @@ export default function CombinedComponent() {
 
     doc.text(title, marginLeft, 40);
     doc.autoTable(content);
-    doc.save('supplier_list.pdf');
+    doc.save('Inventory.pdf');
   };
 
   return (
@@ -368,7 +368,22 @@ export default function CombinedComponent() {
                               min={new Date().toISOString().split('T')[0]}
                             />
                           ) : (
-                            <TextField fullWidth value={row[key]} onChange={(e) => handleInputChange(index, key, e.target.value)} style={{ fontSize: '20px' }} />
+                            key !== 'quantity' && key !== 'unitPrice' && key !== 'reOrderLevel' ? (
+                              <TextField
+                                fullWidth
+                                value={row[key]}
+                                onChange={(e) => handleInputChange(index, key, e.target.value)}
+                                style={{ fontSize: '20px' }}
+                              />
+                            ) : (
+                              <TextField
+                                fullWidth
+                                value={row[key]}
+                                onChange={(e) => handleInputChange(index, key, e.target.value)}
+                                style={{ fontSize: '20px' }}
+                                type="number" // Added type="number" for numeric input
+                              />
+                            )
                           )
                         ) : (
                           row[key]
@@ -407,7 +422,7 @@ export default function CombinedComponent() {
 
       <Button
         variant="outlined"
-        style={{ backgroundColor: 'rgba(255, 255, 0, 0.5)', color: '#004D40' }}
+        style={{ backgroundColor: 'lightgreen', color: '#004D40 !important' }}
         onClick={generateReport}
       >
         Generate Report
