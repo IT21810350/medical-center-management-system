@@ -4,10 +4,9 @@ const Test = require("../Models/LabAssistantModel/testModel");
 // Test Controllers for each CRUD function
 module.exports.createTests = async (req, res, next) => {
   try {
-    const { sample_id, test_name, test_date, lab_assistant_name, result_data } = req.body;
+    const { test_name, test_date, lab_assistant_name, result_data } = req.body;
 
     const newTest = new Test({
-      sample_id,
       test_name,
       test_date,
       lab_assistant_name,

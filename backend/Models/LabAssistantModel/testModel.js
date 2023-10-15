@@ -1,11 +1,6 @@
 const mongoose = require("mongoose");
 
 const testSchema = new mongoose.Schema({
-    sample_id: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Sample',
-        required: true
-    },
     test_name: {
         type: String,
         required: true,

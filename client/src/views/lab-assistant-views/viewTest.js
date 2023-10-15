@@ -83,7 +83,6 @@ const Test = () => {
       })
       .catch((error) => console.error(error));
   };
-  
 
   const handleDeleteTest = (id) => {
     Axios.delete(`http://localhost:4000/tests/${id}`)
@@ -106,14 +105,14 @@ const Test = () => {
   return (
     <div>
       <NavBar />
-      <h1 style={{ fontSize: '50px', fontFamily: 'Arial, sans-serif', fontWeight: 'bold' }}>Tests</h1>
+      <h1>Tests</h1>
 
       <TextField
         label="Search"
         variant="outlined"
         value={searchTerm}
         onChange={(e) => setSearchTerm(e.target.value)}
-        style={{ marginBottom: '20px', fontSize: '39px' }}
+        style={{ marginBottom: '20px' }}
       />
 
       <Paper elevation={3} style={{ padding: '20px', marginBottom: '20px' }}>
@@ -124,7 +123,7 @@ const Test = () => {
           onChange={(e) => setNewTest({ ...newTest, test_name: e.target.value })}
           error={Boolean(validationErrors.test_name)}
           helperText={validationErrors.test_name}
-          style={{ marginRight: '10px', fontSize: '28px' }}
+          style={{ marginRight: '10px', marginBottom: '10px' }}
         />
         <TextField
           label="Test Date"
@@ -137,7 +136,7 @@ const Test = () => {
           onChange={(e) => setNewTest({ ...newTest, test_date: e.target.value })}
           error={Boolean(validationErrors.test_date)}
           helperText={validationErrors.test_date}
-          style={{ marginRight: '10px', fontSize: '28px' }}
+          style={{ marginRight: '10px', marginBottom: '10px' }}
         />
         <TextField
           label="Lab Assistant Name"
@@ -146,7 +145,7 @@ const Test = () => {
           onChange={(e) => setNewTest({ ...newTest, lab_assistant_name: e.target.value })}
           error={Boolean(validationErrors.lab_assistant_name)}
           helperText={validationErrors.lab_assistant_name}
-          style={{ marginRight: '10px', fontSize: '28px' }}
+          style={{ marginRight: '10px', marginBottom: '10px' }}
         />
         <TextField
           label="Result Data"
@@ -155,9 +154,9 @@ const Test = () => {
           onChange={(e) => setNewTest({ ...newTest, result_data: e.target.value })}
           error={Boolean(validationErrors.result_data)}
           helperText={validationErrors.result_data}
-          style={{ marginRight: '10px', fontSize: '28px' }}
+          style={{ marginRight: '10px', marginBottom: '10px' }}
         />
-        <Button variant="contained" color="primary" onClick={handleCreateTest} style={{ fontSize: '21px' }}>
+        <Button variant="contained" color="primary" onClick={handleCreateTest}>
           Create Test
         </Button>
       </Paper>
@@ -166,26 +165,26 @@ const Test = () => {
         <Table>
           <TableHead>
             <TableRow>
-              <TableCell style={{ fontSize: '30px', fontWeight: 'bold' }}>Test Name</TableCell>
-              <TableCell style={{ fontSize: '30px', fontWeight: 'bold' }}>Test Date</TableCell>
-              <TableCell style={{ fontSize: '30px', fontWeight: 'bold' }}>Lab Assistant Name</TableCell>
-              <TableCell style={{ fontSize: '30px', fontWeight: 'bold' }}>Result Data</TableCell>
-              <TableCell style={{ fontSize: '30px', fontWeight: 'bold' }}>Actions</TableCell>
+              <TableCell>Test Name</TableCell>
+              <TableCell>Test Date</TableCell>
+              <TableCell>Lab Assistant Name</TableCell>
+              <TableCell>Result Data</TableCell>
+              <TableCell>Actions</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
             {filteredTests.map((test) => (
               <TableRow key={test._id}>
-                <TableCell style={{ fontSize: '27px' }}>{test.test_name}</TableCell>
-                <TableCell style={{ fontSize: '27px' }}>{new Date(test.test_date).toLocaleDateString()}</TableCell>
-                <TableCell style={{ fontSize: '27px' }}>{test.lab_assistant_name}</TableCell>
-                <TableCell style={{ fontSize: '27px' }}>{test.result_data}</TableCell>
+                <TableCell>{test.test_name}</TableCell>
+                <TableCell>{new Date(test.test_date).toLocaleDateString()}</TableCell>
+                <TableCell>{test.lab_assistant_name}</TableCell>
+                <TableCell>{test.result_data}</TableCell>
                 <TableCell>
-                  <Button variant="contained" color="primary" component={Link} to={`/lab-test/update/${test._id}`} style={{ fontSize: '21px' }}>
+                  <Button variant="contained" color="primary" component={Link} to={`/lab-test/update/${test._id}`}>
                     Update
                   </Button>
                   {' '}
-                  <Button variant="contained" color="secondary" onClick={() => handleDeleteTest(test._id)} style={{ fontSize: '21px' }}>
+                  <Button variant="contained" color="secondary" onClick={() => handleDeleteTest(test._id)}>
                     Delete
                   </Button>
                 </TableCell>
