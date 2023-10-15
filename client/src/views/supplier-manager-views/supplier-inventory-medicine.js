@@ -465,15 +465,3 @@ const ConfirmModal = ({ open, onClose, onConfirm }) => {
 
 export default CombinedComponent;
 
-if (document.styleSheets.length > 0) {
-  const styles = `
-    .highlighted-row {
-      background-color: yellow !important;
-    }
-  `;
-  
-  const styleSheet = document.styleSheets[0];
-  styleSheet.insertRule(styles, styleSheet.cssRules.length);
-} else {
-  console.error('No stylesheets found.');
-}
