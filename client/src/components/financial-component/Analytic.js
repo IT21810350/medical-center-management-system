@@ -7,6 +7,7 @@ import { BsBank } from "react-icons/bs";
 import { GiTakeMyMoney } from "react-icons/gi";
 import './FFindex.css';
 
+
 function Analytic() {
     return (
         <Section>

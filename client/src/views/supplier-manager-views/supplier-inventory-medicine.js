@@ -469,5 +469,5 @@ const styles = `
   }
 `;
 
-const styleSheet = document.styleSheets[0];
-styleSheet.insertRule(styles, styleSheet.cssRules.length);
+// const styleSheet = document.styleSheets[0];
+// styleSheet.insertRule(styles, styleSheet.cssRules.length);

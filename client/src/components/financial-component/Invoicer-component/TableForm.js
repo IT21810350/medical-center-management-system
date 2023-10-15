@@ -2,6 +2,7 @@ import React from 'react'
 import { useState, useEffect } from 'react'
 import {v4 as uuidv4 } from "uuid"
 import { AiOutlineDelete, AiOutlineEdit } from "react-icons/ai";
+import '../FMindex.css';
 
 
 export default function TableForm({description,

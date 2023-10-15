@@ -1,4 +1,5 @@
 import React from 'react'
+import '../FMindex.css';
 
 export default function Table({ list, total }) {
   return (

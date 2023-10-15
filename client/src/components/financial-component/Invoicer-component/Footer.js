@@ -1,4 +1,5 @@
 import React from 'react'
+import '../FMindex.css';
 
 export default function Footer({name, email, website, phone, bankAccount, bankName}) {
   return (

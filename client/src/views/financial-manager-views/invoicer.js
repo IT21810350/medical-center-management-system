@@ -1,4 +1,5 @@
 import { useState } from "react";
+import NavBar from '../../components/financial-component/financial-nav-bar';
 import ClientDetails from "../../components/financial-component/Invoicer-component/ClientDetails";
 import Dates from "../../components/financial-component/Invoicer-component/Dates";
 import Footer from "../../components/financial-component/Invoicer-component/Footer";
@@ -7,6 +8,7 @@ import MainDetails from "../../components/financial-component/Invoicer-component
 import Notes from "../../components/financial-component/Invoicer-component/Notes";
 import Table from "../../components/financial-component/Invoicer-component/Table";
 import TableForm from "../../components/financial-component/Invoicer-component/TableForm";
+
 
 function Invoicer() {
     const [showInvoice, setShowInvoice] = useState(false)
@@ -177,24 +179,24 @@ function Invoicer() {
 
                             <article className="md:grid grid-cols-2 gap-10 md:mt-16">
                                 <div className="flex flex-col">
-                                    <label htmlFor="clientName">Enter your client's name</label>
+                                    <label htmlFor="clientName">Enter your Patient's name</label>
                                     <input
                                         type="text"
                                         name="clientName"
                                         id="clientName"
-                                        placeholder="Enter your client's name "
+                                        placeholder="Enter your Patient's name "
                                         autoComplete="off"
                                         value={clientName}
                                         onChange={(e) => setClientName(e.target.value)}
                                     />
                                 </div>
                                 <div className="flex flex-col">
-                                    <label htmlFor="clientAddress">Enter your client's address </label>
+                                    <label htmlFor="clientAddress">Enter your Patient's address </label>
                                     <input
                                         type="text"
                                         name="clientAddress"
                                         id="clientAddress"
-                                        placeholder="Enter your client's address "
+                                        placeholder="Enter your Patient's address "
                                         autoComplete="off"
                                         value={clientAddress}
                                         onChange={(e) => setClientAddress(e.target.value)}
