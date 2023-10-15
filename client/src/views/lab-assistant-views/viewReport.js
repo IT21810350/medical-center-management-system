@@ -94,13 +94,6 @@ const Reports = () => {
       {/* Create Report Form */}
       <Paper elevation={3} style={{ padding: '20px', marginBottom: '20px' }}>
         <TextField
-          label="Report ID"
-          variant="outlined"
-          value={newReport.report_id}
-          onChange={(e) => setNewReport({ ...newReport, report_id: e.target.value })}
-          style={{ marginRight: '10px', fontSize: '28px' }}
-        />
-        <TextField
           label="Report Name"
           variant="outlined"
           value={newReport.report_name}
@@ -142,7 +135,6 @@ const Reports = () => {
         <Table>
           <TableHead>
             <TableRow>
-              <TableCell style={{ fontSize: '30px', fontWeight:'bold' }} >Report ID</TableCell>
               <TableCell style={{ fontSize: '30px',  fontWeight:'bold'  }}>Report Name</TableCell>
               <TableCell style={{ fontSize: '30px',  fontWeight:'bold'  }}>Created Date</TableCell>
               <TableCell style={{ fontSize: '30px', fontWeight:'bold'  }}>Content</TableCell>
@@ -153,7 +145,6 @@ const Reports = () => {
           <TableBody>
             {filteredReports.map((report) => (
               <TableRow key={report._id}>
-                <TableCell style={{ fontSize: '27px' }}>{report.report_id}</TableCell>
                 <TableCell style={{ fontSize: '27px' }}>{report.report_name}</TableCell>
                 <TableCell style={{ fontSize: '27px' }}>{new Date(report.created_date).toLocaleDateString()}</TableCell>
                 <TableCell style={{ fontSize: '27px' }}>{report.content}</TableCell>
