@@ -59,7 +59,7 @@ module.exports.updateReportById = async (req, res) => {
     
         res.status(200).json({
           message: "Report with ID: " + reportId + " has been updated",
-          updatedSample,
+          updatedReport,
         });
       } catch (error) {
         console.error(error);
