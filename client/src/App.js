@@ -36,6 +36,7 @@ import Delete from './views/patient-views/delete';
 import Pharmacist from './views/pharmacist-views/parmacist-home';
 import UpdateMedicine from './views/pharmacist-views/updateMedicine';
 import PharmacistProfile from './views/pharmacist-views/pharmacistProfile';
+import UpdateProfile from './views/pharmacist-views/updateProfile';
 import MedicineStore from './views/pharmacist-views/medicineStore';
 import MedicineOrder from './views/pharmacist-views/medicineOrders';
 import MedicineSales from './views/pharmacist-views/medicineSales';
@@ -50,14 +51,22 @@ import Payrollsystem from './views/hr-views/Payroll-Management';
 
 // lab assistant imports
 import LA from './views/lab-assistant-views/lab-assistant-home';
-import LabTest from './views/lab-assistant-views/lab-test';
-import LabInventory from './views/lab-assistant-views/lab-inventory';
-import LabReport from './views/lab-assistant-views/lab-report';
 import LabFacilities from './views/lab-assistant-views/lab-facilities';
 import LabAssistantProfile from './views/lab-assistant-views/lab-assistant-profile';
 
-import updateSample from "./views/lab-assistant-views/sample/updateSample";
-import CreateSampleForm from "./views/lab-assistant-views/sample/createSample";
+// Lab Assistant <- Test
+import Test from './views/lab-assistant-views/test/viewTest';
+
+// Lab Assistant <- Inventory{Equipment}
+import Equipment from './views/lab-assistant-views/equipment/viewInventory';
+import UpdateEquipment from "./views/lab-assistant-views/equipment/updateInventory";
+
+// Lab Assistant <- Report
+import LabReport from './views/lab-assistant-views/report/viewReport';
+import UpdateReport from "./views/lab-assistant-views/report/updateReport";
+
+// Lab Assistant <- Sample
+import UpdateSample from "./views/lab-assistant-views/sample/updateSample";
 import ViewSample from "./views/lab-assistant-views/sample/viewSample";
 
 // supplier manager imports
@@ -83,8 +92,7 @@ import EditRoom from './views/resource-manager-views/editRoom';
 
 // financial manager imports
 import FM from './views/financial-manager-views/financial-manager-home';
-//import Invoice from './views/financial-manager-views/invoice';
-
+import Invoice from './views/financial-manager-views/invoice';
 
 function App() {
   return (
@@ -116,6 +124,7 @@ function App() {
         <Route path="/pharmacist" element={<Pharmacist />} />
         <Route path="/pharmacistProfile" element={<PharmacistProfile />} />
         <Route path="/addMedicine" element={<FormPage />} />
+        <Route path="/updateProfile" element={<updateProfile />} />
         <Route path="/updateMedicine" element={<UpdateMedicine/>}/>
         <Route path="/medicineStore" element={<MedicineStore />} />
         <Route path="/medicineOrder" element={<MedicineOrder />} />
@@ -141,6 +150,7 @@ function App() {
 
         {/*Pharmacist Routes */}
         <Route path="/pharmacistProfile" element={<PharmacistProfile/>} />
+        <Route path="/updateProfile" element={<updateProfile />} />
         <Route path="/addMedicine" element={<addMedicine/>} />
         <Route path="/medicineStore" element={<MedicineStore/>} />
         <Route path="/medicineOrder" element={<MedicineOrder/>} />
@@ -170,23 +180,29 @@ function App() {
 
         {/*Lab Assistant Routes */}
         <Route path="/lab-assistant" element={<LA />} />
-        <Route path="/lab-test" element={<LabTest />} />
-        <Route path="/lab-inventory" element={<LabInventory />} />
-        <Route path="/lab-report" element={<LabReport />} />
-        
-        <Route path="/lab-sample" element={<ViewSample/>}/>
-        <Route path="/lab-sample/create" element={<CreateSampleForm/>}/>
-        <Route path="/lab-sample/update" element={<updateSample/>}/>
-        
-        
-        <Route path="/lab-test" element={<LabTest />} />
         <Route path="/lab-facilities" element={<LabFacilities />} />
         <Route path="/labAssistant-profile" element={<LabAssistantProfile />} />
+        
+        <Route path="/lab-test" element={<Test />} />
+        <Route path="/lab-test/update/:id" element={<Test />} />
+
+        
+        <Route path="/lab-inventory" element={<Equipment />} />
+        <Route path="/lab-inventory/update/:id" element={<UpdateEquipment />} />
+        
+        
+        <Route path="/lab-report" element={<LabReport />} />
+        <Route path="/lab-report/update/:id" element={<UpdateReport />} />
+        
+        
+        <Route path="/lab-sample" element={<ViewSample/>}/>
+        <Route path="/lab-sample/update/:id" element={<UpdateSample/>}/>
+        
 
         
         {/*Financial Manager Routes */}
         <Route path="/financial-manager" element={<FM />} />
-        {/* <Route path="/invoice" element={<Invoice />} /> */}
+        <Route path="/invoice" element={<Invoice />} />
 
 
       </Routes>

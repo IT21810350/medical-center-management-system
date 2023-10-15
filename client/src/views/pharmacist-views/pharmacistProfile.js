@@ -14,6 +14,7 @@ import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import axios from 'axios';
+import NavBar from '../../components/pharmacist-component/pharmacist-nav-bar';
 
 const Pharmacist = () => {
   const [email, setEmail] = useState('');
@@ -41,6 +42,15 @@ const Pharmacist = () => {
 
     try {
       const response = await axios.post('http://localhost:4000/pharmacistProfile/add', parmacistDetails);
+      setparmacistDetails({
+        firstName: '', 
+            lastName: '', 
+            emailAddress: '', 
+            contactNumber: '', 
+            gender: '', 
+            nic: '', 
+            bio: '',
+      });
 
     } catch (error) {
       
@@ -61,6 +71,7 @@ const Pharmacist = () => {
 
   return (
     <div>
+      <NavBar/>
       <Paper
         sx={{
           position: 'relative',
@@ -80,7 +91,7 @@ const Pharmacist = () => {
             bottom: 0,
             right: 0,
             left: 0,
-            backgroundColor: 'rgba(33, 150, 243)',
+            backgroundColor: '#00bcd4',
           }}
         />
         <Grid container>
@@ -92,8 +103,8 @@ const Pharmacist = () => {
                 pr: { md: 0 },
               }}
             >
-              <Typography component="h1" variant="h3" color="inherit" align="center" gutterBottom>
-                Welcome to Our Pharmacy!
+              <Typography component="h1" variant="h3" color="inherit" align="center" gutterBottom sx={{ fontWeight: 'bold' }}>
+                Welcome to Our Pharmacy..!
               </Typography>
               <Link variant="subtitle1" href="#">
               </Link>
@@ -213,9 +224,9 @@ const Pharmacist = () => {
         <Grid item>
           <Stack direction="row" spacing={4} justifyContent='center'>
             <Button type='submit' variant="contained" color="error">
-              UPDATE
+              Cancel
             </Button>
-            <button type='submit' variant="contained" onClick={handleSubmit}>Add</button>
+            
             <Button type='submit' variant="contained" onClick={handleSubmit}>ADD</Button>
           </Stack>
         </Grid>

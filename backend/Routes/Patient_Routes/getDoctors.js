@@ -31,7 +31,7 @@ router.route("/get/:id").get(async (req, res) => {
       const doctor = await Doctors.findById(dId);
       
       if (!doctor) {
-        return res.status(404).json({ status: "Patient not found" });
+        return res.status(404).json({ status: "Doctor not found" });
       }
   
       return res.status(200).json({ status: "Doctor found", doctor });

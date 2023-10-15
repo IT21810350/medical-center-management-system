@@ -106,7 +106,7 @@ export default function App() {
 
   return (
     <div>
-  <AppBar position="static" sx={{ margin: '20px 0' }}>
+  <AppBar position="static" sx={{ marginBottom: '20px' }}>
 
         <Toolbar>
           <IconButton
@@ -138,7 +138,7 @@ export default function App() {
         </Toolbar>
       </AppBar>
       <Container maxWidth="sm">
-        <Box sx={{ p: 3, border: '2px solid #90A4AE', borderRadius: '8px', backgroundColor: '#FFFFFF' , margin: '20px' }}>
+      <Box sx={{ p: 3, border: '2px solid #90A4AE', borderRadius: '8px', backgroundColor: '#FFFFFF', margin: '20px 0' }}>
           <h1 style={{ textAlign: 'center' }}>Supplier Registration</h1>
 
           <Grid container spacing={2}>

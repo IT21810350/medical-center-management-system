@@ -1,3 +1,4 @@
+// UpdateTestPage.js
 import React, { useState } from 'react';
 import {
   Container,
@@ -7,10 +8,15 @@ import {
   Grid,
   Paper,
   Box,
+  Link,
 } from '@mui/material';
-import NavBar from '../../components/LA-component/la-nav-bar';
+import Axios from 'axios';
+import { useParams } from 'react-router-dom';
+import NavBar from '../../../components/LA-component/la-nav-bar';
 
 const UpdateTestPage = () => {
+  const { id } = useParams(); // Assuming you have a similar setup with a test ID in the URL
+
   const [test, setTest] = useState({
     result_id: '',
     sample_id: '',
@@ -28,10 +34,14 @@ const UpdateTestPage = () => {
     });
   };
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    // Perform the update test operation here
-    console.log('Updated test:', test);
+  const handleUpdateTest = () => {
+    // Assuming you have an API endpoint for updating tests
+    Axios.put(`http://localhost:4000/tests/${id}`, test)
+      .then(() => {
+        // Redirect or perform any necessary action after the update
+        console.log('Test updated successfully');
+      })
+      .catch((error) => console.error(error));
   };
 
   return (
@@ -45,8 +55,17 @@ const UpdateTestPage = () => {
         </Typography>
         <Paper elevation={3}>
           <Box p={3}>
-            <form onSubmit={handleSubmit}>
+            <form>
               <Grid container spacing={3}>
+                {/* Assuming you are displaying the ID from the URL */}
+                <Grid item xs={12}>
+                  <TextField
+                    label="Test ID"
+                    fullWidth
+                    disabled
+                    value={id}
+                  />
+                </Grid>
                 <Grid item xs={12}>
                   <TextField
                     label="Result ID"
@@ -108,10 +127,11 @@ const UpdateTestPage = () => {
                   />
                 </Grid>
                 <Grid item xs={12}>
+                  <Link to='/lab-test'/>
                   <Button
                     variant="contained"
                     color="primary"
-                    type="submit"
+                    onClick={handleUpdateTest}
                   >
                     Update Test
                   </Button>

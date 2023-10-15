@@ -13,8 +13,10 @@ import TextField from '@mui/material/TextField';
 import jsPDF from 'jspdf';
 import 'jspdf-autotable';
 
+
+
 const columns = [
-  { field: 'supplierName', headerName: 'Supplier name', flex: 1 },
+  { field: 'supplierName', headerName: 'Supplier name', flex: 1, fontSize: 20 },
   { field: 'nic', headerName: 'NIC', flex: 1 },
   { field: 'email', headerName: 'Email', flex: 1 },
   { field: 'phoneNumber', headerName: 'Phone number', flex: 1 },
@@ -88,13 +90,13 @@ export default function CombinedComponent() {
 
   const handleExportPDF = () => {
     const unit = 'pt';
-    const size = 'A4'; 
-    const orientation = 'portrait'; 
+    const size = 'A4';
+    const orientation = 'portrait';
 
     const marginLeft = 40;
     const doc = new jsPDF(orientation, unit, size);
 
-    doc.setFontSize(12);
+    doc.setFontSize(14);
 
     const title = 'Supplier List';
     const headers = columns.map(column => column.headerName);
@@ -129,9 +131,13 @@ export default function CombinedComponent() {
               variant="h6"
               noWrap
               component="div"
-              sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}
+              style={{
+                flexGrow: 1,
+                display: { xs: 'none', sm: 'block' },
+                fontSize: '20px', // Change the font size here
+              }}
             >
-             Supplier List
+              Supplier List
             </Typography>
             <Search>
               <SearchIconWrapper>
@@ -141,13 +147,14 @@ export default function CombinedComponent() {
                 placeholder="Search…"
                 inputProps={{ 'aria-label': 'search' }}
               />
-              <button onClick={handleExportPDF}>Export to PDF</button> {/* Added button */}
+
             </Search>
           </Toolbar>
         </AppBar>
       </Box>
       <div style={{ height: '100vh', width: '100%' }}>
         <button onClick={handleAddRow}>Add Row</button>
+        <button onClick={handleExportPDF}>Export to PDF</button> {/* Added button */}
         <DataGrid
           rows={rows}
           columns={columns.map(column => ({
