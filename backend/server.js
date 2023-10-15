@@ -31,7 +31,6 @@ const testRouter = require("./Routes/LabAssistant_Routes/TestRoute");
 
 
 const validationRoute = require("./Routes/ValidateRoutes");
-const SupplierPayment = require('./Models/SupplierManagerModel/SupplierPayment');
 const { MONGO_URL, PORT } = process.env;
 
 const app = express();
