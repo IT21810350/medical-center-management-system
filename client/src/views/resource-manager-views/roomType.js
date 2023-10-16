@@ -36,7 +36,7 @@ function RoomTypesPage() {
                 </Card.Text>
               </Card.Body>
               <Card.Body>
-                <Link to='/room'><Button variant="primary">View Room</Button></Link>
+                <Link to='/room'><Button variant="primary">View Rooms</Button></Link>
               </Card.Body>
             </Card>
             </Grid>

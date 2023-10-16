@@ -55,7 +55,7 @@ import LabReport from './views/lab-assistant-views/lab-report';
 import LabFacilities from './views/lab-assistant-views/lab-facilities';
 import LabAssistantProfile from './views/lab-assistant-views/lab-assistant-profile';
 
-import updateSample from "./views/lab-assistant-views/sample/updateSample";
+// import updateSample from "./views/lab-assistant-views/sample/updateSample";
 import CreateSampleForm from "./views/lab-assistant-views/sample/createSample";
 import ViewSample from "./views/lab-assistant-views/sample/viewSample";
 
@@ -78,6 +78,8 @@ import RP from "./views/resource-manager-views/resource-manager-home";
 import RoomType from './views/resource-manager-views/roomType';
 import Room from './views/resource-manager-views/room';
 import EditRoom from './views/resource-manager-views/editRoom';
+import Bookings from './views/resource-manager-views/bookings';
+import AddRoom from './views/resource-manager-views/addRoom';
 
 
 // financial manager imports
@@ -115,7 +117,7 @@ function App() {
         <Route path="/pharmacist" element={<Pharmacist />} />
         <Route path="/pharmacistProfile" element={<PharmacistProfile />} />
         <Route path="/addMedicine" element={<FormPage />} />
-        <Route path="/updateMedicine" element={<UpdateMedicine/>}/>
+        <Route path="/updateMedicine" element={<UpdateMedicine />} />
         <Route path="/medicineStore" element={<MedicineStore />} />
         <Route path="/medicineOrder" element={<MedicineOrder />} />
         <Route path="/medicineSales" element={<MedicineSales />} />
@@ -135,27 +137,29 @@ function App() {
         <Route path="/patient-additional" exact Component={PatientAdditionalFiles} />
         <Route path="/rescedule-appointment" exact Component={Reschedule} />
         <Route path="/delete-appointment" exact Component={Delete} />
-        <Route path="/editinq/:id" element={<EditInquiry/>} />
+        <Route path="/editinq/:id" element={<EditInquiry />} />
 
 
         {/*Pharmacist Routes */}
-        <Route path="/pharmacistProfile" element={<PharmacistProfile/>} />
-        <Route path="/addMedicine" element={<addMedicine/>} />
-        <Route path="/medicineStore" element={<MedicineStore/>} />
-        <Route path="/medicineOrder" element={<MedicineOrder/>} />
-        <Route path="/medicineSales" element={<MedicineSales/>} />
+        <Route path="/pharmacistProfile" element={<PharmacistProfile />} />
+        <Route path="/addMedicine" element={<addMedicine />} />
+        <Route path="/medicineStore" element={<MedicineStore />} />
+        <Route path="/medicineOrder" element={<MedicineOrder />} />
+        <Route path="/medicineSales" element={<MedicineSales />} />
         <Route path="/pharmacist/*" element={<Pharmacist />} />
 
 
-      
-        
+
+
 
 
         {/* Resource person Routes */}
         <Route path="/resource-person" element={<RP />} />
         <Route path="/room-types" element={<RoomType />} />
-        <Route path="/room" element={<Room/>}/>
-        <Route path="/editRoom" element={<EditRoom/>}/>
+        <Route path="/room" element={<Room />} />
+        <Route path="/editRoom" element={<EditRoom />} />
+        <Route path="/room/:roomid" element={<Bookings />} />
+        <Route path="/addRoom" element={<AddRoom />} />
 
 
         {/* Supplier Routes */}
@@ -176,17 +180,17 @@ function App() {
         <Route path="/lab-test" element={<LabTest />} />
         <Route path="/lab-inventory" element={<LabInventory />} />
         <Route path="/lab-report" element={<LabReport />} />
-        
-        <Route path="/lab-sample" element={<ViewSample/>}/>
-        <Route path="/lab-sample/create" element={<CreateSampleForm/>}/>
-        <Route path="/lab-sample/update" element={<updateSample/>}/>
-        
-        
+
+        <Route path="/lab-sample" element={<ViewSample />} />
+        <Route path="/lab-sample/create" element={<CreateSampleForm />} />
+        <Route path="/lab-sample/update" element={<updateSample />} />
+
+
         <Route path="/lab-test" element={<LabTest />} />
         <Route path="/lab-facilities" element={<LabFacilities />} />
         <Route path="/labAssistant-profile" element={<LabAssistantProfile />} />
 
-        
+
         {/*Financial Manager Routes */}
         <Route path="/financial-manager" element={<FM />} />
         {/* <Route path="/invoice" element={<Invoice />} /> */}
