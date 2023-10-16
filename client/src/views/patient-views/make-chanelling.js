@@ -1,13 +1,11 @@
 import React, { useState, useEffect } from 'react';
-
 import { Link } from 'react-router-dom';
-import { useParams } from 'react-router-dom';
 import { Box, Button, Grid, Typography } from '@mui/material';
 import { Card, CardMedia, CardActions } from '@mui/material';
 import PatientNavigationBar from '../../views/patient-views/patient-navigation-bar';
-import { useLocation } from 'react-router-dom';
 import axios from 'axios';
 import img1 from '../../assets/img/patient/profile.jpg';
+import { useLocation } from 'react-router-dom';
 
 export default function PatientMakeChanelling() {
     const location = useLocation();
@@ -28,13 +26,6 @@ export default function PatientMakeChanelling() {
         licenseNumber: ' ',
         middleName: ' ',
         specialty: ' ',
-    });
-
-    const [formData, setFormData] = useState({
-        date: '',
-        time: '',
-        patient: '',
-        doctor: '',
     });
 
     const generateDateRows = (day) => {
@@ -77,62 +68,23 @@ export default function PatientMakeChanelling() {
     useEffect(() => {
         const fetchDoctorDetails = async () => {
             try {
-                if (doctorId) {
-                    const response = await axios.get(`http://localhost:4000/getD/get/${doctorId}`);
-                    setDoctorDetails(response.data.doctor);
-                }
+                // Fetch doctor details based on the doctor ID
+                const response = await axios.get(`http://localhost:4000/getD/get/${doctorId}`);
+                setDoctorDetails(response.data.doctor);
             } catch (error) {
                 console.error('Error fetching doctor details:', error);
             }
         };
         fetchDoctorDetails();
-    }, [doctorId]);
+    }, []);
 
-    const handleBookAppointment = async (date, timeSlotId) => {
-        window.location.href = `/confirm-chanelling?bookingId=${timeSlotId}&date=${date}`;
-        try {
-            const response = await axios.post('http://localhost:4000/ch/add', {
-                date,
-                time: timeSlotId,
-                patient: '', // Fill in the patient information
-                doctor: doctorId,
-            });
-
-            console.log('Form submitted successfully', response.data);
-
-            setFormData({
-                date: '',
-                time: '',
-                patient: '',
-                doctor: '',
-            });
-        } catch (error) {
-            console.error('Error submitting form', error);
-        }
+    const handleBookAppointment = (date, timeSlotId) => {
+        // Construct the channelDate as an ISO string
+        const channelDate = date.toISOString();
+        // Construct the link with parameters
+        const confirmChanellingLink = `/confirm-chanelling?bookingId=${timeSlotId}&channelDate=${channelDate}`;
+        window.location.href = confirmChanellingLink;
     };
-
-    // const handleBookAppointment = async (date, timeSlotId) => {
-    //     try {
-    //         // Create a unique booking ID (you can generate it as per your requirements)
-    //         const bookingId = generateBookingId();
-    
-    //         // Redirect to the confirmation page with booking ID, date, and timeSlotId in the URL
-    //         window.location.href = `/confirm-chanelling?bookingId=${bookingId}&date=${date}&timeSlotId=${timeSlotId}`;
-    
-    //         // You can also add the booking information to state if needed
-    //         setFormData({
-    //             date,
-    //             time: timeSlotId,
-    //             patient: '', // Fill in the patient information
-    //             doctor: doctorId,
-    //         });
-    //     } catch (error) {
-    //         console.error('Error submitting form', error);
-    //     }
-    // };
-    
-
-    const { value } = useParams();
 
     return (
         <>
@@ -188,7 +140,7 @@ export default function PatientMakeChanelling() {
                                     <Button
                                         variant="contained"
                                         color="primary"
-                                        onClick={() => handleBookAppointment(date.toISOString(), time._id)}
+                                        onClick={() => handleBookAppointment(date, time._id)}
                                         disabled={new Date() > new Date(date)}
                                     >
                                         {new Date() > new Date(date) ? 'Time Passed' : `Channel ${date.toDateString()}`}

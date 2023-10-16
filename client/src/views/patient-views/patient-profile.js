@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Box, Grid,Typography} from '@mui/material';
 import Heading from '../../components/patient-components/heading.component';
 import Tabs from '@mui/material/Tabs';
@@ -68,8 +68,8 @@ export default function PatientProfile() {
                                         <Tabs style={{backgroundColor:"pink"}} value={value2} onChange={handleChange2} aria-label="basic tabs example">
                                             <Tab label="Upcoming" {...a11yProps(0)} />
                                             <Tab label="Past" {...a11yProps(1)} />
-                                            <Tab label="Cancelled" {...a11yProps(2)} />
-                                            <Tab label="Refunds" {...a11yProps(3)} /> 
+                                            {/* <Tab label="Cancelled" {...a11yProps(2)} />
+                                            <Tab label="Refunds" {...a11yProps(3)} />  */}
                                         </Tabs>
 
                                     </Box>

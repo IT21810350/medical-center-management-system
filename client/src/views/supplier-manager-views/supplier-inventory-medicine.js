@@ -358,10 +358,8 @@ const CombinedComponent = () => {
           </TableHead>
           <TableBody>
             {rows.map((row, index) => (
-              <TableRow
-               key={index}
-               className={isQuantityBelowReorderLevel(row) ? 'highlighted-row' : ''} // Use the correct function here
-               >
+              <TableRow key={index} style={isQuantityBelowReorderLevel(row) ? { backgroundColor: 'yellow' } : null}>
+
                 {Object.keys(row).map((key) => {
                   if (key !== '_id') {
                     return (
@@ -387,7 +385,7 @@ const CombinedComponent = () => {
                                 fullWidth
                                 value={row[key]}
                                 onChange={(e) => handleInputChange(index, key, e.target.value)}
-                                style={{ fontSize: '20px' }}
+                                style={{ fontSize: 'px' }}
                               />
                             ) : (
                               <TextField
@@ -462,4 +460,6 @@ const ConfirmModal = ({ open, onClose, onConfirm }) => {
   );
 };
 
+
 export default CombinedComponent;
+
