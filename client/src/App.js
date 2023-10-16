@@ -41,6 +41,7 @@ import MedicineStore from './views/pharmacist-views/medicineStore';
 import MedicineOrder from './views/pharmacist-views/medicineOrders';
 import MedicineSales from './views/pharmacist-views/medicineSales';
 import FormPage from "./views/pharmacist-views/addMedicine";
+import updateMedicine from "./views/pharmacist-views/updateMedicine";
 
 // hr imports 
 import HR from './views/hr-views/hr-home';
@@ -155,6 +156,7 @@ function App() {
         <Route path="/pharmacistProfile" element={<PharmacistProfile/>} />
         <Route path="/updateProfile" element={<updateProfile />} />
         <Route path="/addMedicine" element={<addMedicine/>} />
+        <Route path="/updateMedicine" element={<updateMedicine />} />
         <Route path="/medicineStore" element={<MedicineStore/>} />
         <Route path="/medicineOrder" element={<MedicineOrder/>} />
         <Route path="/medicineSales" element={<MedicineSales/>} />

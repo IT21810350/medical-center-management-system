@@ -13,7 +13,9 @@ class MedicineStore extends Component {
         { id: '002', col1: 'Piriton', col2: '10mg', col3: 'Tablet', col4: '50 Packs', col5: '02/02/2024' },
         { id: '003', col1: 'Cetrizine', col2: '10mg', col3: 'Tablet', col4: '200 Packs', col5: '10/05/2024' },
         { id: '004', col1: 'Brufen', col2: '600mg', col3: 'Tablet', col4: '20 Packs', col5: '20/01/2025' },
-        { id: '005', col1: 'Panadol', col2: '500mg', col3: 'Tablet', col4: '180 Packs', col5: '05/11/2025' },
+        { id: '005', col1: 'Panadol', col2: '500mg', col3: 'Tablet', col4: '180 Packs', col5: '25/10/2024' },
+        { id: '006', col1: 'Amoxicillin', col2: '250mg', col3: 'Tablet', col4: '180 Packs', col5: '01/11/2023' },
+        { id: '007', col1: 'Piriton Syrup', col2: '100ml', col3: 'Syrup bottle', col4: '80 Bottles', col5: '05/11/2025' },
         // Add more rows as needed
       ],
       filteredData: [],
