@@ -1,25 +1,26 @@
 const mongoose = require('mongoose');
 
-const sample = new mongoose.Schema({
-    sample_id: {
+const sampleSchema = new mongoose.Schema({
+    sample_name: {
         type: String,
     },
-    sample_type : {
-        type : String,
-    },    
-    collection_date : {
-        type : Date,
+    sample_type: {
+        type: String,
     },
-    status : {
-        type : String,
+    collection_date: {
+        type: Date,
     },
-    lab_assistant_name : {
-        type : String,
-    }
+    status: {
+        type: String,
+    },
+    lab_assistant_name: {
+        type: String,
+    },
 },
-    {
-        timestamps : true,
-    });
+{
+    timestamps: true,
+});
 
-const Sample = mongoose.model("Sample", sample);
+const Sample = mongoose.model('Sample', sampleSchema);
+
 module.exports = Sample;

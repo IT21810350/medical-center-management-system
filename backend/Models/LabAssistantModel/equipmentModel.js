@@ -1,29 +1,25 @@
 const mongoose = require("mongoose");
 
-const lab_equipment = new mongoose.Schema({
-   equipment_id : {
-        type : String,
-   },
-   name : {
-        type : String,
-   }, 
-   manufacturer : {
-        type : String,
-   },
-   purchase_date : {
-        type : Date,
-   },
-   maintainence_schedule : {
-        type : Date,
-   }, 
-   status : {
-        type : String,
-   }
-},
-    {
-        timestamps : true
-    });
+const equipmentSchema = new mongoose.Schema({
+  equipment_name: {
+    type: String,
+  },
+  manufacturer: {
+    type: String,
+  },
+  purchase_date: {
+    type: Date,
+  },
+  maintenance_schedule: {
+    type: Date,
+  },
+  status: {
+    type: String,
+  },
+}, {
+  timestamps: true,
+});
 
-const LabEquipment = mongoose.model("LabEquipment",lab_equipment);
+const Equipment = mongoose.model("Equipment", equipmentSchema);
 
-module.exports = LabEquipment;
+module.exports = Equipment;

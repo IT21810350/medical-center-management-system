@@ -76,16 +76,4 @@ router.route('/update/:id').post((req, res) => {
         .catch(err => res.status(400).json('Error: ' + err));
 });
 
-// add room
-// router.post("/add", async (req, res) => {
-//     try {
-//         const newRoom = new Room(req.body)
-//         await newRoom.save()
-
-//         req.send("new room added successfully")
-//     } catch (error) {
-//         return res.status(4000).json({ error });
-//     }
-// })
-
 module.exports = router;

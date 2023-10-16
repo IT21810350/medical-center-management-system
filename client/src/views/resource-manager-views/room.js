@@ -33,13 +33,13 @@
 //             .catch(err => console.log(err))
 //     }, [])
 
-//     function deleteRoom(id) {
-//         axios.delete('http://localhost:4000/room/'+id)
-//             .then(room => { console.log(room.data)});
+    // function deleteRoom(id) {
+    //     axios.delete('http://localhost:4000/room/'+id)
+    //         .then(room => { console.log(room.data)});
 
-//         const updatedResults = rooms.filter((room) => room._id !== id);
-//         setRooms(updatedResults);
-//     }
+    //     const updatedResults = rooms.filter((room) => room._id !== id);
+    //     setRooms(updatedResults);
+    // }
 
 //     return(
 //         <div>

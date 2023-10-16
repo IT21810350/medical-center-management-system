@@ -4,27 +4,31 @@ const Schema = mongoose.Schema;
 
 const medicineSchema = new Schema({
 
-    medicineName : {
+    medicineCode : {
         type :String,
         requied : true
     },
-    dosage : {
+    medicineName : {
         type: String,
         required : true
     },
-    medicineType : {
+    dosage : {
         type : String,
         required : true
     },
-    exoirtDate : {
+    medicineType : {
         type :String,
         required : true
     },
     availability : {
         type : String,
         required : true
+    },
+    expiryDate : {
+        type : String,
+        required : true
     }
-    
+   
 
 
 

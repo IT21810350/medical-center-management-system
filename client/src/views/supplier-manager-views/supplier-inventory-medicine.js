@@ -25,6 +25,8 @@ import { styled, alpha } from '@mui/material/styles';
 import jsPDF from 'jspdf';
 import 'jspdf-autotable';
 
+
+// Define your custom theme
 const theme = createTheme({
   palette: {
     primary: {
@@ -33,6 +35,9 @@ const theme = createTheme({
   },
 });
 
+
+
+// Create a styled search component
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
   borderRadius: theme.shape.borderRadius,
@@ -48,6 +53,7 @@ const Search = styled('div')(({ theme }) => ({
   },
 }));
 
+// Create a styled search icon wrapper
 const SearchIconWrapper = styled('div')(({ theme }) => ({
   padding: theme.spacing(0, 2),
   height: '100%',
@@ -58,6 +64,7 @@ const SearchIconWrapper = styled('div')(({ theme }) => ({
   justifyContent: 'center',
 }));
 
+// Create a styled input base component
 const StyledInputBase = styled(InputBase)(({ theme }) => ({
   color: 'inherit',
   '& .MuiInputBase-input': {
@@ -74,6 +81,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
+// Define the columns for your table
 const columns = [
   { field: 'drugCode', headerName: 'Drug Code', flex: 1 },
   { field: 'drugName', headerName: 'Drug Name', flex: 1 },
@@ -84,33 +92,24 @@ const columns = [
   { field: 'unitPrice', headerName: 'Unit Price', flex: 1 },
 ];
 
-const ConfirmModal = ({ open, onClose, onConfirm }) => {
-  return (
-    <Modal
-      open={open}
-      onClose={onClose}
-      aria-labelledby="modal-modal-title"
-      aria-describedby="modal-modal-description"
-    >
-      <Box sx={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', width: 300, bgcolor: 'background.paper', borderRadius: '20', p: 2 }}>
-        <p>Are you sure you want to remove this row?</p>
-        <Button style={{ color: 'red' }} onClick={onConfirm}>Yes</Button>
-        <Button onClick={onClose}>No</Button>
-      </Box>
-    </Modal>
-  );
+// Define a function to check if quantity is below reorder level
+const isQuantityBelowReorderLevel = (row) => {
+  const quantity = parseFloat(row.quantity);
+  const reorderLevel = parseFloat(row.reOrderLevel);
+  return quantity < reorderLevel;
 };
 
-export default function CombinedComponent() {
+const CombinedComponent = () => {
   const [rows, setRows] = useState([]);
   const [editableCell, setEditableCell] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [rowToRemove, setRowToRemove] = useState(null);
-  // const [isCellEdited, setIsCellEdited] = useState(false);
   const [editedRowIndex, setEditedRowIndex] = useState(null);
   const [, setSearchQuery] = useState('');
   const [fetchedRows, setFetchedRows] = useState([]);
+  const [, setExpiryDateFlag] = useState(false);
 
+  // Fetch data from API when component mounts
   useEffect(() => {
     fetch('http://localhost:4000/supplier/inventoryMedicine')
       .then(response => response.json())
@@ -140,11 +139,13 @@ export default function CombinedComponent() {
       });
   }, []);
 
+  // Handle click event to remove a row
   const handleRemoveClick = (index) => {
     setRowToRemove(index);
     setIsModalOpen(true);
   };
 
+  // Handle confirmation of row removal
   const handleConfirmRemove = async () => {
     try {
       const deletedItemId = rows[rowToRemove]._id;
@@ -166,16 +167,23 @@ export default function CombinedComponent() {
     }
   };
 
+  // Handle modal close
   const handleCloseModal = () => {
     setIsModalOpen(false);
   };
 
+  // Handle input change in a cell
   const handleInputChange = (index, name, value) => {
     const updatedRows = [...rows];
     updatedRows[index][name === '_id' ? name : name] = value;
+    if (name === 'expiryDate') {
+      const isExpiryDateLessThanTwoWeeks = isDateLessThanTwoWeeksAhead(value);
+      setExpiryDateFlag(isExpiryDateLessThanTwoWeeks);
+    }
     setRows(updatedRows);
   };
 
+  // Handle cell click event
   const handleCellClick = (index, name) => {
     if (name !== '_id') {
       setEditableCell({ index, name });
@@ -183,6 +191,7 @@ export default function CombinedComponent() {
     }
   };
 
+  // Handle form submission
   const handleSubmit = async (updatedRow) => {
     try {
       const updatedDrugData = {
@@ -196,7 +205,6 @@ export default function CombinedComponent() {
         unitPrice: updatedRow.unitPrice,
         reOrderLevel: updatedRow.reOrderLevel,
       };
-      
 
       const updatedRows = [...rows];
       updatedRows[editedRowIndex] = updatedRow;
@@ -219,6 +227,7 @@ export default function CombinedComponent() {
     }
   };
 
+  // Handle save button click
   const handleSave = (index) => {
     const updatedRow = rows[index];
 
@@ -226,6 +235,8 @@ export default function CombinedComponent() {
 
     if (isRowValid) {
       handleSubmit(updatedRow);
+      const isExpiryDateLessThanTwoWeeks = isDateLessThanTwoWeeksAhead(updatedRow.expiryDate);
+      setExpiryDateFlag(isExpiryDateLessThanTwoWeeks);
     } else {
       alert('Invalid data. Please fill all fields.');
     }
@@ -234,10 +245,22 @@ export default function CombinedComponent() {
     setEditedRowIndex(null);
   };
 
+  // Validate a row
   const validateRow = (row) => {
     return row.drugCode && row.drugName && row.specificationModel && row.unit && row.expiryDate && row.manufacturer && row.quantity && row.unitPrice && row.reOrderLevel;
   };
 
+  // Check if a date is less than two weeks ahead
+  const isDateLessThanTwoWeeksAhead = (expiryDate) => {
+    const twoWeeksFromNow = new Date();
+    twoWeeksFromNow.setDate(twoWeeksFromNow.getDate() + 14);
+
+    const expiryDateObject = new Date(expiryDate);
+
+    return expiryDateObject < twoWeeksFromNow;
+  };
+
+  // Add a new row to the table
   const addRow = () => {
     setRows([...rows, {
       drugCode: '',
@@ -252,6 +275,7 @@ export default function CombinedComponent() {
     }]);
   };
 
+  // Handle search input change
   const handleSearchChange = (e) => {
     const query = e.target.value.toLowerCase();
     setSearchQuery(query);
@@ -265,6 +289,7 @@ export default function CombinedComponent() {
     setRows(filteredRows);
   };
 
+  // Generate a report as a PDF
   const generateReport = async () => {
     const unit = 'pt';
     const size = 'A4';
@@ -287,7 +312,7 @@ export default function CombinedComponent() {
 
     doc.text(title, marginLeft, 40);
     doc.autoTable(content);
-    doc.save('supplier_list.pdf');
+    doc.save('Inventory.pdf');
   };
 
   return (
@@ -319,8 +344,7 @@ export default function CombinedComponent() {
         <Table sx={{ minWidth: 650 }} aria-label="simple table">
           <TableHead style={{ backgroundColor: '#BBDEFB', fontWeight: 'bold', fontSize: '28px' }}>
             <TableRow>
-              
-            <TableCell style={{ fontSize: '20px' , fontWeight: 'bold'}}>Drug Code</TableCell>
+              <TableCell style={{ fontSize: '20px', fontWeight: 'bold' }}>Drug Code</TableCell>
               <TableCell style={{ fontSize: '20px', fontWeight: 'bold' }}>Drug Name</TableCell>
               <TableCell style={{ fontSize: '20px', fontWeight: 'bold' }}>Specification Model</TableCell>
               <TableCell style={{ fontSize: '20px', fontWeight: 'bold' }}>Unit</TableCell>
@@ -334,20 +358,45 @@ export default function CombinedComponent() {
           </TableHead>
           <TableBody>
             {rows.map((row, index) => (
-              <TableRow key={index}>
+              <TableRow key={index} style={isQuantityBelowReorderLevel(row) ? { backgroundColor: 'yellow' } : null}>
+
                 {Object.keys(row).map((key) => {
                   if (key !== '_id') {
                     return (
-                      <TableCell key={key} onClick={() => handleCellClick(index, key)}>
-                        
+                      <TableCell
+                        key={key}
+                        onClick={() => handleCellClick(index, key)}
+                        style={{
+                          color: key === 'expiryDate' && isDateLessThanTwoWeeksAhead(row[key]) ? 'red' : 'inherit',
+                        }}
+                      >
                         {editableCell && editableCell.index === index && editableCell.name === key ? (
-                          
-                          <TextField
-                            fullWidth
-                            value={row[key]}
-                            onChange={(e) => handleInputChange(index, key, e.target.value)}
-                            style={{ fontSize: '20px' }}  // Add this style
-                          />
+                          key === 'expiryDate' ? (
+                            <input
+                              type="date"
+                              value={row[key]}
+                              onChange={(e) => handleInputChange(index, key, e.target.value)}
+                              style={{ fontSize: '20px' }}
+                              min={new Date().toISOString().split('T')[0]}
+                            />
+                          ) : (
+                            key !== 'quantity' && key !== 'unitPrice' && key !== 'reOrderLevel' ? (
+                              <TextField
+                                fullWidth
+                                value={row[key]}
+                                onChange={(e) => handleInputChange(index, key, e.target.value)}
+                                style={{ fontSize: 'px' }}
+                              />
+                            ) : (
+                              <TextField
+                                fullWidth
+                                value={row[key]}
+                                onChange={(e) => handleInputChange(index, key, e.target.value)}
+                                style={{ fontSize: '20px' }}
+                                type="number" // Added type="number" for numeric input
+                              />
+                            )
+                          )
                         ) : (
                           row[key]
                         )}
@@ -357,47 +406,60 @@ export default function CombinedComponent() {
                   return null;
                 })}
                 <TableCell>
-                  <Button
-                    variant="outlined"
-                    style={{ backgroundColor: '#E57373', color: '#8B0000' }}
-                    onClick={() => handleRemoveClick(index)}
-                  >
+                  <Button variant="outlined" style={{ backgroundColor: '#E57373', color: '#8B0000' }} onClick={() => handleRemoveClick(index)}>
                     Remove
                   </Button>
                 </TableCell>
-
                 <TableCell>
                   {editedRowIndex === index ? (
-                    <Button
-                      variant="contained"
-                      style={{ backgroundColor: '#A5D6A7', color: '#004D40' }}
-                      onClick={() => handleSave(index)}
-                    >
+                    <Button variant="contained" style={{ backgroundColor: '#A5D6A7', color: '#004D40' }} onClick={() => handleSave(index)}>
                       Save
                     </Button>
                   ) : null}
                 </TableCell>
-
               </TableRow>
             ))}
           </TableBody>
-          <ConfirmModal open={isModalOpen} onClose={handleCloseModal} onConfirm={handleConfirmRemove} />
         </Table>
+        <ConfirmModal open={isModalOpen} onClose={handleCloseModal} onConfirm={handleConfirmRemove} />
       </TableContainer>
-      <Button 
-  variant="outlined" 
-  style={{ backgroundColor: '#FFCDD2', color: '#8B0000' }}
-  onClick={addRow}
->
-  Add Row
-</Button>
 
-      <Button 
-      variant="outlined"
-      style={{ backgroundColor: 'rgba(255, 255, 0, 0.5)', color: '#004D40' }}
-       onClick={generateReport}>
+      <Button
+        variant="outlined"
+        style={{ backgroundColor: '#FFCDD2', color: '#8B0000' }}
+        onClick={addRow}
+      >
+        Add Row
+      </Button>
+
+      <Button
+        variant="outlined"
+        style={{ backgroundColor: 'lightgreen', color: '#004D40 !important' }}
+        onClick={generateReport}
+      >
         Generate Report
       </Button>
     </ThemeProvider>
   );
-}
+};
+
+const ConfirmModal = ({ open, onClose, onConfirm }) => {
+  return (
+    <Modal
+      open={open}
+      onClose={onClose}
+      aria-labelledby="modal-modal-title"
+      aria-describedby="modal-modal-description"
+    >
+      <Box sx={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', width: 300, bgcolor: 'background.paper', borderRadius: '20', p: 2 }}>
+        <p>Are you sure you want to remove this row?</p>
+        <Button style={{ color: 'red' }} onClick={onConfirm}>Yes</Button>
+        <Button onClick={onClose}>No</Button>
+      </Box>
+    </Modal>
+  );
+};
+
+
+export default CombinedComponent;
+

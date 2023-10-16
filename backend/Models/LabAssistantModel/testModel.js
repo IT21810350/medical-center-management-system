@@ -1,29 +1,29 @@
 const mongoose = require("mongoose");
 
-const lab_test = new mongoose.Schema({
-    result_id : {
-        type : String,
+const testSchema = new mongoose.Schema({
+    test_name: {
+        type: String,
+        required: true,
+        trim: true // removes leading/trailing whitespaces
     },
-    sample_id : { // refer to sample id in the sample table 
-        type : String,
+    test_date: {
+        type: Date,
+        required: true
     },
-    test_name : {
-        type : String,
+    lab_assistant_name: {
+        type: String,
+        required: true,
+        trim: true
     },
-    test_date : {
-        type : Date,
-    },
-    lab_assistant_id : {
-        type : String,
-    },
-    result_data : {
-        type : String,
+    result_data: {
+        type: String,
+        required: true,
+        trim: true
     }
-},
-    {
-        timestamps : true
-    });
+}, {
+    timestamps: true
+});
 
-const LabTest = mongoose.model("LabTest",lab_test);
+const Test = mongoose.model("Test", testSchema);
 
-module.exports = LabTest;
+module.exports = Test;

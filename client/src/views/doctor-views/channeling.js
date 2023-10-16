@@ -16,7 +16,8 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import axios from "axios";
 import backgroundImage from '../../assets/img/common/home-hero-background-img.jpg';
-
+import Swal from 'sweetalert2';
+import { Link } from 'react-router-dom';
 
 
 const HeroSection = () => {
@@ -57,38 +58,48 @@ const SearchContainer = () => {
     });
 
     const [data, setData] = useState([]);
+    const [isLoading, setIsLoading] = useState(true);
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
         setSearchParams({
             ...searchParams,
-            [name]: value
+            [name]: value,
         });
     };
 
     const handleSearch = async () => {
-        
-        try {
-            const response = await axios.post(
-                'http://localhost:4000/search-channeling',
-                {
-                    ...searchParams,
-                },
-                {
-                    withCredentials: true,
-                }
-            );
+        setIsLoading(true);
+        Swal.fire({
+            title: 'Loading...',
+            allowOutsideClick: false,
+            showConfirmButton: false,
+            onBeforeOpen: () => {
+                Swal.showLoading();
+            },
+        });
 
-            setData(response);
+        try {
+            const response = await axios.post('http://localhost:4000/search-channeling', {
+                ...searchParams,
+            });
+
+            setData(response.data.Channelings);
         } catch (error) {
             console.error('Error:', error);
+        } finally {
+            setIsLoading(false);
+            Swal.close(); // Close the loading popup
         }
-
     };
 
-    // useEffect(() => {
-    //     handleSearch();
-    // }, []);
+    useEffect(() => {
+        handleSearch();
+    }, []);
+
+    if (isLoading) {
+        return null; // Render nothing while loading
+    }
 
     return (
         <Container maxWidth="100px">
@@ -159,21 +170,28 @@ const LoadData = ({ data }) => {
         <Table >
             <TableHead >
                 <TableRow>
-                    <TableCell>Patient Name</TableCell>
-                    <TableCell>Date</TableCell>
-                    <TableCell>Time</TableCell>
-                    <TableCell>Channeling Serverity</TableCell>
-                    <TableCell>Action</TableCell>
+                    <TableCell><strong>Patient Name</strong></TableCell>
+                    <TableCell><strong>Date</strong></TableCell>
+                    <TableCell><strong>Time</strong></TableCell>
+                    <TableCell><strong>Action</strong></TableCell>
                 </TableRow>
             </TableHead>
             <TableBody>
                 {data.map((item) => (
                     <TableRow key={item.id}>
-                        <TableCell>{item.patientName}</TableCell>
-                        <TableCell>{item.date}</TableCell>
-                        <TableCell>{item.fromTime}</TableCell>
-                        <TableCell>{item.channelingSeverity}</TableCell>
-
+                        <TableCell>{item.patient.profile && item.patient.profile.fName ? item.patient.profile.fName : 'Name N/A'}</TableCell>
+                        <TableCell>{item.date ? new Date(item.date).toLocaleDateString('en-US') : 'Date N/A'}</TableCell>
+                        <TableCell>{item.date ? new Date(item.date).toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: true }) : 'Date N/A'}</TableCell>
+                        <TableCell>
+                            <Link to={`/symptoms/${item._id}`}>
+                                <Button
+                                    variant="outlined"
+                                    color="primary"
+                                >
+                                    View
+                                </Button>
+                            </Link>
+                        </TableCell>
                     </TableRow>
                 ))}
             </TableBody>

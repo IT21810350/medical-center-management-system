@@ -166,10 +166,6 @@ function ResponsiveAppBar() {
                         ))}
                     </Box>
 
-                    <Link style={{ textDecoration: 'none' }} onClick={handleLogout}>
-                        <Typography textAlign="center">Log Out</Typography>
-                    </Link>
-
                     <Box sx={{ flexGrow: 0 }}>
                         <Tooltip title="Open settings">
                             <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
@@ -194,11 +190,15 @@ function ResponsiveAppBar() {
                             onClose={handleCloseUserMenu}
                         >
                             <MenuItem onClick={handleCloseUserMenu}>
-                                <Typography textAlign="center">Profile</Typography>
+                                <Link to="/your-profile" style={{ textDecoration: 'none' }}>
+                                    <Typography textAlign="center">Profile</Typography>
+                                </Link>
                             </MenuItem>
 
                             <MenuItem onClick={handleCloseUserMenu}>
-                                <Typography textAlign="center">Logout</Typography>
+                                <Link style={{ textDecoration: 'none' }} onClick={handleLogout}>
+                                    <Typography textAlign="center">Log Out</Typography>
+                                </Link>
                             </MenuItem>
                         </Menu>
                     </Box>

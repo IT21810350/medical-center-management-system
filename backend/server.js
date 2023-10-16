@@ -20,6 +20,19 @@ const getDoctors = require("./Routes/Patient_Routes/getDoctors");
 const getChannels = require("./Routes/Patient_Routes/channeling-routes");
 //========================================
 
+//========Financial Routes=====================
+
+const claimRouter = require('./Routes/FM_Routes/ClaimRoute');
+const contractRouter = require('./Routes/FM_Routes/ContractRoute');
+const invoiceRouter= require('./Routes/FM_Routes/InvoiceRoute');
+const paymentROuter= require('./Routes/FM_Routes/PaymentRoute');
+const transactionRouter= require('./Routes/FM_Routes/TransactionRoute');
+
+
+
+
+//===============================================
+
 
 // Lab Assistant Route start
 const equipmentRouter = require("./Routes/LabAssistant_Routes/EquipmentRoute");
@@ -29,8 +42,8 @@ const sampleRouter = require("./Routes/LabAssistant_Routes/SampleRoute");
 const testRouter = require("./Routes/LabAssistant_Routes/TestRoute");
 
 
+
 const validationRoute = require("./Routes/ValidateRoutes");
-const SupplierPayment = require('./Models/SupplierManagerModel/SupplierPayment');
 const { MONGO_URL, PORT } = process.env;
 
 const app = express();
@@ -85,9 +98,15 @@ app.use("/room-type", RoomType);
 // lab assistant routes end
 app.use("/",sampleRouter,testRouter,reportRouter,labAssistantRouter,equipmentRouter);
 
-//Hansanie
+//Pharmacist
 app.use("/pharmacistProfile",PharmacistRoutes);
+app.use("/addMedicine",PharmacistRoutes);
+
 
 app.listen(PORT, () => {
     console.log(`Server is running on port: ${PORT}`);
 });
+
+//Kaveesha
+app.use("/",claimRouter,contractRouter,invoiceRouter,paymentROuter,transactionRouter);
+

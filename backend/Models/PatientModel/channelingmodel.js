@@ -5,12 +5,28 @@ const channelingSchema = new mongoose.Schema({
   //appointmentNumber: String,
   patient: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'Patient',
+    refPath: 'User'
+  },
+  booking: {
+    type: String,
+    required: true
   },
   doctor: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'Doctor',
+    refPath: 'DoctorProfile'
   },
+  symptoms: [{
+    type: mongoose.Schema.Types.ObjectId,
+    refPath: 'Symptoms'
+  }],
+  prescription:[{
+    type: mongoose.Schema.Types.ObjectId,
+    refPath: 'Prescriptions'
+  }],
+  labReports:[{
+    type: mongoose.Schema.Types.ObjectId,
+    refPath: 'Report'
+  }]
   // prescription: {
   //   type: mongoose.Schema.Types.ObjectId,
   //   ref: 'Prescription',

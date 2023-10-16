@@ -112,75 +112,53 @@ const NextAppointmentCard = () => {
 };
 
 const UpcomingChanneling = () => {
+  const [channelingData, setChannelingData] = useState([]);
+
+  useEffect(() => {
+    // Use Axios to fetch data from the API
+    axios.get('http://localhost:4000/get-channelings')
+      .then((response) => {
+        // Update the state with the fetched data
+        setChannelingData(response.data.channelings);
+      })
+      .catch((error) => {
+        console.error('Error fetching data:', error);
+      });
+  }, []);
 
   return (
     <Table>
       <TableHead>
         <TableRow>
-          <TableCell>Patient Name</TableCell>
-          <TableCell>Date</TableCell>
-          <TableCell>Time</TableCell>
-          <TableCell>Servirity Level</TableCell>
-          <TableCell>View</TableCell>
+          <TableCell><strong>Patient Name</strong></TableCell>
+          <TableCell><strong>Date</strong></TableCell>
+          <TableCell><strong>Time</strong></TableCell>
+          <TableCell><strong>View</strong></TableCell>
         </TableRow>
       </TableHead>
       <TableBody>
-
-        <TableRow>
-          <TableCell>malshan</TableCell>
-          <TableCell>13/09/2023</TableCell>
-          <TableCell>1.00 PM</TableCell>
-          <TableCell>low</TableCell>
-          <TableCell>
-            <Link to="/symptoms">
-              <Button
-                variant="outlined"
-                color="primary"
-              >
-                View
-              </Button>
-            </Link>
-          </TableCell>
-        </TableRow>
-
-        <TableRow>
-          <TableCell>kaveesha</TableCell>
-          <TableCell>13/09/2023</TableCell>
-          <TableCell>3.00 PM</TableCell>
-          <TableCell>low</TableCell>
-          <TableCell>
-            <Link to="/symptoms">
-              <Button
-                variant="outlined"
-                color="primary"
-              >
-                View
-              </Button>
-            </Link>
-          </TableCell>
-        </TableRow>
-
-        <TableRow>
-          <TableCell>ravindu</TableCell>
-          <TableCell>14/09/2023</TableCell>
-          <TableCell>4.00 PM</TableCell>
-          <TableCell>medium</TableCell>
-          <TableCell>
-            <Link to="/symptoms">
-              <Button
-                variant="outlined"
-                color="primary"
-              >
-                View
-              </Button>
-            </Link>
-          </TableCell>
-        </TableRow>
-
+        {channelingData.map((item) => (
+          <TableRow key={item._id}>
+            <TableCell>{item.patient.profile && item.patient.profile.fName ? item.patient.profile.fName : 'Name N/A'}</TableCell>
+            <TableCell>{item.date ? new Date(item.date).toLocaleDateString('en-US') : 'Date N/A'}</TableCell>
+            <TableCell>{item.date ? new Date(item.date).toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: true }) : 'Date N/A'}</TableCell>
+            <TableCell>
+              <Link to={`/symptoms/${item._id}`}>
+                <Button
+                  variant="outlined"
+                  color="primary"
+                >
+                  View
+                </Button>
+              </Link>
+            </TableCell>
+          </TableRow>
+        ))}
       </TableBody>
     </Table>
   );
 };
+
 
 
 

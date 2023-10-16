@@ -161,7 +161,7 @@ router.route("/").get((req,res)=>{
 //     });
 
 router.route("/update/:id").put(async (req, res) => {
-  const patientId = req.params.id; // Extract the patient ID from the request parameters
+  //const patientId = req.params.id; // Extract the patient ID from the request parameters
 
   // const { country, identity, firstName, lastName, gender, dob, phone, email, address, gName, relation, gId, gContact } = req.body;
 
@@ -180,12 +180,12 @@ router.route("/update/:id").put(async (req, res) => {
   //     relation,
   //     gId,
   //     gContact,
-  // };
+  // }; 
 
   try {
       // Use findByIdAndUpdate to find and update the patient
       // const updatedPatient = await Patient.findByIdAndUpdate(patientId, updatePatient);
-      const updatedPatient = await Patient.findByIdAndUpdate(patientId, req.body, { new: true, runValidators: true });
+      const updatedPatient = await Patient.findByIdAndUpdate(req.params.id, req.body, { new: true, runValidators: true });
 
       if (!updatedPatient) {
           return res.status(404).send({ status: "Patient not found" });
