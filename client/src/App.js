@@ -108,8 +108,8 @@ function App() {
         {/* Doctor Routes */}
         <Route path="/doctor" element={<Doctor />} />
         <Route path="/channeling" element={<Channeling />} />
-        <Route path="/symptoms" element={<Symptoms />} />
-        <Route path="/prescription" element={<Prescription />} />
+        <Route path="/symptoms/:channelingId" element={<Symptoms />} />
+        <Route path="/prescription/:channelingId" element={<Prescription />} />
         <Route path="/doctor-create-profile" element={<DoctorProfileCreate />} />
         <Route path="/your-profile" element={<DoctorProfile/>}/>
 

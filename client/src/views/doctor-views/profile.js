@@ -280,6 +280,7 @@ const AvailableTime = () => {
                                     name={`startTime_${index}`}
                                     margin="normal"
                                     variant="outlined"
+                                    type="time"
                                     value={time.startTime}
                                     onChange={(e) => handleTimeChange(index, 'startTime', e.target.value)}
                                 />
@@ -289,6 +290,7 @@ const AvailableTime = () => {
                                     name={`endTime_${index}`}
                                     margin="normal"
                                     variant="outlined"
+                                    type="time"
                                     value={time.endTime}
                                     onChange={(e) => handleTimeChange(index, 'endTime', e.target.value)}
                                 />

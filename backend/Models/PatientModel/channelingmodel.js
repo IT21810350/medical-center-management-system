@@ -19,10 +19,10 @@ const channelingSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     refPath: 'Symptoms'
   }],
-  prescription:{
+  prescription:[{
     type: mongoose.Schema.Types.ObjectId,
     refPath: 'Prescriptions'
-  },
+  }],
   labReports:[{
     type: mongoose.Schema.Types.ObjectId,
     refPath: 'Report'
