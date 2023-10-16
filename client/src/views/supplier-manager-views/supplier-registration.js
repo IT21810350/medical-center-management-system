@@ -14,7 +14,7 @@ import SearchIcon from '@mui/icons-material/Search';
 import { styled, alpha } from '@mui/material/styles';
 import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
-
+import img11 from '../../assets/img/supplier/reg-background.png';
 
 
 const Search = styled('div')(({ theme }) => ({
@@ -52,10 +52,21 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
     [theme.breakpoints.up('sm')]: {
       width: '12ch',
       '&:focus': {
-        width: '20ch',
+        width: '12ch',
       },
     },
   },
+}));
+const BackgroundContainer = styled(Container)(({ theme }) => ({
+  backgroundImage: `../../assets/img/supplier/reg-background.png(${img11})`, // Set the background image
+  backgroundSize: 'cover',
+  backgroundPosition: 'center',
+  position: 'absolute',
+  top: 0,
+  left: 0,
+  width: '100%',
+  height: '100%',
+  zIndex: -3,
 }));
 
 export default function App() {
@@ -106,7 +117,7 @@ export default function App() {
 
   return (
     <div>
-  <AppBar position="static" sx={{ marginBottom: '20px' }}>
+      <AppBar position="static" sx={{ marginBottom: '0px', marginTop: '0px' }}>
 
         <Toolbar>
           <IconButton
@@ -138,112 +149,124 @@ export default function App() {
         </Toolbar>
       </AppBar>
       <Container maxWidth="sm">
-      <Box sx={{ p: 3, border: '2px solid #90A4AE', borderRadius: '8px', backgroundColor: '#FFFFFF', margin: '20px 0' }}>
-          <h1 style={{ textAlign: 'center' }}>Supplier Registration</h1>
+        <BackgroundContainer>
+        <Box sx={{ 
+  p: 3, 
+  border: '2px solid #90A4AE', 
+  borderRadius: '8px', 
+  backgroundColor: '#FFFFFF', 
+  margin: '10px 0',  // Increase the top margin to 30px
+  marginTop: '25px', // Adjust top margin further if needed
+  marginBottom: '15px' // Decrease the bottom margin to 15px
+}}>
 
-          <Grid container spacing={2}>
-            <Grid item xs={6}>
-              <TextField
-                required
-                fullWidth
-                id="outlined-required-first-name"
-                label="First Name"
-                value={FirstName}
-                onChange={handleInputChange}
-                name="FirstName"
-              />
-            </Grid>
-            <Grid item xs={6}>
-              <TextField
-                required
-                fullWidth
-                id="outlined-required-last-name"
-                label="Last Name"
-                value={LastName}
-                onChange={handleInputChange}
-                name="LastName"
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <TextField
-                required
-                fullWidth
-                id="outlined-required-email"
-                label="Email Address"
-                type="email"
-                value={Email}
-                onChange={handleInputChange}
-                name="Email"
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <TextField
-                required
-                fullWidth
-                id="outlined-required-address"
-                label="Address"
-                value={Address}
-                onChange={handleInputChange}
-                name="Address"
-              />
-            </Grid>
-            <Grid item xs={6}>
-              <TextField
-                required
-                fullWidth
-                id="outlined-required-phone"
-                label="Phone Numbers"
-                value={PhoneNumber}
-                onChange={handleInputChange}
-                name="PhoneNumber"
-                inputProps={{ inputMode: 'numeric', pattern: '[0-9]*' }}
-              />
+
+            <h1  style={{ textAlign: 'center' }}>Supplier Registration</h1>
+
+            <Grid container spacing={2}>
+              <Grid item xs={6}>
+                <TextField
+                  required
+                  fullWidth
+                  id="outlined-required-first-name"
+                  label="First Name"
+                  value={FirstName}
+                  onChange={handleInputChange}
+                  name="FirstName"
+                />
+              </Grid>
+              <Grid item xs={6}>
+                <TextField
+                  required
+                  fullWidth
+                  id="outlined-required-last-name"
+                  label="Last Name"
+                  value={LastName}
+                  onChange={handleInputChange}
+                  name="LastName"
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  required
+                  fullWidth
+                  id="outlined-required-email"
+                  label="Email Address"
+                  type="email"
+                  value={Email}
+                  onChange={handleInputChange}
+                  name="Email"
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  required
+                  fullWidth
+                  id="outlined-required-address"
+                  label="Address"
+                  value={Address}
+                  onChange={handleInputChange}
+                  name="Address"
+                />
+              </Grid>
+              <Grid item xs={6}>
+                <TextField
+                  required
+                  fullWidth
+                  id="outlined-required-phone"
+                  label="Phone Numbers"
+                  value={PhoneNumber}
+                  onChange={handleInputChange}
+                  name="PhoneNumber"
+                  inputProps={{ inputMode: 'numeric', pattern: '[0-9]*' }}
+                />
+              </Grid>
+
+              <Grid item xs={6}>
+                <TextField
+                  required
+                  fullWidth
+                  id="outlined-required-nic"
+                  label="NIC Number"
+                  value={NIC}
+                  onChange={handleInputChange}
+                  name="NIC"
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  required
+                  fullWidth
+                  id="outlined-required-company-name"
+                  label="Company Name"
+                  value={CompanyName}
+                  onChange={handleInputChange}
+                  name="CompanyName"
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  required
+                  fullWidth
+                  id="outlined-required-bio"
+                  label="Your Bio"
+                  multiline
+                  rows={4}
+                  value={Bio}
+                  onChange={handleInputChange}
+                  name="Bio"
+                />
+              </Grid>
             </Grid>
 
-            <Grid item xs={6}>
-              <TextField
-                required
-                fullWidth
-                id="outlined-required-nic"
-                label="NIC Number"
-                value={NIC}
-                onChange={handleInputChange}
-                name="NIC"
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <TextField
-                required
-                fullWidth
-                id="outlined-required-company-name"
-                label="Company Name"
-                value={CompanyName}
-                onChange={handleInputChange}
-                name="CompanyName"
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <TextField
-                required
-                fullWidth
-                id="outlined-required-bio"
-                label="Your Bio"
-                multiline
-                rows={4}
-                value={Bio}
-                onChange={handleInputChange}
-                name="Bio"
-              />
-            </Grid>
-          </Grid>
+            <Box sx={{ display: 'flex', justifyContent: 'left', mt: 2 }}>
+              <Button variant="contained" color="primary" onClick={handleSubmit}>
+                Submit
+              </Button>
+            </Box>
 
-          <Box sx={{ display: 'flex', justifyContent: 'left', mt: 2 }}>
-            <Button variant="contained" color="primary" onClick={handleSubmit}>
-              Submit
-            </Button>
           </Box>
-
-        </Box>
+        </BackgroundContainer>
       </Container>
     </div>
   );

@@ -13,7 +13,7 @@ import {
 } from '@mui/material';
 import Axios from 'axios';
 import { Link } from 'react-router-dom';
-import NavBar from '../../../components/LA-component/la-nav-bar';
+import NavBar from '../../components/LA-component/la-nav-bar';
 
 const Reports = () => {
   const [reports, setReports] = useState([]);
@@ -67,12 +67,11 @@ const Reports = () => {
       .catch((error) => console.error(error));
   };
 
-  // Update filtered reports based on the search term
+  // Update filtered reports based on the search term for report_name
   useEffect(() => {
     const filtered = reports.filter(
       (report) =>
-        report.report_name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        report.report_id.toLowerCase().includes(searchTerm.toLowerCase())
+        report.report_name.toLowerCase().includes(searchTerm.toLowerCase())
     );
     setFilteredReports(filtered);
   }, [searchTerm, reports]);
@@ -80,7 +79,7 @@ const Reports = () => {
   return (
     <div>
       <NavBar />
-      <h1 style={{ fontSize: '50px', fontFamily: 'Arial, sans-serif', fontWeight:'bold' }}>Reports</h1>
+      <h1 style={{ fontSize: '50px', fontFamily: 'Arial, sans-serif', fontWeight: 'bold' }}>Reports</h1>
 
       {/* Search Bar */}
       <TextField
@@ -93,13 +92,6 @@ const Reports = () => {
 
       {/* Create Report Form */}
       <Paper elevation={3} style={{ padding: '20px', marginBottom: '20px' }}>
-        <TextField
-          label="Report ID"
-          variant="outlined"
-          value={newReport.report_id}
-          onChange={(e) => setNewReport({ ...newReport, report_id: e.target.value })}
-          style={{ marginRight: '10px', fontSize: '28px' }}
-        />
         <TextField
           label="Report Name"
           variant="outlined"
@@ -142,18 +134,16 @@ const Reports = () => {
         <Table>
           <TableHead>
             <TableRow>
-              <TableCell style={{ fontSize: '30px', fontWeight:'bold' }} >Report ID</TableCell>
-              <TableCell style={{ fontSize: '30px',  fontWeight:'bold'  }}>Report Name</TableCell>
-              <TableCell style={{ fontSize: '30px',  fontWeight:'bold'  }}>Created Date</TableCell>
-              <TableCell style={{ fontSize: '30px', fontWeight:'bold'  }}>Content</TableCell>
-              <TableCell style={{ fontSize: '30px',  fontWeight:'bold'  }}>Lab Assistant Name</TableCell>
-              <TableCell style={{ fontSize: '30px',  fontWeight:'bold'  }}>Actions</TableCell>
+              <TableCell style={{ fontSize: '30px', fontWeight: 'bold' }}>Report Name</TableCell>
+              <TableCell style={{ fontSize: '30px', fontWeight: 'bold' }}>Created Date</TableCell>
+              <TableCell style={{ fontSize: '30px', fontWeight: 'bold' }}>Content</TableCell>
+              <TableCell style={{ fontSize: '30px', fontWeight: 'bold' }}>Lab Assistant Name</TableCell>
+              <TableCell style={{ fontSize: '30px', fontWeight: 'bold' }}>Actions</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
             {filteredReports.map((report) => (
               <TableRow key={report._id}>
-                <TableCell style={{ fontSize: '27px' }}>{report.report_id}</TableCell>
                 <TableCell style={{ fontSize: '27px' }}>{report.report_name}</TableCell>
                 <TableCell style={{ fontSize: '27px' }}>{new Date(report.created_date).toLocaleDateString()}</TableCell>
                 <TableCell style={{ fontSize: '27px' }}>{report.content}</TableCell>
