@@ -39,13 +39,6 @@ const UpdateTest = () => {
       <Paper elevation={3} style={{ padding: '20px', marginBottom: '20px' }}>
         <Grid container spacing={2}>
           <Grid item xs={6}>
-            <TextField
-              label="Report ID"
-              variant="outlined"
-              fullWidth
-              value={report.report_id}
-              onChange={(e) => setReport({ ...report, report_id: e.target.value })}
-            />
           </Grid>
           <Grid item xs={6}>
             <TextField

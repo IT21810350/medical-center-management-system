@@ -70,33 +70,62 @@ router.route("/").get((req, res) => {
   })
 });
 
+// router.route("/updatec/:id").put(async (req, res) => {
+//   const cId = req.params.id;
+//   const { date, time, patient, doctor, } = req.body;
+
+//   try {
+//     // Find the inquiry by ID
+//     const channel = await Channels.findById(cId);
+
+//     if (!channel) {
+//       return res.status(404).send({ status: "Inq not found" });
+//     }
+
+//     // Update the inquiry details
+//     channel.date = date;
+//     channel.time = time;
+//     channel.patient = patient;
+//     channel.doctor = doctor;
+
+//     // Save the updated inquiry
+//     await channel.save();
+
+//     return res.status(200).send({ status: "channel details updated successfully" });
+//   } catch (err) {
+//     console.error(err);
+//     return res.status(500).send({ status: "Error with updating channel", error: err.message });
+//   }
+// });
+
 router.route("/updatec/:id").put(async (req, res) => {
   const cId = req.params.id;
-  const { date, time, patient, doctor, } = req.body;
+  const { date, time, patient, doctor } = req.body; // Removed the extra comma
 
   try {
-    // Find the inquiry by ID
+    // Find the channel by ID
     const channel = await Channels.findById(cId);
 
     if (!channel) {
-      return res.status(404).send({ status: "Inq not found" });
+      return res.status(404).json({ status: "Channel not found" }); // Changed .send to .json
     }
 
-    // Update the inquiry details
+    // Update the channel details
     channel.date = date;
     channel.time = time;
     channel.patient = patient;
     channel.doctor = doctor;
 
-    // Save the updated inquiry
+    // Save the updated channel
     await channel.save();
 
-    return res.status(200).send({ status: "channel details updated successfully" });
+    return res.status(200).json({ status: "Channel details updated successfully" }); // Changed .send to .json
   } catch (err) {
     console.error(err);
-    return res.status(500).send({ status: "Error with updating channel", error: err.message });
+    return res.status(500).json({ status: "Error with updating channel", error: err.message }); // Changed .send to .json
   }
 });
+
 
 
 // DELETE
@@ -106,7 +135,7 @@ router.route("/deletec/:id").delete(async (req, res) => {
 
   try {
     // Use findByIdAndDelete to find and delete the inq
-    const deleteC = await Inquiries.findByIdAndDelete(cId);
+    const deleteC = await Channeling.findByIdAndDelete(cId);
 
     if (!deleteC) {
       return res.status(404).send({ status: "Chanenl not found" });
