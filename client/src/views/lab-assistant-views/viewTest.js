@@ -13,6 +13,7 @@ import {
 import Axios from 'axios';
 import { Link } from 'react-router-dom';
 import NavBar from '../../components/LA-component/la-nav-bar';
+import jsPDF from 'jspdf';
 
 const Test = () => {
   const [tests, setTests] = useState([]);
@@ -102,6 +103,33 @@ const Test = () => {
     setFilteredTests(filtered);
   }, [searchTerm, tests]);
 
+  const handleGenerateReport = () => {
+    // Fetch data from the server
+    Axios.get('http://localhost:4000/tests')
+      .then((response) => {
+        const testsData = response.data.tests;
+  
+        // Create a new instance of jsPDF
+        const pdf = new jsPDF();
+  
+        // Add content to the PDF
+        pdf.text('Test Report', 10, 10);
+        testsData.forEach((test, index) => {
+          const yPosition = 20 + index * 10;
+          pdf.text(`Test Name: ${test.test_name}`, 10, yPosition,'\n');
+          pdf.text(`Test Date: ${new Date(test.test_date).toLocaleDateString()}`, 10, yPosition + 5,'\n');
+          pdf.text(`Lab Assistant Name: ${test.lab_assistant_name}`, 10, yPosition + 10,'\n');
+          pdf.text(`Result Data: ${test.result_data}`, 10, yPosition + 15,'\n');
+          pdf.text('-------------------------------------', 10, yPosition + 20,'\n');
+        });
+  
+        // Save the PDF
+        pdf.save('test_report.pdf');
+      })
+      .catch((error) => console.error(error));
+  };
+
+  
   return (
     <div>
       <NavBar />
@@ -180,6 +208,9 @@ const Test = () => {
                 <TableCell>{test.lab_assistant_name}</TableCell>
                 <TableCell>{test.result_data}</TableCell>
                 <TableCell>
+                <Button variant="contained" color="primary" onClick={handleGenerateReport}>
+                  Generate Report
+                </Button>
                   <Button variant="contained" color="primary" component={Link} to={`/lab-test/update/${test._id}`}>
                     Update
                   </Button>
