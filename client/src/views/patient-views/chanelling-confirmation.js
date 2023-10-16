@@ -376,7 +376,7 @@ export default function PaymentDetails() {
 
     const location = useLocation();
     const bookingId = new URLSearchParams(location.search).get('bookingId');
-    const date = new URLSearchParams(location.search).get('date')
+    const date = new URLSearchParams(location.search).get('channelDate')
     const patientId = id; // Actual patient ID
 
     const [upcoming, setUpcoming] = useState(null);
@@ -411,6 +411,8 @@ export default function PaymentDetails() {
                 console.error('Error fetching doctor details:', error);
             });
     }, [bookingId]);
+
+    
 
     // Function to handle payment confirmation
     const handlePaymentConfirmation = async (doctorId) => {
