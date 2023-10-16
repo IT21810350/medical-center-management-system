@@ -67,12 +67,11 @@ const Reports = () => {
       .catch((error) => console.error(error));
   };
 
-  // Update filtered reports based on the search term
+  // Update filtered reports based on the search term for report_name
   useEffect(() => {
     const filtered = reports.filter(
       (report) =>
-        report.report_name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        report.report_id.toLowerCase().includes(searchTerm.toLowerCase())
+        report.report_name.toLowerCase().includes(searchTerm.toLowerCase())
     );
     setFilteredReports(filtered);
   }, [searchTerm, reports]);
@@ -80,7 +79,7 @@ const Reports = () => {
   return (
     <div>
       <NavBar />
-      <h1 style={{ fontSize: '50px', fontFamily: 'Arial, sans-serif', fontWeight:'bold' }}>Reports</h1>
+      <h1 style={{ fontSize: '50px', fontFamily: 'Arial, sans-serif', fontWeight: 'bold' }}>Reports</h1>
 
       {/* Search Bar */}
       <TextField
@@ -135,11 +134,11 @@ const Reports = () => {
         <Table>
           <TableHead>
             <TableRow>
-              <TableCell style={{ fontSize: '30px',  fontWeight:'bold'  }}>Report Name</TableCell>
-              <TableCell style={{ fontSize: '30px',  fontWeight:'bold'  }}>Created Date</TableCell>
-              <TableCell style={{ fontSize: '30px', fontWeight:'bold'  }}>Content</TableCell>
-              <TableCell style={{ fontSize: '30px',  fontWeight:'bold'  }}>Lab Assistant Name</TableCell>
-              <TableCell style={{ fontSize: '30px',  fontWeight:'bold'  }}>Actions</TableCell>
+              <TableCell style={{ fontSize: '30px', fontWeight: 'bold' }}>Report Name</TableCell>
+              <TableCell style={{ fontSize: '30px', fontWeight: 'bold' }}>Created Date</TableCell>
+              <TableCell style={{ fontSize: '30px', fontWeight: 'bold' }}>Content</TableCell>
+              <TableCell style={{ fontSize: '30px', fontWeight: 'bold' }}>Lab Assistant Name</TableCell>
+              <TableCell style={{ fontSize: '30px', fontWeight: 'bold' }}>Actions</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
