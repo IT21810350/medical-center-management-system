@@ -8,8 +8,7 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import Paper from '@mui/material/Paper';
-import Link from '@mui/material/Link';
-
+import { Link } from 'react-router-dom';
 
 // Corrected file paths for image imports
 import img1 from '../../assets/img/pharmacist/PharmacistProfile.jpeg';
@@ -17,15 +16,24 @@ import img2 from '../../assets/img/pharmacist/MedicineStore.jpeg';
 import img3 from '../../assets/img/pharmacist/MedicineOrder.jpeg';
 import img4 from '../../assets/img/pharmacist/MedicineSales.jpeg';
 
+const cardStyle = {
+  maxWidth: 345,
+  height: '100%', // Fixed height for all cards
+};
+
+const cardImageStyle = {
+  height: 260, // Fixed height for all card images
+};
+
 const PharmacistProfile = () => {
   return (
     <Grid item xs={3}>
-      <Card sx={{ maxWidth: 345 }}>
+      <Card sx={cardStyle}>
         <Link to="/pharmacistProfile" style={{ textDecoration: 'none' }}>
           <CardActionArea>
             <CardMedia
               component="img"
-              height="260"
+              sx={cardImageStyle}
               image={img1}
               alt="Pharmacist Profile"
             />
@@ -34,7 +42,7 @@ const PharmacistProfile = () => {
                 Pharmacist Profile
               </Typography>
               <Typography variant="body2" color="text.secondary">
-              A highly trained healthcare professional responsible for ensuring the safe and effective use of medications.
+                A highly trained healthcare professional responsible for ensuring the safe and effective use of medications.
               </Typography>
             </CardContent>
           </CardActionArea>
@@ -47,12 +55,12 @@ const PharmacistProfile = () => {
 const MedicineStore = () => {
   return (
     <Grid item xs={3}>
-      <Card sx={{ maxWidth: 345 }}>
-        <Link to="/pharmacist/medicineStore" style={{ textDecoration: 'none' }}>
+      <Card sx={cardStyle}>
+        <Link to="/medicineStore" style={{ textDecoration: 'none' }}>
           <CardActionArea>
             <CardMedia
               component="img"
-              height="260"
+              sx={cardImageStyle}
               image={img2}
               alt="Medicine Store"
             />
@@ -61,25 +69,25 @@ const MedicineStore = () => {
                 Medicine Store
               </Typography>
               <Typography variant="body2" color="text.secondary">
-              A medicine store is a retail establishment where medications and healthcare-related products are dispensed and sold to the public.
+                A medicine store is a retail establishment where medications and healthcare-related products are dispensed and sold to the public.
               </Typography>
             </CardContent>
           </CardActionArea>
         </Link>
       </Card>
-    </Grid >
+    </Grid>
   );
 };
 
 const MedicineOrder = () => {
   return (
     <Grid item xs={3}>
-      <Card sx={{ maxWidth: 345 }}>
-        <Link to="/pharmacist/medicineOrder" style={{ textDecoration: 'none' }}>
+      <Card sx={cardStyle}>
+        <Link to="/medicineOrder" style={{ textDecoration: 'none' }}>
           <CardActionArea>
             <CardMedia
               component="img"
-              height="260"
+              sx={cardImageStyle}
               image={img3}
               alt="Medicine Order"
             />
@@ -88,7 +96,7 @@ const MedicineOrder = () => {
                 Medicine Order
               </Typography>
               <Typography variant="body2" color="text.secondary">
-              The process of requesting and purchasing medications and submitting a prescription or selecting healthcare products.
+                The process of requesting and purchasing medications and submitting a prescription or selecting healthcare products.
               </Typography>
             </CardContent>
           </CardActionArea>
@@ -101,12 +109,12 @@ const MedicineOrder = () => {
 const MedicineSales = () => {
   return (
     <Grid item xs={3}>
-      <Card sx={{ maxWidth: 345 }}>
-        <Link to="/pharmacist/medicineSales" style={{ textDecoration: 'none' }}>
+      <Card sx={cardStyle}>
+        <Link to="/medicineSales" style={{ textDecoration: 'none' }}>
           <CardActionArea>
             <CardMedia
               component="img"
-              height="260"
+              sx={cardImageStyle}
               image={img4}
               alt="Medicine Sales"
             />
@@ -115,7 +123,7 @@ const MedicineSales = () => {
                 Medicine Sales
               </Typography>
               <Typography variant="body2" color="text.secondary">
-              Encompass the activities related to the distribution and selling of medications, pharmaceutical products, and healthcare supplies.
+                Encompass the activities related to the distribution and selling of medications, pharmaceutical products, and healthcare supplies.
               </Typography>
             </CardContent>
           </CardActionArea>
@@ -137,7 +145,6 @@ const Pharmacist = () => {
           backgroundSize: 'cover',
           backgroundRepeat: 'no-repeat',
           backgroundPosition: 'center',
-          //backgroundImage: `url(${post.image})`,
         }}
       >
         {<img style={{ display: 'none' }} alt="" />}
@@ -168,7 +175,7 @@ const Pharmacist = () => {
                 align="center"
                 gutterBottom
               >
-                Welcome to Our Pharmacy !
+                Welcome to Our Pharmacy!
               </Typography>
               <Link variant="subtitle1" href="#">
                 {/* Link content goes here */}

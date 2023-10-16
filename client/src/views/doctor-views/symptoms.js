@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 import Navbar from '../../components/doctor-component/doctor-nav-bar';
 import { Box, Grid, TextField, Button, CssBaseline, Container, Typography, MenuItem, FormControl, InputLabel } from '@mui/material';
 import Select from '@mui/material/Select';
@@ -17,7 +18,6 @@ import Autocomplete from '@mui/material/Autocomplete';
 import backgroundImage from '../../assets/img/common/home-hero-background-img.jpg';
 import axios from "axios";
 import { Link } from 'react-router-dom';
-import Cookies from 'js-cookie';
 
 const HeroSection = () => {
 
@@ -78,54 +78,50 @@ const Symptoms = () => {
         });
     };
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
+    const submitData = async () => {
 
         console.log('Sending data to the backend:', symptoms);
 
         try {
             await axios.post(
                 "http://localhost:4000/symptoms",
-                symptoms,
+                {
+                    channelingId: channelingId,
+                    symptoms: symptoms,
+                },
                 { withCredentials: true }
             );
 
             setSymptoms([{}]);
+
+            window.location.href = `/prescription/${channelingId}`;
+
         } catch (error) {
             console.error(error);
         }
     };
 
-    const token = Cookies.get('token');
-    const tokenParts = token.split('.');
-    const payload = JSON.parse(atob(tokenParts[1]));
-    const userId = payload.id;
+    const { channelingId } = useParams();
 
     const [userData, setUserData] = useState(null);
 
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.get(`http://localhost:4000/getDoctorProfile/` + userId);
-                setUserData(response.data.user);
+                const response = await axios.get(`http://localhost:4000/getChannelingById/` + channelingId);
+                setUserData(response.data.channeling);
             } catch (error) {
                 console.error('Error fetching user data:', error);
             }
         };
 
         fetchData();
-    }, [userId]);
+    }, [channelingId]);
 
-    console.log("User Id: " + userId);
-    console.log("User Data: ", userData);
 
     if (userData === null) {
         return <div>Loading...</div>;
     }
-
-    console.log("First Name: " + userData.profile.firstName);
-
-
 
     return (
 
@@ -139,29 +135,63 @@ const Symptoms = () => {
             </Grid>
 
             <Container maxWidth="100px">
-                <Grid>
+                <Grid container spacing={2} mt={2}>
 
-                    <Grid>
-                        <Grid item xs={6} mt={5} sx={{ backgroundColor: '#1976D2' }}>
-                            <Typography variant="h5" sx={{ marginBottom: 2, color: 'white', textAlign: 'center' }}>
-                                Details Of Patient
-                            </Typography>
+                    <Grid item xs={12} sm={6}>
+                        <Grid container spacing={2}>
+                            <Grid item xs={12}>
+                                <Typography variant="h5" sx={{ marginBottom: 2, color: 'white', textAlign: 'center', backgroundColor: '#1976D2' }}>
+                                    Patient Details
+                                </Typography>
+                            </Grid>
+
+                            <Grid item xs={12} sm={12}>
+                                <Typography variant="h5">
+                                    Patient Name :  {userData.patient.profile.fName}
+                                </Typography>
+                            </Grid>
+
+                            <Grid item xs={12} sm={12}>
+                                <Typography variant="h5">
+                                    Gender :  {userData.patient.profile.gender}
+                                </Typography>
+                            </Grid>
+
+                            <Grid item xs={12} sm={12}>
+                                <Typography variant="h5">
+                                    Email :  {userData.patient.profile.email}
+                                </Typography>
+                            </Grid>
                         </Grid>
+
                     </Grid>
 
-                    <Grid item xs={6} mt={5}>
+                    <Grid item xs={12} sm={6}>
+                        <Grid container spacing={2}>
+                            <Grid item xs={12}>
+                                <Typography variant="h5" sx={{ marginBottom: 2, color: 'white', textAlign: 'center', backgroundColor: '#1976D2' }}>
+                                    Doctor Details
+                                </Typography>
+                            </Grid>
 
-                        <Typography variant="h5">
-                            Patient Name :  {userData.profile.firstName}
-                        </Typography>
+                            <Grid item xs={12} sm={12}>
+                                <Typography variant="h5">
+                                    Doctor Name :  {userData.doctor.firstName}
+                                </Typography>
+                            </Grid>
 
-                        <Typography variant="h5">
-                            Gender :  {userData.profile.gender}
-                        </Typography>
+                            <Grid item xs={12} sm={12}>
+                                <Typography variant="h5">
+                                    Speciality :  {userData.doctor.specialty}
+                                </Typography>
+                            </Grid>
 
-                        <Typography variant="h5">
-                            Email :  {userData.email}
-                        </Typography>
+                            <Grid item xs={12} sm={12}>
+                                <Typography variant="h5">
+                                    Licen Number :  {userData.doctor.licenseNumber}
+                                </Typography>
+                            </Grid>
+                        </Grid>
 
                     </Grid>
                 </Grid>
@@ -179,134 +209,130 @@ const Symptoms = () => {
                 </Grid>
             </Container>
             <Container maxWidth="100px">
-                <form onSubmit={handleSubmit}>
-                    {symptoms.map((symptom, index) => (
+                {symptoms.map((symptom, index) => (
 
-                        <Grid container spacing={2} mt={2} key={index} >
-                            <Grid item xs={3}>
-                                <Autocomplete
-                                    id="Symptom"
-                                    options={top100Symptoms.map((option) => option.symptom)}
-                                    sx={{ width: 315 }}
-                                    renderInput={(params) => (
-                                        <TextField
-                                            {...params}
-                                            label="Symptom"
-                                            fullWidth
-                                            margin="normal"
-                                            variant="outlined"
-                                        />
-                                    )}
-                                    value={symptoms[index]?.symptom || ''}
-                                    onChange={(event, newValue) => {
-                                        handleOnChange({ target: { name: 'symptom', value: newValue } }, index);
-                                    }}
-                                />
-                            </Grid>
+                    <Grid container spacing={2} mt={2} key={index} >
+                        <Grid item xs={3}>
+                            <Autocomplete
+                                id="Symptom"
+                                options={top100Symptoms.map((option) => option.symptom)}
+                                sx={{ width: 315 }}
+                                renderInput={(params) => (
+                                    <TextField
+                                        {...params}
+                                        label="Symptom"
+                                        fullWidth
+                                        margin="normal"
+                                        variant="outlined"
+                                    />
+                                )}
+                                value={symptoms[index]?.symptom || ''}
+                                onChange={(event, newValue) => {
+                                    handleOnChange({ target: { name: 'symptom', value: newValue } }, index);
+                                }}
+                            />
+                        </Grid>
 
-                            <Grid item xs={3}>
-                                <TextField
-                                    fullWidth
-                                    label="Since"
-                                    name="since"
-                                    type="date"
-                                    value={symptom.since || ''}
-                                    placeholder="Since when?"
+                        <Grid item xs={3}>
+                            <TextField
+                                fullWidth
+                                label="Since"
+                                name="since"
+                                type="date"
+                                value={symptom.since || ''}
+                                placeholder="Since when?"
+                                onChange={(e) => handleOnChange(e, index)}
+                                margin="normal"
+                                variant="outlined"
+                            />
+                        </Grid>
+
+                        <Grid item xs={3}>
+                            <Autocomplete
+                                id="body-part"
+                                options={top100BodyParts.map((option) => option.bodyPart)}
+                                sx={{ width: 315 }}
+                                renderInput={(params) => (
+                                    <TextField
+                                        {...params}
+                                        label="Body Part"
+                                        fullWidth
+                                        margin="normal"
+                                        variant="outlined"
+                                    />
+                                )}
+                                value={symptoms[index]?.bodyPart || ''}
+                                onChange={(event, newValue) => {
+                                    handleOnChange({ target: { name: 'bodyPart', value: newValue } }, index);
+                                }}
+                            />
+                        </Grid>
+
+                        <Grid item xs={3}>
+
+                            <FormControl fullWidth sx={{ marginY: 2 }}>
+                                <InputLabel id="severity-level">Severity Level</InputLabel>
+                                <Select
+                                    labelId="severity-level"
+                                    id="severityLevel"
+                                    name="severityLevel"
+                                    value={symptom.severityLevel || ''}
+                                    label="Severity Level"
                                     onChange={(e) => handleOnChange(e, index)}
-                                    margin="normal"
-                                    variant="outlined"
-                                />
-                            </Grid>
+                                >
+                                    <MenuItem value={"low"}>Low</MenuItem>
+                                    <MenuItem value={"medium"}>Medium</MenuItem>
+                                    <MenuItem value={"high"}>High</MenuItem>
+                                    <MenuItem value={"critical"}>Critical</MenuItem>
 
-                            <Grid item xs={3}>
-                                <Autocomplete
-                                    id="body-part"
-                                    options={top100BodyParts.map((option) => option.bodyPart)}
-                                    sx={{ width: 315 }}
-                                    renderInput={(params) => (
-                                        <TextField
-                                            {...params}
-                                            label="Body Part"
-                                            fullWidth
-                                            margin="normal"
-                                            variant="outlined"
-                                        />
-                                    )}
-                                    value={symptoms[index]?.bodyPart || ''}
-                                    onChange={(event, newValue) => {
-                                        handleOnChange({ target: { name: 'bodyPart', value: newValue } }, index);
-                                    }}
-                                />
-                            </Grid>
-
-                            <Grid item xs={3}>
-
-                                <FormControl fullWidth sx={{ marginY: 2 }}>
-                                    <InputLabel id="severity-level">Severity Level</InputLabel>
-                                    <Select
-                                        labelId="severity-level"
-                                        id="severityLevel"
-                                        name="severityLevel"
-                                        value={symptom.severityLevel || ''}
-                                        label="Severity Level"
-                                        onChange={(e) => handleOnChange(e, index)}
-                                    >
-                                        <MenuItem value={"low"}>Low</MenuItem>
-                                        <MenuItem value={"medium"}>Medium</MenuItem>
-                                        <MenuItem value={"high"}>High</MenuItem>
-                                        <MenuItem value={"critical"}>Critical</MenuItem>
-
-                                    </Select>
-                                </FormControl>
-                            </Grid>
-
-                            <Grid item xs={12} container justifyContent="flex-end" spacing={2}>
-                                <Grid item>
-                                    <Button
-                                        type="button"
-                                        variant="contained"
-                                        color="error"
-                                        startIcon={<DeleteIcon />}
-                                        onClick={() => handleRemoveSymptom(index)}
-                                    >
-                                        Remove Symptom Record
-                                    </Button>
-                                </Grid>
-                                <Grid item>
-                                    <Button
-                                        type="button"
-                                        variant="contained"
-                                        color="primary"
-                                        startIcon={<AddCircleIcon />}
-                                        onClick={handleAddSymptom}
-                                    >
-                                        Add More Symptom
-                                    </Button>
-                                </Grid>
-                            </Grid>
+                                </Select>
+                            </FormControl>
                         </Grid>
 
-                    ))}
-
-                    <Grid item xs={12} container justifyContent="center" alignItems="center" mt={5} spacing={2}>
-                        <Grid item>
-                            <Link to="/doctor">
-                                <Button variant="outlined" color="primary" startIcon={<CloseIcon />}>
-                                    CANCEL
+                        <Grid item xs={12} container justifyContent="flex-end" spacing={2}>
+                            <Grid item>
+                                <Button
+                                    type="button"
+                                    variant="contained"
+                                    color="error"
+                                    startIcon={<DeleteIcon />}
+                                    onClick={() => handleRemoveSymptom(index)}
+                                >
+                                    Remove Symptom Record
                                 </Button>
-                            </Link>
-                        </Grid>
-                        <Grid item>
-                            <Link to="/prescription" style={{ textDecoration: 'none' }}>
-                                <Button type="submit" variant="contained" color="primary" startIcon={<SaveIcon />}>
-                                    CONTINUE
+                            </Grid>
+                            <Grid item>
+                                <Button
+                                    type="button"
+                                    variant="contained"
+                                    color="primary"
+                                    startIcon={<AddCircleIcon />}
+                                    onClick={handleAddSymptom}
+                                >
+                                    Add More Symptom
                                 </Button>
-                            </Link>
+                            </Grid>
                         </Grid>
                     </Grid>
 
-                    <Grid item xs={12} container justifyContent="center" alignItems="center" mt={5} spacing={2}></Grid>
-                </form>
+                ))}
+
+                <Grid item xs={12} container justifyContent="center" alignItems="center" mt={5} spacing={2}>
+                    <Grid item>
+                        <Link to="/doctor">
+                            <Button variant="outlined" color="primary" startIcon={<CloseIcon />}>
+                                CANCEL
+                            </Button>
+                        </Link>
+                    </Grid>
+                    <Grid item>
+                        <Button type="submit" variant="contained" color="primary" startIcon={<SaveIcon />} onClick={submitData}>
+                            CONTINUE
+                        </Button>
+                    </Grid>
+                </Grid>
+
+                <Grid item xs={12} container justifyContent="center" alignItems="center" mt={5} spacing={2}></Grid>
             </Container>
         </Box>
     );

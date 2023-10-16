@@ -40,25 +40,3 @@ module.exports.ValidateUsername = async (req, res, next) => {
         console.log(err);
     }
 };
-
-//Validate Password
-module.exports.ValidatePassword = async (req, res, next) => {
-
-    try{
-
-        const { email, password } = req.body;
-
-        const existingEmail = await User.findOne({ email });
-        const existingPassword = await bcrypt.compare(password, existingEmail.password);
-
-
-        if (existingPassword) {
-            return res.json({ message: "Password already exists",success: false });
-        }else{
-            return res.json({ success: true });
-        }
-
-    }catch(error){
-        console.log(err);
-    }
-};

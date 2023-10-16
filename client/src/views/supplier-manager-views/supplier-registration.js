@@ -6,9 +6,70 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Container from '@mui/material/Container';
 import axios from 'axios';
-import img1 from '../../assets/img/supplier/Registration.jpg';
+import AppBar from '@mui/material/AppBar';
+import Typography from '@mui/material/Typography';
+import InputBase from '@mui/material/InputBase';
+import MenuIcon from '@mui/icons-material/Menu';
+import SearchIcon from '@mui/icons-material/Search';
+import { styled, alpha } from '@mui/material/styles';
+import Toolbar from '@mui/material/Toolbar';
+import IconButton from '@mui/material/IconButton';
+import img11 from '../../assets/img/supplier/reg-background.png';
 
-export default function RegistrationForm() {
+
+const Search = styled('div')(({ theme }) => ({
+  position: 'relative',
+  borderRadius: theme.shape.borderRadius,
+  backgroundColor: alpha(theme.palette.common.white, 0.15),
+  '&:hover': {
+    backgroundColor: alpha(theme.palette.common.white, 0.25),
+  },
+  marginLeft: 0,
+  width: '100%',
+  [theme.breakpoints.up('sm')]: {
+    marginLeft: theme.spacing(1),
+    width: 'auto',
+  },
+}));
+
+const SearchIconWrapper = styled('div')(({ theme }) => ({
+  padding: theme.spacing(0, 2),
+  height: '100%',
+  position: 'absolute',
+  pointerEvents: 'none',
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+}));
+
+const StyledInputBase = styled(InputBase)(({ theme }) => ({
+  color: 'inherit',
+  '& .MuiInputBase-input': {
+    padding: theme.spacing(1, 1, 1, 0),
+    paddingLeft: `calc(1em + ${theme.spacing(4)})`,
+    transition: theme.transitions.create('width'),
+    width: '100%',
+    [theme.breakpoints.up('sm')]: {
+      width: '12ch',
+      '&:focus': {
+        width: '12ch',
+      },
+    },
+  },
+}));
+const BackgroundContainer = styled(Container)(({ theme }) => ({
+  backgroundImage: `../../assets/img/supplier/reg-background.png(${img11})`, // Set the background image
+  backgroundSize: 'cover',
+  backgroundPosition: 'center',
+  position: 'absolute',
+  top: 0,
+  left: 0,
+  width: '100%',
+  height: '100%',
+  zIndex: -3,
+}));
+
+export default function App() {
   const [formData, setFormData] = useState({
     FirstName: '',
     LastName: '',
@@ -48,140 +109,165 @@ export default function RegistrationForm() {
         NIC: '',
         Bio: '',
       });
+      alert("Your response is successful");
     } catch (error) {
       console.error(error);
     }
   };
 
   return (
-    <Container
-      maxWidth="sm"
-      style={{
-        height: '120vh',
-        width: '140vw',
-        backgroundColor: '#E1F5FE', // Updated background color to light blue
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-      }}
-    >
-      <Box
-        sx={{
-          p: 3,
-          border: '2px solid #90A4AE', // Added border styling
-          borderRadius: '8px', // Added border radius
-          backgroundColor: '#FFFFFF', // Set background color to white
-        }}
-      >
-        <h1 style={{ textAlign: 'center' }}>Supplier Registration</h1>
+    <div>
+      <AppBar position="static" sx={{ marginBottom: '0px', marginTop: '0px' }}>
 
-          <img
-            src={img1}
-            alt=""
-            style={{ maxWidth: '100%', height: 'auto', maxHeight: '200px' }}
-          />
-        
+        <Toolbar>
+          <IconButton
+            size="large"
+            edge="start"
+            color="inherit"
+            aria-label="open drawer"
+            sx={{ mr: 2 }}
+          >
+            <MenuIcon />
+          </IconButton>
+          <Typography
+            variant="h6"
+            noWrap
+            component="div"
+            sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}
+          >
+            Supplier Registration
+          </Typography>
+          <Search>
+            <SearchIconWrapper>
+              <SearchIcon />
+            </SearchIconWrapper>
+            <StyledInputBase
+              placeholder="Search…"
+              inputProps={{ 'aria-label': 'search' }}
+            />
+          </Search>
+        </Toolbar>
+      </AppBar>
+      <Container maxWidth="sm">
+        <BackgroundContainer>
+        <Box sx={{ 
+  p: 3, 
+  border: '2px solid #90A4AE', 
+  borderRadius: '8px', 
+  backgroundColor: '#FFFFFF', 
+  margin: '10px 0',  // Increase the top margin to 30px
+  marginTop: '25px', // Adjust top margin further if needed
+  marginBottom: '15px' // Decrease the bottom margin to 15px
+}}>
 
-        <Grid container spacing={2}>
-          <Grid item xs={6}>
-            <TextField
-              required
-              fullWidth
-              id="outlined-required-first-name"
-              label="First Name"
-              value={FirstName}
-              onChange={handleInputChange}
-              name="FirstName"
-            />
 
-          </Grid>
-          <Grid item xs={6}>
-            <TextField
-              required
-              fullWidth
-              id="outlined-required-last-name"
-              label="Last Name"
-              value={LastName}
-              onChange={handleInputChange}
-              name="LastName"
-            />
-          </Grid>
-          <Grid item xs={12}>
-            <TextField
-              required
-              fullWidth
-              id="outlined-required-email"
-              label="Email Address"
-              type="email"
-              value={Email}
-              onChange={handleInputChange}
-              name="Email"
-            />
-          </Grid>
-          <Grid item xs={12}>
-            <TextField
-              required
-              fullWidth
-              id="outlined-required-address"
-              label="Address"
-              value={Address}
-              onChange={handleInputChange}
-              name="Address"
-            />
-          </Grid>
-          <Grid item xs={6}>
-            <TextField
-              required
-              fullWidth
-              id="outlined-required-phone"
-              label="Phone Numbers"
-              value={PhoneNumber}
-              onChange={handleInputChange}
-              name="PhoneNumber"
-            />
-          </Grid>
-          <Grid item xs={6}>
-            <TextField
-              required
-              fullWidth
-              id="outlined-required-nic"
-              label="NIC Number"
-              value={NIC}
-              onChange={handleInputChange}
-              name="NIC"
-            />
-          </Grid>
-          <Grid item xs={12}>
-            <TextField
-              required
-              fullWidth
-              id="outlined-required-company-name"
-              label="Company Name"
-              value={CompanyName}
-              onChange={handleInputChange}
-              name="CompanyName"
-            />
-          </Grid>
-          <Grid item xs={12}>
-            <TextField
-              required
-              fullWidth
-              id="outlined-required-bio"
-              label="Your Bio"
-              multiline
-              rows={4}
-              value={Bio}
-              onChange={handleInputChange}
-              name="Bio"
-            />
-          </Grid>
-        </Grid>
-        <Box sx={{ display: 'flex', justifyContent: 'center', mt: 2 }}>
-          <Button variant="contained" color="primary" onClick={handleSubmit}>
-            Submit
-          </Button>
-        </Box>
-      </Box>
-    </Container>
+            <h1  style={{ textAlign: 'center' }}>Supplier Registration</h1>
+
+            <Grid container spacing={2}>
+              <Grid item xs={6}>
+                <TextField
+                  required
+                  fullWidth
+                  id="outlined-required-first-name"
+                  label="First Name"
+                  value={FirstName}
+                  onChange={handleInputChange}
+                  name="FirstName"
+                />
+              </Grid>
+              <Grid item xs={6}>
+                <TextField
+                  required
+                  fullWidth
+                  id="outlined-required-last-name"
+                  label="Last Name"
+                  value={LastName}
+                  onChange={handleInputChange}
+                  name="LastName"
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  required
+                  fullWidth
+                  id="outlined-required-email"
+                  label="Email Address"
+                  type="email"
+                  value={Email}
+                  onChange={handleInputChange}
+                  name="Email"
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  required
+                  fullWidth
+                  id="outlined-required-address"
+                  label="Address"
+                  value={Address}
+                  onChange={handleInputChange}
+                  name="Address"
+                />
+              </Grid>
+              <Grid item xs={6}>
+                <TextField
+                  required
+                  fullWidth
+                  id="outlined-required-phone"
+                  label="Phone Numbers"
+                  value={PhoneNumber}
+                  onChange={handleInputChange}
+                  name="PhoneNumber"
+                  inputProps={{ inputMode: 'numeric', pattern: '[0-9]*' }}
+                />
+              </Grid>
+
+              <Grid item xs={6}>
+                <TextField
+                  required
+                  fullWidth
+                  id="outlined-required-nic"
+                  label="NIC Number"
+                  value={NIC}
+                  onChange={handleInputChange}
+                  name="NIC"
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  required
+                  fullWidth
+                  id="outlined-required-company-name"
+                  label="Company Name"
+                  value={CompanyName}
+                  onChange={handleInputChange}
+                  name="CompanyName"
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  required
+                  fullWidth
+                  id="outlined-required-bio"
+                  label="Your Bio"
+                  multiline
+                  rows={4}
+                  value={Bio}
+                  onChange={handleInputChange}
+                  name="Bio"
+                />
+              </Grid>
+            </Grid>
+
+            <Box sx={{ display: 'flex', justifyContent: 'left', mt: 2 }}>
+              <Button variant="contained" color="primary" onClick={handleSubmit}>
+                Submit
+              </Button>
+            </Box>
+
+          </Box>
+        </BackgroundContainer>
+      </Container>
+    </div>
   );
 }

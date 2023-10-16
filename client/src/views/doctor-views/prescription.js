@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 import NavBar from '../../components/doctor-component/doctor-nav-bar';
 import { Box, Grid, TextField, Button, CssBaseline, Container, Typography, InputLabel, MenuItem } from '@mui/material';
 import Select from '@mui/material/Select';
@@ -126,7 +127,10 @@ const Prescription = () => {
         try {
             await axios.post(
                 "http://localhost:4000/prescription",
-                medicinesToSend,
+                {
+                    channelingId: channelingId,
+                    medicines: medicinesToSend,
+                },
                 { withCredentials: true }
             );
 
@@ -136,34 +140,27 @@ const Prescription = () => {
         }
     };
 
-    const token = Cookies.get('token');
-    const tokenParts = token.split('.');
-    const payload = JSON.parse(atob(tokenParts[1]));
-    const userId = payload.id;
+    const { channelingId } = useParams();
 
     const [userData, setUserData] = useState(null);
 
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.get(`http://localhost:4000/getDoctorProfile/` + userId);
-                setUserData(response.data.user);
+                const response = await axios.get(`http://localhost:4000/getChannelingById/` + channelingId);
+                setUserData(response.data.channeling);
             } catch (error) {
                 console.error('Error fetching user data:', error);
             }
         };
 
         fetchData();
-    }, [userId]);
+    }, [channelingId]);
 
-    console.log("User Id: " + userId);
-    console.log("User Data: ", userData);
 
     if (userData === null) {
         return <div>Loading...</div>;
     }
-
-    console.log("First Name: " + userData.profile.firstName);
 
     return (
         <Grid>
@@ -176,29 +173,63 @@ const Prescription = () => {
             </Grid>
 
             <Container maxWidth="100px">
-                <Grid>
+                <Grid container spacing={2} mt={2}>
 
-                    <Grid>
-                        <Grid item xs={6} mt={5} sx={{ backgroundColor: '#1976D2' }}>
-                            <Typography variant="h5" sx={{ marginBottom: 2, color: 'white', textAlign: 'center' }}>
-                                Details Of Patient
-                            </Typography>
+                    <Grid item xs={12} sm={6}>
+                        <Grid container spacing={2}>
+                            <Grid item xs={12}>
+                                <Typography variant="h5" sx={{ marginBottom: 2, color: 'white', textAlign: 'center', backgroundColor: '#1976D2' }}>
+                                    Patient Details
+                                </Typography>
+                            </Grid>
+
+                            <Grid item xs={12} sm={12}>
+                                <Typography variant="h5">
+                                    Patient Name :  {userData.patient.profile.fName}
+                                </Typography>
+                            </Grid>
+
+                            <Grid item xs={12} sm={12}>
+                                <Typography variant="h5">
+                                    Gender :  {userData.patient.profile.gender}
+                                </Typography>
+                            </Grid>
+
+                            <Grid item xs={12} sm={12}>
+                                <Typography variant="h5">
+                                    Email :  {userData.patient.profile.email}
+                                </Typography>
+                            </Grid>
                         </Grid>
+
                     </Grid>
 
-                    <Grid item xs={6} mt={5}>
+                    <Grid item xs={12} sm={6}>
+                        <Grid container spacing={2}>
+                            <Grid item xs={12}>
+                                <Typography variant="h5" sx={{ marginBottom: 2, color: 'white', textAlign: 'center', backgroundColor: '#1976D2' }}>
+                                    Doctor Details
+                                </Typography>
+                            </Grid>
 
-                        <Typography variant="h5">
-                            Patient Name :  {userData.profile.firstName}
-                        </Typography>
+                            <Grid item xs={12} sm={12}>
+                                <Typography variant="h5">
+                                    Doctor Name :  {userData.doctor.firstName}
+                                </Typography>
+                            </Grid>
 
-                        <Typography variant="h5">
-                            Gender :  {userData.profile.gender}
-                        </Typography>
+                            <Grid item xs={12} sm={12}>
+                                <Typography variant="h5">
+                                    Speciality :  {userData.doctor.specialty}
+                                </Typography>
+                            </Grid>
 
-                        <Typography variant="h5">
-                            Email :  {userData.email}
-                        </Typography>
+                            <Grid item xs={12} sm={12}>
+                                <Typography variant="h5">
+                                    Licen Number :  {userData.doctor.licenseNumber}
+                                </Typography>
+                            </Grid>
+                        </Grid>
 
                     </Grid>
                 </Grid>

@@ -1,128 +1,129 @@
-import React, { useState } from 'react';
-import {
-  Container,
-  Typography,
-  TextField,
-  Button,
-  Grid,
-  Paper,
-  Box,
-} from '@mui/material';
-import NavBar from '../../components/LA-component/la-nav-bar';
+import React, { useState, useEffect } from 'react';
+import { Button, TextField, Paper, Grid } from '@mui/material';
+import Axios from 'axios';
+import { useParams, Link } from 'react-router-dom';
 
-const UpdateTestPage = () => {
+const UpdateTest = () => {
+  const { id } = useParams();
+
   const [test, setTest] = useState({
-    result_id: '',
-    sample_id: '',
     test_name: '',
     test_date: '',
-    lab_assistant_id: '',
+    lab_assistant_name: '',
     result_data: '',
   });
 
-  const handleChange = (event) => {
-    const { name, value } = event.target;
-    setTest({
-      ...test,
-      [name]: value,
-    });
+  const [validationErrors, setValidationErrors] = useState({});
+
+  useEffect(() => {
+    Axios.get(`http://localhost:4000/tests/${id}`)
+      .then((response) => {
+        setTest(response.data.test);
+      })
+      .catch((error) => console.error(error));
+  }, [id]);
+
+  const validateForm = () => {
+    const errors = {};
+
+    if (!test.test_name.trim()) {
+      errors.test_name = 'Test Name is required';
+    }
+    if (!test.test_date) {
+      errors.test_date = 'Test Date is required';
+    }
+    if (!test.lab_assistant_name.trim()) {
+      errors.lab_assistant_name = 'Lab Assistant Name is required';
+    }
+    if (!test.result_data.trim()) {
+      errors.result_data = 'Result Data is required';
+    }
+
+    setValidationErrors(errors);
+
+    return Object.keys(errors).length === 0;
   };
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    // Perform the update test operation here
-    console.log('Updated test:', test);
+  const handleUpdateTest = () => {
+    if (!validateForm()) {
+      // Form validation failed
+      return;
+    }
+
+    Axios.put(`http://localhost:4000/tests/${id}`, test)
+      .then(() => {
+        // Use Link component for navigation
+        // Note: You might want to use useHistory() for programmatic navigation
+        return <Link to="/lab-test" />;
+      })
+      .catch((error) => console.error(error));
   };
 
   return (
     <div>
-      {/* Include your NavBar component here */}
-      <NavBar />
+      <h1>Update Test</h1>
 
-      <Container>
-        <Typography variant="h4" gutterBottom>
-          Update Test
-        </Typography>
-        <Paper elevation={3}>
-          <Box p={3}>
-            <form onSubmit={handleSubmit}>
-              <Grid container spacing={3}>
-                <Grid item xs={12}>
-                  <TextField
-                    label="Result ID"
-                    fullWidth
-                    name="result_id"
-                    value={test.result_id}
-                    onChange={handleChange}
-                  />
-                </Grid>
-                <Grid item xs={12}>
-                  <TextField
-                    label="Sample ID"
-                    fullWidth
-                    name="sample_id"
-                    value={test.sample_id}
-                    onChange={handleChange}
-                  />
-                </Grid>
-                <Grid item xs={12}>
-                  <TextField
-                    label="Test Name"
-                    fullWidth
-                    name="test_name"
-                    value={test.test_name}
-                    onChange={handleChange}
-                  />
-                </Grid>
-                <Grid item xs={12}>
-                  <TextField
-                    label="Test Date"
-                    fullWidth
-                    type="date"
-                    name="test_date"
-                    value={test.test_date}
-                    onChange={handleChange}
-                    InputLabelProps={{
-                      shrink: true,
-                    }}
-                  />
-                </Grid>
-                <Grid item xs={12}>
-                  <TextField
-                    label="Lab Assistant ID"
-                    fullWidth
-                    name="lab_assistant_id"
-                    value={test.lab_assistant_id}
-                    onChange={handleChange}
-                  />
-                </Grid>
-                <Grid item xs={12}>
-                  <TextField
-                    label="Result Data"
-                    fullWidth
-                    multiline
-                    rows={4}
-                    name="result_data"
-                    value={test.result_data}
-                    onChange={handleChange}
-                  />
-                </Grid>
-                <Grid item xs={12}>
-                  <Button
-                    variant="contained"
-                    color="primary"
-                    type="submit"
-                  >
-                    Update Test
-                  </Button>
-                </Grid>
-              </Grid>
-            </form>
-          </Box>
-        </Paper>
-      </Container>
+      <Paper elevation={3} style={{ padding: '20px', marginBottom: '20px' }}>
+        <Grid container spacing={2}>
+          <Grid item xs={6}>
+            <TextField
+              label="Test Name"
+              variant="outlined"
+              fullWidth
+              value={test.test_name}
+              onChange={(e) => setTest({ ...test, test_name: e.target.value })}
+              error={Boolean(validationErrors.test_name)}
+              helperText={validationErrors.test_name}
+            />
+          </Grid>
+          <Grid item xs={6}>
+            <TextField
+              label="Test Date"
+              type="date"
+              variant="outlined"
+              fullWidth
+              value={test.test_date}
+              onChange={(e) => setTest({ ...test, test_date: e.target.value })}
+              error={Boolean(validationErrors.test_date)}
+              helperText={validationErrors.test_date}
+            />
+          </Grid>
+          <Grid item xs={6}>
+            <TextField
+              label="Lab Assistant Name"
+              variant="outlined"
+              fullWidth
+              value={test.lab_assistant_name}
+              onChange={(e) => setTest({ ...test, lab_assistant_name: e.target.value })}
+              error={Boolean(validationErrors.lab_assistant_name)}
+              helperText={validationErrors.lab_assistant_name}
+            />
+          </Grid>
+          <Grid item xs={6}>
+            <TextField
+              label="Result Data"
+              variant="outlined"
+              fullWidth
+              multiline
+              rows={4}
+              value={test.result_data}
+              onChange={(e) => setTest({ ...test, result_data: e.target.value })}
+              error={Boolean(validationErrors.result_data)}
+              helperText={validationErrors.result_data}
+            />
+          </Grid>
+          <Grid item xs={12}>
+            {/* Use Link component for navigation */}
+            <Link to="/lab-test" style={{ textDecoration: 'none' }}>
+              <Button variant="contained" color="primary" onClick={handleUpdateTest}>
+                Update Test
+              </Button>
+            </Link>
+          </Grid>
+        </Grid>
+      </Paper>
     </div>
   );
 };
 
-export default UpdateTestPage;
+export default UpdateTest;

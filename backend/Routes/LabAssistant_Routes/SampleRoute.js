@@ -1,21 +1,27 @@
-const express = require("express");
+const express = require('express');
 const router = express.Router();
-
-// SAMPLE
 const {
-    createSampleController,
-    getAllSampleController,
-    getSampleByIdController,
-    updateSampleByIdController,
-    deleteSampleByIdController
-} = require("../../Controllers/LabAssistantControllers/SampleController"); 
+  createSamples,
+  deleteSampleById,
+  getSampleById,
+  updateSampleById,
+  getAllSamples,
+} = require('../../Controllers/SampleController');
 
-router.post("/lab-sample",createSampleController);
-router.get("/lab-sample/:id",getAllSampleController);
-router.get("/lab-sample/:id",getSampleByIdController);
-router.put("/lab-sample/:id",updateSampleByIdController);
-router.delete("/lab-sample/:id",deleteSampleByIdController);
+// Create a sample
+router.post('/samples', createSamples);
 
-router.put("/lab-sample/update/:id",updateSampleByIdController);
+// Get all samples
+router.get('/samples', getAllSamples);
+
+// Get a specific sample by ID
+router.get('/samples/:id', getSampleById);
+
+// Update a sample by ID
+router.put('/samples/:id', updateSampleById);
+
+// Delete a sample by ID
+router.delete('/samples/:id', deleteSampleById);
 
 module.exports = router;
+

@@ -1,108 +1,120 @@
-import * as React from 'react';
-import { useState } from 'react';
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
-import Paper from '@mui/material/Paper';
-import TextField from '@mui/material/TextField';
-import IconButton from '@mui/material/IconButton';
-import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
-import Button from '@mui/material/Button';
+import React, { Component } from 'react';
+import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, TextField, Grid, Button } from '@mui/material';
+import Heading from '../../components/patient-components/heading.component';
+import { Link } from 'react-router-dom';
+import NavBar from '../../components/pharmacist-component/pharmacist-nav-bar';
 
-import { createTheme, ThemeProvider } from '@mui/material/styles';
+class MedicineStore extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      tableData: [
+        { id: '001', col1: 'Paracetamol', col2: '50mg', col3: 'Tablet', col4: '100 Packs', col5: '12/12/2023' },
+        { id: '002', col1: 'Piriton', col2: '10mg', col3: 'Tablet', col4: '50 Packs', col5: '02/02/2024' },
+        { id: '003', col1: 'Cetrizine', col2: '10mg', col3: 'Tablet', col4: '200 Packs', col5: '10/05/2024' },
+        { id: '004', col1: 'Brufen', col2: '600mg', col3: 'Tablet', col4: '20 Packs', col5: '20/01/2025' },
+        { id: '005', col1: 'Panadol', col2: '500mg', col3: 'Tablet', col4: '180 Packs', col5: '25/10/2024' },
+        { id: '006', col1: 'Amoxicillin', col2: '250mg', col3: 'Tablet', col4: '180 Packs', col5: '01/11/2023' },
+        { id: '007', col1: 'Piriton Syrup', col2: '100ml', col3: 'Syrup bottle', col4: '80 Bottles', col5: '05/11/2025' },
+        // Add more rows as needed
+      ],
+      filteredData: [],
+      searchTerm: '',
+    };
+  }
 
-const theme = createTheme({
-  palette: {
-    primary: {
-      main: '#1976D2', // Lightning Blue
-    },
-  },
-});
+  handleSearchChange = (event) => {
+    const searchTerm = event.target.value;
+    const { tableData } = this.state;
 
-export default function BasicTable() {
-  const [rows, setRows] = useState([
-    {
-      medicineCode: '',
-      medicineName: '',
-      dosage :  '',
-      medicineType: '',
-      expiryDate: '',
-      quantity: '',
-      unitPrice: '',
-    }
-  ]);
+    // Filter the data based on the search term
+    const filteredData = tableData.filter((row) =>
+      Object.values(row).some((value) =>
+        String(value).toLowerCase().includes(searchTerm.toLowerCase())
+      )
+    );
 
-  const handleInputChange = (index, name, value) => {
-    const updatedRows = [...rows];
-    updatedRows[index][name] = value;
-    setRows(updatedRows);
+    this.setState({
+      searchTerm,
+      filteredData,
+    });
   };
 
-  const addRow = () => {
-    setRows([...rows, {
-      medicineCode : '',
-      medicineName : '',
-      dosage : '',
-      medicineType : '',
-      expiryDate: '',
-      quantity: '',
-      unitPrice: '',
-    }]);
+  handleDelete = (id) => {
+    // Implement the delete functionality here
+    // You can filter the data to remove the item with the given id and update the state
+    const updatedData = this.state.tableData.filter((row) => row.id !== id);
+    this.setState({ tableData: updatedData });
   };
 
-  const removeRow = (index) => {
-    const updatedRows = [...rows];
-    updatedRows.splice(index, 1);
-    setRows(updatedRows);
-  };
+  render() {
+    const { searchTerm, filteredData } = this.state;
+    const dataToDisplay = searchTerm ? filteredData : this.state.tableData;
 
-  return (
-    <ThemeProvider theme={theme}>
-      <TableContainer component={Paper}>
-        <Table sx={{ minWidth: 650 }} aria-label="simple table">
-          <TableHead style={{ backgroundColor: '#BBDEFB', fontWeight: 'bold' }}>
-            <TableRow>
-              <TableCell>Medicine Code</TableCell>
-              <TableCell>Medicine Name</TableCell>
-              <TableCell>Dosage</TableCell>
-              <TableCell>MedicineType</TableCell>
-              <TableCell>Expiry Date</TableCell>
-              <TableCell>Quantity</TableCell>
-              <TableCell>Unit Price</TableCell>
-              <TableCell></TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {rows.map((row, index) => (
-              <TableRow key={index}>
-                {Object.keys(row).map((key) => (
-                  <TableCell key={key}>
-                    <TextField
-                      name={key}
-                      value={row[key]}
-                      onChange={(e) => handleInputChange(index, e.target.name, e.target.value)}
-                    />
-                  </TableCell>
-                ))}
-                <TableCell>
-                  <IconButton color="primary" aria-label="add to shopping cart">
-                    <AddShoppingCartIcon />
-                  </IconButton>
-                </TableCell>
-                <TableCell>
-                  <Button variant="outlined" color="secondary" onClick={() => removeRow(index)}>
-                    Remove
-                  </Button>
-                </TableCell>
+    return (
+      <div style={{ background: 'white', padding: '20px' }}>
+        <NavBar /> {/* NavBar at the top of the page */}
+        <Heading
+          title="Medicine Store"
+          description="Use filters to search for medicine"
+        />
+        <TextField
+          label="Search"
+          variant="outlined"
+          value={searchTerm}
+          onChange={this.handleSearchChange}
+          fullWidth
+          placeholder="Enter name of the medicine/medicine code"
+        />
+        <TableContainer component={Paper} style={{ position: 'relative' }}>
+          <Table>
+            <TableHead>
+              <TableRow>
+                <TableCell>Medicine Code</TableCell>
+                <TableCell>Name</TableCell>
+                <TableCell>Dosage</TableCell>
+                <TableCell>Type</TableCell>
+                <TableCell>Availability</TableCell>
+                <TableCell>Expiry date</TableCell>
+                <TableCell>Action</TableCell>
               </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
-      <button type="button" onClick={addRow}>Add Row</button>
-    </ThemeProvider>
-  );
+            </TableHead>
+            <TableBody>
+              {dataToDisplay.map((row) => (
+                <TableRow key={row.id}>
+                  <TableCell>{row.id}</TableCell>
+                  <TableCell>{row.col1}</TableCell>
+                  <TableCell>{row.col2}</TableCell>
+                  <TableCell>{row.col3}</TableCell>
+                  <TableCell>{row.col4}</TableCell>
+                  <TableCell>{row.col5}</TableCell>
+                  <TableCell>
+                    <Button
+                      variant="contained"
+                      color="error"
+                      onClick={() => this.handleDelete(row.id)}
+                      style={{ marginRight: '10px' }}
+                    >
+                      Delete
+                    </Button>
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+          <Grid container justifyContent='flex-end' style={{ marginTop: '20px' }}>
+            <Button component={Link} to="/updateMedicine" variant="contained" color="success">
+              UPDATE
+            </Button>
+            <span style={{ width: '10px' }} /> {/* Space */}
+            <Button component={Link} to="/addMedicine" variant="contained" color="primary">
+              ADD
+            </Button>
+          </Grid>
+        </TableContainer>
+      </div>
+    );
+  }
 }
+
+export default MedicineStore;

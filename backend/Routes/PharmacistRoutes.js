@@ -1,20 +1,55 @@
 const express = require("express");
 const router = require("express").Router();
 let Pharmacist = require("../Models/PharmacistModel/PharmacistProfile");
-
+let Order = require("../Models/PharmacistModel/Order");
 
 
 //pharmacistProfile
 //url of create
 
-router.route("/addPharmacist").post((req,res)=>{
+// router.route("/addPharmacist").post((req,res)=>{
 
-    const patientProfile = Pharmacist.create(req.body);
+//     const patientProfile = Pharmacist.create(req.body);
 
-    res.json(patientProfile);
-})
+//     res.json(patientProfile);
+// })
 
-//http://Localhost
+//Hansanie
+
+    router.post ('/add', async (req, res) => {
+    
+    const {firstName, lastName, emailAddress, contactNumber, gender, nic, bio} = req.body;
+    try {
+    const newP = new Pharmacist({
+        firstName, 
+        lastName, 
+        emailAddress, 
+        contactNumber, 
+        gender, 
+        nic, 
+        bio,
+
+        
+    });
+    await newP.save();
+
+
+    res.status(201).json({
+        message : "Pharmacist profile data added successfully"
+    });
+    
+}catch (error) {
+    console.error(error);
+    res.status(500).json({
+        message : "Pharmacist profile data not added successfully",
+
+    });
+
+}
+});
+
+
+
 
 router.route("/").get((req,res)=>{
     Pharmacist.find().then((pharmacistProfile)=>{
@@ -24,7 +59,7 @@ router.route("/").get((req,res)=>{
     })
 })
 
-//http//Localhost:
+
 
 router.route("/update/:id").put(async(req,res)=>{
     let pharmacistId = res.params.id;
@@ -49,7 +84,7 @@ router.route("/update/:id").put(async(req,res)=>{
 
 })
 
-//http
+
 
 router.route("/delete/:id").delete(async (req,res) => {
     let pharmacistId = req.params.id ;
@@ -80,32 +115,65 @@ router.route("/get/:id").get(async (req,res) => {
 //Medicine Profile 
 
 
-router.route("/medicineadd").post((req,res)=>{
+// router.post('/add',async (req,res) =>  {
 
-    const medicineName  =  req.body.medicineName;
-    const dosage        =  req.body.dosage;
-    const medicineType  =  req.body.medicineType;
-    const expiryDate    =  req.body.expiryDate;
-    const availabilty   =  req.body.availabilty;
+//     const {medicineCode,medicineName, dosage,medicineType,availability,expiryDate} = req.body;
     
+// try{
+//     const newP = new Pharmacist({
+//         medicineCode,
+//         medicineName, 
+//         dosage, 
+//         medicineType, 
+//         availability,
+//         expiryDate, 
 
-    const newPharmacist = new Pharmacist({
-        medicineName, 
-        dosage, 
-        medicineType, 
-        expiryDate, 
-        availabilty
-    })
+//     });
+//     await newP.save();
+
+//     res.status(201).json({
+//         message : "Medicine details added successfully"
+//     });
+// }catch(error){
+//     console.error(error);
+//     res.status(500).json({
+//         message : "Medicine details added successfully",
+//     });
+// } 
+// });
+
+//Medicine orders
+router.post('/moadd', async (req, res) => {
+    const { name, dosage, type, quantity, due, order, reorder, more } = req.body;
+    
+    try {
+      const newOrder = new Order({
+        name,
+        dosage,
+        type,
+        quantity,
+        due,
+        order,
+        reorder,
+        more
+      });
+      
+      await newOrder.save();
+  
+      res.status(201).json({
+        message: "Medicine order added successfully"
+      });
+  
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({
+        message: "Medicine order not added successfully",
+      });
+    }
+  });
+  
 
 
-    newPharmacist.save().then(()=>{
-        res.json("Data Added")
-    }).catch((err)=>{
-        console.log(err);
-    })
-})
-
-//http://Localhost
 
 router.route("/").get((req,res)=>{
     Pharmacist.find().then((medicineProfile)=>{
@@ -115,7 +183,7 @@ router.route("/").get((req,res)=>{
     })
 })
 
-//http//Localhost:
+
 
 router.route("/medicineupdate/:id").put(async(req,res)=>{
     let medicineId = res.params.id;
@@ -138,7 +206,7 @@ router.route("/medicineupdate/:id").put(async(req,res)=>{
 
 })
 
-//http
+
 
 router.route("/medicinedelete/:id").delete(async (req,res) => {
     let medicineId = req.params.id ;
@@ -163,5 +231,38 @@ router.route("/get/:id").get(async (req,res) => {
         res.status(500).send({status : "Error with get user", error : err.message});
     })
 })
+
+
+//Add data to the medicine store
+
+
+router.post('/mdadd', async (req, res) => {
+    const { code, name, dosage, type, availabilty, expiryDate } = req.body;
+    
+    try {
+      const newAdd = new Add({
+        code, 
+        name, 
+        dosage, 
+        type, 
+        availabilty, 
+        expiryDate 
+      });
+      
+      await newAdd.save();
+  
+      res.status(201).json({
+        message: "Medicine details added successfully"
+      });
+  
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({
+        message: "Medicine details not added successfully",
+      });
+    }
+  });
+
+
 
 module.exports = router;

@@ -1,237 +1,156 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from '@mui/material';
-
-import { useParams } from 'react-router-dom';
-import { Box, Button, Grid, Typography, Stack } from '@mui/material';
+import { Link } from 'react-router-dom';
+import { Box, Button, Grid, Typography } from '@mui/material';
+import { Card, CardMedia, CardActions } from '@mui/material';
 import PatientNavigationBar from '../../views/patient-views/patient-navigation-bar';
-import { useLocation } from 'react-router-dom';
 import axios from 'axios';
+import img1 from '../../assets/img/patient/profile.jpg';
+import { useLocation } from 'react-router-dom';
 
 export default function PatientMakeChanelling() {
-
     const location = useLocation();
     const doctorId = new URLSearchParams(location.search).get('doctorId');
-    const [doctorDetails, setDoctorDetails] = useState(null);
-    const [formData, setFormData] = useState({
-        date: '',
-        time: '',
-        patient: '',
-        doctor: '',
+    const [doctorDetails, setDoctorDetails] = useState({
+        addressLine1: ' ',
+        addressLine2: ' ',
+        availableTime: [
+            { day: ' ', startTime: ' ', endTime: ' ', _id: ' ' },
+            { day: ' ', startTime: ' ', endTime: ' ', _id: ' ' },
+        ],
+        city: ' ',
+        code: ' ',
+        experience: '',
+        firstName: '',
+        gender: ' ',
+        lastName: ' ',
+        licenseNumber: ' ',
+        middleName: ' ',
+        specialty: ' ',
     });
 
+    const generateDateRows = (day) => {
+        const currentDate = new Date();
+        const nextMonth = new Date(currentDate);
+        nextMonth.setMonth(nextMonth.getMonth() + 1);
 
-    // useEffect(() => {
-    //     // Fetch the doctor's details using the doctorId
-    //     const fetchDoctorDetails = async () => {
-    //       try {
-    //         const response = await axios.get(`http://localhost:4000/getD/get/${doctorId}`);
-    //         setDoctorDetails(response.data);
-    //         console.log('API Response:', response.data); // Log the response
-    //       } catch (error) {
-    //         console.error('Error fetching doctor details:', error);
-    //       }
-    //     };
+        const dateRows = [];
+        while (currentDate < nextMonth) {
+            if (currentDate.getDay() === getDayNumber(day)) {
+                dateRows.push(new Date(currentDate));
+            }
+            currentDate.setDate(currentDate.getDate() + 1);
+        }
 
-    //     if (doctorId) {
-    //       fetchDoctorDetails();
-    //     }
-    //   }, [doctorId]);
-    //   console.log('doctorDetails:', doctorDetails); // Log doctorDetails
+        return dateRows;
+    };
+
+    const getDayNumber = (day) => {
+        switch (day) {
+            case 'Sunday':
+                return 0;
+            case 'Monday':
+                return 1;
+            case 'Tuesday':
+                return 2;
+            case 'Wednesday':
+                return 3;
+            case 'Thursday':
+                return 4;
+            case 'Friday':
+                return 5;
+            case 'Saturday':
+                return 6;
+            default:
+                return -1;
+        }
+    };
 
     useEffect(() => {
         const fetchDoctorDetails = async () => {
             try {
-                if (doctorId) {
-                    const response = await axios.get(`http://localhost:4000/getD/get/${doctorId}`);
-                    setDoctorDetails(response.data.doctor);
-                }
+                // Fetch doctor details based on the doctor ID
+                const response = await axios.get(`http://localhost:4000/getD/get/${doctorId}`);
+                setDoctorDetails(response.data.doctor);
             } catch (error) {
                 console.error('Error fetching doctor details:', error);
             }
         };
         fetchDoctorDetails();
-    }, [doctorId]);
-    console.log('doctorDetails:', doctorDetails);
+    }, []);
 
-
-
-
-    const handleBookAppointment = async (doctorId) => {
-        // Redirect to the desired page with doctorId
-        window.location.href = `/confirm-chanelling?doctorId=${doctorId}`;
-        try {
-            // Make a POST request to your server or API endpoint
-            const response = await axios.post('http://localhost:4000/ch/add', formData);
-
-            // Handle the response (e.g., show success message)
-            console.log('Form submitted successfully', response.data);
-
-            // Optionally, reset the form
-            setFormData({
-                date: '',
-                time: '',
-                patient: '',
-                doctor: '',
-            });
-        } catch (error) {
-            // Handle errors (e.g., show error message)
-            console.error('Error submitting form', error);
-        }
-
+    const handleBookAppointment = (date, timeSlotId) => {
+        // Construct the channelDate as an ISO string
+        const channelDate = date.toISOString();
+        // Construct the link with parameters
+        const confirmChanellingLink = `/confirm-chanelling?bookingId=${timeSlotId}&channelDate=${channelDate}`;
+        window.location.href = confirmChanellingLink;
     };
 
-    let { value } = useParams();
     return (
         <>
             <PatientNavigationBar />
             <br />
-
-            <Grid container spacing={3} justifyContent="center" alignItems="center" >
-
-                <Grid item xs={12} sm={6} md={4} lg={3} style={{ backgroundColor: "lightyellow", margin: 10 }} >
-
-                    <Box p={2} >
-                        {doctorDetails ? (<>
-                            <Typography variant="h5">Name: Dr.{`${doctorDetails.firstName} ${doctorDetails.lastname}`}</Typography>
-                            <Typography variant="h6">Specialization: {doctorDetails.specialization}</Typography>
-                            <Typography variant="h4">Monday</Typography>
-                            <Typography variant="h4">4.30 p.m - 10.30 p.m</Typography></>
-                        ) : (
-                            <p>Loading doctor details...</p>
-                        )}
-                        <br />
-                        <Button
-                            variant="contained"
-                            color="primary"
-                            onClick={() => handleBookAppointment()}
-                        >
-                            Channel
-                        </Button>
-                    </Box>
+            <Grid container spacing={3} justifyContent="center" alignItems="center">
+                <Grid item xs={12} sm={3}>
+                    <Card sx={{ height: '100%' }}>
+                        <CardMedia
+                            component="div"
+                            sx={{
+                                pt: '56.25%',
+                            }}
+                            image={img1}
+                        />
+                        <CardActions>
+                            <Button
+                                component={Link}
+                                to="/"
+                                variant="contained"
+                                style={{ width: '100%' }}
+                                color="primary"
+                            >
+                                View Profile (Still not available)
+                            </Button>
+                        </CardActions>
+                    </Card>
                 </Grid>
-
-                <Grid item xs={12} sm={6} md={4} lg={3} style={{ backgroundColor: "lightyellow", margin: 10 }}  >
-
-                    <Box p={2} >
-                        {doctorDetails ? (<>
-                            <Typography variant="h5">Name: Dr.{`${doctorDetails.firstName} ${doctorDetails.lastname}`}</Typography>
-                            <Typography variant="h6">Specialization: {doctorDetails.specialization}</Typography>
-                            <Typography variant="h4">Tuesday</Typography>
-                            <Typography variant="h4">4.30 p.m - 10.30 p.m</Typography></>
-                        ) : (
-                            <p>Loading doctor details...</p>
-                        )}
-
-                        <br />
-                        <Button
-                            variant="contained"
-                            color="primary"
-                            onClick={() => handleBookAppointment()}
-                        >
-                            Channel
-                        </Button>
-
-
-                    </Box>
+                <Grid item xs={12} sm={9}>
+                    <Grid item xs={12} sm={12} md={12} lg={12} style={{ backgroundColor: 'lightyellow', margin: 10 }}>
+                        <Box p={2}>
+                            {doctorDetails ? (
+                                <>
+                                    <Typography variant="h5">
+                                        Name: Dr.{`${doctorDetails.firstName} ${doctorDetails.middleName} ${doctorDetails.lastName}`}
+                                    </Typography>
+                                    <Typography variant="h6">Specialization: {doctorDetails.specialization || doctorDetails.specialty}</Typography>
+                                </>
+                            ) : (
+                                <p>Loading doctor details...</p>
+                            )}
+                            <br />
+                        </Box>
+                    </Grid>
                 </Grid>
-
-                <Grid item xs={12} sm={6} md={4} lg={3} style={{ backgroundColor: "lightyellow", margin: 10 }}  >
-
-                    <Box p={2} >
-                        {doctorDetails ? (<>
-                            <Typography variant="h5">Name: Dr.{`${doctorDetails.firstName} ${doctorDetails.lastname}`}</Typography>
-                            <Typography variant="h6">Specialization: {doctorDetails.specialization}</Typography>
-                            <Typography variant="h4">Wednesday</Typography>
-                            <Typography variant="h4">4.30 p.m - 10.30 p.m</Typography></>
-                        ) : (
-                            <p>Loading doctor details...</p>
-                        )}
-                        <br />
-                        <Button
-                            variant="contained"
-                            color="primary"
-                            onClick={() => handleBookAppointment()}
-                        >
-                            Channel
-                        </Button>
-
-                    </Box>
+                <Grid item xs={12} sm={6} md={6} lg={4} style={{ backgroundColor: 'pink', margin: 10 }}>
+                    <Typography>Available Time Slots</Typography>
+                    {doctorDetails.availableTime.map(time => (
+                        <div key={time._id}>
+                            <Typography>{time.day} from {time.startTime} to {time.endTime}</Typography>
+                            {generateDateRows(time.day).map(date => (
+                                <Box key={date.toISOString()} p={2}>
+                                    <Button
+                                        variant="contained"
+                                        color="primary"
+                                        onClick={() => handleBookAppointment(date, time._id)}
+                                        disabled={new Date() > new Date(date)}
+                                    >
+                                        {new Date() > new Date(date) ? 'Time Passed' : `Channel ${date.toDateString()}`}
+                                    </Button>
+                                </Box>
+                            ))}
+                        </div>
+                    ))}
                 </Grid>
-
-                <Grid item xs={12} sm={6} md={4} lg={3} style={{ backgroundColor: "lightyellow", margin: 10 }}  >
-
-                    <Box p={2} >
-                        {doctorDetails ? (<>
-                            <Typography variant="h5">Name: Dr.{`${doctorDetails.firstName} ${doctorDetails.lastname}`}</Typography>
-                            <Typography variant="h6">Specialization: {doctorDetails.specialization}</Typography>
-                            <Typography variant="h4">Friday</Typography>
-                            <Typography variant="h4">4.30 p.m - 10.30 p.m</Typography></>
-                        ) : (
-                            <p>Loading doctor details...</p>
-                        )}
-
-                        <br />
-                        <Button
-                            variant="contained"
-                            color="primary"
-                            onClick={() => handleBookAppointment()}
-                        >
-                            Channel
-                        </Button>
-
-                    </Box>
-                </Grid>
-
-                <Grid item xs={12} sm={6} md={4} lg={3} style={{ backgroundColor: "lightyellow", margin: 10 }}  >
-
-                    <Box p={2} >
-                        {doctorDetails ? (<>
-                            <Typography variant="h5">Name: Dr.{`${doctorDetails.firstName} ${doctorDetails.lastname}`}</Typography>
-                            <Typography variant="h6">Specialization: {doctorDetails.specialization}</Typography>
-                            <Typography variant="h4">Sunday</Typography>
-                            <Typography variant="h4">4.30 p.m - 10.30 p.m</Typography></>
-                        ) : (
-                            <p>Loading doctor details...</p>
-                        )}
-                        <br />
-                        {/* <Button variant="contained" color="primary" style={{ width: "100%" }}>
-                            <Link href="/confirm-chanelling" style={{ textDecoration: 'none', color: 'white' }}>Book</Link>
-                        </Button> */}
-
-                        {/* <Button
-                            variant="contained"
-                            color="primary"
-                            style={{ width: '100%' }}
-                            component={Link}
-                            to={`/confirm-chanelling/${doctorId}`}
-                        >
-                            Book
-                        </Button> */}
-
-                        <Button
-                            variant="contained"
-                            color="primary"
-                            onClick={() => handleBookAppointment()}
-                        >
-                            Channel
-                        </Button>
-                    </Box>
-                </Grid>
-
             </Grid>
-
         </>
     );
 }
-
-
-// {doctorDetails ? (
-//     <div>
-//       <h2>Doctor Details</h2>
-//       <p>Name: {`${doctorDetails.firstName} ${doctorDetails.lastname}`}</p>
-//       <p>Specialization: {doctorDetails.specialization}</p>
-//       {/* Add more doctor details here */}
-//     </div>
-//   ) : (
-//     <p>Loading doctor details...</p>
-//   )}

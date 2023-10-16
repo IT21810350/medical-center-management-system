@@ -43,57 +43,59 @@ router.route("/").get((req,res)=>{
 })
 //=====================================================
 //UPDATE
-// router.route("/updateinq/:id").put(async(req,res)=>{
-//     let inqId = req.params.id;
+router.route("/updateinq/:id").put(async(req,res)=>{
+    // let inqId = req.params.id;
 
-//     const{name,subject,message} = req.body;
+    // const{name,subject,message} = req.body;
 
-//     //crate an object
-//     const updateInq = {
-//         name,subject,message
-//     };
-//     try {
-//         // Use findByIdAndUpdate to find and update the inq
-//         const updatedInq = await Inquiries.findByIdAndUpdate(inqId, updateInq);
+    // //crate an object
+    // const updateInq = {
+    //     name,subject,message
+    // };
+    try {
+        // Use findByIdAndUpdate to find and update the inq
+        const updatedInq = await Inquiries.findByIdAndUpdate(req.params.id, req.body,{ new: true, runValidators: true });
     
-//         if (!updatedInq) {
-//           return res.status(404).send({ status: "Inq not found" });
-//         }
+        if (!updatedInq) {
+          return res.status(404).send({ status: "Inq not found" });
+        }
     
-//         return res.status(200).send({ status: "Inq details updated successfully" });
-//       } catch (err) {
-//         console.error(err);
-//         return res.status(500).send({ status: "Error with updating inqs", error: err.message });
-//       }
-//     });
+        return res.status(200).send({ status: "Inq details updated successfully" });
+      } catch (err) {
+        console.error(err);
+        return res.status(500).send({ status: "Error with updating inqs", error: err.message });
+      }
+    });
+
+    
 
 // 
-router.route("/updateinq/:id").put(async (req, res) => {
-  const inqId = req.params.id;
-  const { name, subject, message } = req.body;
+// router.route("/updateinq/:id").put(async (req, res) => {
+//   const inqId = req.params.id;
+//   const { name, subject, message } = req.body;
 
-  try {
-    // Find the inquiry by ID
-    const inquiry = await Inquiries.findById(inqId);
+//   try {
+//     // Find the inquiry by ID
+//     const inquiry = await Inquiries.findByIdAndUpdate(inqId);
 
-    if (!inquiry) {
-      return res.status(404).send({ status: "Inq not found" });
-    }
+//     if (!inquiry) {
+//       return res.status(404).send({ status: "Inq not found" });
+//     }
 
-    // Update the inquiry details
-    inquiry.name = name;
-    inquiry.subject = subject;
-    inquiry.message = message;
+//     // Update the inquiry details
+//     inquiry.name = name;
+//     inquiry.subject = subject;
+//     inquiry.message = message;
 
-    // Save the updated inquiry
-    await inquiry.save();
+//     // Save the updated inquiry
+//     await inquiry.save();
 
-    return res.status(200).send({ status: "Inq details updated successfully" });
-  } catch (err) {
-    console.error(err);
-    return res.status(500).send({ status: "Error with updating inq", error: err.message });
-  }
-});
+//     return res.status(200).send({ status: "Inq details updated successfully" });
+//   } catch (err) {
+//     console.error(err);
+//     return res.status(500).send({ status: "Error with updating inq", error: err.message });
+//   }
+// });
 
 
 //=====================================================
@@ -146,19 +148,45 @@ router.route("/deleteinq/:id").delete(async (req, res) => {
 //     })
 // })
 
-router.route("/get/:id").get(async(req,res) => {
-const fetchInquiry = async () => {
+// router.route("/get/:id").get(async (req, res) => {
+//   let inqId = req.params.id; 
+//   const inq = await Inquiries.findOne({id:inqId}).then((inquery) =>{
+//     res.status(200).send({status: "Inquery fetched", inquery})
+//   }).catch((err) => {
+//     console.log(err.message);
+//     res.status(500).send({status:"Error with inq", error: err.message});
+//   })
+// })
+
+router.route("/get/:id").get(async (req, res) => {
   try {
+    const inqId = req.params.id;
+    const inq = await Inquiries.findById(inqId);
+    
+    if (!inq) {
+      return res.status(404).json({ status: "Inquiry not found" });
+    }
 
-    const url = window.location.href;
-    const parts = url.split('/');
-    const id = parts[parts.length - 1]
-
-    const response = await axios.get(`http://localhost:4000/inqData/` + id);
-    setInquiry(response.data);
-  } catch (error) {
-    console.error('Error fetching inquiry for editing:', error);
+    return res.status(200).json({ status: "Inquiry found", inq });
+  } catch (err) {
+    console.error(err.message);
+    return res.status(500).json({ status: "Error with getting Inquiry", error: err.message });
   }
-}});
+});
+
+// router.route("/get/:id").get(async(req,res) => {
+// const fetchInquiry = async () => {
+//   try {
+
+//     const url = window.location.href;
+//     const parts = url.split('/');
+//     const id = parts[parts.length - 1]
+
+//     const response = await axios.get(`http://localhost:4000/inqData/` + id);
+//     setInquiry(response.data);
+//   } catch (error) {
+//     console.error('Error fetching inquiry for editing:', error);
+//   }
+// }});
 
 module.exports = router;
