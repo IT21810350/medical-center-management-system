@@ -91,14 +91,16 @@ app.use("/getD",getDoctors);
 app.use("/ch",getChannels);
 //=================================
 
+//Jehan
 app.use("/room", Room);
 app.use("/room-type", RoomType);
 
 // lab assistant routes end
 app.use("/",sampleRouter,testRouter,reportRouter,labAssistantRouter,equipmentRouter);
 
-//Hansanie
+//Pharmacist
 app.use("/pharmacistProfile",PharmacistRoutes);
+app.use("/addMedicine",PharmacistRoutes);
 
 
 app.listen(PORT, () => {

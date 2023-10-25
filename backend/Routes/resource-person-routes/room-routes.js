@@ -8,16 +8,42 @@ router.route('/').get((req, res) => {
         .catch(err => res.status(400).json('Error: ' + err));
 });
 
+// get room by id
+router.route('/:id').get((req, res) => {
+    Room.findById(req.params.id)
+        .then(room => res.json(room))
+        .catch(err => res.status(400).json('Error: ' + err));
+});
+
+router.post("/getroombyid", async (req, res) => {
+
+    const roomid = req.body.roomid
+
+    try {
+        const rooms = await Room.findOne({ _id: roomid })
+        res.send(rooms)
+    } catch (error) {
+        return res.status(400).json({ message: error });
+    }
+
+});
+
 // add rooms
 router.route('/add').post((req, res) => {
-    const roomNumber = req.body.roomNumber;
-    const status = req.body.status;
-    const roomType = req.body.roomType;
+    const name = req.body.name;
+    const rentPerDay = req.body.rentPerDay;
+    const type = req.body.type;
+    const imageUrls = req.body.imageUrls;
+    const currentBookings = req.body.currentBookings;
+    const description = req.body.description;
 
     const newRoom = new Room({
-        roomNumber,
-        status,
-        roomType
+        name,
+        rentPerDay,
+        type,
+        imageUrls,
+        currentBookings,
+        description
     });
 
     newRoom.save()
@@ -31,5 +57,23 @@ router.route('/:id').delete((req, res) => {
         .then(() => res.json("Room Deleted!"))
         .catch(err => res.status(400).json("Error: " + err));
 })
+
+// update room
+router.route('/update/:id').post((req, res) => {
+    Room.findById(req.params.id)
+        .then(room => {
+            room.name = req.body.name;
+            room.rentPerDay = req.body.rentPerDay;
+            room.type = req.body.type;
+            room.imageUrls = req.body.imageUrls;
+            room.currentBookings = req.body.currentBookings;
+            room.description = req.body.description;
+
+            room.save()
+                .then(() => res.json('Room updated!'))
+                .catch(err => res.status(400).json('Error: ' + err));
+        })
+        .catch(err => res.status(400).json('Error: ' + err));
+});
 
 module.exports = router;

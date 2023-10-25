@@ -233,48 +233,35 @@ router.route("/get/:id").get(async (req,res) => {
 })
 
 
-//Contact Supplier Manager 
+//Add data to the medicine store
 
 
-router.post('/csmadd',async (req,res) =>  {
-
-    const {medicineName, dosage,medicineType, quantity, dueDate,orderNo, medicineReorder,moreDetails} = req.body;
+router.post('/mdadd', async (req, res) => {
+    const { code, name, dosage, type, availabilty, expiryDate } = req.body;
     
-try{
-    const newP = new Pharmacist({
-        medicineName, 
-        dosage,
-        medicineType,
-        quantity, 
-        dueDate,
-        orderNo, 
-        medicineReorder,
-        moreDetails
-
-    });
-    await newP.save();
-
-    res.status(201).json({
-        message : "Order details added successfully"
-    });
-}catch(error){
-    console.error(error);
-    res.status(500).json({
-        message : "Order details added successfully",
-    });
-} 
-});
-
-
-
-
-router.route("/").get((req,res)=>{
-    Pharmacist.find().then((medicineProfile)=>{
-        res.json(medicineProfile)
-    }).catch((err)=>{
-        console.log(err);
-    })
-})
+    try {
+      const newAdd = new Add({
+        code, 
+        name, 
+        dosage, 
+        type, 
+        availabilty, 
+        expiryDate 
+      });
+      
+      await newAdd.save();
+  
+      res.status(201).json({
+        message: "Medicine details added successfully"
+      });
+  
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({
+        message: "Medicine details not added successfully",
+      });
+    }
+  });
 
 
 

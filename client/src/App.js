@@ -41,6 +41,7 @@ import MedicineStore from './views/pharmacist-views/medicineStore';
 import MedicineOrder from './views/pharmacist-views/medicineOrders';
 import MedicineSales from './views/pharmacist-views/medicineSales';
 import FormPage from "./views/pharmacist-views/addMedicine";
+import updateMedicine from "./views/pharmacist-views/updateMedicine";
 
 // hr imports 
 import HR from './views/hr-views/hr-home';
@@ -89,6 +90,8 @@ import RP from "./views/resource-manager-views/resource-manager-home";
 import RoomType from './views/resource-manager-views/roomType';
 import Room from './views/resource-manager-views/room';
 import EditRoom from './views/resource-manager-views/editRoom';
+import Bookings from './views/resource-manager-views/bookings';
+import AddRoom from './views/resource-manager-views/addRoom';
 
 
 // financial manager imports
@@ -98,114 +101,117 @@ import Invoice from './views/financial-manager-views/invoice';
 
 
 function App() {
-  return (
-    <div className="App">
-      <Routes>
+        return (
+                <div className="App">
+                        <Routes>
 
-        {/* common routes */}
-        <Route path="/" element={<Home />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/signup" element={<Signup />} />
-        <Route path="/contact-us" element={<Contact />} />
+                                {/* common routes */}
+                                <Route path="/" element={<Home />} />
+                                <Route path="/login" element={<Login />} />
+                                <Route path="/signup" element={<Signup />} />
+                                <Route path="/contact-us" element={<Contact />} />
 
-        {/* Doctor Routes */}
-        <Route path="/doctor" element={<Doctor />} />
-        <Route path="/channeling" element={<Channeling />} />
-        <Route path="/symptoms/:channelingId" element={<Symptoms />} />
-        <Route path="/prescription/:channelingId" element={<Prescription />} />
-        <Route path="/doctor-create-profile" element={<DoctorProfileCreate />} />
-        <Route path="/your-profile" element={<DoctorProfile/>}/>
+                                {/* Doctor Routes */}
+                                <Route path="/doctor" element={<Doctor />} />
+                                <Route path="/channeling" element={<Channeling />} />
+                                <Route path="/symptoms/:channelingId" element={<Symptoms />} />
+                                <Route path="/prescription/:channelingId" element={<Prescription />} />
+                                <Route path="/doctor-create-profile" element={<DoctorProfileCreate />} />
+                                <Route path="/your-profile" element={<DoctorProfile />} />
 
-        {/* Hr Routes */}
-        <Route path="/hr" element={<HR />} />
-        <Route path="/registration" element={<Registration />} />
-        <Route path="/edit-employee" element={<EditEmployee />} />
-        <Route path="/profile/:id" element={<Profile />} />
-        <Route path="/payroll" element={<Payrollsystem />} />
+                                {/* Hr Routes */}
+                                <Route path="/hr" element={<HR />} />
+                                <Route path="/registration" element={<Registration />} />
+                                <Route path="/edit-employee" element={<EditEmployee />} />
+                                <Route path="/profile/:id" element={<Profile />} />
+                                <Route path="/payroll" element={<Payrollsystem />} />
 
-        {/*Pharmacist Routes */}
-        <Route path="/pharmacist" element={<Pharmacist />} />
-        <Route path="/pharmacistProfile" element={<PharmacistProfile />} />
-        <Route path="/addMedicine" element={<FormPage />} />
-        <Route path="/updateProfile" element={<updateProfile />} />
-        <Route path="/updateMedicine" element={<UpdateMedicine/>}/>
-        <Route path="/medicineStore" element={<MedicineStore />} />
-        <Route path="/medicineOrder" element={<MedicineOrder />} />
-        <Route path="/medicineSales" element={<MedicineSales />} />
+                                {/*Pharmacist Routes */}
+                                <Route path="/pharmacist" element={<Pharmacist />} />
+                                <Route path="/pharmacistProfile" element={<PharmacistProfile />} />
+                                <Route path="/addMedicine" element={<FormPage />} />
+                                <Route path="/updateProfile" element={<updateProfile />} />
+                                <Route path="/updateMedicine" element={<UpdateMedicine />} />
+                                <Route path="/medicineStore" element={<MedicineStore />} />
+                                <Route path="/medicineOrder" element={<MedicineOrder />} />
+                                <Route path="/medicineSales" element={<MedicineSales />} />
 
-        {/* Patient Routes */}
-        <Route path="/searchDoctors" element={<SearchDoctors />} />
-        <Route path="/patient" element={<Patient />} />
-        <Route path="/search-doctors" element={<SearchDoctors />} />
-        <Route path="/dash" exact Component={CommonPatientDashboard} />
-        <Route path="/search-chanelling" exact Component={SearchChanelling} />
-        <Route path="/patient-create-account" exact Component={PatientCreateAccount} />
-        <Route path="/make-chanelling" exact Component={PatientMakeChanelling} />
-        <Route path="/confirm-chanelling" exact Component={ChanellingConfirmation} />
-        <Route path="/patient-profile" exact Component={PatientProfile} />
-        <Route path="/patient-inquiries" exact Component={PatientInquiries} />
-        <Route path="/inq-handle" exact Component={InquiryList} />
-        <Route path="/patient-additional" exact Component={PatientAdditionalFiles} />
-        <Route path="/rescedule-appointment" exact Component={Reschedule} />
-        <Route path="/delete-appointment" exact Component={Delete} />
-        <Route path="/editinq/:id" element={<EditInquiry/>} />
-
-
-        {/*Pharmacist Routes */}
-        <Route path="/pharmacistProfile" element={<PharmacistProfile/>} />
-        <Route path="/updateProfile" element={<updateProfile />} />
-        <Route path="/addMedicine" element={<addMedicine/>} />
-        <Route path="/medicineStore" element={<MedicineStore/>} />
-        <Route path="/medicineOrder" element={<MedicineOrder/>} />
-        <Route path="/medicineSales" element={<MedicineSales/>} />
-        <Route path="/pharmacist/*" element={<Pharmacist />} />    
+                                {/* Patient Routes */}
+                                <Route path="/searchDoctors" element={<SearchDoctors />} />
+                                <Route path="/patient" element={<Patient />} />
+                                <Route path="/search-doctors" element={<SearchDoctors />} />
+                                <Route path="/dash" exact Component={CommonPatientDashboard} />
+                                <Route path="/search-chanelling" exact Component={SearchChanelling} />
+                                <Route path="/patient-create-account" exact Component={PatientCreateAccount} />
+                                <Route path="/make-chanelling" exact Component={PatientMakeChanelling} />
+                                <Route path="/confirm-chanelling" exact Component={ChanellingConfirmation} />
+                                <Route path="/patient-profile" exact Component={PatientProfile} />
+                                <Route path="/patient-inquiries" exact Component={PatientInquiries} />
+                                <Route path="/inq-handle" exact Component={InquiryList} />
+                                <Route path="/patient-additional" exact Component={PatientAdditionalFiles} />
+                                <Route path="/rescedule-appointment" exact Component={Reschedule} />
+                                <Route path="/delete-appointment" exact Component={Delete} />
+                                <Route path="/editinq/:id" element={<EditInquiry />} />
 
 
-        {/* Resource person Routes */}
-        <Route path="/resource-person" element={<RP />} />
-        <Route path="/room-types" element={<RoomType />} />
-        <Route path="/room" element={<Room/>}/>
-        <Route path="/editRoom" element={<EditRoom/>}/>
+                                {/*Pharmacist Routes */}
+                                <Route path="/pharmacistProfile" element={<PharmacistProfile />} />
+                                <Route path="/updateProfile" element={<updateProfile />} />
+                                <Route path="/addMedicine" element={<addMedicine />} />
+                                <Route path="/updateMedicine" element={<updateMedicine />} />
+                                <Route path="/medicineStore" element={<MedicineStore />} />
+                                <Route path="/medicineOrder" element={<MedicineOrder />} />
+                                <Route path="/medicineSales" element={<MedicineSales />} />
+                                <Route path="/pharmacist/*" element={<Pharmacist />} />
 
 
-        {/* Supplier Routes */}
-        <Route path="/supplier" element={<SM />} />
-        <Route path="/supplier/supplier-registration" element={<SupplierRegistration />} />
-        <Route path="/supplier/supplier-profile" element={<SupplierProfile />} />
-        <Route path="/supplier/supplier-list" element={<SupplierList />} />
-        <Route path="/supplier/supplier-payment" element={<SupplierPayment />} />
-        <Route path="/supplier/supplier-inventory-equipment" element={<SupplierInventoryEquipment />} />
-        <Route path="/supplier/supplier-inventory-medicine" element={<SupplierInventoryMedicine />} />
-        <Route path="/supplier/supplier-order-request" element={<SupplierOrderRequest />} />
-        <Route path="/supplier/supplier-order-confirmation" element={<SupplierOrderConfirmation />} />
-        <Route path="/supplier/supplier-order-pharmacy" element={<SupplierOrderPharmacy />} />
+                                {/* Resource person Routes */}
+                                <Route path="/resource-person" element={<RP />} />
+                                <Route path="/room-types" element={<RoomType />} />
+                                <Route path="/room" element={<Room />} />
+                                <Route path="/editRoom" element={<EditRoom />} />
+                                <Route path="/room/:roomid" element={<Bookings />} />
+                                <Route path="/addRoom" element={<AddRoom />} />
 
 
-        {/*Lab Assistant Routes */}
-        <Route path="/lab-assistant" element={<LA />} />
-        <Route path="/lab-facilities" element={<LabFacilities />} />
-        <Route path="/labAssistant-profile" element={<LabAssistantProfile />} />
-        
-        <Route path="/lab-test" element={<Test />} />
-        <Route path="/lab-test/update/:id" element={<UpdateTest />} />
-        <Route path="/lab-inventory" element={<Equipment />} />
-        <Route path="/lab-inventory/update/:id" element={<UpdateEquipment />} />        
-        <Route path="/lab-report" element={<LabReport />} />
-        <Route path="/lab-report/update/:id" element={<UpdateReport />} />
-        <Route path="/lab-sample" element={<ViewSample/>}/>
-        <Route path="/lab-sample/update/:id" element={<UpdateSample/>}/>
-        
+                                {/* Supplier Routes */}
+                                <Route path="/supplier" element={<SM />} />
+                                <Route path="/supplier/supplier-registration" element={<SupplierRegistration />} />
+                                <Route path="/supplier/supplier-profile" element={<SupplierProfile />} />
+                                <Route path="/supplier/supplier-list" element={<SupplierList />} />
+                                <Route path="/supplier/supplier-payment" element={<SupplierPayment />} />
+                                <Route path="/supplier/supplier-inventory-equipment" element={<SupplierInventoryEquipment />} />
+                                <Route path="/supplier/supplier-inventory-medicine" element={<SupplierInventoryMedicine />} />
+                                <Route path="/supplier/supplier-order-request" element={<SupplierOrderRequest />} />
+                                <Route path="/supplier/supplier-order-confirmation" element={<SupplierOrderConfirmation />} />
+                                <Route path="/supplier/supplier-order-pharmacy" element={<SupplierOrderPharmacy />} />
 
-        
-        {/*Financial Manager Routes */}
-        <Route path="/financial-manager" element={<FM />} />
-        <Route path="/invoice" element={<Invoice />} />
-       
 
-      </Routes>
+                                {/*Lab Assistant Routes */}
+                                <Route path="/lab-assistant" element={<LA />} />
+                                <Route path="/lab-facilities" element={<LabFacilities />} />
+                                <Route path="/labAssistant-profile" element={<LabAssistantProfile />} />
 
-    </div>
-  );
+                                <Route path="/lab-test" element={<Test />} />
+                                <Route path="/lab-test/update/:id" element={<UpdateTest />} />
+                                <Route path="/lab-inventory" element={<Equipment />} />
+                                <Route path="/lab-inventory/update/:id" element={<UpdateEquipment />} />
+                                <Route path="/lab-report" element={<LabReport />} />
+                                <Route path="/lab-report/update/:id" element={<UpdateReport />} />
+                                <Route path="/lab-sample" element={<ViewSample />} />
+                                <Route path="/lab-sample/update/:id" element={<UpdateSample />} />
+
+
+
+                                {/*Financial Manager Routes */}
+                                <Route path="/financial-manager" element={<FM />} />
+                                <Route path="/invoice" element={<Invoice />} />
+
+
+                        </Routes>
+
+                </div>
+        );
 }
 
 export default App;
