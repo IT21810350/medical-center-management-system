@@ -113,14 +113,14 @@ const Test = () => {
         const pdf = new jsPDF();
   
         // Add content to the PDF
-        pdf.text('Test Report', 10, 10);
+        pdf.text('Test Report', 100, 100);
         testsData.forEach((test, index) => {
-          const yPosition = 20 + index * 10;
-          pdf.text(`Test Name: ${test.test_name}`, 10, yPosition,'\n');
-          pdf.text(`Test Date: ${new Date(test.test_date).toLocaleDateString()}`, 10, yPosition + 5,'\n');
-          pdf.text(`Lab Assistant Name: ${test.lab_assistant_name}`, 10, yPosition + 10,'\n');
-          pdf.text(`Result Data: ${test.result_data}`, 10, yPosition + 15,'\n');
-          pdf.text('-------------------------------------', 10, yPosition + 20,'\n');
+          const yPosition = 200 + index * 100;
+          pdf.text(`Test Name: ${test.test_name}`, 100, yPosition,'\n');
+          pdf.text(`Test Date: ${new Date(test.test_date).toLocaleDateString()}`, 100, yPosition + 50,'\n');
+          pdf.text(`Lab Assistant Name: ${test.lab_assistant_name}`, 100, yPosition + 100,'\n');
+          pdf.text(`Result Data: ${test.result_data}`, 100, yPosition + 15,'\n');
+          pdf.text('-------------------------------------', 100, yPosition + 200,'\n');
         });
   
         // Save the PDF
